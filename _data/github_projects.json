@@ -1,0 +1,30 @@
+{
+    "editorconnect": {
+        "title": "Editor Connect", 
+        "thumbnail": {
+            "blur": 5, 
+            "url": "/projects/jsx--thumb.png", 
+            "height": 18, 
+            "width": 30, 
+            "intrinsic": "60%"
+        }, 
+        "image": {
+            "url": "./projects/jsx.png", 
+            "alt": "A JSX error showing in Sublime Text"
+        }, 
+        "subtitle": "Node script", 
+        "description": "<p>\n  This is a plugin (more of a node script) which was created to eliminate the back and forth checks between the text editor and a gulp process.\n  <em>It has not yet been published to npm.</em>\n</p>\n<p>\n  With every gulp task that errors out, a message is sent to text editor for it to display the error message. Errors are removed an redisplayed after every task error. This works for Sass, React, or anything that emits an error with a line number.\n</p>\n<p>\n  Some of the features including scrolling to the line where the error occurred and showing an icon on the line the error occurred. Currently only Sublime Text 3 is supported.\n</p>\n", 
+        "icon": {
+            "name": "icon-nodejs"
+        }, 
+        "tags": [
+            "NodeJS", 
+            "Javascript", 
+            "Python"
+        ], 
+        "links": {
+            "repository": "https://github.com/anthonykoch/editor-connect"
+        }, 
+        "quote": "No more switching between the text editor and a gulp process!"
+    }
+}

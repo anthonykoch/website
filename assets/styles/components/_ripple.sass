@@ -1,0 +1,56 @@
+
+// Adapted from http://codepen.io/KrisOlszewski/pen/Dnktj
+//
+// Requires a parent with position relative or absolute
+
+.Ripple-item
+  background: rgba(black, 0.14)
+  border-radius: 50%
+  display: inline-block
+  pointer-events: none
+  position: absolute
+  transform: translate(-50%, -50%)
+  user-select: none
+  opacity: 0
+  width: 220%
+  padding-bottom: 220%
+  // width: 220%
+  // padding-bottom: 220%
+  // width: 30px
+  // height: 30px
+
+
+.tr-ripple-enter-active,
+.tr-ripple-leave-active
+  transition: all 320ms linear
+  // transition: width 500ms ease, padding-bottom 500ms ease
+
+.tr-ripple-enter
+  opacity: 0.9
+  padding-bottom: 30%
+  width: 30%
+
+.tr-ripple-enter-to
+  opacity: 0
+  padding-bottom: 220%
+  width: 220%
+
+
+
+// .tr-ripple-enter-active,
+// .tr-ripple-leave-active
+//   transition: all 500ms ease
+
+// .tr-ripple-enter
+//   opacity: 1
+
+// .tr-ripple-enter
+//   transform: translate(-50%, -50%) scale(1)
+
+// .tr-ripple-leave-to
+//   opacity: 0
+//   transform: translate(-50%, -50%) scale(5)
+
+
+
+

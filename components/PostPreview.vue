@@ -1,0 +1,29 @@
+<template>
+  <article class="PostPreview  u-collapse@medium">
+    <ul class="PostPreview__meta">
+      post date
+      <!-- <li>{{ post.date | date:'%B %d, %Y'}}</li> -->
+    </ul>
+    <h4 class="PostPreview__title">
+      <a :href="post.url" class="PostPreview__link">
+        {{ post.title }}
+      </a>
+    </h4>
+    <p class="PostPreview__body  row row--medium row--left">
+      <!-- {{ post.excerpt | strip_html | truncatewords: 30 }} -->
+    </p>
+    <a :href="post.url" class="PostPreview__more">read more &rarr;</a>
+  </article>
+
+</template>
+
+<script>
+export default {
+  props: {
+    post: {
+      type: Object,
+      require: true,
+    },
+  },
+};
+</script>
