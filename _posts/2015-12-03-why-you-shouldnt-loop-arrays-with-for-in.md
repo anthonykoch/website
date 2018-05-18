@@ -2,9 +2,8 @@
 layout: post
 author: Anthony Koch
 title: Why you shouldn't loop arrays with for-in
-use_excerpt_as_description: true
 tags: ['JavaScript', 'arrays']
-post_id: 4
+postId: 4
 ---
 
 

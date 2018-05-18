@@ -87,7 +87,7 @@ export default [
     icon: {
 xlinkHref: 'icon-octocat',
     },
-    fade: 'light',
+    fade: 'white',
     href: 'http://www.anthonykoch.com/ponymail/inbox/',
   },
 ].map(data => {

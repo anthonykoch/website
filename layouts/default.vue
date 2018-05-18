@@ -85,6 +85,7 @@ Vue.component('app-social-icons', require('@/components/SocialIcons').default);
 Vue.component('app-project-preview', require('@/components/ProjectPreview').default);
 Vue.component('app-project-preview-list', require('@/components/ProjectPreviewList').default);
 Vue.component('app-ripple', require('@/components/Ripple').default);
+Vue.component('app-overlay', require('@/components/Overlay').default);
 
 
 

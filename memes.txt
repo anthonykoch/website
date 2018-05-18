@@ -1,0 +1,58 @@
+
+> website@1.0.0 generate /Users/tony/Documents/Github/website
+> cross-env NODE_ENV=production nuxt generate
+
+memes /blog/favorite-features-of-ES2015
+memes /blog/the-tools-i-use
+memes /blog/remember-directories-in-con-emu
+memes /blog/why-you-shouldnt-loop-arrays-with-for-in
+memes /blog/medium-style-images
+memes /blog/understanding-javascript-prototypes
+
+
+ DONE  Compiled successfully in 10938ms04:50:53
+
+Hash: [1m35579b209094424ceedf[39m[22m
+Version: webpack [1m3.12.0[39m[22m
+Time: [1m10938[39m[22mms
+                                                  [1mAsset[39m[22m       [1mSize[39m[22m  [1mChunks[39m[22m  [1m[39m[22m           [1m[39m[22m[1mChunk Names[39m[22m
+                    [1m[32mpages/blade.66a8e52085efcc9c2652.js[39m[22m    1.39 kB       [1m3[39m[22m  [1m[32m[emitted][39m[22m  pages/blade
+                                   [1m[32mimg/desk.cd1ff98.svg[39m[22m    40.5 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                                 [1m[32mimg/office.4b82819.svg[39m[22m    48.1 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                             [1m[32mimg/calculator.b6306cd.png[39m[22m    75.7 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                         [1m[32mimg/con_emu_panels.0c425d3.png[39m[22m    95.1 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32mimg/settings.40eeba4.png[39m[22m    64.7 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                                    [1m[32mimg/jsx.a710cac.png[39m[22m    16.8 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                         [1m[32mimg/social-connect.c9aeb13.png[39m[22m    46.1 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                                 [1m[32mimg/medium.481d2f0.png[39m[22m     290 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                            [1m[32mimg/smarthomeui.ed77829.png[39m[22m    45.1 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                               [1m[32mimg/ponymail.377d329.png[39m[22m     248 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                                 [1m[32mimg/nodejs.fe0d47c.svg[39m[22m    3.44 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                                   [1m[32mimg/sass.57535f4.png[39m[22m    14.7 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                [1m[32mlayouts/default.bbd051db53ab9bfaa1ee.js[39m[22m    20.9 kB       [1m0[39m[22m  [1m[32m[emitted][39m[22m  layouts/default
+                      [1m[32mpages/lol.8b62679c6acf415db633.js[39m[22m    3.61 kB       [1m1[39m[22m  [1m[32m[emitted][39m[22m  pages/lol
+                    [1m[32mpages/about.824ad13a7eff2e28df79.js[39m[22m    6.19 kB       [1m2[39m[22m  [1m[32m[emitted][39m[22m  pages/about
+                                 [1m[32mimg/jekyll.1f24603.svg[39m[22m    10.3 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                  [1m[32mpages/contact.756770fb35720a58f973.js[39m[22m     3.2 kB       [1m4[39m[22m  [1m[32m[emitted][39m[22m  pages/contact
+                    [1m[32mpages/index.be6dee5993ad30b69c87.js[39m[22m    3.02 kB       [1m5[39m[22m  [1m[32m[emitted][39m[22m  pages/index
+               [1m[32mpages/blog/index.46690b82da27fec75152.js[39m[22m  455 bytes       [1m6[39m[22m  [1m[32m[emitted][39m[22m  pages/blog/index
+               [1m[32mpages/blog/_slug.f00613bb6e4521a197d3.js[39m[22m  378 bytes       [1m7[39m[22m  [1m[32m[emitted][39m[22m  pages/blog/_slug
+                         [1m[32mvendor.92e4412bb70ff5edb2c9.js[39m[22m     153 kB       [1m8[39m[22m  [1m[32m[emitted][39m[22m  vendor
+                            [1m[32mapp.3cf7907c5d288618c695.js[39m[22m    33.7 kB       [1m9[39m[22m  [1m[32m[emitted][39m[22m  app
+                       [1m[32mmanifest.35579b209094424ceedf.js[39m[22m    1.72 kB      [1m10[39m[22m  [1m[32m[emitted][39m[22m  manifest
+               [1m[32mapp.624f0ea7ccbcb8f4211c7a11d8f3bec7.css[39m[22m    63.6 kB       [1m9[39m[22m  [1m[32m[emitted][39m[22m  app
+                                               [1m[32mLICENSES[39m[22m  645 bytes        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+         [1m[32mapi/posts/remember-directories-in-con-emu.json[39m[22m    2.73 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                     [1m[32mapi/posts/medium-style-images.json[39m[22m    14.1 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+             [1m[32mapi/posts/favorite-features-of-ES2015.json[39m[22m    14.8 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+     [1m[32mapi/posts/understanding-javascript-prototypes.json[39m[22m    23.5 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                         [1m[32mapi/posts/the-tools-i-use.json[39m[22m    5.97 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+[1m[32mapi/posts/why-you-shouldnt-loop-arrays-with-for-in.json[39m[22m    5.32 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+                                    [1m[32mapi/posts/meta.json[39m[22m      67 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+ + 3 hidden assets
+Hash: [1m673cb19c2fa32276ef02[39m[22m
+Version: webpack [1m3.12.0[39m[22m
+Time: [1m1681[39m[22mms
+              [1mAsset[39m[22m     [1mSize[39m[22m  [1mChunks[39m[22m  [1m[39m[22m           [1m[39m[22m[1mChunk Names[39m[22m
+ [1m[32mserver-bundle.json[39m[22m   232 kB        [1m[39m[22m  [1m[32m[emitted][39m[22m  
+[1m[32mapi/posts/meta.json[39m[22m  2 bytes        [1m[39m[22m  [1m[32m[emitted][39m[22m  

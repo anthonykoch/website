@@ -22,7 +22,7 @@
 
 import cuid from 'cuid';
 
-import * as utils from '@/utils';
+import * as utils from '@/core/utils';
 
 export default {
 

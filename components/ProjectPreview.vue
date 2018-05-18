@@ -61,7 +61,7 @@ export default {
         pageY: e.pageY,
       };
 
-      this.$emit('navigate', e);
+      this.$emit('navigate', e, this.project);
     },
   },
 };

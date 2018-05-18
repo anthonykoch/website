@@ -2,9 +2,8 @@
 layout: post
 author: Anthony Koch
 title: The tools I use
-use_excerpt_as_description: true
 tags: ['development', 'tools']
-post_id: 2
+postId: 2
 ---
 
 This is an overview of some of the development tools I've found useful, as well as some opinions and experiences I have had with them. 

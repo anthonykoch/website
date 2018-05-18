@@ -2,9 +2,8 @@
 layout: post
 author: Anthony Koch
 title: Remember directories in Con Emu
-use_excerpt_as_description: true
 tags: ['con emu', 'command line']
-post_id: 5
+postId: 5
 ---
 
 After an hour of research, trial, and error, I finally figured out how to get Con Emu to remember directories for tabs using Git Bash. When I first started using Con Emu, I swear it used to do this by default, but I guess updates in Con Emu or the Git Bash shell broke this feature. Either way, I've found a solution that worked for me to get this feature back.

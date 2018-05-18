@@ -35,7 +35,6 @@ $button-font-size: rem(12px)
   color: $button-foreground
   cursor: pointer
   display: inline-block
-  filter: $button-drop-shadow
   font-size: $button-font-size
   font-weight: 600
   letter-spacing: 0.1rem
@@ -60,6 +59,9 @@ $button-font-size: rem(12px)
 
   &:active
     filter: $button-drop-shadow--active
+
+.Button--has-shadow
+  filter: $button-drop-shadow
 
 .Button--outline
   $border-color: #dddddd
@@ -87,6 +89,13 @@ $button-font-size: rem(12px)
   line-height: $button-line-height--large
   padding: $button-padding-v $button-padding-h--large
 
+
+.Button--light
+  background-color: white
+
+  &:link,
+  &:visited
+    background-color: white
 
 
 /**

@@ -2,9 +2,8 @@
 layout: post
 author: Anthony Koch
 title: My favorite features of ES2015
-use_excerpt_as_description: true
 tags: ['JavaScript', 'ES2015']
-post_id: 1
+postId: 1
 ---
 
 

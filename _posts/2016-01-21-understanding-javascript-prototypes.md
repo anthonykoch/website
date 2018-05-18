@@ -2,9 +2,8 @@
 layout: post
 author: Anthony Koch
 title: Understanding JavaScript Prototypes
-use_excerpt_as_description: true
 tags: ['JavaScript', 'prototypes']
-post_id: 6
+postId: 6
 ---
 
 Several months ago, I set out to get a deeper understanding of JavaScript, specifically in the area of prototypes. Prototypes were a fuzzy concept for me. I sort of knew how to use them, but didn't fully understand them. After a lot of study, I've started to see the picture of how prototypes work, and that they are not as complicated as I first thought.

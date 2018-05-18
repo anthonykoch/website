@@ -1,5 +1,7 @@
 # website
 
+Note: This is the original nuxt readme.
+
 > Nuxt.js project
 
 ## Build Setup

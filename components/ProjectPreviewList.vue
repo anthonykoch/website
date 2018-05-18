@@ -12,6 +12,7 @@
           :style="getStyle(project)"
           :project="project"
           ref="project"
+          @navigate="onNavigate"
         ></app-project-preview>
       </transition>
     </li>
@@ -54,12 +55,6 @@ export default {
     };
   },
 
-  methods: {
-    getIndex(project) {
-      return this.projects.findIndex(p => p.id === project.id);
-    },
-  },
-
   computed: {
     getStyle() {
       return (project) => {
@@ -73,6 +68,16 @@ export default {
           'pointer-events': isShowing ? 'auto' : 'none',
         };
       };
+    },
+  },
+
+  methods: {
+    getIndex(project) {
+      return this.projects.findIndex(p => p.id === project.id);
+    },
+
+    onNavigate(e, project) {
+      this.$emit('navigate', e, project);
     },
   },
 };

@@ -1,6 +1,5 @@
 <template>
   <div>
-
     <app-site-header>
       <app-hero
         slot="lower"
@@ -13,10 +12,17 @@
       </app-hero>
     </app-site-header>
 
-    <div
-      style="display: none; opacity: 0;"
-      class="Overlay Overlay--solidWhite  tr-fade  js-codepen-overlay">
-    </div>
+    <transition
+      name="tr-fade"
+      @after-enter="navigateToProject"
+      @enter-cancelled="navigateToProject"
+    >
+      <app-overlay
+        ref="projectsOverlay"
+        :background="overlays.projects.background"
+        v-show="overlays.projects.isShowing"
+      ></app-overlay>
+    </transition>
 
     <section class="Band Band--small u-collapse-bottom">
       <div class="row row--xxlarge">
@@ -30,7 +36,16 @@
 
       <div class="CodepenProjects">
         <div class="row row--xxlarge">
-          <app-project-preview-list :projects="projects"></app-project-preview-list>
+          <app-project-preview-list
+            :projects="projects"
+            @navigate="setNavigatedProject"
+          >
+          </app-project-preview-list>
+          <div class="u-text-center">
+            <a href="https://codepen.io/anthonykoch/" class="Button Button--light Button--large">View more on Codepen &rarr;</a>
+            <div class="Band"></div>
+            <!-- <a href="https://codepen.io/anthonykoch/" class="ViewMore">View more of my projects on Codepen &rarr;</a> -->
+          </div>
         </div>
       </div>
     </section>
@@ -199,7 +214,13 @@ export default {
 
   data() {
     return {
-      //
+      navigatedProject: null,
+      overlays: {
+        projects: {
+          isShowing: false,
+          background: 'is-white',
+        },
+      },
     };
   },
 
@@ -215,6 +236,23 @@ export default {
       projects: state => state.projects.codepen,
       featuredProject: state => state.projects.github.editorconnect,
     }),
+  },
+
+  methods: {
+    navigateToProject(e) {
+      this.overlays.projects.isShowing = true;
+
+      setTimeout(() => {
+        window.location = this.navigatedProject.href;
+      }, 100)
+    },
+
+    setNavigatedProject(e, project) {
+
+      this.navigatedProject = project;
+      this.overlays.projects.isShowing = true;
+      this.overlays.projects.background = project.fade;
+    },
   },
 };
 </script>

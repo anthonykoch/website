@@ -4,6 +4,48 @@ $project-translate: 12%
 $project-translate: 80px
 $project-quote-margin-top: 60px
 
+
+.Overlay
+  +position(fixed, 0 null null 0)
+  +size(100%)
+  background: rgba(color('background'), 0.5)
+  z-index: $app-overlay-layer
+
+.Overlay.is-white
+  background-color: #ffffff
+
+.Overlay.is-codepen
+  background-color: #1a1c1d
+
+.Overlay.is-dark
+  background-color: #2b292b
+
+
+
+
+.ViewMore
+  margin-bottom: 3rem
+  // // border-radius: 100px
+  // border: 2px solid #333333
+  // display: inline-block
+  // font-family: Lato
+  // font-size: 12px
+  // margin-bottom: 3rem
+  // padding: 14px 26px
+  // // padding: 12px 24px
+  // text-transform: uppercase
+
+  // &:link,
+  // &:visited
+  //   color: #333333
+
+  // &:hover,
+  // &:active
+  //   color: #333333
+
+
+
+
 $codepen-border-radius: 3px
 $codepen-projects-image-width: 500px
 $codepen-projects-image-count: 6

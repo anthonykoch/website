@@ -1,12 +1,13 @@
 
-assets/scripts/**/*.map
-assets/styles/main.css
+/assets/scripts/**/*.map
+/assets/styles/main.css
 
-.personal
-_drafts/
-extras/
-test/
-linters/
+/.reports/
+/.personal
+/_drafts/
+/extras/
+/test/
+/linters/
 
 
 
