@@ -53,7 +53,6 @@ export default {
     return {
       console,
       isExpanding: false,
-      memes: false,
       ripples: [],
     };
   },

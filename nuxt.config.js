@@ -214,9 +214,14 @@ const when = (bool, a, b) => bool ? a : b;
 
 const baseUrl = 'http://localhost:3000';
 
+const getPathSlug =
+  (filename) =>
+    stripFileDate(path.basename(filename, path.extname(filename)))
+      .replace(/\..+$/, '')
+
 module.exports = {
   env: {
-    // baseUrl,
+    baseUrl,
   },
 
   css: [
@@ -260,10 +265,10 @@ module.exports = {
    */
   build: {
     extractCSS: {
-      allChunks: true
+      allChunks: true,
     },
 
-    extend (config, { isClient }) {
+    extend(config, { isClient }) {
       config.module.rules = [
         ...config.module.rules,
         {
@@ -285,12 +290,8 @@ module.exports = {
         },
       ];
 
-      if (isClient) {
-        config.plugins = [
-          ...config.plugins,
-          //   reportFilename: path.join(__dirname, IS_PRODUCTION ? '.reports/prod.html' : '.reports/dev.html'),
-
-          new TransformFilePlugin({
+      const transformFilePlugin =
+        new TransformFilePlugin({
             include: /_posts\/.*?\.html$/,
             deleteOriginalAssets: true,
             async transform(files) {
@@ -310,13 +311,14 @@ module.exports = {
               const posts =
                 postsFiles.reduce((assets, file) => {
                   assets[file.path] =
-                    JSON.stringify(
-                      _.pick(file, [
-                        'frontmatter',
-                        'contents',
-                        'meta',
-                      ]),
-                      null, JSON_INDENT);
+                    JSON.stringify({
+                        excerpt: file.meta.excerpt,
+                        ...file.frontmatter,
+                        contents: file.contents,
+                      },
+                      null,
+                      JSON_INDENT
+                    );
 
                   return assets;
                 }, {});
@@ -329,27 +331,24 @@ module.exports = {
                 'api/postmeta.json':
                   JSON.stringify(
                     postsFiles.map(file => {
-                      return _.merge(
-                        _.pick(file, [
-                          'frontmatter',
-                          'meta.excerpt',
-                        ]), {
-                          meta: {
-                            // TODO: export to function
-                            slug:
-                              stripFileDate(path.basename(file.path, path.extname(file.path)))
-                                .replace(/\..+$/, ''),
-                          },
-                        });
+                      return {
+                        excerpt: file.meta.excerpt,
+                        ...file.frontmatter,
+                        slug: getPathSlug(file.path),
+                      };
                     }), null, JSON_INDENT),
-
               };
-
-              // console.log(Object.keys(all))
 
               return all;
             },
-          }),
+          });
+
+      if (isClient) {
+        config.plugins = [
+          ...config.plugins,
+          //   reportFilename: path.join(__dirname, IS_PRODUCTION ? '.reports/prod.html' : '.reports/dev.html'),
+
+          transformFilePlugin
         ];
       }
     },

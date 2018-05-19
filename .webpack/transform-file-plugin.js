@@ -82,24 +82,12 @@ export default class TransformFilePlugin {
             }
           }
 
-          // console.log(require('util').inspect(compilation.chunks, { depth: 5 }));
-
-          // console.log('matches', require('util').inspect(matches, { depth: 5 }));
-
-          // console.log('BREAK')
-
-          // console.log('before', require('util').inspect(Object.keys(compilation), { depth: 5 }));
-
           if (this.options.deleteOriginalAssets) {
             for (const filename in matches) {
               // console.log('deleting', filename)
               delete compilation.assets[filename];
             }
           }
-
-          // console.log('after', require('util').inspect(Object.keys(compilation.assets), { depth: 5 }));
-
-          // console.log(require('util').inspect(compilation.assets, { depth: 5 }));
 
           const newFiles =
             Object.keys(files).reduce((entries, filename) => {

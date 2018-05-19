@@ -2,11 +2,14 @@
   <div>
     this is index blog
 
+  {{ postsMeta }}
 
   </div>
 </template>
 
 <script>
+import { mapState } from 'vuex';
+
 import * as api from '@/core/api';
 
 export default {
@@ -14,18 +17,16 @@ export default {
     console.log(this);
   },
 
-  async asyncData(context) {
-    const postsMeta = await api.getPostsMeta();
-
-    console.log({postsMeta})
-
+  data() {
     return {
-      postsMeta,
-    };
 
-    // return {
-    //   metadata,
-    // };
+    };
+  },
+
+  computed: {
+    ...mapState({
+      postsMeta: state => state.posts.meta,
+    }),
   },
 };
 </script>

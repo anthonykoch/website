@@ -5,7 +5,7 @@ export default {
 
   state: {
     posts: {},
-    metadata: [],
+    meta: [],
   },
 
   mutations: {
@@ -20,7 +20,7 @@ export default {
 
   actions: {
     async nuxtServerInit() {
-      throw new Error('LMAO');
+      console.log('LMAO'.repeat(200));
     },
 
     async loadPost($store, { slug }) {
@@ -31,12 +31,14 @@ export default {
       return posts;
     },
 
-    async loadMetadata($store) {
-      const postsMeta = await api.getPostsMeta();
+    async loadMeta($store) {
+      const { error, data } = await api.getPostsMeta();
 
-      $store.commit('LOAD_POSTS_META', postsMeta);
+      console.log({data, error})
 
-      return postsMeta;
+      $store.commit('LOAD_POSTS_META', data);
+
+      return data;
     },
   },
 

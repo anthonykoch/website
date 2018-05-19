@@ -1,19 +1,20 @@
-import axios from 'axios';
+import axios from '@/core/fetch';
 
-const request = axios.create({
-  baseURL: process.env.baseUrl,
-});
 
-console.log('baseUrl', process.env.baseUrl);
+console.log({baseUrl: process.env.baseUrl})
 
 if (typeof window !== 'undefined') {
   window.axios = axios;
 }
 
 export const getPost = async (slug) => {
-  return axios.get(`http://localhost:3000/_nuxt/api/posts/${slug}`);
+  return axios.get(`/_nuxt/api/posts/${slug}`)
+    .then(res => ({ error: null, data: res.data }))
+    .catch(error => ({ error, data: null }));
 };
 
 export const getPostsMeta = async () => {
-  return axios.get(`http://localhost:3000/_nuxt/api/postmeta.json`);
+  return axios.get(`/_nuxt/api/postmeta.json`)
+    .then(res => ({ error: null, data: res.data }))
+    .catch(error => ({ error, data: null }));
 };
