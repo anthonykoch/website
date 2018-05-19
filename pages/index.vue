@@ -212,6 +212,10 @@ export default {
     //
   },
 
+  async asyncData({ params }) {
+    console.log('memes')
+  },
+
   data() {
     return {
       navigatedProject: null,

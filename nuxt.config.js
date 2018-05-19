@@ -40,7 +40,7 @@ const interpolatePath = ({ resourcePath, output, contents, context }) => {
  * Converts an array of mapping of interpolation filenames (e.g. '[name]-[hash:8].png')
  * to file contents.
  *
- * @return {Object<RawSource>}
+ * @return {Object<string>}
  */
 const convertToAssets =
   (assets, options) =>
@@ -124,22 +124,6 @@ const getPostExcerpt =
   };
 
 const stripFileDate = (pathname) => pathname.replace(/\d{4}-\d{2}-\d{2}-/, '');
-
-const getApiPathname =
-  () =>
-    (file) => {
-      return _.merge({}, file, {
-        path: stripFileDate(file.path),
-      });
-    };
-
-const getRenderedMarkdown =
-  ({ md }={}) =>
-    (file) => {
-      return _.merge({}, file, {
-        contents: md.render(file.contents),
-      });
-    };
 
 const validateBaseFile = (value) => {
   let message = null;
@@ -226,7 +210,15 @@ const transformer = async (files, { transforms=[] }={}) => {
   return Promise.all(newFiles);
 };
 
+const when = (bool, a, b) => bool ? a : b;
+
+const baseUrl = 'http://localhost:3000';
+
 module.exports = {
+  env: {
+    // baseUrl,
+  },
+
   css: [
     '@/assets/styles/main.sass',
   ],
@@ -271,7 +263,7 @@ module.exports = {
       allChunks: true
     },
 
-    extend (config, memes) {
+    extend (config, { isClient }) {
       config.module.rules = [
         ...config.module.rules,
         {
@@ -293,88 +285,73 @@ module.exports = {
         },
       ];
 
-      console.log(memes)
+      if (isClient) {
+        config.plugins = [
+          ...config.plugins,
+          //   reportFilename: path.join(__dirname, IS_PRODUCTION ? '.reports/prod.html' : '.reports/dev.html'),
 
-      if (memes.isClient) {
-      config.plugins = [
-        ...config.plugins,
-        //   reportFilename: path.join(__dirname, IS_PRODUCTION ? '.reports/prod.html' : '.reports/dev.html'),
+          new TransformFilePlugin({
+            include: /_posts\/.*?\.html$/,
+            deleteOriginalAssets: true,
+            async transform(files) {
+              const postsFiles = await transformer(files, {
+                transforms: [
+                  getFrontMatter(),
+                  getPostExcerpt({ md }),
+                  (file) => _.merge({}, file, {
+                    contents: md.render(file.contents),
+                  }),
+                  (file) => _.merge({}, file, {
+                    path: stripFileDate(file.path),
+                  }),
+                ],
+              });
 
-
-        new TransformFilePlugin({
-          include: /_posts\/.*?\.html$/,
-          deleteOriginalAssets: true,
-          async transform(files) {
-            console.log('transforming:', Object.keys(files))
-            const postsFiles = await transformer(files, {
-              transforms: [
-                getFrontMatter(),
-                getPostExcerpt({ md }),
-                getRenderedMarkdown({ md }),
-                getApiPathname(),
-              ],
-            });
-
-            const posts =
-              postsFiles.reduce((assets, file) => {
-                assets[file.path] =
-                  JSON.stringify(
-                    _.pick(file, [
-                      'frontmatter',
-                      'contents',
-                      'meta',
-                    ]),
-                    null, JSON_INDENT);
-
-                return assets;
-              }, {})
-
-            // console.log(posts)
-
-            const metadata = {
-              'metadata.json':
-                JSON.stringify(
-                  postsFiles.map(file => {
-                    return _.merge(
+              const posts =
+                postsFiles.reduce((assets, file) => {
+                  assets[file.path] =
+                    JSON.stringify(
                       _.pick(file, [
                         'frontmatter',
-                        'meta.excerpt',
-                      ]), {
-                        meta: {
-                          // TODO: export to function
-                          slug:
-                            stripFileDate(path.basename(file.path, path.extname(file.path)))
-                              .replace(/\..+$/, ''),
-                        },
-                      });
-                  }), null, JSON_INDENT),
-            };
+                        'contents',
+                        'meta',
+                      ]),
+                      null, JSON_INDENT);
 
-            const postRoutes =
-              convertToAssets(posts, {
-                context: config.context,
-                output: 'api/posts/[name].json',
-              });
+                  return assets;
+                }, {});
 
-            const postMetaRoutes =
-              convertToAssets(metadata, {
-                context: config.context,
-                output: 'api/postmeta.json',
-              });
+              const all = {
+                ...convertToAssets(posts, {
+                  // context: config.context,
+                  output: 'api/posts/[name].json',
+                }),
+                'api/postmeta.json':
+                  JSON.stringify(
+                    postsFiles.map(file => {
+                      return _.merge(
+                        _.pick(file, [
+                          'frontmatter',
+                          'meta.excerpt',
+                        ]), {
+                          meta: {
+                            // TODO: export to function
+                            slug:
+                              stripFileDate(path.basename(file.path, path.extname(file.path)))
+                                .replace(/\..+$/, ''),
+                          },
+                        });
+                    }), null, JSON_INDENT),
 
-            const all = Object.assign({}, postRoutes, postMetaRoutes);
+              };
 
-            console.log(Object.keys(all))
+              // console.log(Object.keys(all))
 
-            return all;
-          },
-        }),
-      ];
+              return all;
+            },
+          }),
+        ];
       }
-
-      // if (isDev && isClient) {
-
-      // }
     },
   },
 

@@ -1,33 +1,31 @@
 <template>
   <div>
     this is index blog
+
+
   </div>
 </template>
 
 <script>
-import axios from 'axios';
+import * as api from '@/core/api';
 
 export default {
   mounted() {
-    // console.log(this.$router.options.routes)
+    console.log(this);
   },
 
-  // asyncData(context) {
-  //   // console.log('awpdokawd', context)
+  async asyncData(context) {
+    const postsMeta = await api.getPostsMeta();
 
-  //   const metadata =
-  //     axios.get('//localhost:3000/api/posts/metadata.json')
-  //       .then(meme => console.log(meme))
-  //       .catch(err => console.log('error', err));
+    console.log({postsMeta})
 
-  //   // return Promise.resolve()
-  //   // // console.log(metadata)
+    return {
+      postsMeta,
+    };
 
-  //   return metadata;
-
-  //   // return {
-  //   //   metadata,
-  //   // };
-  // },
+    // return {
+    //   metadata,
+    // };
+  },
 };
 </script>
