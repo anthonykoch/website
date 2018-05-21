@@ -9,7 +9,9 @@ export default {
   props: {
     social: {
       type: Array,
-      required: true,
+      default() {
+        return this.$store.getters['social/getMediaItems'];
+      },
     },
   },
 };

@@ -16,12 +16,14 @@
     "@nuxtjs/markdownit": "^1.2.1",
     "axios": "^0.18.0",
     "cuid": "2.1.1",
+    "date-fns": "^2.0.0-alpha.8",
     "esm": "^3.0.34",
     "front-matter": "^2.3.0",
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.1",
-    "nuxt": "1.0.0",
-    "slugify": "1.3.0"
+    "nuxt": "1.4.0",
+    "slugify": "1.3.0",
+    "vue-disqus": "^3.0.3"
   },
   "devDependencies": {
     "@webpack-contrib/schema-utils": "^1.0.0-beta.0",

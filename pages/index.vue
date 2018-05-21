@@ -1,14 +1,15 @@
 <template>
   <div>
     <app-site-header>
-      <app-hero
-        slot="lower"
-        :social="$store.getters['social/getMediaItems']"
-      >
+      <app-hero slot="lower">
         <div slot="caption">Front-End Developer</div>
         <div slot="description">
           Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development. I'm a lover of JavaScript, Python, and simple code.
         </div>
+        <app-social-icons
+          slot="social"
+          :social="$store.getters['social/getMediaItems']"
+        ></app-social-icons>
       </app-hero>
     </app-site-header>
 
@@ -42,7 +43,12 @@
           >
           </app-project-preview-list>
           <div class="u-text-center">
-            <a href="https://codepen.io/anthonykoch/" class="Button Button--light Button--large">View more on Codepen &rarr;</a>
+            <a
+              href="https://codepen.io/anthonykoch/"
+              class="Button Button--light Button--large Button--hover-stripe-bottom"
+            >
+              View more on Codepen &rarr;
+            </a>
             <div class="Band"></div>
             <!-- <a href="https://codepen.io/anthonykoch/" class="ViewMore">View more of my projects on Codepen &rarr;</a> -->
           </div>
@@ -195,7 +201,7 @@
       </div> -->
     </section>
 
-    <app-site-footer :social="$store.getters['social/getMediaItems']"></app-site-footer>
+    <app-site-footer></app-site-footer>
   </div>
 </template>
 

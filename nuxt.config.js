@@ -7,59 +7,50 @@ const glob = require('glob');
 const { inspect } = require('util');
 
 const _ = require('lodash');
+const datefns = require('date-fns');
 const MarkdownIt = require('markdown-it');
 const frontmatter = require('front-matter');
-const loaderUtils = require('loader-utils');
+const hljs = require('highlight.js');
 
 const md = new MarkdownIt({
-  // TODO
+  html: true,
+  linkify: false,
+  highlight(content, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return hljs.highlight(lang, content, true).value
+      } catch (err) {
+        // console.log(lang,  content)
+        throw err;
+      }
+    }
+
+    // console.log(lang, content);
+
+    return md.utils.escapeHtml(content);
+  },
 });
 
 const TransformFilePlugin = requireModule('./.webpack/transform-file-plugin').default;
 
+const {
+  stripFileDate,
+  getPathSlug,
+  interpolatePath,
+  convertToAssets,
+  validateBaseFile,
+  runTransforms,
+  transformer,
+  when,
+} = requireModule('./.webpack/utils');
+
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const DIR_POSTS = '_posts';
-const JSON_INDENT = 0;
-
-const interpolatePath = ({ resourcePath, output, contents, context }) => {
-  const loaderContext = {
-    resourcePath,
-  };
-
-  const options = {
-    content: contents.toString('utf8'),
-    context,
-  };
-
-  const filename = loaderUtils.interpolateName(loaderContext, output, options);
-
-  return filename;
-};
+const JSON_INDENT = 2;
+const ROUTE_BLOG = '/blog';
 
 /**
- * Converts an array of mapping of interpolation filenames (e.g. '[name]-[hash:8].png')
- * to file contents.
- *
- * @return {Object<string>}
- */
-const convertToAssets =
-  (assets, options) =>
-    Object.entries(assets)
-      .reduce((newFiles, [originalFilename, contents]) => {
-      const filename = interpolatePath({
-        resourcePath: originalFilename,
-        contents: contents,
-        output: options.output,
-        context: options.context,
-      });
-
-      newFiles[filename] = contents;
-
-      return newFiles;
-    }, {});
-
-/**
- * Parses front matter and adds it to the meta
+ * Adds the parsed front matter to the file object
  */
 const getFrontMatter =
   () =>
@@ -114,6 +105,7 @@ const getPostExcerpt =
     }
 
     return _.merge({}, file, {
+      contents: file.contents,
       meta: {
         excerpt: {
           content: renderExcerpt && excerpt != null ? md.render(excerpt) : excerpt,
@@ -123,106 +115,91 @@ const getPostExcerpt =
     });
   };
 
-const stripFileDate = (pathname) => pathname.replace(/\d{4}-\d{2}-\d{2}-/, '');
+  /**
+   * Convers a list of files to JSON and returns an asset mapping.
+   *
+   * @param  {Array<File>} files
+   * @param  {Number} options.indent - The indent for the json
+   * @param  {Number} options.output - Interpolation name e.g. '[name]-[hash:8].json'
+   * @return {Object.<string>}
+   */
+const createPostsJsonAssets = (files, options={}) => {
+  const posts = files.reduce((assets, file) => {
+    const slug = getPathSlug(file.path);
 
-const validateBaseFile = (value) => {
-  let message = null;
+    assets[file.path] =
+      JSON.stringify({
+          excerpt: file.meta.excerpt,
+          ...file.frontmatter,
+          humanized: file.humanized,
+          url: path.posix.normalize(`${ROUTE_BLOG}/${slug}`),
+          slug,
+          contents: file.contents,
+        },
+        null,
+        options.indent || 0
+      );
 
-  if (!_.isObject(value)) {
-    message = `transform did not return an object, got ${inspect(value)}`;
-  } else if (!_.isString(value.contents) && !Buffer.isBuffer(value.contents)) {
-    message = `transform returned object without contents as string or buffer, got ${inspect(value.contents)}`;
-  } else if (!_.isObject(value.meta)) {
-    message = `transform did not return an object with meta , got ${inspect(value.meta)}`;
-  } else if (!_.isString(value.path)) {
-    message = `transform did not return an object with a path, got ${inspect(value.path)}`;
-  }
+      return assets;
+    }, {});
 
-  return { message };
+  return convertToAssets(posts, {
+    output: options.output,
+  });
 };
 
 /**
- * Runs transforms (really just a series of functions) on an initial value.
+ * Converts a list of files to a list of meta of each file and returns
+ * an asset mapping containg the meta file.
  *
- * @throws {Error} If the transform function doesn't return an object
- *
- * @return Promise<Object>
+ * @type {Object.<Array<Object>>}
  */
-const runTransforms =
-  async (initial, transforms, options={ name: 'TransformRunner' }) => {
-    let data = await initial;
+const createPostsMetaAssets =
+  (files, { output='postmeta.json', indent=0 }={}) => {
+    const meta = files.map(file => {
+      return {
+        excerpt: file.meta.excerpt,
+        ...file.frontmatter,
+        humanized: file.humanized,
+        url: path.posix.normalize(`${ROUTE_BLOG}/${getPathSlug(file.path)}`),
+        slug: getPathSlug(file.path),
+      };
+    }).sort((a, b) => datefns.compareDesc(a.created_at, b.created_at));
 
-    for (const transform of transforms) {
-      const arg = await data;
-      const value = await transform(arg);
-      const { message } = validateBaseFile(value);
-
-      if (message != null) {
-        throw new Error(`${options.name}: ${message}`);
-      }
-
-      data = value;
-    }
-
-    return data;
+    return convertToAssets({
+      'postsmeta.json': JSON.stringify(meta, null, indent),
+    }, {
+      output: output,
+    });
   };
 
-/**
- * Calls a series of functions
- *
- * @throws {Error} If the yaml frontmatter does not exist
- *
- * type files = { [string]: Buffer };
- * type transforms = function[];
- *
- * type return = {
- *   path: string,
- *   contents: string,
- *   meta: {},
- *   attributes: {},
- * };
- */
-const transformer = async (files, { transforms=[] }={}) => {
-  const newFiles = Object.entries(files)
-    .map(async ([filename, buffer]) => {
-      const contents = buffer.toString('utf8');
-
-      let file = {
-        // originalPath and source should not be modified
-        originalPath: filename,
-        source: contents,
-
-        // Any one of these properties below may be modified by a transformer
-        path: filename,
-        meta: {},
-        contents,
-      };
-
-      const defaultOpts = {
-        name: 'Transformer',
-      };
-
-      file = await runTransforms(file, transforms, defaultOpts);
-
-      return file;
-    });
-
-  return Promise.all(newFiles);
+let appenv = {
+  baseUrl: 'http://localhost:3000',
+  apiPath: '/_nuxt/api',
 };
 
-const when = (bool, a, b) => bool ? a : b;
-
-const baseUrl = 'http://localhost:3000';
-
-const getPathSlug =
-  (filename) =>
-    stripFileDate(path.basename(filename, path.extname(filename)))
-      .replace(/\..+$/, '')
+if (IS_PRODUCTION) {
+  appenv = {
+    baseUrl: 'http://localhost:8080',
+    apiPath: '/_nuxt/api',
+  };
+}
 
 module.exports = {
-  env: {
-    baseUrl,
+
+  router: {
+    linkActiveClass: '',
+    linkExactActiveClass: '',
   },
+
+  env: {
+    app: {
+      ...appenv,
+      IS_PRODUCTION,
+    },
+  },
+
+  // mode: 'spa',
 
   css: [
     '@/assets/styles/main.sass',
@@ -252,13 +229,8 @@ module.exports = {
   /*
    * Customize the progress bar color
    */
-  loading: { color: '#3B8070' },
-
-  router: {
-    linkActiveClass: '',
-    linkExactActiveClass: '',
-    // FIXME: Scroll position should be restored on refresh
-  },
+  loading: false,
+  // loading: { color: '#3B8070' },
 
   /*
    * Build configuration
@@ -267,6 +239,10 @@ module.exports = {
     extractCSS: {
       allChunks: true,
     },
+
+    postcss: [
+
+    ],
 
     extend(config, { isClient }) {
       config.module.rules = [
@@ -305,38 +281,28 @@ module.exports = {
                   (file) => _.merge({}, file, {
                     path: stripFileDate(file.path),
                   }),
+                  (file) => _.merge({}, file, {
+                    humanized: {
+                      created_at: datefns.format(file.frontmatter.created_at, 'MMMM, d y'),
+                    },
+                  }),
                 ],
               });
 
-              const posts =
-                postsFiles.reduce((assets, file) => {
-                  assets[file.path] =
-                    JSON.stringify({
-                        excerpt: file.meta.excerpt,
-                        ...file.frontmatter,
-                        contents: file.contents,
-                      },
-                      null,
-                      JSON_INDENT
-                    );
+              const postAssets = createPostsJsonAssets(postsFiles, {
+                output: 'api/posts/[name].json',
+                indent: JSON_INDENT,
+              });
 
-                  return assets;
-                }, {});
+              // This is so that we can have a preview listing of posts on the /blog page
+              const postsMeta = createPostsMetaAssets(postsFiles, {
+                output: 'api/postmeta.json',
+                indent: JSON_INDENT,
+              });
 
               const all = {
-                ...convertToAssets(posts, {
-                  // context: config.context,
-                  output: 'api/posts/[name].json',
-                }),
-                'api/postmeta.json':
-                  JSON.stringify(
-                    postsFiles.map(file => {
-                      return {
-                        excerpt: file.meta.excerpt,
-                        ...file.frontmatter,
-                        slug: getPathSlug(file.path),
-                      };
-                    }), null, JSON_INDENT),
+                ...postAssets,
+                ...postsMeta,
               };
 
               return all;
@@ -359,17 +325,21 @@ module.exports = {
       ...glob.sync(path.join(__dirname, `${DIR_POSTS}/*.md`))
         .map((filename) => {
           const relativeFilename =
-            path.relative(path.join(__dirname, DIR_POSTS), filename)
+            path.relative(path.join(__dirname, DIR_POSTS), filename);
 
-          const basename = path.basename(relativeFilename, path.extname(relativeFilename))
+          const basename =
+            path.basename(relativeFilename, path.extname(relativeFilename));
 
-          return `/blog/${stripFileDate(basename)}`;
+          return path.posix.normalize(`${ROUTE_BLOG}/${stripFileDate(basename)}`);
         }),
     ],
   },
 
   plugins: [
     '~plugins/context',
+    '~plugins/logger',
+    '~/plugins/disqus',
+
     // Might need highlighter later
     // '~plugins/vue-highlightjs'
   ],

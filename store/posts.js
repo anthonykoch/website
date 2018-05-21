@@ -4,45 +4,62 @@ export default {
   namespaced: true,
 
   state: {
-    posts: {},
+    postsById: Object.freeze({}),
     meta: [],
   },
 
   mutations: {
     LOAD_POST(state, post) {
-      state.posts[post.frontmatter.postId] = post;
+      logger.client('Adding post:', post);
+
+      state.postsById = Object.freeze({
+        ...state.postsById,
+        [post.id]: post,
+      });
     },
 
     LOAD_POSTS_META(state, postsMeta) {
-      state.postsMeta = postsMeta;
+      state.meta = postsMeta;
     },
   },
 
   actions: {
-    async nuxtServerInit() {
-      console.log('LMAO'.repeat(200));
+    loadPost($store, { slug }) {
+      return api.getPost(slug)
+        .then(res => {
+          $store.commit('LOAD_POST', res.data);
+          // console.log('commiting:', slug, res.data.slug)
+          // console.log('loaded:', response.data.slug, response.data.slug===slug, {error, response});
+
+        })
+        .catch(err => {
+          // console.log('err', err)
+
+          return err;
+        });
     },
 
-    async loadPost($store, { slug }) {
-      const post = await api.getPost(slug);
+    loadMeta($store) {
+      return api.getPostsMeta()
+        .then(res => {
+          $store.commit('LOAD_POSTS_META', res.data);
+          // console.log('loadMeta', res.data);
+        })
+        .catch(err => {
+          // console.log('err', err)
 
-      $store.commit('LOAD_POST', slug);
-
-      return posts;
-    },
-
-    async loadMeta($store) {
-      const { error, data } = await api.getPostsMeta();
-
-      console.log({data, error})
-
-      $store.commit('LOAD_POSTS_META', data);
-
-      return data;
+          return err;
+        });
     },
   },
 
   getters: {
-    getPosts: state => Object.values(state.posts),
+    getBySlug:
+      (state, getters) =>
+        slug => getters.getPosts.find(item => item.slug === slug),
+
+    getPosts: state => {
+      return Array.from(Object.values(state.postsById));
+    },
   },
 };

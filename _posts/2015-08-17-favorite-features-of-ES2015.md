@@ -3,12 +3,12 @@ layout: post
 author: Anthony Koch
 title: My favorite features of ES2015
 tags: ['JavaScript', 'ES2015']
-postId: 1
+id: 1
+created_at: 2015-08-17
 ---
 
 
 ES2015, formerly called ES6, brings a lot of great features to JavaScript. A lot of the new features provide a much cleaner syntax for common tasks, and makes writing JavaScript so much better. After using these features for a while, I can't imagine going back to ES5. Here's an overview of my favorite features of ES2015. 
-
 
 <!-- endexcerpt -->
 

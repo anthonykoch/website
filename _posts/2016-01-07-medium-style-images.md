@@ -3,7 +3,8 @@ layout: post
 author: Anthony Koch
 title: Medium style image loading
 tags: ['stackblur', 'medium', 'lazy loading']
-postId: 5
+id: 5
+created_at: 2016-01-07
 ---
 
 I was on the [Medium](https://medium.com/) website and noticed a cool effect  they do when they lazy load their images. The image first appears blurry, and then slowly unblurs or fades out to reveal the actual image. I thought this was pretty cool, and wanted to see if I could achieve a similar effect. 

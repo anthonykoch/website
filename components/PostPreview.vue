@@ -1,28 +1,39 @@
 <template>
   <article class="PostPreview  u-collapse@medium">
     <ul class="PostPreview__meta">
-      post date
-      <!-- <li>{{ post.date | date:'%B %d, %Y'}}</li> -->
+      {{ meta.humanized.created_at }}
     </ul>
     <h4 class="PostPreview__title">
-      <a :href="post.url" class="PostPreview__link">
-        {{ post.title }}
-      </a>
+      <nuxt-link :to="meta.url" class="PostPreview__link">
+        {{ meta.title }}
+      </nuxt-link>
     </h4>
-    <p class="PostPreview__body  row row--medium row--left">
-      <!-- {{ post.excerpt | strip_html | truncatewords: 30 }} -->
-    </p>
-    <a :href="post.url" class="PostPreview__more">read more &rarr;</a>
+    <div
+      class="PostPreview__body  row row--medium  u-margin-0 u-collapse-last"
+      v-html="content"
+    >
+    </div>
+    <a :href="meta.url" class="PostPreview__more">read more &rarr;</a>
   </article>
 
 </template>
 
 <script>
+import _ from 'lodash';
+
 export default {
   props: {
-    post: {
+    meta: {
       type: Object,
       require: true,
+    },
+  },
+
+  computed: {
+    content() {
+      return _.truncate(this.meta.excerpt.content, {
+        length: 250,
+      });
     },
   },
 };

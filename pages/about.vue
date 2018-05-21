@@ -10,10 +10,6 @@
         <div slot="description">
           I started out writing JavaScript in Notepad for fun, and tried to recreate things like jQuery in order to gain understanding of the syntax and concepts of the language. I've since found myself really enjoying front-end development, and have made various projects, some of which I've put on my <a href="http://codepen.io/anthonykoch/">codepen</a> and <a href="https://github.com/anthonykoch">github</a>.
         </div>
-        <app-social-icons
-          slot="social"
-          :social="$store.getters['social/getMediaItems']"
-        ></app-social-icons>
       </app-hero>
     </app-site-header>
 
@@ -53,7 +49,7 @@
       </section>
     </div>
 
-    <app-site-footer :social="$store.getters['social/getMediaItems']"></app-site-footer>
+    <app-site-footer></app-site-footer>
   </div>
 </template>
 

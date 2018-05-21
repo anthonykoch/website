@@ -10,22 +10,17 @@ import pages from './pages';
 
 export const storeDefinitions = {
   strict: true,
+
   // plugins: [createPersistedState({
   //   //
   // })],
   actions: {
     async nuxtServerInit() {
-      console.log('looooool')
-
-      this.dispatch('posts/loadMeta');
-
       if (process.server) {
         // const test = await axios.get('http://localhost:3000/_nuxt/api/postmeta.json');
 
         // console.log(test)
       }
-
-
     },
   },
 

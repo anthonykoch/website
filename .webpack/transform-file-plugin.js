@@ -98,7 +98,7 @@ export default class TransformFilePlugin {
 
           Object.assign(compilation.assets, newFiles);
 
-          console.log('assets:', Object.keys(compilation.assets))
+          // console.log('assets:', Object.keys(compilation.assets))
 
           callback();
         });

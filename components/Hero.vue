@@ -1,6 +1,4 @@
 <template>
-  <!-- TODO: See if page is a thing that can be done -->
-  <!-- TODO: Make hero into a component -->
   <div class="Hero">
     <div>
       <div class="Hero__caption" v-if="$slots.caption">
@@ -12,7 +10,7 @@
       </div>
     </div>
 
-    <div slot="social"></div>
+    <slot name="social"></slot>
   </div>
 </template>
 
@@ -21,7 +19,3 @@ export default {
   name: 'Hero',
 };
 </script>
-
-<style>
-
-</style>

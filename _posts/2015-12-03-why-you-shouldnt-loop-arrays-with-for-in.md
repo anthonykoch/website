@@ -3,7 +3,8 @@ layout: post
 author: Anthony Koch
 title: Why you shouldn't loop arrays with for-in
 tags: ['JavaScript', 'arrays']
-postId: 4
+id: 4
+created_at: 2015-12-03
 ---
 
 

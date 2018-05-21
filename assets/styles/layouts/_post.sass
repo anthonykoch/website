@@ -6,12 +6,25 @@ $post-font-size: rem(16px)
 $post-max-width: rem(800px)
 $post-header-background: #eeeeee
 $post-gutter: double($row-gutter)
-$post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div)
+$post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div, pre)
 $post-body-children: ()
 
 @each $selector in join($headings, $post-elements)
   $post-body-children: join($post-body-children, '.Post__body > ' + $selector + ',')
 
+
+
+/**
+ * z-indexed over the header wrapper
+ */
+.PostList
+  margin: 0 auto
+  padding-top: 2.5rem
+  position: relative
+  z-index: 1 /* [1] */
+
+.PostList__item
+  padding-bottom: 5rem
 
 .Post
   font-size: $post-font-size
@@ -88,26 +101,6 @@ $post-body-children: ()
     padding-right: 0 !important
 
 
-/**
- * z-indexed over the header wrapper
- */
-.PostList
-  margin: 0 auto
-  position: relative
-  z-index: 1 /* [1] */
-
-.PostList__item
-  padding: 1.25rem 0
-
-
-
-.PostPreview
-  padding: $base-spacing 0
-
-  @media (max-width: breakpoint('medium'))
-    padding: $base-spacing 0
-
-// EXTRA EMPTY LINE
 
 .PostPreview__title
   +title('small')
