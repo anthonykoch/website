@@ -1,6 +1,5 @@
 $app-overlay-layer: 10;
 
-
 $config: (
   'images': '/assets/images/'
 );
@@ -12,20 +11,6 @@ $z-indexes: (
   'header': 10,
   'overlay': 5000,
   'modal': 5001,
-);
-
-/**
- * Declare them from largest to smallest so that when looping over
- * them to create the responsive classes, the smaller classes
- * override the larger classes
- */
-$breakpoints: (
-  'xxlarge': rem(1400px),
-  'xlarge': rem(1200px),
-  'large': rem(900px),
-  'medium': rem(600px),
-  'small': rem(350px),
-  'readable': rem(760px)
 );
 
 // $ionicons-font-path: '../fonts/ionicons-2.0.1' !default;
@@ -72,12 +57,6 @@ $row-gutter-at-small: 1.25rem;
 $block-quote-padding-h: ($base-gutter * 3);
 
 /**
- * These classes will be used for the responsive @ classes.
- * @type {list}
- */
-$breakpoint-classes: ('xlarge', 'large', 'medium', 'small');
-
-/**
  * The base border radius
  * @type {number}
  */
@@ -104,3 +83,67 @@ $list-padding-v: $base-spacing;
  * The height of the header when
  */
 $site-header-height--post: rem(400px);
+
+
+
+/**
+ * Declare them from largest to smallest so that when looping over
+ * them to create the responsive classes, the smaller classes
+ * override the larger classes
+ */
+$app-breakpoints: (
+  'default': 0,
+  'xsm': rem(360px),
+  'sm': rem(600px),
+  'readable': rem(760px),
+  'lg': rem(900px),
+  'xlg': rem(1200px),
+  'xxlg': rem(1400px),
+);
+
+/**
+ * These classes will be used for the responsive @ classes.
+ * @type {list}
+ */
+$app-breakpoint-classes: ('default', 'xlg', 'lg', 'sm', 'xsm');
+
+$app-active-breakpoints: ();
+
+@each $breakpoint-name, $size in $app-breakpoints {
+  @if index($app-breakpoint-classes, $breakpoint-name) {
+    $app-active-breakpoints: map-merge($app-active-breakpoints, ($breakpoint-name: $size)) !global;
+  }
+}
+
+// ("default": 0, "xsm": 22.5rem, "sm": 37.5rem, "lg": 56.25rem, "xl": 75rem)
+// @error $app-active-breakpoints;
+
+$app-spacing: 16px;
+
+$app-utility-levels: (
+  // Don't put 0, because those are output manually
+  1: quarter($app-spacing),
+  2: half($app-spacing),
+  3: $app-spacing,
+  4: $app-spacing * 1.5,
+  5: $app-spacing * 3,
+  6: $app-spacing * 6,
+);
+
+$app-utility-positions: (
+  t: (top),
+  b: (bottom),
+  l: (left),
+  r: (right),
+  x: (left, right),
+  y: (top, bottom)
+);
+
+$app-project-preview-border-radius: 3px;
+$app-site-header-lower: 1;
+$app-site-header-container: 2;
+
+
+// @each $weight in (200, 300, 400, 500, 600, 700)
+//   .u-textWeight#{$weight}
+//     font-weight: $weight !important

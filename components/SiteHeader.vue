@@ -1,8 +1,12 @@
 <template>
-  <div class="site-header-wrapper" data-page="TODO">
-    <header class="SiteHeader" role="banner">
+    <header
+      :style="background"
+      :class="{ 'has-default-background': background == null }"
+      class="SiteHeader"
+      role="banner"
+      data-page="TODO"
+    >
       <div class="SiteHeader__container">
-
         <div class="Logo">
           <nuxt-link
             active-class="is-active"
@@ -34,7 +38,18 @@
         </nav>
       </div>
 
-      <slot name="lower"></slot>
+      <div class="SiteHeader__lower">
+        <slot name="lower"></slot>
+      </div>
     </header>
-  </div>
 </template>
+
+<script>
+export default {
+  props: {
+    background: {
+      type: Object,
+    },
+  },
+};
+</script>

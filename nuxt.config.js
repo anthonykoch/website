@@ -180,8 +180,7 @@ let appenv = {
 
 if (IS_PRODUCTION) {
   appenv = {
-    baseUrl: 'http://localhost:8080',
-    apiPath: '/_nuxt/api',
+    baseUrl: '/',
   };
 }
 
@@ -241,7 +240,10 @@ module.exports = {
     },
 
     postcss: [
-
+      require('cssnano')({
+        preset: 'default',
+      }),
+      require('autoprefixer')(),
     ],
 
     extend(config, { isClient }) {

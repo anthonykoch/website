@@ -1,0 +1,51 @@
+// TODO: Find a SUIT compatible name for u-my0-last
+// purpose: Creates spacing utility classes in the same format as bootstrap's
+// selector: .u-my0
+// description: Collapses the bottom margin
+// examples:
+//   |
+//     <!-- Adds padding on the left and right at level 2 -->
+//     <div class="u-px2"></div>
+//
+//     <!-- Collapses the padding on the third paragraph -->
+//     <div class="u-my0-last">
+//        <p>first</p>
+//        <p>second</p>
+//        <p>third</p>
+//     </div>
+//
+
+@each $abbr, $positions in $app-utility-positions
+  @each $level, $size in $app-utility-levels
+    .u-m#{$abbr}#{$level}
+      @each $p in $positions
+        margin-#{$p}: $size !important
+
+    .u-p#{$abbr}#{$level}
+      @each $p in $positions
+        padding-#{$p}: $size !important
+
+
+
+
+
+@each $abbr, $positions in $app-utility-positions
+  @each $breakpoint-name in map-keys($app-active-breakpoints)
+    +app-breakpoint-min($breakpoint-name)
+      $suffix: app-breakpoint-suffix($breakpoint-name)
+
+      .u-m#{$abbr}0#{$suffix}
+        @each $p in $positions
+          margin-#{$p}: 0 !important
+
+      .u-m#{$abbr}0-last#{$suffix} > :last-child
+        @each $p in $positions
+          margin-#{$p}: 0 !important
+
+      .u-p#{$abbr}0#{$suffix}
+        @each $p in $positions
+          padding-#{$p}: 0 !important
+
+      .u-m#{$abbr}0-last#{$suffix} > :last-child
+        @each $p in $positions
+          margin-#{$p}: 0 !important

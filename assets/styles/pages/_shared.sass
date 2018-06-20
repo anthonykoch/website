@@ -12,14 +12,14 @@
 .Hero__description
   color: #dddddd
   font-size: rem(17px)
-  max-width: breakpoint('medium')
+  max-width: app-breakpoint('sm')
   padding: $base-spacing 0 $base-spacing
 
 /**
  * 1. Push the header down so the background image doesn't show under the text,
  *    making it unreadable.
  */
-@media (max-width: breakpoint('medium'))
+@media (max-width: app-breakpoint('sm'))
   .Hero
     padding-top: ($base-spacing * 3)
 
@@ -47,7 +47,7 @@
 
 .disqus_thread
   margin: 0 auto
-  max-width: breakpoint('large')
+  max-width: breakpoint('lg')
   padding: ($base-spacing * 4) $row-gutter
 
 
@@ -60,7 +60,7 @@
   position: absolute
   right: 1.25rem
 
-@media (max-width: breakpoint('medium'))
+@media (max-width: app-breakpoint('sm'))
   .Social
     left: 50%
     right: initial

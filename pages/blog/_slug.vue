@@ -38,7 +38,7 @@
             </a>
           </h1>
           <ul class="Post__meta-list">
-            <li class="u-text-meta" >
+            <li class="TODO-POSTMETA" >
               {{ post.humanized.created_at }}
             </li>
           </ul>
@@ -86,6 +86,10 @@ export default {
     post() {
       // console.log(Object.keys(this.$store.state.posts.postsById))
       const post = this.$store.getters['posts/getBySlug'](this.$route.params.slug);
+
+      if (post == null) {
+        throw new Error('the fuck is happening: ' + this.$route.params.slug)
+      }
 
       // console.log({
       //   slug: this.$route.params.slug,

@@ -1,0 +1,91 @@
+
+
+.ProjectPreview
+  cursor: pointer
+  display: block
+  outline: 0
+  position: relative
+  -webkit-tap-highlight-color: transparent
+  width: 100%
+  z-index: 1
+
+.ProjectPreview--is-animated
+  // opacity: 0
+  // pointer-events: none
+  transition-duration: 0.7s
+  transition-property: transform, opacity
+  transition-timing-function: ease-out
+
+.ProjectPreview--is-showing
+  opacity: 1
+  pointer-events: auto
+  transform: none
+
+.nojs .ProjectPreview
+  opacity: 1
+  pointer-events: auto
+  transform: none
+
+.ProjectPreview:hover,
+.ProjectPreview:active,
+.ProjectPreview:focus
+  .ProjectPreview__background:before
+    opacity: 1
+
+  .ProjectPreview__title
+    opacity: 1
+    transform: translate(-50.5%, -50%)
+
+.ProjectPreview__container
+  border-radius: $app-project-preview-border-radius
+  box-shadow: 0 rem(18px) rem(40px) rem(-12px) rgba(0,0,0,0.32)
+  overflow: hidden
+  padding-bottom: 56.25%
+  position: relative
+
+.ProjectPreview__background
+  +fill
+  background-color: #eeeeee
+  background-position: center
+  background-size: cover
+  border-radius: inherit
+
+  &:before
+    +fill
+    background: rgba(color('background', 'dark'), 0.92)
+    border-radius: inherit
+    content: ''
+    opacity: 0
+    transition-duration: 0.3s
+    transition-property: background, opacity
+    transition-timing-function: $ease-in-out-cubic
+
+.ProjectPreview__icon
+  border-radius: 50%
+  display: inline-block
+  fill: #eeeeee
+  filter: drop-shadow(0 0 6px rgba(0,0,0, 0.3))
+  padding: rem(7px) rem(5px)
+  position: absolute
+
+  > svg
+    +size(26px)
+
+.ProjectPreview__title
+  +center
+  backface-visibility: hidden
+  border: rem(2px) solid rgba(white, 0.8)
+  box-shadow: 0 rem(2px) rem(10px) 0 rgba(black, 0.1)
+  color: rgba(white, 0.9)
+  font-family: $heading-font-family
+  font-size: rem(11px)
+  letter-spacing: rem(2px)
+  opacity: 0
+  padding: rem(20px) rem(40px)
+  text-shadow: 0 rem(1px) rem(8px) rgba(black, 0.3)
+  text-transform: uppercase
+  transform: translate(-50%, 0%)
+  transition: transform 0.45s, opacity 0.45s
+  user-select: none
+  -webkit-font-smoothing: subpixel-antialiased
+  white-space: nowrap

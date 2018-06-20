@@ -51,7 +51,7 @@ export default {
 </script>
 
 
-<style scoped>
+<style>
 
 .PostList {
   /*padding-top: 2rem;*/

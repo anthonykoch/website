@@ -25,7 +25,7 @@
       ></app-overlay>
     </transition>
 
-    <section class="Band Band--small u-collapse-bottom">
+    <section class="Band Band--small u-mb0 u-pb0">
       <div class="row row--xxlarge">
         <h2 class="Title Title--alternate Title--dark">
           <span>Codepen</span>
@@ -42,53 +42,59 @@
             @navigate="setNavigatedProject"
           >
           </app-project-preview-list>
-          <div class="u-text-center">
+          <div class="u-textCenter">
             <a
               href="https://codepen.io/anthonykoch/"
               class="Button Button--light Button--large Button--hover-stripe-bottom"
             >
               View more on Codepen &rarr;
             </a>
-            <div class="Band"></div>
             <!-- <a href="https://codepen.io/anthonykoch/" class="ViewMore">View more of my projects on Codepen &rarr;</a> -->
           </div>
         </div>
       </div>
     </section>
-<!--
-    editorconnect:
-  title: Editor Connect
-  subtitle: Node script
-  icon:
-    name: icon-nodejs
-  description: |
-      <p>
-        This is a plugin (more of a node script) which was created to eliminate the back and forth checks between the text editor and a gulp process.
-        <em>It has not yet been published to npm.</em>
-      </p>
-      <p>
-        With every gulp task that errors out, a message is sent to text editor for it to display the error message. Errors are removed an redisplayed after every task error. This works for Sass, React, or anything that emits an error with a line number.
-      </p>
-      <p>
-        Some of the features including scrolling to the line where the error occurred and showing an icon on the line the error occurred. Currently only Sublime Text 3 is supported.
-      </p>
-  links:
-    repository: https://github.com/anthonykoch/editor-connect
-  tags: ['NodeJS', 'Javascript', 'Python']
-  quote: 'No more switching between the text editor and a gulp process!'
-  image:
-    url: './projects/jsx.png'
-    alt: 'A JSX error showing in Sublime Text'
-  thumbnail:
-    url: '/projects/jsx--thumb.png'
-    height: 18
-    width: 30
-    blur: 5
-    intrinsic: 60%
- -->
 
-    <section>
-      <!-- <div class="Projects">
+    <!-- /Users/tony/Documents/Github/companies/plaid/screenshots -->
+    <!-- <img src="http://localhost:3020/plaid/screenshots/june 19 2018/pricing.png" alt=""> -->
+
+    <!-- <section id="work" class="Band Band--small">
+      <div class="row">
+        <h2 class="Title Title--alternate Title--dark">Work</h2>
+        <ul class="u-flex u-items-center">
+          <li class="WorkList__item  u-size3of12">
+            <router-link
+              :to="{ name: 'work-plaid' }"
+              class="WorkList__link"
+            >
+              <img
+                src="~/assets/images/logos/plaid-horizontal.svg"
+                alt="plaid technologies inc."
+                width="163px"
+                class="WorkList__image is-plaid"
+              >
+            </router-link>
+          </li>
+          <li class="WorkList__item  u-size3of12">
+
+            <router-link
+              :to="{ name: 'work-modern-fertility' }"
+              class="WorkList__link"
+            >
+              <img
+                src="~/assets/images/logos/mf-vertical-lockup.svg"
+                alt="modern fertility"
+                width="237px"
+                class="WorkList__image"
+              >
+            </router-link>
+          </li>
+        </ul>
+      </div>
+    </section> -->
+
+    <section id="projects">
+      <div class="Projects">
         <header class="Projects__header">
           <div class="row row--xxlarge">
             <h3 class="Title Title--alternate">
@@ -100,13 +106,32 @@
           </div>
           <div class="row row--xlarge">
             <p class="Projects__header__quote">
-              Connecting the editor and GulpJS for error reporting
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              <!-- A vue component wrapper around codemirror showing JavaScript expression feedback -->
             </p>
           </div>
         </header>
 
+        <div class="Project__side">
+          <a
+            href="/"
+            onclick="return false;"
+            class="u-block"
+          >
+          <!-- <video
+            src="~assets/videos/howitworks2.mp4"
+            class="Project__asset"
+            autoplay=""
+            loop=""
+            width="560"
+          ></video> -->
+            <img src="~assets/images/scuffka3.png" alt="awd" width="560" class="Project__asset">
+          </a>
+        </div>
+
+
         <ul class="ProjectList">
-          <li class="ProjectList__item row row--xlarge">
+          <!-- <li class="ProjectList__item row row--xlarge">
             <div class="Project Project--first">
 
               <div class="Project__media  u-size6of12 u-size12of12@xlarge">
@@ -147,15 +172,24 @@
                   </h3>
                 </div>
                 <div
-                  v-html="featuredProject.description"
                   class="Project__description  Paragraphs Paragraphs--light  u-collapse-last"
                 >
+                  <p>
+                  This is a plugin (more of a node script) which was created to eliminate the back and forth checks between the text editor and a gulp process.
+                  <em>It has not yet been published to npm.</em>
+                </p>
+                <p>
+                  With every gulp task that errors out, a message is sent to text editor for it to display the error message. Errors are removed an redisplayed after every task error. This works for Sass, React, or anything that emits an error with a line number.
+                </p>
+                <p>
+                  Some of the features including scrolling to the line where the error occurred and showing an icon on the line the error occurred. Currently only Sublime Text 3 is supported.
+                </p>
                 </div>
               </div>
             </div>
-          </li>
+          </li> -->
 
-          <li class="ProjectList__item">
+          <!-- <li class="ProjectList__item">
             <div class="Project Project--other  Band">
               <div class="row row--xlarge">
                 <h2 class="Title Title--alternate Title--dark  u-text-center">
@@ -169,14 +203,28 @@
                     </h3>
                     <div class="Paragraphs Paragraphs--light Paragraphs--small">
                       <p>
-                        An implementation of Laravel's Blade templating engine in JavaScript. This project was written purely for fun on my off days. It took a couple of months as I also wrote Blade Expression at the same time.
+                        An implementation of Laravel's Blade templating engine in JavaScript. This project was written purely for fun on my off days. It took a couple of months as I also wrote JSParse at the same time.
                       </p>
                     </div>
                   </li>
+
                   <li class="ProjectOtherList__item">
                     <h3 class="Project__title">
-                      <a href="https://github.com/anthonykoch/blade-expression" class="ProjectOtherTitle">
-                        Blade Expression
+                      <a href="https://github.com/anthonykoch/JSParse" class="ProjectOtherTitle">
+                        JSParse
+                      </a>
+                    </h3>
+                    <div class="Paragraphs Paragraphs--light Paragraphs--small">
+                      <p>
+                        A parser for JavaScript expressions created according to the ES6 specification. This parser was written for BladeJS so that Blade could output errors at compile time. It continues to be a work in progress.
+                      </p>
+                    </div>
+                  </li>
+
+                  <li class="ProjectOtherList__item">
+                    <h3 class="Project__title">
+                      <a href="https://github.com/anthonykoch/JSParse" class="ProjectOtherTitle">
+                        JSParse
                       </a>
                     </h3>
                     <div class="Paragraphs Paragraphs--light Paragraphs--small">
@@ -196,9 +244,9 @@
                 </div>
               </div>
             </div>
-          </li>
+          </li> -->
         </ul>
-      </div> -->
+      </div>
     </section>
 
     <app-site-footer></app-site-footer>
@@ -242,10 +290,18 @@ export default {
       projects: state => state.projects.codepen,
       featuredProject: state => state.projects.github.editorconnect,
     }),
+
+    images() {
+      return {
+        plaidHorizontal: require('~/assets/images/logos/plaid-horizontal.svg'),
+        mfVerticalLockup: require('~/assets/images/logos/mf-vertical-lockup.svg'),
+      };
+    },
   },
 
   methods: {
     navigateToProject(e) {
+      // TODO: Make this triggerable by vue attribute
       this.overlays.projects.isShowing = true;
 
       setTimeout(() => {

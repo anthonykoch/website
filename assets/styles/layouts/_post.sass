@@ -14,6 +14,15 @@ $post-body-children: ()
 
 
 
+.TODO-POSTMETA
+  font-size: fontsize('small')
+  font-weight: 600
+  letter-spacing: 1px
+  line-height: $base-spacing
+  text-transform: capitalize
+
+
+
 /**
  * z-indexed over the header wrapper
  */
@@ -92,7 +101,7 @@ $post-body-children: ()
 /**
  * 1. Make code displays full width on mobile for max viewability
  */
-@media (max-width: breakpoint('medium'))
+@media (max-width: app-breakpoint('sm'))
   #{$post-body-children}
     +padding(null $row-gutter-at-small)
 

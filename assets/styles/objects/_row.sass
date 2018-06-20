@@ -7,7 +7,7 @@
   +row
   +margin(null auto)
 
-  @each $name, $size in $breakpoints
+  @each $name, $size in $app-breakpoints
     &--#{$name}
       max-width: $size
 
@@ -16,7 +16,7 @@
  */
 
 .row--readable
-  max-width: breakpoint('readable')
+  max-width: app-breakpoint('readable')
 
 /**
  * Unset the margin centering
@@ -29,7 +29,7 @@
 
 
 
-@media screen and (max-width: breakpoint('small'))
+@media screen and (max-width: app-breakpoint('small'))
 
   .row
     +padding(null $row-gutter-at-small)

@@ -23,6 +23,38 @@ $project-quote-margin-top: 60px
 
 
 
+
+.WorkList__link
+  background-color: transparent
+  background-size: 80%
+  background-position: center
+  background-repeat: no-repeat
+  display: block
+  height: 200px
+  padding: 10px 20px
+  position: relative
+  width: 100%
+  transition: background-color 300ms
+  will-change: background-color
+
+  &:hover
+    background-color: rgba(black, 0.2)
+
+.WorkList__image
+  left: 50%
+  position: absolute
+  top: 50%
+  transform: translate(-50%, -50%)
+
+  // &.is-plaid
+  //   width: 120px
+  //   height: auto
+
+
+
+
+
+
 .ViewMore
   margin-bottom: 3rem
   // // border-radius: 100px
@@ -53,13 +85,14 @@ $codepen-projects-image-count: 6
 .CodepenProjects
   background-color: hsla(0,0%,95%,1)
   border-top: 1px solid rgb(234, 233, 228)
+  padding: spacing(2) 0
 
 .ProjectPreviewList
   display: flex
   flex-wrap: wrap
   justify-content: space-between
   opacity: 1
-  padding: spacing(2) 0 spacing(1)
+  padding: 0 0 spacing(1)
   transition: opacity 0.4s
 
 .ProjectPreviewList__item
@@ -90,95 +123,6 @@ $codepen-projects-image-count: 6
 
 
 
-.ProjectPreview
-  cursor: pointer
-  display: block
-  outline: 0
-  position: relative
-  -webkit-tap-highlight-color: transparent
-  width: 100%
-  z-index: 1
-
-.ProjectPreview--is-animated
-  // opacity: 0
-  // pointer-events: none
-  transition-duration: 0.7s
-  transition-property: transform, opacity
-  transition-timing-function: ease-out
-
-.ProjectPreview--is-showing
-  opacity: 1
-  pointer-events: auto
-  transform: none
-
-.nojs .ProjectPreview
-  opacity: 1
-  pointer-events: auto
-  transform: none
-
-.ProjectPreview:hover,
-.ProjectPreview:active,
-.ProjectPreview:focus
-  .ProjectPreview__background:before
-    opacity: 1
-
-  .ProjectPreview__title
-    opacity: 1
-    transform: translate(-50.5%, -50%)
-
-.ProjectPreview__container
-  border-radius: $codepen-border-radius
-  box-shadow: 0 rem(18px) rem(40px) rem(-12px) rgba(0,0,0,0.32)
-  overflow: hidden
-  padding-bottom: 56.25%
-  position: relative
-
-.ProjectPreview__background
-  +fill
-  background-color: #eeeeee
-  background-position: center
-  background-size: cover
-  border-radius: inherit
-
-  &:before
-    +fill
-    background: rgba(color('background', 'dark'), 0.92)
-    border-radius: inherit
-    content: ''
-    opacity: 0
-    transition-duration: 0.3s
-    transition-property: background, opacity
-    transition-timing-function: $ease-in-out-cubic
-
-.ProjectPreview__icon
-  border-radius: 50%
-  display: inline-block
-  fill: #eeeeee
-  filter: drop-shadow(0 0 6px rgba(0,0,0, 0.3))
-  padding: rem(7px) rem(5px)
-  position: absolute
-
-  > svg
-    +size(26px)
-
-.ProjectPreview__title
-  +center
-  backface-visibility: hidden
-  border: rem(2px) solid rgba(white, 0.8)
-  box-shadow: 0 rem(2px) rem(10px) 0 rgba(black, 0.1)
-  color: rgba(white, 0.9)
-  font-family: $heading-font-family
-  font-size: rem(11px)
-  letter-spacing: rem(2px)
-  opacity: 0
-  padding: rem(20px) rem(40px)
-  text-shadow: 0 rem(1px) rem(8px) rgba(black, 0.3)
-  text-transform: uppercase
-  transform: translate(-50%, 0%)
-  transition: transform 0.45s, opacity 0.45s
-  user-select: none
-  -webkit-font-smoothing: subpixel-antialiased
-  white-space: nowrap
 
 
 
@@ -249,16 +193,22 @@ $codepen-projects-image-count: 6
 .Project__media
   order: 2
   position: relative
-  transform: translateX(negative($project-translate))
+  // transform: translateX(negative($project-translate))
 
 /**
  * 1. Fix issue with IE rendering.
  */
 
-.Project__image
+.Project__asset
+  display: block
   border-radius: $base-border-radius
   box-shadow: 0 rem(10px) rem(30px) rem(1px) rgba(black, 0.4)
   width: 100% // 1
+  transform: translate(0, -300px)
+
+.Project__side
+  width: 620px
+  margin-left: 45%
 
 .Project__details
   padding: 0 2rem 0 0
@@ -348,7 +298,7 @@ $codepen-projects-image-count: 6
  *    to display: in two columns because of the max-width being applied.
  */
 
-@media (max-width: breakpoint('xlarge'))
+@media (max-width: breakpoint('xlg'))
 
   $max-width: 500px
 
@@ -393,7 +343,7 @@ $codepen-projects-image-count: 6
 
 
 
-@media screen and (max-width: breakpoint('large'))
+@media screen and (max-width: app-breakpoint('lg'))
 
   .ProjectOtherList__item
     +row('medium')

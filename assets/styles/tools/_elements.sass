@@ -41,7 +41,7 @@
 
 
 =title($type: ('default'))
-  @if (contains($type, 'small'))
+  @if (index($type, 'small'))
     color: color('foreground')
     font-family: $heading-font-family
     font-size: 1.3rem
@@ -50,14 +50,14 @@
     padding-bottom: $base-spacing
     text-transform: uppercase
 
-  @if (contains($type, 'default'))
+  @if (index($type, 'default'))
     font-size: 2rem
     padding-bottom: $base-spacing
 
-  @if (contains($type, 'bordered'))
+  @if (index($type, 'bordered'))
     +heading-border
 
-  @if (contains($type, 'alternate'))
+  @if (index($type, 'alternate'))
     color: color('primary')
     font-family: $base-font-family
     font-size: rem(20px)
@@ -72,20 +72,18 @@
  * Creates a row
  */
 =row($args: ())
-  $max-width: breakpoint('xlarge')
+  $max-width: app-breakpoint('xxlg')
   +margin(null auto)
+  +padding(null $row-gutter)
 
   @each $item in $args
     @if breakpoint($item)
-      $max-width: breakpoint($item)
-
-  @if (contains($args, 'nogutter')) == false
-    +padding(null $row-gutter)
+      $max-width: app-breakpoint($item)
 
   display: block
   max-width: $max-width
 
-  @media (max-width: breakpoint('small'))
+  @media (max-width: app-breakpoint('xsm'))
     +padding(null $row-gutter-at-small)
 
 
@@ -115,7 +113,7 @@
 
 // FIXME: this is unfinished
 =button($type: (null))
-  @if (contains($type, 'reset'))
+  @if (index($type, 'reset'))
     background-color: transparent
     border: 0
     cursor: pointer
@@ -125,7 +123,7 @@
 
 
 =link($type: ('base'))
-  @if (contains($type, 'base'))
+  @if (index($type, 'base'))
     &:link,
     &:visited
       color: color('link')
@@ -134,7 +132,7 @@
     &:active
       color: color('link', 'hover')
 
-  @if (contains($type, 'dark'))
+  @if (index($type, 'dark'))
     &:link,
     &:visited
       color: color('foreground')
@@ -143,7 +141,7 @@
     &:active
       color: color('foreground', 'alternate')
 
-  @else if (contains($type, 'light'))
+  @else if (index($type, 'light'))
     &:link,
     &:visited
       color: color('foreground', 'alternate')
@@ -153,6 +151,6 @@
       color: color('foreground')
 
 
-  @else if (contains($type, 'underline'))
+  @else if (index($type, 'underline'))
     border-bottom: rem(1px) solid currentColor
     padding-bottom: rem(4px)
