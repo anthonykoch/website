@@ -12,9 +12,9 @@
             active-class="is-active"
             exact
             to="/"
-            class="Logo__link"
+            class="Logo__link u-px6"
           >
-            <span>Anthony</span>
+            <span>Anthony </span>
             <span>Koch</span>
           </nuxt-link>
         </div>
@@ -22,8 +22,9 @@
         <nav class="SiteNav" role="navigation">
           <ul class="SiteNav__list">
             <li
-               v-for="link of $store.state.navigation.links"
+               v-for="(link, index) of $store.state.navigation.links"
               class="SiteNav__list__item"
+              :key="index"
             >
               <!-- TODO: Active blog link should be active if -->
               <nuxt-link

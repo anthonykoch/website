@@ -174,13 +174,14 @@ const createPostsMetaAssets =
   };
 
 let appenv = {
-  baseUrl: 'http://localhost:3000',
   apiPath: '/_nuxt/api',
+  baseUrl: 'http://localhost:3000',
 };
 
 if (IS_PRODUCTION) {
   appenv = {
-    baseUrl: '/',
+    apiPath: '/_nuxt/api',
+    baseUrl: 'http://localhost:3000',
   };
 }
 
@@ -240,10 +241,10 @@ module.exports = {
     },
 
     postcss: [
-      require('cssnano')({
-        preset: 'default',
-      }),
-      require('autoprefixer')(),
+      // require('cssnano')({
+      //   preset: 'default',
+      // }),
+      // require('autoprefixer')(),
     ],
 
     extend(config, { isClient }) {

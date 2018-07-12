@@ -15,19 +15,27 @@
 //     </div>
 //
 
-@each $abbr, $positions in $app-utility-positions
-  @each $level, $size in $app-utility-levels
-    .u-m#{$abbr}#{$level}
-      @each $p in $positions
-        margin-#{$p}: $size !important
+@each $breakpoint-name in map-keys($app-active-breakpoints)
+  +app-breakpoint-min($breakpoint-name)
+    $suffix: app-breakpoint-suffix($breakpoint-name)
 
-    .u-p#{$abbr}#{$level}
-      @each $p in $positions
-        padding-#{$p}: $size !important
+    @each $abbr, $positions in $app-utility-positions
+      @each $level, $size in $app-utility-levels
+        .u-m#{$abbr}#{$level}#{$suffix}
+          @each $p in $positions
+            margin-#{$p}: $size !important
+
+        .u-p#{$abbr}#{$level}#{$suffix}
+          @each $p in $positions
+            padding-#{$p}: $size !important
 
 
 
 
+
+//
+// Margin and padding resets to 0.
+//
 
 @each $abbr, $positions in $app-utility-positions
   @each $breakpoint-name in map-keys($app-active-breakpoints)
@@ -46,6 +54,22 @@
         @each $p in $positions
           padding-#{$p}: 0 !important
 
-      .u-m#{$abbr}0-last#{$suffix} > :last-child
+      .u-m#{$abbr}0Last#{$suffix} > :last-child
         @each $p in $positions
           margin-#{$p}: 0 !important
+
+
+
+
+
+//
+// Miscellaneous
+//
+
+@each $breakpoint-name in map-keys($app-active-breakpoints)
+  +app-breakpoint-min($breakpoint-name)
+    $suffix: app-breakpoint-suffix($breakpoint-name)
+
+    .u-gutter#{$suffix}
+      padding-left: rem($app-gutter)
+      padding-right: rem($app-gutter)

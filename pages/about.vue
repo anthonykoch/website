@@ -14,14 +14,13 @@
     </app-site-header>
 
     <div class="u-flex">
-      <div class="side-image  u-size6of12 u-size12of12@large  about-office-background"></div>
-      <section class="Band  u-size6of12 u-size12of12@large  u-text-center">
-        <div class="u-continent  u-collapse-v  u-collapse@large">
+      <div class="side-image about-office-background u-size12of12 u-size6of12@sm"></div>
+      <section class="u-size12of12 u-size6of12@sm u-textCenter">
+        <div class="u-px5 u-py8">
           <h2 class="Title Title--small">
             Always learning
           </h2>
-          <div class="row row--readable  u-text-left@medium
-                Paragraphs Paragraphs--small Paragraphs--light  u-collapse-last">
+          <div class="u-sizeReadable u-textLeft@md Paragraphs Paragraphs--small Paragraphs--light">
             <p>
               I believe writing maintainable and expressive code is important. There's lot of learning involved with this though. To keep current with the latest best practices as well as web technologies, I often read articles and other such material from various places around the internet such as CSSWizardy, Site Point, and Smashing Magazine.
             </p>
@@ -31,12 +30,11 @@
     </div>
 
     <div class="u-flex">
-      <div class="side-image  u-size6of12 u-size12of12@large  about-jekyll-background  u-order-1"></div>
-      <section class="Band  u-size6of12 u-size12of12@large  u-text-center  u-order-2@large">
-        <div class="u-continent  u-collapse-v  u-collapse@large">
-          <h2 class="Title Title--small  u-text-center">About this website</h2>
-          <div class="row row--readable  u-text-left@medium
-                Paragraphs Paragraphs--small Paragraphs--light  u-collapse-last">
+      <div class="side-image about-jekyll-background u-size12of12 u-size6of12@lg u-order1 u-order2@lg"></div>
+      <section class="u-size12of12 u-size6of12@sm u-textCenter">
+        <div class="u-px5 u-py8">
+          <h2 class="[ Title Title--small ]  u-textCenter">About this website</h2>
+          <div class="u-sizeReadable u-textLeft@md  [ Paragraphs Paragraphs--small Paragraphs--light ]">
             <p>
               This site is built with Jekyll and is hosted with Github Pages. The repository can be found <a href="https://github.com/anthonykoch/anthonykoch.github.io">here</a>.
               It was made with <b>performance</b> and <b>best practices</b> in mind. The assets are minified and compressed, and are also gzipped by Github. Each page uses a fluid layout and should display well on most mobile devices.

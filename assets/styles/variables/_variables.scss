@@ -28,28 +28,10 @@ $base-spacing: 2rem;
 $base-gutter: 2rem;
 
 /**
- * The large base gutter width
- * @type {number}
- */
-$base-gutter--large: rem(50px);
-
-/**
  * The gutter for the row classes
  * @type {number}
  */
 $row-gutter: 1.25rem;
-
-/**
- * FIXME
- * @type {Number}
- */
- $grid-sizes: (12);
-
-/**
- * The gutter used for the horizontal padding of rows when at mobile sizes.
- * @type {number}
- */
-$row-gutter-at-small: 1.25rem;
 
 /**
  * The left padding for the blockquote
@@ -86,11 +68,11 @@ $site-header-height--post: rem(400px);
 
 
 
-/**
- * Declare them from largest to smallest so that when looping over
- * them to create the responsive classes, the smaller classes
- * override the larger classes
- */
+//
+// Declare them from largest to smallest so that when looping over
+// them to create the responsive classes, the smaller classes
+// override the larger classes
+//
 $app-breakpoints: (
   'default': 0,
   'xsm': rem(360px),
@@ -101,11 +83,11 @@ $app-breakpoints: (
   'xxlg': rem(1400px),
 );
 
-/**
- * These classes will be used for the responsive @ classes.
- * @type {list}
- */
-$app-breakpoint-classes: ('default', 'xlg', 'lg', 'sm', 'xsm');
+//
+// These classes will be used for the responsive @ classes.
+// @type {list}
+//
+$app-breakpoint-classes: ('default', 'xxlg', 'xlg', 'lg', 'sm', 'xsm');
 
 $app-active-breakpoints: ();
 
@@ -118,16 +100,21 @@ $app-active-breakpoints: ();
 // ("default": 0, "xsm": 22.5rem, "sm": 37.5rem, "lg": 56.25rem, "xl": 75rem)
 // @error $app-active-breakpoints;
 
-$app-spacing: 16px;
+$app-grid-sizes: (12);
+$app-spacing: 20px;
+$app-gutter: 20px;
 
 $app-utility-levels: (
   // Don't put 0, because those are output manually
-  1: quarter($app-spacing),
-  2: half($app-spacing),
-  3: $app-spacing,
-  4: $app-spacing * 1.5,
-  5: $app-spacing * 3,
-  6: $app-spacing * 6,
+  auto: auto,
+  1: rem(quarter($app-spacing)),
+  2: rem(half($app-spacing)),
+  3: rem($app-spacing),
+  4: rem($app-spacing * 1.5),
+  5: rem($app-spacing * 2),
+  6: rem($app-spacing * 2.5),
+  7: rem($app-spacing * 3),
+  8: rem($app-spacing * 6),
 );
 
 $app-utility-positions: (
@@ -136,14 +123,10 @@ $app-utility-positions: (
   l: (left),
   r: (right),
   x: (left, right),
-  y: (top, bottom)
+  y: (top, bottom),
+  '': (top, right, bottom, left)
 );
 
 $app-project-preview-border-radius: 3px;
 $app-site-header-lower: 1;
 $app-site-header-container: 2;
-
-
-// @each $weight in (200, 300, 400, 500, 600, 700)
-//   .u-textWeight#{$weight}
-//     font-weight: $weight !important

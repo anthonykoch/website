@@ -68,24 +68,6 @@
 
 
 
-/**
- * Creates a row
- */
-=row($args: ())
-  $max-width: app-breakpoint('xxlg')
-  +margin(null auto)
-  +padding(null $row-gutter)
-
-  @each $item in $args
-    @if breakpoint($item)
-      $max-width: app-breakpoint($item)
-
-  display: block
-  max-width: $max-width
-
-  @media (max-width: app-breakpoint('xsm'))
-    +padding(null $row-gutter-at-small)
-
 
 
 =list($type)

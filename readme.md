@@ -17,3 +17,30 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 
 
 - Maybe add js to fullscreen an image
+- Show work as images and make it like that shipify slider
+- Add make-grid-column
+
+
+
+
+
+
+
+// /**
+//  * Creates a row
+//  */
+// =row($args: ())
+//   $max-width: app-size('xxlg')
+//   +margin(null auto)
+//   +padding(null $row-gutter)
+
+//   @each $item in $args
+//     @if app-breakpoint($item)
+//       $max-width: app-breakpoint($item)
+//       @else
+//   display: block
+//   max-width: app-size('xxlg')
+
+//   @media (max-width: app-breakpoint('xsm'))
+//     +padding(null $row-gutter-at-small)
+

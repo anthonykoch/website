@@ -1,18 +1,47 @@
 
-/**
- * Outputs a grid for each of the total columns in $grid-sizes.
- *
- * Note: The parent must have `flex-wrap: wrap;` for the responsive
- *       classes to work.
- */
+//
+// Outputs a grid for each of the total columns in $grid-sizes as
+// well as responsive classes.
+//
+// Note: The parent must have `flex-wrap: wrap;` for the responsive
+//       classes to work.
+//
 
-@at-root
-  @each $column, $grid-total-columns, $a, $b in get-grid-list($grid-sizes)
-    .u-size#{$column}of#{$grid-total-columns}
-      +grid-column($column, $grid-total-columns, $important: true)
+@each $breakpoint-name in map-keys($app-active-breakpoints)
+  +app-breakpoint-min($breakpoint-name)
+    $suffix: app-breakpoint-suffix($breakpoint-name)
 
-  @each $column, $grid-total-columns, $name, $size in get-responsive-grid-list($grid-sizes)
-    @media only screen and (max-width: $size)
-      .u-size#{$column}of#{$grid-total-columns}\@#{$name}
-        +grid-column($column, $grid-total-columns, $important: true)
+    @each $grid-total-columns in $app-grid-sizes
+      @if (type-of($grid-total-columns) != 'number')
+        @error 'grid column size from $app-grid-sizes is not a number, got #{$grid-total-columns}'
 
+      $grid-total-columns: strip-units($grid-total-columns)
+
+      @for $column-index from 1 through $grid-total-columns
+        .u-size#{$column-index}of#{$grid-total-columns}#{$suffix}
+          +grid-column($column-index, $grid-total-columns, $important: true)
+
+
+
+$app-utility-sizes: map-keys($app-breakpoints)
+
+@each $breakpoint-name in map-keys($app-active-breakpoints)
+  +app-breakpoint-min($breakpoint-name)
+    $suffix: app-breakpoint-suffix($breakpoint-name)
+
+    @each $size-name in $app-utility-sizes
+      //
+      // 1. The flex-basis is set to auto to avoid potential bugs (google flexbugs)
+      //
+      .u-size#{_capitalize($size-name)}#{$suffix}
+        flex-basis: auto // [1]
+        max-width: app-breakpoint($size-name)
+
+
+//
+// The purpose
+//
+.u-siteWrapper
+  max-width: app-breakpoint('xxlg')
+  margin-left: auto
+  margin-right: auto

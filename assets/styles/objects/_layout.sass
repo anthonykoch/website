@@ -1,7 +1,6 @@
-/**
- * file: _layout.sass
- * Styles for a grid layout
- */
+///
+/// Styles for a grid layout
+///
 
 @at-root
   $gutter: $base-gutter
@@ -23,9 +22,9 @@
   .Layout--flush
     +margin(null negative($gutter))
 
-  /**
-   * 1. See https://github.com/philipwalton/flexbugs
-   */
+  ///
+  /// 1. See https://github.com/philipwalton/flexbugs
+  ///
   .Layout__item
-    flex-basis: auto /* 1 */
+    flex-basis: auto // 1
     +padding(null $gutter)

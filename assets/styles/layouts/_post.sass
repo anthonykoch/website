@@ -23,14 +23,14 @@ $post-body-children: ()
 
 
 
-/**
- * z-indexed over the header wrapper
- */
+///
+/// 1. z-indexed over the header wrapper
+///
 .PostList
   margin: 0 auto
   padding-top: 6rem
   position: relative
-  z-index: 1 /* [1] */
+  z-index: 1 // [1]
 
 .PostList__item
   padding-bottom: 6rem
@@ -39,10 +39,10 @@ $post-body-children: ()
   font-size: $post-font-size
   line-height: 1.8
 
-/**
- * 1. Causes the text to be title to be directly in the middle
- *    of the site header's background image.
- */
+///
+/// 1. Causes the text to be title to be directly in the middle
+///    of the site header's background image.
+///
 .Post__header
   padding: 0 $row-gutter
   position: absolute
@@ -51,7 +51,7 @@ $post-body-children: ()
   width: 100%
 
 .Post__title
-  +row(readable)
+  // FIXME: +row(readable)
   font-family: $heading-font-family
   font-size: 1.75rem
   font-weight: 900
@@ -70,7 +70,7 @@ $post-body-children: ()
     color: color('foreground', 'lightest')
 
 .Post__meta-list
-  +row(readable)
+  // FIXME +row(readable)
   color: #aaaaaa
   line-height: $base-spacing
 
@@ -93,6 +93,10 @@ $post-body-children: ()
   > ul
     +list(bullet)
 
+  > p
+    padding-bottom: $paragraph-spacing
+
+
   > .full-width
     max-width: initial
 
@@ -102,12 +106,12 @@ $post-body-children: ()
  * 1. Make code displays full width on mobile for max viewability
  */
 @media (max-width: app-breakpoint('sm'))
-  #{$post-body-children}
-    +padding(null $row-gutter-at-small)
-
   .Post__body > .highlighter-rouge
     padding-left: 0 !important
     padding-right: 0 !important
+
+  // #{$post-body-children}
+    // +padding(null $row-gutter-at-small)
 
 
 

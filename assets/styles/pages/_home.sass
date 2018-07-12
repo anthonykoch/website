@@ -5,6 +5,85 @@ $project-translate: 80px
 $project-quote-margin-top: 60px
 
 
+
+
+.Slider
+  position: relative
+
+  // &:before
+  //   +absolute-fill
+  //   background-color: rgba(black, 0.2)
+  //   content: ''
+  //   z-index: 1
+
+.Slider-container
+  display: flex
+  flex-wrap: nowrap
+  height: 400px
+  transform: translate(0%, 0%)
+  transition: transform 700ms cubic-bezier(0.645, 0.045, 0.355, 1)
+
+.Slider-slide
+  background-color: rgba(black, 0.2)
+  // background-image: linear-gradient(to right, black, white)
+  position: relative
+  height: 100%
+
+
+
+
+// @keyframes
+//   0%
+//     transform: translate(-50%, -50%)
+
+//   100%
+//     transform: translate(-50%)
+
+
+// .project
+//   width: 960px
+//   background-color: red
+
+
+
+
+
+
+.WorkImage
+  +absolute-fill
+  background-repeat: no-repeat
+  background-size: cover
+  // opacity: 0.7
+  // background-color: rgba(black, 0.2)
+
+  &:after
+    +absolute-fill
+    background-color: rgba(black, 0.6)
+    content: ''
+    z-index: 1
+    // background-image: linear-gradient(to bottom, black, transparent)
+
+  &.is-1
+    background-image: url('~/assets/images/plaid/financial-institutions+c.png')
+
+  &.is-2
+    background-image: url('~/assets/images/plaid/solutions-money-movement+c.png')
+
+  &.is-3
+    background-image: url('~/assets/images/plaid/pricing+c.png')
+
+  &.is-4
+    background-image: url('~/assets/images/modernfertility/landing+c.jpg')
+
+  &:hover
+    animation: scrollmedude 10000
+
+
+
+
+
+
+
 .Overlay
   +position(fixed, 0 null null 0)
   +size(100%)
@@ -346,6 +425,6 @@ $codepen-projects-image-count: 6
 @media screen and (max-width: app-breakpoint('lg'))
 
   .ProjectOtherList__item
-    +row('medium')
+    // FIXME: +row('medium')
     +padding(null 0)
     width: 100%

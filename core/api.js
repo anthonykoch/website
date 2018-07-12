@@ -1,5 +1,8 @@
 import axios from '@/core/fetch';
 
+/**
+ * For debugging purposes.
+ */
 if (typeof window !== 'undefined') {
   window.axios = axios;
 }

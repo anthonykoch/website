@@ -101,14 +101,9 @@
 
 
 
-/**
- * Causes an element to fill its parent's contianer using absolute positioning
- */
-=fill($args: ())
-  $position: absolute
-
-  @if index($args, 'fixed')
-    $position: fixed
-
-  +position($position, 0 null null 0)
+//
+// Causes an element to fill its parent's contianer using absolute positioning
+//
+=absolute-fill
+  +position(absolute, 0 null null 0)
   +size(100%)

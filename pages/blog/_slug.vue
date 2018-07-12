@@ -31,18 +31,20 @@
 
     <article class="Post">
       <div class="Post__container">
-        <header class="Post__header">
-          <h1 class="Post__title">
-            <a href="$route.path" class="Link Link--dark">
-              {{ post.title }}
-            </a>
-          </h1>
-          <ul class="Post__meta-list">
-            <li class="TODO-POSTMETA" >
-              {{ post.humanized.created_at }}
-            </li>
-          </ul>
-        </header>
+        <div class="u-sizeReadable u-mxauto">
+          <header class="Post__header  u-sizeSm">
+              <h1 class="Post__title">
+                <a href="$route.path" class="Link Link--dark">
+                  {{ post.title }}
+                </a>
+              </h1>
+            <ul class="Post__meta-list">
+              <li class="TODO-POSTMETA" >
+                {{ post.humanized.created_at }}
+              </li>
+            </ul>
+          </header>
+        </div>
         <div
           class="Post__body"
           style="animation-delay: 0.3s"

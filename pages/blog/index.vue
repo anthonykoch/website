@@ -13,9 +13,12 @@
     </app-site-header>
 
     <section>
-      <div class="row row--readable">
+      <div class="u-sizeReadable u-mxauto">
         <ul class="PostList">
-          <li class="PostList__item" v-for="meta in postsMeta">
+          <li class="PostList__item"
+            v-for="(meta, index) in postsMeta"
+            :key="index"
+          >
             <app-post-preview :meta="meta"></app-post-preview>
           </li>
         </ul>
