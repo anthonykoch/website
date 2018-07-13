@@ -1,17 +1,9 @@
 <template>
-  <div>
-
-    <app-site-header>
-      <app-hero
-        slot="lower"
-      >
-        <div slot="caption">My writings</div>
-        <div slot="description">
-          These are my various writings, mostly on topics surrounding front-end development.
-        </div>
-      </app-hero>
-    </app-site-header>
-
+  <page>
+    <div slot="heroCaption">My writings</div>
+    <div slot="heroDescription">
+      These are my various writings, mostly on topics surrounding front-end development.
+    </div>
     <section>
       <div class="u-sizeReadable u-mxauto">
         <ul class="PostList">
@@ -24,9 +16,7 @@
         </ul>
       </div>
     </section>
-
-    <app-site-footer></app-site-footer>
-  </div>
+  </page>
 </template>
 
 <script>
@@ -37,6 +27,10 @@ import * as api from '@/core/api';
 export default {
   async fetch({ store: $store }) {
     await $store.dispatch('posts/loadMeta');
+  },
+
+  components: {
+    page: require('@/layouts/main').default,
   },
 
   data() {
@@ -53,11 +47,6 @@ export default {
 };
 </script>
 
-
 <style>
-
-.PostList {
-  /*padding-top: 2rem;*/
-}
 
 </style>

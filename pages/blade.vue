@@ -1,8 +1,8 @@
 <template>
 
   <app-hero>
-    <div slot="caption">Try BladeJS.</div>
-    <div slot="description">
+    <div slot="heroCaption">Try BladeJS.</div>
+    <div slot="heroDescription">
       BladeJS is a JavaScript implementation of Laravel's Blade templating engine.
     </div>
   </app-hero>
@@ -16,6 +16,7 @@
 <script>
 export default {
   components: {
+    page: require('@/layouts/main').default,
     AppHero: require('@/components/Hero').default,
   },
 

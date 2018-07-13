@@ -71,8 +71,11 @@ $site-nav-link-border-width: rem(0)
   @media (max-width: rem(890px))
     min-height: rem(650px) // [2]
 
-  &.has-default-background
+  &.has-defaultBackground
     background-image: url(image('desk.svg'))
+
+  &.is-fullHeight
+    min-height: 100vh
 
   &[data-page='about']
     @media (max-width: rem(890px))

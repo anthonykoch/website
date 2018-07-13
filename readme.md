@@ -5,6 +5,7 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 
 ## Todo
 
+- Refactor component to be AppSiteHeader instead of just SiteHeader
 - Refactor sass styles
 - add these to package.json and modify webpack to handle css plugins
 ```

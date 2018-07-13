@@ -1,17 +1,9 @@
 <template>
-  <div>
-    <app-site-header>
-      <app-hero slot="lower">
-        <div slot="caption">Front-End Developer</div>
-        <div slot="description">
-          Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development. I'm a lover of JavaScript, Python, and simple code.
-        </div>
-        <app-social-icons
-          slot="social"
-          :social="$store.getters['social/getMediaItems']"
-        ></app-social-icons>
-      </app-hero>
-    </app-site-header>
+  <page>
+    <div slot="heroCaption">Front-End Developer</div>
+    <div slot="heroDescription">
+      Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development. I'm a lover of JavaScript, Python, and simple code.
+    </div>
 
     <transition
       name="tr-fade"
@@ -80,7 +72,7 @@
     <!-- <img src="http://localhost:3020/plaid/screenshots/june 19 2018/pricing.png" alt=""> -->
 
     <app-site-footer></app-site-footer>
-  </div>
+  </page>
 </template>
 
 <script>
@@ -93,7 +85,7 @@ export default {
   },
 
   components: {
-    //
+    page: require('@/layouts/main').default,
   },
 
   data() {

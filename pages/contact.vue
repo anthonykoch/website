@@ -1,32 +1,37 @@
 <template>
-  <div>
-    <app-site-header>
-      <app-hero
-        slot="lower"
-      >
-        <div slot="caption">Contact me</div>
-        <div slot="description">
-          If you have any questions for me or just want to say hello, you can get in touch with me through the contact form below. (Hey, that rhymed!)
-        </div>
-        <app-social-icons
-          slot="social"
-          :social="$store.getters['social/getMediaItems']"
-        ></app-social-icons>
-      </app-hero>
-    </app-site-header>
+  <page
+    :showFooter="false"
+    :showFullHeightHeader="true"
+  >
+    <div slot="heroCaption">Contact me</div>
+    <div slot="heroDescription">
+      If you have any questions for me or just want to say hello, you can get in touch with me through the contact form below. (Hey, that rhymed!)
+    </div>
 
-    <section class="Band">
+    <div class="u-py5" slot="heroLower">
+      <!-- <input type="text" class="input"> -->
+    </div>
+
+    <!-- <section class="Band">
       <div class="row row--medium">
         <app-contact-form></app-contact-form>
       </div>
-    </section>
-  </div>
-
+    </section> -->
+  </page>
 </template>
+
+<style lang="scss">
+
+.input {
+
+}
+
+</style>
 
 <script>
 export default {
   components: {
+    page: require('@/layouts/main').default,
     AppContactForm: require('@/components/ContactForm').default,
   },
 
@@ -40,7 +45,3 @@ export default {
   },
 };
 </script>
-
-<style>
-
-</style>

@@ -1,7 +1,10 @@
 <template>
     <header
       :style="background"
-      :class="{ 'has-default-background': background == null }"
+      :class="{
+        'has-defaultBackground': background == null,
+        'is-fullHeight': fullHeight,
+      }"
       class="SiteHeader"
       role="banner"
       data-page="TODO"
@@ -50,6 +53,10 @@ export default {
   props: {
     background: {
       type: Object,
+    },
+    fullHeight: {
+      type: Boolean,
+      default: false,
     },
   },
 };
