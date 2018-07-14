@@ -218,12 +218,9 @@ module.exports = {
       { name: 'robots', content: 'index,follow' },
     ],
     link: [
-      {
-        href: 'https://fonts.googleapis.com/css?family=Lato:400,300,700, 800,900|Source+Sans+Pro:200,200italic,300,300italic,400,400italic,600,700|Source+Code+Pro:400,600,700',
-       rel: 'stylesheet',
-       type: 'text/css',
-     },
+
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://use.typekit.net/nsr0hmh.css' },
     ]
   },
   /*

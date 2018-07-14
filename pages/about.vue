@@ -1,6 +1,7 @@
 <template>
-  <page>
-
+  <page
+    :show-social="false"
+  >
     <div slot="heroCaption">My start in programming</div>
     <div slot="heroDescription">
       I started out writing JavaScript in Notepad for fun, and tried to recreate things like jQuery in order to gain understanding of the syntax and concepts of the language. I've since found myself really enjoying front-end development, and have made various projects, some of which I've put on my <a href="http://codepen.io/anthonykoch/">codepen</a> and <a href="https://github.com/anthonykoch">github</a>.

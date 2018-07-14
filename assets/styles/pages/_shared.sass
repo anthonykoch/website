@@ -4,7 +4,7 @@
 
 .Hero
   // FIXME +row(xxlarge)
-  padding-top: ($base-spacing * 5)
+  padding-top: ($app-base-spacing * 5)
 
 .Hero__caption
   +title('alternate')
@@ -13,7 +13,7 @@
   color: #dddddd
   font-size: rem(17px)
   max-width: app-breakpoint('sm')
-  padding: $base-spacing 0 $base-spacing
+  padding: 1.5rem 0 2rem
 
 /**
  * 1. Push the header down so the background image doesn't show under the text,
@@ -21,10 +21,10 @@
  */
 @media (max-width: app-breakpoint('sm'))
   .Hero
-    padding-top: ($base-spacing * 3)
+    padding-top: ($app-base-spacing * 3)
 
   .Hero__description
-    padding-bottom: ($base-spacing * 9) // [1]
+    padding-bottom: ($app-base-spacing * 9) // [1]
 
 
 
@@ -48,7 +48,7 @@
 .disqus_thread
   margin: 0 auto
   max-width: breakpoint('lg')
-  padding: ($base-spacing * 4) $row-gutter
+  padding: ($app-base-spacing * 4) $app-gutter
 
 
 

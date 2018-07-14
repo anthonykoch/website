@@ -3,9 +3,9 @@
  */
 
 =heading-border
-  +padding($base-spacing null)
-  border-bottom: rem(1px) solid $base-border-color
-  margin-bottom: quarter($base-spacing)
+  +padding($app-base-spacing null)
+  border-bottom: rem(1px) solid $app-base-border-color
+  margin-bottom: quarter($app-base-spacing)
 
 
 
@@ -19,11 +19,11 @@
   font-size: $input-font-size
   font-weight: 400
   line-height: 1.6
-  margin: $base-spacing 0
+  margin: $app-base-spacing 0
   outline: none
   padding: $input-padding-v $input-padding-h
   transition: background-color
-  transition-duration: $base-transition-duration
+  transition-duration: $app-transition-duration
   width: 100%
 
   &:focus
@@ -31,7 +31,7 @@
 
   &::placeholder
     color: $input-placeholder-foreground
-    font-family: $base-font-family
+    font-family: $app-default-font-family
     font-size: $input-placeholder-font-size
     font-weight: 400
     letter-spacing: rem(1px)
@@ -43,24 +43,24 @@
 =title($type: ('default'))
   @if (index($type, 'small'))
     color: color('foreground')
-    font-family: $heading-font-family
+    font-family: $app-heading-font-family
     font-size: 1.3rem
     font-weight: 700
     letter-spacing: rem(3px)
-    padding-bottom: $base-spacing
+    padding-bottom: $app-base-spacing
     text-transform: uppercase
 
   @if (index($type, 'default'))
     font-size: 2rem
-    padding-bottom: $base-spacing
+    padding-bottom: $app-base-spacing
 
   @if (index($type, 'bordered'))
     +heading-border
 
   @if (index($type, 'alternate'))
     color: color('primary')
-    font-family: $base-font-family
-    font-size: rem(20px)
+    font-family: 'rift-soft'
+    font-size: rem(22px)
     font-weight: 600
     letter-spacing: rem(6px)
     line-height: 1.3
@@ -73,20 +73,20 @@
 =list($type)
   @if $type == 'number'
     list-style-type: decimal
-    padding-bottom: $list-padding-v
+    padding-bottom: $app-list-padding-v
 
     & > li
-      margin-left: $list-item-margin-h
-      padding-left: $list-item-padding-h
+      margin-left: $app-list-item-margin-h
+      padding-left: $app-list-item-padding-h
 
   @else if $type == 'bullet'
     counter-reset: list-counter
     list-style-type: disc
-    padding-bottom: $list-padding-v
+    padding-bottom: $app-list-padding-v
 
     > li
-      margin-left: $list-item-margin-h
-      padding-left: $list-item-padding-h
+      margin-left: $app-list-item-margin-h
+      padding-left: $app-list-item-padding-h
 
   @else
     @error 'Invalid list type: "' + $type + '"'

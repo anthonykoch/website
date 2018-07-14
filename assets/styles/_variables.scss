@@ -1,11 +1,4 @@
 
-
-
-
-/**
- * Colors
- */
-
 /**
  * Returns the different lightness and saturations of a color
  * @param  {Color} $color
@@ -23,10 +16,10 @@
   );
 }
 
-/**
- * Some browsers supposedly mess up with transparent so rgba(black, 0)
- * is used instead.
- */
+//
+// Some browsers supposedly mess up with transparent so rgba(black, 0)
+// is used instead.
+//
 
 $transparent: rgba(black, 0);
 
@@ -45,7 +38,7 @@ $color-secondary: #4d5366; // hsla(226,14%,35%,1); // dark blue
 $color-secondary: $green;
 
 // Accent colors
-$base-border-color: #44413a;
+$app-base-border-color: #44413a;
 
 // Foreground colors
 $color-foreground: #444444;
@@ -116,8 +109,12 @@ $colors: (
 
 
 
+$app-backup-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
 
-$app-overlay-layer: 10;
+$app-font-family-1: 'rift-soft', $app-backup-font-family;
+$app-font-family-2: 'proxima-nova', $app-backup-font-family;
+
+
 
 $config: (
   'images': '/assets/images/'
@@ -134,172 +131,27 @@ $z-indexes: (
 
 // $ionicons-font-path: '../fonts/ionicons-2.0.1' !default;
 
-/**
- * The base bottom spacing
- * @type {number}
- */
-$base-spacing: 2rem;
+$app-intrinsic-ratios: ('16by9': (16, 9), '4by3': (4, 3));
 
-/**
- * The base gutter width
- * @type {number}
- */
-$base-gutter: 2rem;
-
-/**
- * The gutter for the row classes
- * @type {number}
- */
-$row-gutter: 1.25rem;
-
-/**
- * The left padding for the blockquote
- */
-$block-quote-padding-h: ($base-gutter * 3);
-
-/**
- * The base border radius
- * @type {number}
- */
-$base-border-radius: 3px;
-
-/**
- * The base transition time to be used for hover states
- */
-$base-transition-duration: 0.3s;
-
-/**
- * The header color for the background of post headers
- */
-$post-header-background: $color-secondary;
-
-/**
- * Variables for lists
- */
-$list-item-margin-h: ($base-gutter * 1.25);
-$list-item-padding-h: quarter($base-gutter);
-$list-padding-v: $base-spacing;
-
-/**
- * The height of the header when
- */
-$site-header-height--post: rem(400px);
+$app-base-spacing: 2rem;
+$app-base-gutter: 2rem;
 
 
 
 
+$app-layer-0: -1;
+$app-layer-1: 100;
+$app-layer-2: 200;
+$app-layer-3: 300;
+$app-layer-4: 400;
+$app-layer-5: 500;
+$app-layer-6: 600;
+$app-layer-7: 700;
+$app-layer-8: 800;
+$app-layer-9: 900;
+$app-layer-10: 1000;
 
-/**
- * file: _typography.scss
- */
-
-/**
- * Defines font sizes for helper classes.
- * They may also be accesed through the util function 'fontsize'
- */
- $font-sizes: (
-  'xsmall': rem(11px),
-  'small': rem(14px),
-  'medium': rem(15px),
-  'normal': rem(17px),
-  'large': rem(20px),
-  'xlarge': rem(28px),
-);
-
-/**
- * The base font size for the html
- */
-$base-font-size: 100%;
-
-/**
- * The base font size as pixels
- */
-$base-font-size-px: 16px;
-
-/**
- * The base font size as pixels
- */
-$base-font-size-rem: rem($base-font-size-px);
-
-/**
- * Variable for modular scale (unused atm)
- */
-$base-size: rem(10px);
-
-/**
- * Variable for modular scale
- */
-$ratio: $golden;
-
-/**
- * The base font weight for the body
- */
-$base-font-weight: 400;
-
-/**
- * The base line height for the body
- */
-$base-line-height: 1.7;
-
-/**
- * The base paragraph font size
- */
-$paragraph-font-size: rem(17px);
-
-/**
- * Used for bottom spacing for paragraphs and other elements
- */
-$paragraph-spacing: ($base-spacing * 1.25);
-
-/**
- * The font family for the body
- */
-$base-font-family: Source Sans Pro, Arial;
-
-/**
- * The font family for the headings
- */
-$heading-font-family: 'Lato', Arial, sans-serif;
-
-/**
- * Font family for code blocks
- * @type {[type]}
- */
-$code-font-family: Source Code Pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
-
-/**
- * The tag names of headings
- */
-$headings: (h1, h2, h3, h4, h5, h6);
-
-
-
-
-
-
-
-
-
-/**
- * z-index layers
- */
-
- $z-layer-below: -1;
-
- $z-layer1:   100;
- $z-layer2:   200;
- $z-layer3:   300;
- $z-layer4:   400;
- $z-layer5:   500;
- $z-layer6:   600;
- $z-layer7:   700;
- $z-layer8:   800;
- $z-layer9:   900;
- $z-layer10: 1000;
-
-
-
-
+$app-overlay-layer: 10;
 
 
 
@@ -320,7 +172,6 @@ $app-breakpoints: (
 
 //
 // These classes will be used for the responsive @ classes.
-// @type {list}
 //
 $app-breakpoint-classes: ('default', 'xxlg', 'xlg', 'lg', 'sm', 'xsm');
 
@@ -362,6 +213,107 @@ $app-utility-positions: (
   '': (top, right, bottom, left)
 );
 
+
+
+
+
+
+$app-border-radius: 3px;
+$app-transition-duration: 0.3s;
+
+
+
+$app-default-font-size: 100%;
+$app-default-font-weight: 400;
+$app-default-line-height: 1.7;
+
+$app-text-size-1: rem(17px);
+$app-paragraph-spacing: ($app-base-spacing * 1.25);
+
+$app-default-font-family: $app-font-family-2;
+$app-heading-font-family: $app-font-family-1;
+$app-code-font-family: 'source-code-pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+$app-headings: (h1, h2, h3, h4, h5, h6);
+
+
+
+// Base element tag styles
+$app-code-background: #e6e6e6;
+$app-pre-background: #eeeeee;
+$app-pre-font-size: em(13px);
+$app-code-font-size: em(12px);
+
+$app-blockquote-padding-x: ($app-base-gutter * 3);
+
+
+$app-site-header-height--post: rem(400px);
+
+
+
+$app-list-item-margin-h: ($app-base-gutter * 1.25);
+$app-list-item-padding-h: quarter($app-base-gutter);
+$app-list-padding-v: $app-base-spacing;
+
+
+
+$app-post-font-size: rem(16px);
+$app-post-max-width: rem(800px);
+$app-post-header-background: #eeeeee;
+$app-post-gutter: double($app-gutter);
+$app-post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div, pre);
+$app-post-body-children: ();
+$app-post-header-background: $color-secondary;
+
+@each $selector in join($app-headings, $app-post-elements) {
+  $app-post-body-children: join($app-post-body-children, '.Post__body > ' + $selector + ',');
+}
+
+
+
 $app-project-preview-border-radius: 3px;
 $app-site-header-lower: 1;
 $app-site-header-container: 2;
+
+
+
+$app-icon-item-gutter: half(2rem);
+$app-icon-list-link-foreground: #dddddd;
+$app-icon-list-link-foreground--active: darken($app-icon-list-link-foreground, 20);
+
+
+
+$app-button-background: $color-primary;
+$app-button-background-hover: rgba(white, 0.85);
+$app-button-foreground: #202020;
+$app-button-foreground-active: #292929;
+$app-button-border-radius: $app-border-radius;
+$app-button-border-width: 0;
+$app-button-border-color: transparent;
+$app-button-letter-spacing: rem(2px);
+$app-button-font-size: rem(12px);
+$app-button-line-height: 1.6;
+$app-button-transition-duration: 300ms;
+
+$app-button-drop-shadow: drop-shadow(rem(3px) rem(3px) rem(6px) rgba(black, 0.3));
+$app-button-drop-shadow-active: drop-shadow(rem(1px) rem(1px) rem(2px) rgba(black, 0.17));
+
+$app-button-padding-t: rem(18px);
+$app-button-padding-b: rem(18px);
+$app-button-padding-r: rem(42px);
+$app-button-padding-l: rem(42px);
+$app-button-padding-b-lg: 22px;
+$app-button-padding-t-lg: 22px;
+$app-button-padding-l-lg: rem(56px);
+$app-button-padding-r-lg: rem(56px);
+$app-button-line-height-lg: 1.6;
+
+$app-button-outline-border-color: #dddddd;
+$app-button-outline-border-color: $color-primary;
+$app-button-outline-foreground: $color-primary;
+$app-button-outline-foreground-active: #444444;
+$app-button-outline-background: transparent;
+$app-button-outline-background-active: $color-primary;
+
+
+

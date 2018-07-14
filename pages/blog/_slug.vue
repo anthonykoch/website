@@ -26,15 +26,26 @@
 
 
 <template>
-  <div>
-    <app-site-header></app-site-header>
-
+  <page
+    :showSocial="false"
+  >
     <article class="Post">
+
+
+    <div class="BlogSidebar">
+      <div class="BlogSidebar-inner">
+        <div class="BlogSidebar-next">
+          <span class="BlogSidebar-nextUpper">Next:</span>
+          <span class="BlogSidebar-nextLower">Understanding JavaScript Prototypes</span>
+        </div>
+      </div>
+    </div>
+
       <div class="Post__container">
         <div class="u-sizeReadable u-mxauto">
           <header class="Post__header  u-sizeSm">
               <h1 class="Post__title">
-                <a href="$route.path" class="Link Link--dark">
+                <a :href="$route.path" class="Link Link--dark">
                   {{ post.title }}
                 </a>
               </h1>
@@ -62,8 +73,75 @@
       :url="disqusUrl"
     >
     </vue-disqus> -->
-  </div>
+  </page>
 </template>
+
+<style lang="scss">
+
+@import '../../assets/styles/variables';
+
+.BlogSidebar {
+  position: fixed;
+  background-color: #f2f2f2;
+  overflow: hidden;
+  width: 300px;
+  height: 100vh;
+  top:  0;
+  left: 0;
+}
+
+.Site {
+  // padding-left: 300px;
+}
+
+.BlogSidebar-inner {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  margin-top: 90px;
+  background-image: url(https://images.unsplash.com/photo-1522980811-53cc29445e08?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=74050b81ff13d8e6fdf7720a855c43d3&amp;auto=format&amp;fit=crop&amp;w=3160&amp;q=80);
+  background-size: cover;
+}
+
+.BlogSidebar-next {
+  border: 1px solid rgba(white, 0.5);
+  border-radius: 4px;
+  background-color: transparent;
+  color: rgba(white, 0.7);
+  cursor: pointer;
+  font-family: $app-font-family-1;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin: 1rem;
+  text-align: left;
+  transition: background-color 300ms;
+
+  &:hover {
+    background-color: rgba($color-primary, 0.8);
+    border-color: rgba($color-primary, 0.8);
+    color: rgba(black, 0.6);
+  }
+
+  > span {
+    display: block;
+    padding: 4px 10px;
+  }
+}
+
+.BlogSidebar-nextUpper {
+  font-family: $app-font-family-1;
+  font-size: 14px;
+  display: block;
+}
+
+.BlogSidebar-nextLower {
+
+}
+
+</style>
 
 <script>
 import { mapState } from 'vuex';
@@ -71,6 +149,10 @@ import Disqus from 'vue-disqus'
 
 export default {
   scrollToTop: true,
+
+  components: {
+    page: require('@/layouts/main').default,
+  },
 
   computed: {
     disqusShortname() {

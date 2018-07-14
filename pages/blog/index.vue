@@ -1,5 +1,7 @@
 <template>
-  <page>
+  <page
+    :show-social="false"
+  >
     <div slot="heroCaption">My writings</div>
     <div slot="heroDescription">
       These are my various writings, mostly on topics surrounding front-end development.

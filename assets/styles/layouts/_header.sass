@@ -11,7 +11,7 @@ $site-nav-link-background--active: color('primary')
 $site-nav-link-padding-v: 1rem
 $site-nav-link-padding-h: 3rem
 $site-nav-link-border-width: rem(0)
-
+$site-nav-link-font-family: 'rift-soft';
 
 
 =site-nav-link
@@ -19,13 +19,13 @@ $site-nav-link-border-width: rem(0)
   border-top: $site-nav-link-border-width solid transparent
   display: block
   filter: drop-shadow(3px 4px 7px rgba(black, 0.2))
-  font-family: Lato, Arial, sans-serif
-  font-size: rem(11px)
-  font-weight: 900
+  font-family: $site-nav-link-font-family
+  font-size: rem(15px)
+  font-weight: 600
   padding: calc(#{$padding-v} - #{$site-nav-link-border-width}) $site-nav-link-padding-h $padding-v
   text-transform: uppercase
   transition: background-color, color
-  transition-duration: $base-transition-duration
+  transition-duration: $app-transition-duration
 
   &:link,
   &:visited
@@ -71,8 +71,8 @@ $site-nav-link-border-width: rem(0)
   @media (max-width: rem(890px))
     min-height: rem(650px) // [2]
 
-  &.has-defaultBackground
-    background-image: url(image('desk.svg'))
+  // &.has-defaultBackground
+  //   background-image: url(image('desk.svg'))
 
   &.is-fullHeight
     min-height: 100vh
@@ -118,7 +118,7 @@ $site-nav-link-border-width: rem(0)
 
 
 .SiteNav
-  padding-left: $base-gutter
+  padding-left: $app-base-gutter
   text-align: right
 
 .SiteNav__list

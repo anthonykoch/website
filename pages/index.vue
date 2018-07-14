@@ -70,8 +70,6 @@
 
     <!-- /Users/tony/Documents/Github/companies/plaid/screenshots -->
     <!-- <img src="http://localhost:3020/plaid/screenshots/june 19 2018/pricing.png" alt=""> -->
-
-    <app-site-footer></app-site-footer>
   </page>
 </template>
 

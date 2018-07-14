@@ -20,8 +20,7 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 - Maybe add js to fullscreen an image
 - Show work as images and make it like that shipify slider
 - Add make-grid-column
-
-
+- Refactor gutter and spacing variables
 
 
 
