@@ -8,8 +8,8 @@
     </div>
     <section>
       <div class="u-sizeReadable u-mxauto">
-        <ul class="PostList">
-          <li class="PostList__item"
+        <ul class="PostList u-pt8">
+          <li class="PostList__item u-pb8"
             v-for="(meta, index) in postsMeta"
             :key="index"
           >

@@ -22,7 +22,7 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 - Refactor gutter and spacing variables
 - Update various bits of spacing throughout the website that were changed when consildating gutter values
 - Update codepen title font size
-
+- Figure out design for date meta in post preview
 
 
 
