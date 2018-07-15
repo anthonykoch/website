@@ -132,8 +132,9 @@ $z-indexes: (
 // $ionicons-font-path: '../fonts/ionicons-2.0.1' !default;
 
 $app-intrinsic-ratios: ('16by9': (16, 9), '4by3': (4, 3));
+$app-grid-sizes: (12);
 
-
+$app-gutter: 20px;
 
 $app-layer-0: -1;
 $app-layer-1: 100;
@@ -178,12 +179,6 @@ $app-active-breakpoints: ();
     $app-active-breakpoints: map-merge($app-active-breakpoints, ($breakpoint-name: $size)) !global;
   }
 }
-
-// ("default": 0, "xsm": 22.5rem, "sm": 37.5rem, "lg": 56.25rem, "xl": 75rem)
-// @error $app-active-breakpoints;
-
-$app-grid-sizes: (12);
-$app-gutter: 20px;
 
 $app-utility-levels: (
   // Don't put 0, because those are output manually
