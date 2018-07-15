@@ -114,27 +114,22 @@ $app-backup-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetic
 $app-font-family-1: 'rift-soft', $app-backup-font-family;
 $app-font-family-2: 'proxima-nova', $app-backup-font-family;
 
+$app-gutter: 20px;
+
 
 
 $config: (
   'images': '/assets/images/'
 );
 
-$z-indexes: (
-  'below': -1,
-  'default': 1,
-  'above': 2,
-  'header': 10,
-  'overlay': 5000,
-  'modal': 5001,
-);
-
 // $ionicons-font-path: '../fonts/ionicons-2.0.1' !default;
+
+
 
 $app-intrinsic-ratios: ('16by9': (16, 9), '4by3': (4, 3));
 $app-grid-sizes: (12);
 
-$app-gutter: 20px;
+
 
 $app-layer-0: -1;
 $app-layer-1: 100;
@@ -148,7 +143,33 @@ $app-layer-8: 800;
 $app-layer-9: 900;
 $app-layer-10: 1000;
 
-$app-overlay-layer: 10;
+$app-layer-site-header: $app-layer-8;
+$app-layer-overlay: $app-layer-9;
+
+
+
+$app-utility-levels: (
+  // Don't put 0, because those are output manually
+  auto: auto,
+  1: rem(quarter($app-gutter)),
+  2: rem(half($app-gutter)),
+  3: rem($app-gutter),
+  4: rem($app-gutter * 1.5),
+  5: rem($app-gutter * 2),
+  6: rem($app-gutter * 2.5),
+  7: rem($app-gutter * 3),
+  8: rem($app-gutter * 6),
+);
+
+$app-utility-positions: (
+  t: (top),
+  b: (bottom),
+  l: (left),
+  r: (right),
+  x: (left, right),
+  y: (top, bottom),
+  '': (top, right, bottom, left)
+);
 
 
 
@@ -180,29 +201,6 @@ $app-active-breakpoints: ();
   }
 }
 
-$app-utility-levels: (
-  // Don't put 0, because those are output manually
-  auto: auto,
-  1: rem(quarter($app-gutter)),
-  2: rem(half($app-gutter)),
-  3: rem($app-gutter),
-  4: rem($app-gutter * 1.5),
-  5: rem($app-gutter * 2),
-  6: rem($app-gutter * 2.5),
-  7: rem($app-gutter * 3),
-  8: rem($app-gutter * 6),
-);
-
-$app-utility-positions: (
-  t: (top),
-  b: (bottom),
-  l: (left),
-  r: (right),
-  x: (left, right),
-  y: (top, bottom),
-  '': (top, right, bottom, left)
-);
-
 
 
 $app-border-radius: 3px;
@@ -229,11 +227,11 @@ $app-headings: (h1, h2, h3, h4, h5, h6);
 
 // Base element tag styles
 $app-code-background: #e6e6e6;
+$app-code-font-size: em(12px);
 $app-pre-background: #eeeeee;
 $app-pre-font-size: em(13px);
-$app-code-font-size: em(12px);
-
 $app-blockquote-padding-x: $app-gutter * 5;
+
 
 
 $app-site-header-height--post: rem(400px);
