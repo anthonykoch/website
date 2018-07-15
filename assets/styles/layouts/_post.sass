@@ -3,7 +3,7 @@
   font-size: fontsize('small')
   font-weight: 600
   letter-spacing: 1px
-  line-height: $app-base-spacing
+  line-height: double($app-gutter)
   text-transform: capitalize
 
 
@@ -42,7 +42,7 @@
   font-weight: 600
   letter-spacing: rem(3px)
   line-height: 1.2
-  padding-bottom: $app-base-spacing
+  padding-bottom: double($app-gutter)
   // text-transform: uppercase
 
 .Post__title a
@@ -57,7 +57,7 @@
 .Post__meta-list
   // FIXME +row(readable)
   color: #aaaaaa
-  line-height: $app-base-spacing
+  line-height: $app-gutter
 
 #{$app-post-body-children}
   +padding(null $app-post-gutter)
@@ -66,7 +66,7 @@
   max-width: $app-post-max-width
 
 .Post__body
-  padding: double($app-base-spacing) 0 $app-base-spacing
+  padding: triple($app-gutter) 0 double($app-gutter)
 
   > #{$app-headings}
     color: #404040
@@ -79,7 +79,7 @@
     +list(bullet)
 
   > p
-    padding-bottom: $app-paragraph-spacing
+    padding-bottom: $app-text-spacing
 
 
   > .full-width
@@ -117,7 +117,7 @@
 
 .PostPreview__body
   font-size: $app-post-font-size
-  padding: 0 0 half($app-base-spacing)
+  padding: 0 0 gutter
 
 .PostPreview__more
   +clearfix

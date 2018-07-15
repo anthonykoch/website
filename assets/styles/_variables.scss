@@ -133,10 +133,6 @@ $z-indexes: (
 
 $app-intrinsic-ratios: ('16by9': (16, 9), '4by3': (4, 3));
 
-$app-base-spacing: 2rem;
-$app-base-gutter: 2rem;
-
-
 
 
 $app-layer-0: -1;
@@ -187,20 +183,19 @@ $app-active-breakpoints: ();
 // @error $app-active-breakpoints;
 
 $app-grid-sizes: (12);
-$app-spacing: 20px;
 $app-gutter: 20px;
 
 $app-utility-levels: (
   // Don't put 0, because those are output manually
   auto: auto,
-  1: rem(quarter($app-spacing)),
-  2: rem(half($app-spacing)),
-  3: rem($app-spacing),
-  4: rem($app-spacing * 1.5),
-  5: rem($app-spacing * 2),
-  6: rem($app-spacing * 2.5),
-  7: rem($app-spacing * 3),
-  8: rem($app-spacing * 6),
+  1: rem(quarter($app-gutter)),
+  2: rem(half($app-gutter)),
+  3: rem($app-gutter),
+  4: rem($app-gutter * 1.5),
+  5: rem($app-gutter * 2),
+  6: rem($app-gutter * 2.5),
+  7: rem($app-gutter * 3),
+  8: rem($app-gutter * 6),
 );
 
 $app-utility-positions: (
@@ -215,11 +210,9 @@ $app-utility-positions: (
 
 
 
-
-
-
 $app-border-radius: 3px;
 $app-transition-duration: 0.3s;
+$app-text-size-1: rem(17px);
 
 
 
@@ -227,8 +220,9 @@ $app-default-font-size: 100%;
 $app-default-font-weight: 400;
 $app-default-line-height: 1.7;
 
-$app-text-size-1: rem(17px);
-$app-paragraph-spacing: ($app-base-spacing * 1.25);
+
+
+$app-text-spacing: double($app-gutter);
 
 $app-default-font-family: $app-font-family-2;
 $app-heading-font-family: $app-font-family-1;
@@ -244,16 +238,16 @@ $app-pre-background: #eeeeee;
 $app-pre-font-size: em(13px);
 $app-code-font-size: em(12px);
 
-$app-blockquote-padding-x: ($app-base-gutter * 3);
+$app-blockquote-padding-x: $app-gutter * 5;
 
 
 $app-site-header-height--post: rem(400px);
 
 
 
-$app-list-item-margin-h: ($app-base-gutter * 1.25);
-$app-list-item-padding-h: quarter($app-base-gutter);
-$app-list-padding-v: $app-base-spacing;
+$app-list-item-margin-h: $app-gutter * 5;
+$app-list-item-padding-h: half($app-gutter);
+$app-list-padding-v: double($app-gutter);
 
 
 

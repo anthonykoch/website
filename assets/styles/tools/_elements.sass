@@ -2,13 +2,6 @@
  * Mixins for types of elements, such as a button, column, etc.
  */
 
-=heading-border
-  +padding($app-base-spacing null)
-  border-bottom: rem(1px) solid $app-base-border-color
-  margin-bottom: quarter($app-base-spacing)
-
-
-
 =input
   background: $input-background
   border: $input-border-width solid $input-border-color
@@ -19,7 +12,7 @@
   font-size: $input-font-size
   font-weight: 400
   line-height: 1.6
-  margin: $app-base-spacing 0
+  margin: double($app-gutter) 0
   outline: none
   padding: $input-padding-v $input-padding-h
   transition: background-color
@@ -47,19 +40,19 @@
     font-size: 1.3rem
     font-weight: 700
     letter-spacing: rem(3px)
-    padding-bottom: $app-base-spacing
+    padding-bottom: double($app-gutter)
     text-transform: uppercase
 
   @if (index($type, 'default'))
     font-size: 2rem
-    padding-bottom: $app-base-spacing
+    padding-bottom: double($app-gutter)
 
   @if (index($type, 'bordered'))
     +heading-border
 
   @if (index($type, 'alternate'))
     color: color('primary')
-    font-family: 'rift-soft'
+    font-family: $app-font-family-1
     font-size: rem(22px)
     font-weight: 600
     letter-spacing: rem(6px)

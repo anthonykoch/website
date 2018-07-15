@@ -7,7 +7,7 @@
   cursor: pointer
   display: inline-block
   font-size: $app-button-font-size
-  font-weight: 600
+  font-weight: 400
   letter-spacing: 0.1rem
   line-height: $app-button-line-height
   outline: 0
@@ -109,30 +109,8 @@
 
 
 /**
- * A wrapper for a group of buttons to give them space
- * from each other.
- * FIXME: Buttons may not be flush by setting margin
- */
-.ButtonGroup
-  $gutter: half(2rem)
-  margin-bottom: $app-base-spacing
-
-  &--flush
-    +margin(null negative($gutter))
-
-  & > .Button
-    margin: 0 $gutter
-
-
-
-
-/**
  * Puts the buttons at full width at smaller screen sizes
  */
 @media screen and (max-width: rem(460px))
   .Button
     width: 100%
-
-  .ButtonGroup__item
-    margin-bottom: $app-base-spacing
-    margin-right: 0

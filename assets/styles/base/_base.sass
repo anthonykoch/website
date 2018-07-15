@@ -95,16 +95,16 @@ code
   word-wrap: break-word
 
 pre
-  $margin: ($app-base-spacing * 2)
-  $padding-v: ($app-base-spacing * 1)
+  $margin: $app-gutter * 3
+  $padding-v: $app-gutter * 1
   +scrollbar
   background-color: $app-pre-background
   border-radius: 1px $app-border-radius $app-border-radius 1px
   font-family: $app-code-font-family
   font-size: $app-pre-font-size
-  margin-bottom: $app-paragraph-spacing
+  margin-bottom: $app-text-spacing
   overflow: auto
-  padding: $app-paragraph-spacing $app-gutter
+  padding: $app-text-spacing $app-gutter
   position: relative
   tab-size: 2
   word-wrap: normal
@@ -139,7 +139,7 @@ ol
 
 
 dl
-  margin: 0 0 half($app-paragraph-spacing) 0
+  margin: 0 0 half($app-text-spacing) 0
 
 dt
   font-weight: 700
@@ -147,10 +147,10 @@ dt
 dd
   color: lighten(color('foreground'), 8)
   margin-left: 1.5em
-  padding-bottom: half($app-base-spacing)
+  padding-bottom: $app-gutter
 
 dd:last-child
-  padding-bottom: ($app-base-spacing)
+  padding-bottom: $app-gutter
 
 @media screen and (max-width: app-breakpoint('sm'))
   dd
@@ -159,11 +159,10 @@ dd:last-child
 
 
 blockquote
-  $left: ($app-base-gutter * 2)
   border-left: rem(4px) solid $app-base-border-color
-  margin-bottom: double($app-paragraph-spacing)
-  margin-top: $app-paragraph-spacing
-  padding: half($app-paragraph-spacing) $app-blockquote-padding-x
+  margin-bottom: double($app-text-spacing)
+  margin-top: $app-text-spacing
+  padding: half($app-text-spacing) $app-blockquote-padding-x
 
   > p
     font-style: italic
@@ -173,18 +172,18 @@ blockquote
     display: inline-block
     font-size: rem(15px)
     font-weight: bold
-    padding-top: half($app-base-spacing)
+    padding-top: $app-gutter
 
 
 
 figure
   margin: 0
-  padding: ($app-base-spacing * 2.5) 0 ($app-base-spacing * 5)
+  padding: ($app-gutter * 4) 0 ($app-gutter * 8)
 
 figcaption
   color: color('foreground', 'lighter')
   font-size: fontsize('medium')
-  margin-bottom: $app-base-spacing
+  margin-bottom: $app-gutter * 1.5
   text-align: center
 
 

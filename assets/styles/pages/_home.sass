@@ -183,7 +183,7 @@ $app-codepen-projects-image-count: 6
   flex: 0 0 auto
   line-height: 0
   max-width: $width
-  padding: 0 0 double($app-base-spacing)
+  padding: 0 0 spacing(3)
   width: 33.333333%
 
 @media (max-width: rem(1300px))
@@ -191,7 +191,7 @@ $app-codepen-projects-image-count: 6
     justify-content: center
 
   .ProjectPreviewList__item
-    +padding(null half($app-base-gutter))
+    +padding(null $app-gutter)
     flex: 0 0 50%
     max-width: rem(500px)
 
@@ -317,7 +317,7 @@ $app-codepen-projects-image-count: 6
   font-size: rem(22px)
   font-weight: 400
   letter-spacing: rem(1px)
-  padding-bottom: half($app-base-spacing)
+  padding-bottom: $app-gutter
 
 .Project__title__link
   $foreground: #333333

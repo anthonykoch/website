@@ -21,7 +21,8 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 - Show work as images and make it like that shipify slider
 - Add make-grid-column
 - Refactor gutter and spacing variables
-
+- Add something I forgot
+- Update codepen title font size
 
 
 

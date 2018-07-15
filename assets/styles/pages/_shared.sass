@@ -4,7 +4,7 @@
 
 .Hero
   // FIXME +row(xxlarge)
-  padding-top: ($app-base-spacing * 5)
+  padding-top: ($app-gutter * 8)
 
 .Hero__caption
   +title('alternate')
@@ -21,10 +21,10 @@
  */
 @media (max-width: app-breakpoint('sm'))
   .Hero
-    padding-top: ($app-base-spacing * 3)
+    padding-top: ($app-gutter * 3)
 
   .Hero__description
-    padding-bottom: ($app-base-spacing * 9) // [1]
+    padding-bottom: ($app-gutter * 14.5) // [1]
 
 
 
@@ -48,7 +48,7 @@
 .disqus_thread
   margin: 0 auto
   max-width: breakpoint('lg')
-  padding: ($app-base-spacing * 4) $app-gutter
+  padding: ($app-gutter * 4) $app-gutter
 
 
 
