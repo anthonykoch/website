@@ -1,16 +1,16 @@
 <template>
-  <div class="Hero">
+  <div class="Hero u-siteWrapper u-px5">
     <div>
-      <div class="Hero__caption" v-if="$slots.caption">
-        <slot name="caption"></slot>
+      <div class="Hero__caption" v-if="$slots.heroCaption">
+        <slot name="heroCaption"></slot>
       </div>
 
-      <div class="Hero__description" v-if="$slots.description">
-        <slot name="description"></slot>
+      <div class="Hero__description" v-if="$slots.heroDescription">
+        <slot name="heroDescription"></slot>
       </div>
+      <slot name="heroLower"></slot>
+      <slot name="heroSocial"></slot>
     </div>
-
-    <slot name="social"></slot>
   </div>
 </template>
 

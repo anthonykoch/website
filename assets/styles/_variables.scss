@@ -1,0 +1,306 @@
+
+/**
+ * Returns the different lightness and saturations of a color
+ * @param  {Color} $color
+ * @return {Map}
+ */
+ @function getvariants($color) {
+  @return (
+    'base':   $color,
+    'light':    adjust-color($color, $lightness: 10,  $saturation: 10),
+    'lighter':  adjust-color($color, $lightness: 21,  $saturation: 22),
+    'lightest': adjust-color($color, $lightness: 36,  $saturation: 32),
+    'dark':     adjust-color($color, $lightness: -10, $saturation: 10),
+    'darker':   change-color($color, $lightness: 20,   $saturation: 25),
+    'darkest':  change-color($color, $lightness: 15,   $saturation: 16),
+  );
+}
+
+//
+// Some browsers supposedly mess up with transparent so rgba(black, 0)
+// is used instead.
+//
+
+$transparent: rgba(black, 0);
+
+$blue: hsl(210, 82%, 59%);
+$green: hsl(160, 100%, 37%);
+$copper: hsl(15, 84%, 55%);
+
+// Primary colors
+$color-primary: hsl(48, 100%, 58%);
+$color-primary: hsl(45, 80%, 54%);
+$color-primary--light: #9c957e;
+$color-primary-darker: #383632;
+
+// Secondary colors
+$color-secondary: #4d5366; // hsla(226,14%,35%,1); // dark blue
+$color-secondary: $green;
+
+// Accent colors
+$app-base-border-color: #44413a;
+
+// Foreground colors
+$color-foreground: #444444;
+$color-foreground-alternate: #bdbdbd;
+$color-foreground--meta: #989b9e;
+
+// Background colors
+$color-background: #3a2f3a;
+$color-background--dark: #2b292b;
+
+
+$color-grayscale: (
+  'light': #f0f0f0,
+  'base':  #eeeeee,
+  'dark':  #dddddd,
+);
+
+$brand-colors: (
+  'node': (
+    'foreground': #669f64,
+    'background': #333333,
+  ),
+  'javascript': (
+    'foreground': #323330,
+    'background': #f0db4f,
+  ),
+  'sass': (
+    'foreground': #cc6699,
+  ),
+  'twitter': (
+    'foreground': #1da1f2,
+    'background': #1da1f2,
+  ),
+  'facebook': (
+    'foreground': #3b5999,
+    'background': #3b5999,
+  )
+);
+
+$colors: (
+  'primary': getvariants($color-primary),
+  'secondary': getvariants($color-secondary),
+  'foreground': (
+    'lightest':  #e6ecef,
+    'lighter':   #868a8c,
+    'light':     #737f86,
+    'base':      $color-foreground,
+    'dark':      #202020,
+    'alternate': $color-foreground-alternate,
+  ),
+  'background': (
+    'light': hsl(hue($color-primary), 7%, 96%),
+    'base': $color-background,
+    'dark': $color-background--dark,
+    'darkest': #202020,
+  ),
+  'success': getvariants($green),
+  // 'warning': getvariants($orange),
+  // 'danger': getvariants($red),
+  'link': (
+    'base': #6196cc,
+    'hover': hsl(225, 34%, 40%),
+    // 'hover': #8fb5d8,
+  ),
+);
+
+
+
+
+
+$app-backup-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
+
+$app-font-family-1: 'rift-soft', $app-backup-font-family;
+$app-font-family-2: 'proxima-nova', $app-backup-font-family;
+
+$app-gutter: 20px;
+
+
+
+$config: (
+  'images': '/assets/images/'
+);
+
+// $ionicons-font-path: '../fonts/ionicons-2.0.1' !default;
+
+
+
+$app-intrinsic-ratios: ('16by9': (16, 9), '4by3': (4, 3));
+$app-grid-sizes: (12);
+
+
+
+$app-layer-0: -1;
+$app-layer-1: 100;
+$app-layer-2: 200;
+$app-layer-3: 300;
+$app-layer-4: 400;
+$app-layer-5: 500;
+$app-layer-6: 600;
+$app-layer-7: 700;
+$app-layer-8: 800;
+$app-layer-9: 900;
+$app-layer-10: 1000;
+
+$app-layer-site-header: $app-layer-8;
+$app-layer-overlay: $app-layer-9;
+
+
+
+$app-utility-levels: (
+  // Don't put 0, because those are output manually
+  auto: auto,
+  1: rem(quarter($app-gutter)),
+  2: rem(half($app-gutter)),
+  3: rem($app-gutter),
+  4: rem($app-gutter * 1.5),
+  5: rem($app-gutter * 2),
+  6: rem($app-gutter * 2.5),
+  7: rem($app-gutter * 3),
+  8: rem($app-gutter * 6),
+);
+
+$app-utility-positions: (
+  t: (top),
+  b: (bottom),
+  l: (left),
+  r: (right),
+  x: (left, right),
+  y: (top, bottom),
+  '': (top, right, bottom, left)
+);
+
+
+
+//
+// Declare them from largest to smallest so that when looping over
+// them to create the responsive classes, the smaller classes
+// override the larger classes
+//
+$app-breakpoints: (
+  'default': 0,
+  'xsm': rem(360px),
+  'sm': rem(600px),
+  'readable': rem(760px),
+  'lg': rem(900px),
+  'xlg': rem(1200px),
+  'xxlg': rem(1400px),
+);
+
+//
+// These classes will be used for the responsive @ classes.
+//
+$app-breakpoint-classes: ('default', 'xxlg', 'xlg', 'lg', 'sm', 'xsm');
+
+$app-active-breakpoints: ();
+
+@each $breakpoint-name, $size in $app-breakpoints {
+  @if index($app-breakpoint-classes, $breakpoint-name) {
+    $app-active-breakpoints: map-merge($app-active-breakpoints, ($breakpoint-name: $size)) !global;
+  }
+}
+
+
+
+$app-border-radius: 3px;
+$app-transition-duration: 0.3s;
+$app-text-size-1: rem(17px);
+
+
+
+$app-default-font-size: 100%;
+$app-default-font-weight: 400;
+$app-default-line-height: 1.7;
+
+
+
+$app-text-spacing: double($app-gutter);
+
+$app-default-font-family: $app-font-family-2;
+$app-heading-font-family: $app-font-family-1;
+$app-code-font-family: 'source-code-pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
+
+$app-headings: (h1, h2, h3, h4, h5, h6);
+
+
+
+// Base element tag styles
+$app-code-background: #e6e6e6;
+$app-code-font-size: em(12px);
+$app-pre-background: #eeeeee;
+$app-pre-font-size: em(13px);
+$app-blockquote-padding-x: $app-gutter * 5;
+
+
+
+$app-site-header-height--post: rem(400px);
+
+
+
+$app-list-item-margin-h: $app-gutter * 5;
+$app-list-item-padding-h: half($app-gutter);
+$app-list-padding-v: double($app-gutter);
+
+
+
+$app-post-font-size: rem(16px);
+$app-post-max-width: rem(800px);
+$app-post-header-background: #eeeeee;
+$app-post-gutter: double($app-gutter);
+$app-post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div, pre);
+$app-post-body-children: ();
+$app-post-header-background: $color-secondary;
+
+@each $selector in join($app-headings, $app-post-elements) {
+  $app-post-body-children: join($app-post-body-children, '.Post__body > ' + $selector + ',');
+}
+
+
+
+$app-project-preview-border-radius: 3px;
+$app-site-header-lower: 1;
+$app-site-header-container: 2;
+
+
+
+$app-icon-item-gutter: half(2rem);
+$app-icon-list-link-foreground: #dddddd;
+$app-icon-list-link-foreground--active: darken($app-icon-list-link-foreground, 20);
+
+
+
+$app-button-background: $color-primary;
+$app-button-background-hover: rgba(white, 0.85);
+$app-button-foreground: #202020;
+$app-button-foreground-active: #292929;
+$app-button-border-radius: $app-border-radius;
+$app-button-border-width: 0;
+$app-button-border-color: transparent;
+$app-button-letter-spacing: rem(2px);
+$app-button-font-size: rem(12px);
+$app-button-line-height: 1.6;
+$app-button-transition-duration: 300ms;
+
+$app-button-drop-shadow: drop-shadow(rem(3px) rem(3px) rem(6px) rgba(black, 0.3));
+$app-button-drop-shadow-active: drop-shadow(rem(1px) rem(1px) rem(2px) rgba(black, 0.17));
+
+$app-button-padding-t: rem(18px);
+$app-button-padding-b: rem(18px);
+$app-button-padding-r: rem(42px);
+$app-button-padding-l: rem(42px);
+$app-button-padding-b-lg: 22px;
+$app-button-padding-t-lg: 22px;
+$app-button-padding-l-lg: rem(56px);
+$app-button-padding-r-lg: rem(56px);
+$app-button-line-height-lg: 1.6;
+
+$app-button-outline-border-color: #dddddd;
+$app-button-outline-border-color: $color-primary;
+$app-button-outline-foreground: $color-primary;
+$app-button-outline-foreground-active: #444444;
+$app-button-outline-background: transparent;
+$app-button-outline-background-active: $color-primary;
+
+
+

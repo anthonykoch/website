@@ -1,16 +1,4 @@
-/**
- * file: _base.sass
- * Contains base styles for tags
- */
 
-$code-background: #e6e6e6
-$pre-background: #eeeeee
-$pre-font-size: em(13px)
-$code-font-size: em(12px)
-
-/**
- * Makes all elements inherit box-sizing from html element
- */
 *,
 *:before,
 *:after
@@ -20,7 +8,9 @@ $code-font-size: em(12px)
 
 html
   box-sizing: border-box
-  font: $base-font-weight #{$base-font-size} / $base-line-height $base-font-family
+  font-family: $app-default-font-family
+  font-size: $app-default-font-size
+  line-height: $app-default-line-height
   overflow-x: hidden
   width: 100%
 
@@ -38,8 +28,8 @@ body
 
 
 
-#{$headings}
-  font-family: $heading-font-family
+#{$app-headings}
+  font-family: $app-heading-font-family
   font-weight: 400
   margin:  0
   padding: 0 0 1rem 0
@@ -75,7 +65,7 @@ h6
 
 a
   text-decoration: none
-  transition: color $base-transition-duration
+  transition: color $app-transition-duration
 
   &:link,
   &:visited
@@ -88,33 +78,33 @@ a
 
 
 p
-  font-size: $paragraph-font-size
-  padding-bottom: $paragraph-spacing
+  font-size: $app-text-size-1
+
 
 
 
 code
-  background-color: $code-background
-  border-radius: $base-border-radius
+  background-color: $app-code-background
+  border-radius: $app-border-radius
   display: inline-block
-  font-family: Source Code Pro
-  font-size: $code-font-size
+  font-family: $app-code-font-family
+  font-size: $app-code-font-size
   line-height: 1.6
   margin: 0 rem(4px)
   padding: rem(1px) rem(6px)
   word-wrap: break-word
 
 pre
-  $margin: ($base-spacing * 2)
-  $padding-v: ($base-spacing * 1)
+  $margin: $app-gutter * 3
+  $padding-v: $app-gutter * 1
   +scrollbar
-  background-color: $pre-background
-  border-radius: 1px $base-border-radius $base-border-radius 1px
-  font-family: Source Code Pro
-  font-size: $pre-font-size
-  margin-bottom: $paragraph-spacing
+  background-color: $app-pre-background
+  border-radius: 1px $app-border-radius $app-border-radius 1px
+  font-family: $app-code-font-family
+  font-size: $app-pre-font-size
+  margin-bottom: $app-text-spacing
   overflow: auto
-  padding: $paragraph-spacing $row-gutter
+  padding: $app-text-spacing $app-gutter
   position: relative
   tab-size: 2
   word-wrap: normal
@@ -128,8 +118,8 @@ pre
     margin: 0
     padding: 0
 
-  @media screen and (max-width: breakpoint('small'))
-    padding: $padding-v $row-gutter
+  @media screen and (max-width: app-breakpoint('xsm'))
+    padding: $padding-v $app-gutter
 
 
 
@@ -149,7 +139,7 @@ ol
 
 
 dl
-  margin: 0 0 half($paragraph-spacing) 0
+  margin: 0 0 half($app-text-spacing) 0
 
 dt
   font-weight: 700
@@ -157,23 +147,22 @@ dt
 dd
   color: lighten(color('foreground'), 8)
   margin-left: 1.5em
-  padding-bottom: half($base-spacing)
+  padding-bottom: $app-gutter
 
 dd:last-child
-  padding-bottom: ($base-spacing)
+  padding-bottom: $app-gutter
 
-@media screen and (max-width: breakpoint('medium'))
+@media screen and (max-width: app-breakpoint('sm'))
   dd
     margin-left: 1.25rem
 
 
 
 blockquote
-  $left: ($base-gutter * 2)
-  border-left: rem(4px) solid $base-border-color
-  margin-bottom: double($paragraph-spacing)
-  margin-top: $paragraph-spacing
-  padding: half($paragraph-spacing) $block-quote-padding-h
+  border-left: rem(4px) solid $app-base-border-color
+  margin-bottom: double($app-text-spacing)
+  margin-top: $app-text-spacing
+  padding: half($app-text-spacing) $app-blockquote-padding-x
 
   > p
     font-style: italic
@@ -183,18 +172,18 @@ blockquote
     display: inline-block
     font-size: rem(15px)
     font-weight: bold
-    padding-top: half($base-spacing)
+    padding-top: $app-gutter
 
 
 
 figure
   margin: 0
-  padding: ($base-spacing * 2.5) 0 ($base-spacing * 5)
+  padding: ($app-gutter * 4) 0 ($app-gutter * 8)
 
 figcaption
   color: color('foreground', 'lighter')
   font-size: fontsize('medium')
-  margin-bottom: $base-spacing
+  margin-bottom: $app-gutter * 1.5
   text-align: center
 
 

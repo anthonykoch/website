@@ -1,0 +1,93 @@
+<template>
+  <div class="Site">
+
+    <!--
+      Hi, since you're already here, I'd like to inform you on the if/elseif statements of various programming languages.
+
+      Ruby: elsif
+      PHP: elseif
+      Sass: elseif or else if
+      JavaScript: else if
+      Python: elif
+      VB: ElseIf
+
+      Like, wtf.
+     -->
+
+    <!-- TODO: Twitter cards -->
+    <!--
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:site" content="{{ site.social.twitter.handle }}" />
+    <meta name="twitter:title" content="{{ page.title }}" />
+    <meta name="twitter:description" content="{{ page.description }}" />
+    <meta name="twitter:url" content="{{ page.url }}">
+     -->
+
+    <!-- vendor.js -->
+    <!-- app.js -->
+    <!--
+      TODO: import() this link
+     <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
+   -->
+
+    <app-icons></app-icons>
+
+    <app-site-header
+      :full-height="showFullHeightHeader"
+    >
+      <app-hero slot="lower">
+        <slot name="heroCaption" slot="heroCaption"></slot>
+        <slot name="heroDescription" slot="heroDescription"></slot>
+        <app-social-icons
+          v-if="showSocial"
+          slot="heroSocial"
+          :social="$store.getters['social/getMediaItems']"
+        ></app-social-icons>
+        <slot name="heroLower" slot="heroLower"></slot>
+      </app-hero>
+    </app-site-header>
+
+    <slot></slot>
+
+    <app-site-footer v-if="showFooter"></app-site-footer>
+  </div>
+</template>
+
+<script>
+
+import Vue from 'vue';
+
+// Just to make things easier so tha
+Vue.component('app-hero', require('@/components/Hero').default);
+Vue.component('app-icons', require('@/components/Icons').default);
+Vue.component('app-site-header', require('@/components/SiteHeader').default);
+Vue.component('app-site-footer', require('@/components/SiteFooter').default);
+Vue.component('app-social-icons', require('@/components/SocialIcons').default);
+Vue.component('app-project-preview', require('@/components/ProjectPreview').default);
+Vue.component('app-project-preview-list', require('@/components/ProjectPreviewList').default);
+Vue.component('app-ripple', require('@/components/Ripple').default);
+Vue.component('app-overlay', require('@/components/Overlay').default);
+Vue.component('app-post-preview', require('@/components/PostPreview').default);
+
+export default {
+  props: {
+    showSocial: {
+      type: Boolean,
+      default: true,
+    },
+    showFooter: {
+      type: Boolean,
+      default: true,
+    },
+    showFullHeightHeader: {
+      type: Boolean,
+      default: false,
+    },
+  },
+
+  components: {
+    //
+  },
+};
+
+</script>

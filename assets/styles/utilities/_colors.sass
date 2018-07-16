@@ -1,34 +1,13 @@
 
-.u-foreground-white
+.u-colorWhite
   color: #ffffff !important
 
-.u-background-white
+.u-backgroundWhite
   background-color: #ffffff !important
 
-.u-foreground-inherit
+.u-colorInherit
   color: inherit !important
 
-.u-background-inherit
+.u-backgroundInherit
   background-color: inherit !important
 
-
-
-@each $name, $thing in $brand-colors
-  $foreground: map-get($thing, 'foreground')
-  $background: map-get($thing, 'background')
-
-  .u-foreground-#{$name}-bg
-    color: $background !important
-    fill: $background !important
-
-  .u-foreground-#{$name}-fg
-    color: $foreground !important
-    fill: $foreground !important
-
-  .u-background-#{$name}-bg
-    background-color: $background !important
-    fill: $background !important
-
-  .u-background-#{$name}-fg
-    background-color: $foreground !important
-    fill: $foreground !important

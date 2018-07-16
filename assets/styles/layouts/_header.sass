@@ -11,7 +11,7 @@ $site-nav-link-background--active: color('primary')
 $site-nav-link-padding-v: 1rem
 $site-nav-link-padding-h: 3rem
 $site-nav-link-border-width: rem(0)
-
+$site-nav-link-font-family: 'rift-soft';
 
 
 =site-nav-link
@@ -19,13 +19,13 @@ $site-nav-link-border-width: rem(0)
   border-top: $site-nav-link-border-width solid transparent
   display: block
   filter: drop-shadow(3px 4px 7px rgba(black, 0.2))
-  font-family: Lato, Arial, sans-serif
-  font-size: rem(11px)
-  font-weight: 900
+  font-family: $site-nav-link-font-family
+  font-size: rem(15px)
+  font-weight: 600
   padding: calc(#{$padding-v} - #{$site-nav-link-border-width}) $site-nav-link-padding-h $padding-v
   text-transform: uppercase
   transition: background-color, color
-  transition-duration: $base-transition-duration
+  transition-duration: $app-transition-duration
 
   &:link,
   &:visited
@@ -42,58 +42,67 @@ $site-nav-link-border-width: rem(0)
 
 
 /**
- * 1. Just ennough to make the header a uniform height throughout all pages.
+ * Meant to move away the background image of the header from the post title text,
+ * so as to not decrease readability.
+ */
+
+// .site-header-wrapper[data-page='post']
+//   @media (max-width: app-breakpoint('lg'))
+//     min-height: rem(900px)
+
+/**
+ * 1. Just enough to make the header a uniform height throughout all pages.
  * 2. Allows the background image to go farther down so it doesn't display
  * underneath the hero text, making it unreadable.
  */
 
-.site-header-wrapper
-  background: $site-header-background url(image('desk.svg')) no-repeat 100% 100% / cover
+.SiteHeader
   background-color: $site-header-background
-  min-height: rem(500px) /* [1] */
-  position: relative
+  background-position: 100% 100%
+  background-repeat: no-repeat
+  background-size: cover
+  // height: 100%
+  left: 0
+  // position: absolute
+  min-height: rem(500px) // [1]
+  top: 0
   width: 100%
 
   @media (max-width: rem(890px))
-    min-height: rem(650px) /* [2] */
+    min-height: rem(650px) // [2]
 
-.site-header-wrapper[data-page='about']
-  @media (max-width: rem(890px))
-    min-height: rem(720px)
+  // &.has-defaultBackground
+  //   background-image: url(app-image('desk.svg'))
 
-/**
- * Meant to move away the background image of the header from the post title text,
- * so as to not decrease readability.
- * @type {String}
- */
+  &.is-fullHeight
+    min-height: 100vh
 
-.site-header-wrapper[data-page='post']
-  @media (max-width: breakpoint('large'))
-    min-height: rem(900px)
+  &[data-page='about']
+    @media (max-width: rem(890px))
+      min-height: rem(720px)
 
-/**
- * Inherit the height from the site-header-wrapper, which is set differently
- * for most pages.
- */
-
-.SiteHeader
+.SiteHeader__inner
   padding: 0 0 3rem 0
   position: relative
   width: 100%
-  z-index: zindex('header')
-
-.SiteHeader__border
-  border-bottom: 1px solid $base-border-color
+  z-index: $app-layer-site-header
 
 .SiteHeader__container
   align-items: center
   display: flex
   justify-content: space-between
   margin: 0 auto
+  position: relative
   width: 100%
+  z-index: $app-site-header-container
+
   // background-color: $site-header-background
   // filter: drop-shadow(3px 4px 7px rgba(black, 0.2))
   // position: fixed
+
+.SiteHeader__lower
+  position: relative
+  z-index: $app-site-header-lower
 
 
 
@@ -106,8 +115,10 @@ $site-nav-link-border-width: rem(0)
 
 
 
+
+
 .SiteNav
-  padding-left: $base-gutter
+  padding-left: $app-gutter * 2
   text-align: right
 
 .SiteNav__list

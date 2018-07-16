@@ -1,55 +1,45 @@
-/**
- * file: _post.sass
- */
 
-$post-font-size: rem(16px)
-$post-max-width: rem(800px)
-$post-header-background: #eeeeee
-$post-gutter: double($row-gutter)
-$post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div, pre)
-$post-body-children: ()
-
-@each $selector in join($headings, $post-elements)
-  $post-body-children: join($post-body-children, '.Post__body > ' + $selector + ',')
+.TODO-POSTMETA
+  font-size: fontsize('small')
+  font-weight: 600
+  letter-spacing: 1px
+  line-height: double($app-gutter)
+  text-transform: capitalize
 
 
 
-/**
- * z-indexed over the header wrapper
- */
+///
+/// 1. z-indexed over the header wrapper
+///
 .PostList
   margin: 0 auto
-  padding-top: 6rem
   position: relative
-  z-index: 1 /* [1] */
-
-.PostList__item
-  padding-bottom: 6rem
+  z-index: 1 // [1]
 
 .Post
-  font-size: $post-font-size
+  font-size: $app-post-font-size
   line-height: 1.8
 
-/**
- * 1. Causes the text to be title to be directly in the middle
- *    of the site header's background image.
- */
+///
+/// 1. Causes the text to be title to be directly in the middle
+///    of the site header's background image.
+///
 .Post__header
-  padding: 0 $row-gutter
+  padding: 0 $app-gutter
   position: absolute
-  top: half($site-header-height--post) /* [1] */
+  top: half($app-site-header-height--post) /* [1] */
   transform: translateY(30%)
   width: 100%
 
 .Post__title
-  +row(readable)
-  font-family: $heading-font-family
-  font-size: 1.75rem
-  font-weight: 900
-  letter-spacing: rem(4px)
-  line-height: 1.4
-  padding-bottom: $base-spacing
-  text-transform: uppercase
+  // FIXME: +row(readable)
+  font-family: rift-soft
+  font-size: rem(42px)
+  font-weight: 600
+  letter-spacing: rem(3px)
+  line-height: 1.2
+  padding-bottom: double($app-gutter)
+  // text-transform: uppercase
 
 .Post__title a
   &:link,
@@ -61,20 +51,20 @@ $post-body-children: ()
     color: color('foreground', 'lightest')
 
 .Post__meta-list
-  +row(readable)
+  // FIXME +row(readable)
   color: #aaaaaa
-  line-height: $base-spacing
+  line-height: $app-gutter
 
-#{$post-body-children}
-  +padding(null $post-gutter)
+#{$app-post-body-children}
+  +padding(null $app-post-gutter)
   +margin(null auto)
   color: lighten(color('foreground'), 4)
-  max-width: $post-max-width
+  max-width: $app-post-max-width
 
 .Post__body
-  padding: double($base-spacing) 0 $base-spacing
+  padding: triple($app-gutter) 0 double($app-gutter)
 
-  > #{$headings}
+  > #{$app-headings}
     color: #404040
     padding-top: 1rem
 
@@ -84,6 +74,10 @@ $post-body-children: ()
   > ul
     +list(bullet)
 
+  > p
+    padding-bottom: $app-text-spacing
+
+
   > .full-width
     max-width: initial
 
@@ -92,20 +86,21 @@ $post-body-children: ()
 /**
  * 1. Make code displays full width on mobile for max viewability
  */
-@media (max-width: breakpoint('medium'))
-  #{$post-body-children}
-    +padding(null $row-gutter-at-small)
-
+@media (max-width: app-breakpoint('sm'))
   .Post__body > .highlighter-rouge
     padding-left: 0 !important
     padding-right: 0 !important
 
+  // #{$post-body-children}
+    // +padding(null $row-gutter-at-small)
+
 
 
 .PostPreview__title
-  +title('small')
-  font-family: Lato, Arial, sans-serif
-  font-size: 1.4rem
+  font-family: $app-font-family-1
+  letter-spacing: 2px
+  font-weight: 600
+  font-size: rem(28px)
   padding-bottom: 1.125rem
 
 .PostPreview__link
@@ -118,8 +113,8 @@ $post-body-children: ()
   padding-bottom: 1.25rem
 
 .PostPreview__body
-  font-size: $post-font-size
-  padding: 0 0 half($base-spacing)
+  font-size: $app-post-font-size
+  padding: 0 0 $app-gutter
 
 .PostPreview__more
   +clearfix

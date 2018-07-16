@@ -1,0 +1,21 @@
+
+@function app-breakpoint($breakpoint-name)
+  @return map-get($app-breakpoints, $breakpoint-name)
+
+@function app-breakpoint-suffix($breakpoint-name)
+  @return if($breakpoint-name == 'default', '', '\\@' + $breakpoint-name)
+
+/**
+ * Returns a breakpoint number from the breakpoints map
+ * @param  {String} $key
+ * @return {Number}
+ */
+
+=app-breakpoint-min($breakpoint-name)
+  @if $breakpoint-name == 'default'
+    @content
+  @else if map-has-key($app-active-breakpoints, $breakpoint-name)
+    @media only screen and (min-width: map-get($app-breakpoints, $breakpoint-name))
+      @content
+  @else
+    @error 'No breakpoint exists for breakpoint #{$breakpoint-name}'

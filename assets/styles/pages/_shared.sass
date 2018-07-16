@@ -3,8 +3,8 @@
  */
 
 .Hero
-  +row(xxlarge)
-  padding-top: ($base-spacing * 5)
+  // FIXME +row(xxlarge)
+  padding-top: ($app-gutter * 8)
 
 .Hero__caption
   +title('alternate')
@@ -12,19 +12,19 @@
 .Hero__description
   color: #dddddd
   font-size: rem(17px)
-  max-width: breakpoint('medium')
-  padding: $base-spacing 0 $base-spacing
+  max-width: app-breakpoint('sm')
+  padding: 1.5rem 0 2rem
 
 /**
  * 1. Push the header down so the background image doesn't show under the text,
  *    making it unreadable.
  */
-@media (max-width: breakpoint('medium'))
+@media (max-width: app-breakpoint('sm'))
   .Hero
-    padding-top: ($base-spacing * 3)
+    padding-top: ($app-gutter * 3)
 
   .Hero__description
-    padding-bottom: ($base-spacing * 9) /* [1] */
+    padding-bottom: ($app-gutter * 14.5) // [1]
 
 
 
@@ -47,8 +47,8 @@
 
 .disqus_thread
   margin: 0 auto
-  max-width: breakpoint('large')
-  padding: ($base-spacing * 4) $row-gutter
+  max-width: breakpoint('lg')
+  padding: ($app-gutter * 4) $app-gutter
 
 
 
@@ -60,7 +60,7 @@
   position: absolute
   right: 1.25rem
 
-@media (max-width: breakpoint('medium'))
+@media (max-width: app-breakpoint('sm'))
   .Social
     left: 50%
     right: initial

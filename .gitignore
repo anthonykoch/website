@@ -2,6 +2,7 @@
 /assets/scripts/**/*.map
 /assets/styles/main.css
 
+.DS_Store
 /.reports/
 /.personal
 /_drafts/

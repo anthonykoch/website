@@ -1,16 +1,23 @@
 <template>
-  <div class="site-header-wrapper" data-page="TODO">
-    <header class="SiteHeader" role="banner">
+    <header
+      :style="background"
+      :class="{
+        'has-defaultBackground': background == null,
+        'is-fullHeight': fullHeight,
+      }"
+      class="SiteHeader"
+      role="banner"
+      data-page="TODO"
+    >
       <div class="SiteHeader__container">
-
         <div class="Logo">
           <nuxt-link
             active-class="is-active"
             exact
             to="/"
-            class="Logo__link"
+            class="Logo__link u-px6"
           >
-            <span>Anthony</span>
+            <span>Anthony </span>
             <span>Koch</span>
           </nuxt-link>
         </div>
@@ -18,8 +25,9 @@
         <nav class="SiteNav" role="navigation">
           <ul class="SiteNav__list">
             <li
-               v-for="link of $store.state.navigation.links"
+               v-for="(link, index) of $store.state.navigation.links"
               class="SiteNav__list__item"
+              :key="index"
             >
               <!-- TODO: Active blog link should be active if -->
               <nuxt-link
@@ -34,7 +42,22 @@
         </nav>
       </div>
 
-      <slot name="lower"></slot>
+      <div class="SiteHeader__lower">
+        <slot name="lower"></slot>
+      </div>
     </header>
-  </div>
 </template>
+
+<script>
+export default {
+  props: {
+    background: {
+      type: Object,
+    },
+    fullHeight: {
+      type: Boolean,
+      default: false,
+    },
+  },
+};
+</script>
