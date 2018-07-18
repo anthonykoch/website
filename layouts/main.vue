@@ -1,5 +1,5 @@
 <template>
-  <div class="Site">
+  <div class="Page">
 
     <!--
       Hi, since you're already here, I'd like to inform you on the if/elseif statements of various programming languages.
@@ -30,26 +30,45 @@
      <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
    -->
 
+    <slot name="before"></slot>
+
+    <slot name="sidebar"></slot>
+
     <app-icons></app-icons>
 
-    <app-site-header
-      :full-height="showFullHeightHeader"
-    >
-      <app-hero slot="lower">
-        <slot name="heroCaption" slot="heroCaption"></slot>
-        <slot name="heroDescription" slot="heroDescription"></slot>
-        <app-social-icons
-          v-if="showSocial"
-          slot="heroSocial"
-          :social="$store.getters['social/getMediaItems']"
-        ></app-social-icons>
-        <slot name="heroLower" slot="heroLower"></slot>
-      </app-hero>
-    </app-site-header>
+    <div class="Page-inner">
+      <div>
+        <app-site-header
+          v-bind="theme.siteHeader"
+          :full-height="showFullHeightHeader"
+          :background="siteHeaderBackground"
+        >
+          <app-hero slot="lower" v-if="$slots.heroCaption && $slots.heroDescription">
+            <slot name="heroCaption" slot="heroCaption"></slot>
+            <slot name="heroDescription" slot="heroDescription"></slot>
+            <app-social-icons
+              v-if="showSocial"
+              slot="heroSocial"
+              :social="$store.getters['social/getMediaItems']"
+            ></app-social-icons>
+            <slot name="heroLower" slot="heroLower"></slot>
+          </app-hero>
+        </app-site-header>
 
-    <slot></slot>
+        <div
+          :class="{
+            'has-sidebar': $slots.sidebar != null,
+          }"
+          class="Page-content"
+        >
+          <slot></slot>
+        </div>
 
-    <app-site-footer v-if="showFooter"></app-site-footer>
+        <app-site-footer v-if="showFooter"></app-site-footer>
+      </div>
+    </div>
+
+    <slot name="after"></slot>
   </div>
 </template>
 
@@ -71,6 +90,15 @@ Vue.component('app-post-preview', require('@/components/PostPreview').default);
 
 export default {
   props: {
+    theme: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    siteHeaderBackground: {
+      default: null,
+    },
     showSocial: {
       type: Boolean,
       default: true,

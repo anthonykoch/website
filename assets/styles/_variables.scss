@@ -142,11 +142,18 @@ $app-layer-7: 700;
 $app-layer-8: 800;
 $app-layer-9: 900;
 $app-layer-10: 1000;
+$app-layer-11: 1100;
+$app-layer-12: 1200;
+$app-layer-13: 1300;
+$app-layer-14: 1400;
+$app-layer-15: 1500;
 
-$app-layer-site-header: $app-layer-8;
-$app-layer-overlay: $app-layer-9;
-
-
+$app-layer-site-header-lower: $app-layer-1;
+$app-layer-blog-toolbar: $app-layer-7;
+$app-layer-blog-sidebar: $app-layer-10;
+$app-layer-post-header: $app-layer-11;
+$app-layer-site-header: $app-layer-12;
+$app-layer-overlay: $app-layer-15;
 
 $app-utility-levels: (
   // Don't put 0, because those are output manually
@@ -205,13 +212,17 @@ $app-active-breakpoints: ();
 
 $app-border-radius: 3px;
 $app-transition-duration: 0.3s;
-$app-text-size-1: rem(17px);
+$app-text-size-1: rem(16px);
 
 
 
 $app-default-font-size: 100%;
 $app-default-font-weight: 400;
-$app-default-line-height: 1.7;
+$app-default-line-height: 1.8;
+
+
+
+$app-cubic-bezier-1: cubic-bezier(0.645, 0.045, 0.355, 1);
 
 
 
@@ -221,46 +232,46 @@ $app-default-font-family: $app-font-family-2;
 $app-heading-font-family: $app-font-family-1;
 $app-code-font-family: 'source-code-pro', Menlo, Monaco, Consolas, 'Courier New', monospace;
 
+
+
 $app-headings: (h1, h2, h3, h4, h5, h6);
 
 
 
 // Base element tag styles
 $app-code-background: #e6e6e6;
-$app-code-font-size: em(12px);
+$app-code-font-size: em(13px);
 $app-pre-background: #eeeeee;
-$app-pre-font-size: em(13px);
-$app-blockquote-padding-x: $app-gutter * 5;
+$app-pre-font-size: rem(14px);
+$app-blockquote-padding-x: $app-gutter;
+$app-blockquote-padding-y: half($app-text-spacing);
+$app-blockquote-font-size: 15px;
 
 
-
-$app-site-header-height--post: rem(400px);
-
+$app-page-sidebar-width: 300px;
 
 
-$app-list-item-margin-h: $app-gutter * 5;
+$app-logo-width: $app-page-sidebar-width;
+
+$app-list-item-margin-h: $app-gutter * 2;
 $app-list-item-padding-h: half($app-gutter);
 $app-list-padding-v: double($app-gutter);
 
 
 
 $app-post-font-size: rem(16px);
-$app-post-max-width: rem(800px);
+$app-post-max-width: rem(590px);
 $app-post-header-background: #eeeeee;
-$app-post-gutter: double($app-gutter);
-$app-post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div, pre);
 $app-post-body-children: ();
 $app-post-header-background: $color-secondary;
 
-@each $selector in join($app-headings, $app-post-elements) {
-  $app-post-body-children: join($app-post-body-children, '.Post__body > ' + $selector + ',');
-}
+
+
+$app-md-max-width: $app-post-max-width;
 
 
 
 $app-project-preview-border-radius: 3px;
-$app-site-header-lower: 1;
-$app-site-header-container: 2;
 
 
 

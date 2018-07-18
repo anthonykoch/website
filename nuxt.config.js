@@ -18,7 +18,9 @@ const md = new MarkdownIt({
   highlight(content, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(lang, content, true).value
+        return `<pre class="hljs"><code>${
+          hljs.highlight(lang, content, true).value
+        }</code></pre>`;
       } catch (err) {
         // console.log(lang,  content)
         throw err;
@@ -221,6 +223,7 @@ module.exports = {
 
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://use.typekit.net/nsr0hmh.css' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' },
     ]
   },
   /*

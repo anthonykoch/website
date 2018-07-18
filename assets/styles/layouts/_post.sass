@@ -1,10 +1,20 @@
 
-.TODO-POSTMETA
-  font-size: fontsize('small')
-  font-weight: 600
-  letter-spacing: 1px
-  line-height: double($app-gutter)
+.PostMeta
+  font-size: 14px
+  font-weight: 500
+  line-height: 1.4
+  text-align: center
+
+.PostMeta-date
+  color: #aaaaaa
+  font-style: italic
+  display: inline-block
   text-transform: capitalize
+
+.PostMeta-author
+  display: inline-block
+  margin-left: 6px
+  color: #dddddd
 
 
 
@@ -19,80 +29,49 @@
 .Post
   font-size: $app-post-font-size
   line-height: 1.8
+  position: relative
 
 ///
 /// 1. Causes the text to be title to be directly in the middle
 ///    of the site header's background image.
 ///
 .Post__header
-  padding: 0 $app-gutter
-  position: absolute
-  top: half($app-site-header-height--post) /* [1] */
-  transform: translateY(30%)
+  background-color: color('background', 'dark')
+  // margin-left: auto
+  // margin-right: auto
+  // margin-top: -180px
+  // margin-top: spacing(6)
+  padding-top: spacing(5)
+  padding-bottom: spacing(6)
+  position: relative
   width: 100%
+  left: 0
+  // top: -400px
+  text-align: center
+  z-index: $app-layer-post-header
+  // max-width: $app-post-max-width
 
 .Post__title
-  // FIXME: +row(readable)
   font-family: rift-soft
-  font-size: rem(42px)
+  font-size: rem(50px)
   font-weight: 600
   letter-spacing: rem(3px)
   line-height: 1.2
   padding-bottom: double($app-gutter)
-  // text-transform: uppercase
 
 .Post__title a
   &:link,
   &:visited
     color: color('primary')
+    // color: #565656
 
   &:hover,
   &:active
     color: color('foreground', 'lightest')
 
-.Post__meta-list
-  // FIXME +row(readable)
-  color: #aaaaaa
-  line-height: $app-gutter
-
-#{$app-post-body-children}
-  +padding(null $app-post-gutter)
-  +margin(null auto)
-  color: lighten(color('foreground'), 4)
-  max-width: $app-post-max-width
-
 .Post__body
   padding: triple($app-gutter) 0 double($app-gutter)
-
-  > #{$app-headings}
-    color: #404040
-    padding-top: 1rem
-
-  > ol
-    +list(number)
-
-  > ul
-    +list(bullet)
-
-  > p
-    padding-bottom: $app-text-spacing
-
-
-  > .full-width
-    max-width: initial
-
-
-
-/**
- * 1. Make code displays full width on mobile for max viewability
- */
-@media (max-width: app-breakpoint('sm'))
-  .Post__body > .highlighter-rouge
-    padding-left: 0 !important
-    padding-right: 0 !important
-
-  // #{$post-body-children}
-    // +padding(null $row-gutter-at-small)
+  font-size: $app-post-font-size
 
 
 
@@ -100,7 +79,7 @@
   font-family: $app-font-family-1
   letter-spacing: 2px
   font-weight: 600
-  font-size: rem(28px)
+  font-size: rem(32px)
   padding-bottom: 1.125rem
 
 .PostPreview__link

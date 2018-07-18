@@ -1,5 +1,5 @@
 <template>
-  <article class="PostPreview  u-collapse@medium">
+  <article class="PostPreview">
     <!-- <p class="PostPreview__meta">{{ meta.humanized.created_at }}</p> -->
     <h4 class="PostPreview__title">
       <nuxt-link :to="meta.url" class="PostPreview__link">
@@ -8,7 +8,7 @@
       <span class="PostPreview__meta">&nbsp;{{ meta.humanized.created_at }}</span>
     </h4>
     <div
-      class="PostPreview__body  row row--medium  u-margin-0 u-collapse-last"
+      class="PostPreview__body u-sizeSm"
       v-html="content"
     >
 

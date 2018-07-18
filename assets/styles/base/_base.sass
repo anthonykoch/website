@@ -30,27 +30,29 @@ body
 
 #{$app-headings}
   font-family: $app-heading-font-family
-  font-weight: 400
+  font-weight: 600
+  letter-spacing: 1px
   margin:  0
   padding: 0 0 1rem 0
 
-/**
- * Defines the base padding for heading elements
- */
-h1
-  font-size: rem(52px)
+h1,
+.h1
+  font-size: rem(54px)
   line-height: 1.1
 
-h2
-  font-size: rem(42px)
+h2,
+.h2
+  font-size: rem(44px)
   line-height: 1.2
 
 h3
-  font-size: rem(32px)
+  font-size: rem(34px)
   line-height: 1.4
 
 h4
-  font-size: rem(26px)
+  font-size: rem(24px)
+  font-family: $app-font-family-2
+  letter-spacing: 0
   line-height: 1.4
 
 h5
@@ -84,27 +86,26 @@ p
 
 
 code
-  background-color: $app-code-background
-  border-radius: $app-border-radius
+  // background-color: $app-code-background
+  // border-radius: $app-border-radius
+  color: #828282
   display: inline-block
   font-family: $app-code-font-family
   font-size: $app-code-font-size
   line-height: 1.6
+  letter-spacing: -0.4px
   margin: 0 rem(4px)
-  padding: rem(1px) rem(6px)
+  // padding: rem(1px) rem(6px)
   word-wrap: break-word
 
 pre
-  $margin: $app-gutter * 3
-  $padding-v: $app-gutter * 1
-  +scrollbar
-  background-color: $app-pre-background
   border-radius: 1px $app-border-radius $app-border-radius 1px
+  // border-left: 4px solid #c7c4b8
   font-family: $app-code-font-family
   font-size: $app-pre-font-size
   margin-bottom: $app-text-spacing
-  overflow: auto
-  padding: $app-text-spacing $app-gutter
+  overflow: scroll
+  padding: 0.5rem 0
   position: relative
   tab-size: 2
   word-wrap: normal
@@ -112,14 +113,18 @@ pre
   > code
     background-color: inherit
     color: inherit
+    display: block
     font-family: inherit
-    font-size: inherit
-    line-height: rem(21px)
+    font-size: $app-pre-font-size
+    line-height: rem(22px)
     margin: 0
-    padding: 0
+    padding-bottom: 0
+    padding-left: rem(16px)
+    padding-right: rem(16px)
+    padding-top: 0
 
-  @media screen and (max-width: app-breakpoint('xsm'))
-    padding: $padding-v $app-gutter
+  // @media screen and (max-width: app-breakpoint('xsm'))
+  //   padding: $padding-v $app-gutter
 
 
 
@@ -159,13 +164,17 @@ dd:last-child
 
 
 blockquote
-  border-left: rem(4px) solid $app-base-border-color
+  border: 1px solid #eae9e4
+  background-color: #f2f2f2
+  border-radius: 3px
+  line-height: 1.6
+  // border-left: rem(2px) solid $app-base-border-color
   margin-bottom: double($app-text-spacing)
-  margin-top: $app-text-spacing
-  padding: half($app-text-spacing) $app-blockquote-padding-x
+  // margin-top: $app-text-spacing
+  padding: $app-blockquote-padding-y $app-blockquote-padding-x
 
-  > p
-    font-style: italic
+  > *
+    font-size: $app-blockquote-font-size
     padding-bottom: 0
 
   > span:last-of-type

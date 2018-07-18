@@ -19,8 +19,6 @@
     })();
 </script>
 
-
-
 <noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 -->
 
@@ -28,36 +26,64 @@
 <template>
   <page
     :showSocial="false"
+    :showFooter="false"
+    :theme="theme"
   >
-    <article class="Post">
+    <div class="Sidebar" slot="sidebar">
+      <div class="Sidebar-inner">
+        <div class="Meme u-mb3">
+          <span class="Meme-upper">Next:</span>
+          <span class="Meme-lower">Understanding JavaScript Prototypes</span>
+        </div>
+        <div class="Meme u-mb3">
+          <span class="Meme-upper">Previous:</span>
+          <span class="Meme-lower">Medium style image loading</span>
+        </div>
 
-
-    <div class="BlogSidebar">
-      <div class="BlogSidebar-inner">
-        <div class="BlogSidebar-next">
-          <span class="BlogSidebar-nextUpper">Next:</span>
-          <span class="BlogSidebar-nextLower">Understanding JavaScript Prototypes</span>
+        <div class="Sidebar-social  u-textCenter">
+          <app-social-icons :social="social"></app-social-icons>
         </div>
       </div>
     </div>
 
+    <div slot="before" class="BlogToolbar">
+      <div>
+        <button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322 222"><path d="M2 95h320v32H2zM2-1h320v32H2zM2 191h320v32H2z"/></svg>
+        </button>
+      </div>
+      <div>
+        <button
+          @click="scrollToTop"
+          class="BlogToolbar-backToTop BlogToolbar-button"
+          title="Back to top"
+        >
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 328"><path d="M195.7 94.8c-3.1 3.1-8 3-11.3 0L110 28.4V313c0 4.4-3.6 8-8 8s-8-3.6-8-8V28.4L19.6 94.7c-3.4 2.9-8.1 3.2-11.2.1-3.1-3.1-3.3-8.5-.1-11.4 0 0 87-79.2 88-80S99.1 1 102 1s4.9 1.6 5.7 2.4 88 80 88 80c1.5 1.5 2.3 3.6 2.3 5.7s-.8 4.1-2.3 5.7z"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <article class="Post">
       <div class="Post__container">
-        <div class="u-sizeReadable u-mxauto">
-          <header class="Post__header  u-sizeSm">
+        <header class="Post__header">
+          <div class="u-sizeReadable u-mxauto">
               <h1 class="Post__title">
                 <a :href="$route.path" class="Link Link--dark">
                   {{ post.title }}
                 </a>
               </h1>
-            <ul class="Post__meta-list">
-              <li class="TODO-POSTMETA" >
+            <p class="PostMeta">
+              <span class="PostMeta-date">
                 {{ post.humanized.created_at }}
-              </li>
-            </ul>
-          </header>
-        </div>
+              </span>
+              <span class="PostMeta-author">
+                by Anthony Koch
+              </span>
+            </p>
+          </div>
+        </header>
         <div
-          class="Post__body"
+          class="Post__body  md"
           style="animation-delay: 0.3s"
           v-html="post.contents"
         >
@@ -76,73 +102,6 @@
   </page>
 </template>
 
-<style lang="scss">
-
-@import '../../assets/styles/variables';
-
-.BlogSidebar {
-  position: fixed;
-  background-color: #f2f2f2;
-  overflow: hidden;
-  width: 300px;
-  height: 100vh;
-  top:  0;
-  left: 0;
-}
-
-.Site {
-  // padding-left: 300px;
-}
-
-.BlogSidebar-inner {
-  position: absolute;
-  left: 0;
-  top: 0;
-  width: 100%;
-  height: 100%;
-  margin-top: 90px;
-  background-image: url(https://images.unsplash.com/photo-1522980811-53cc29445e08?ixlib=rb-0.3.5&amp;ixid=eyJhcHBfaWQiOjEyMDd9&amp;s=74050b81ff13d8e6fdf7720a855c43d3&amp;auto=format&amp;fit=crop&amp;w=3160&amp;q=80);
-  background-size: cover;
-}
-
-.BlogSidebar-next {
-  border: 1px solid rgba(white, 0.5);
-  border-radius: 4px;
-  background-color: transparent;
-  color: rgba(white, 0.7);
-  cursor: pointer;
-  font-family: $app-font-family-1;
-  font-size: 14px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  margin: 1rem;
-  text-align: left;
-  transition: background-color 300ms;
-
-  &:hover {
-    background-color: rgba($color-primary, 0.8);
-    border-color: rgba($color-primary, 0.8);
-    color: rgba(black, 0.6);
-  }
-
-  > span {
-    display: block;
-    padding: 4px 10px;
-  }
-}
-
-.BlogSidebar-nextUpper {
-  font-family: $app-font-family-1;
-  font-size: 14px;
-  display: block;
-}
-
-.BlogSidebar-nextLower {
-
-}
-
-</style>
-
 <script>
 import { mapState } from 'vuex';
 import Disqus from 'vue-disqus'
@@ -154,7 +113,34 @@ export default {
     page: require('@/layouts/main').default,
   },
 
+  methods: {
+    scrollToTop() {
+      window.scrollTo(0, 0);
+    },
+  },
+
+  props: {
+    social: {
+      type: Array,
+      default() {
+        return this.$store.getters['social/getMediaItems'];
+      },
+    },
+  },
+
   computed: {
+    theme() {
+      return {
+        siteHeader: {
+          isCollapsed: true,
+          isLogoFixed: true,
+          allowNavLinkActiveClass: false,
+          hasDarkbackground: false,
+          forceLogoActiveClass: true,
+        },
+      };
+    },
+
     disqusShortname() {
       return process.env.app.disqusShortname;
     },

@@ -1,0 +1,53 @@
+
+.md
+  > #{$app-headings},
+  > blockquote,
+  > figure,
+  > img,
+  > ul,
+  > ol,
+  > li,
+  > p,
+  > dl,
+  > div,
+  > pre
+    color: lighten(color('foreground'), 2)
+    margin-left: auto
+    margin-right: auto
+    max-width: $app-md-max-width
+
+  > blockquote,
+  > figure,
+  > img,
+  > ul,
+  > ol,
+  > li,
+  > p,
+  > dl,
+  > div
+    font-size: inherit
+
+  > #{$app-headings}
+    color: #404040
+    padding-top: 1rem
+
+  > ol
+    +list(number)
+
+  > ul
+    +list(bullet)
+
+  > p
+    padding-bottom: $app-text-spacing
+
+  > .md-fullWidth
+    margin-left: 0
+    margin-right: 0
+    max-width: 100%
+    width: 100%
+
+.md-listNumber
+  +list(number)
+
+.md-listBullet
+  +list(bullet)
