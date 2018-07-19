@@ -106,6 +106,8 @@
 import { mapState } from 'vuex';
 import Disqus from 'vue-disqus'
 
+import * as api from "@/core/api";
+
 export default {
   scrollToTop: true,
 
@@ -152,27 +154,21 @@ export default {
     disqusUrl() {
       return this.$route.path;
     },
-
-    post() {
-      // console.log(Object.keys(this.$store.state.posts.postsById))
-      const post = this.$store.getters['posts/getBySlug'](this.$route.params.slug);
-
-      if (post == null) {
-        throw new Error('the fuck is happening: ' + this.$route.params.slug)
-      }
-
-      // console.log({
-      //   slug: this.$route.params.slug,
-      //   posts: this.$store.getters['posts/getPosts'],
-      //   post,
-      // })
-
-      return post;
-    },
   },
 
-  async fetch({ store: $store, params }) {
-    await $store.dispatch('posts/loadPost', { slug: params.slug });
+  asyncData({ params, error }) {
+    return api.getPost(params.slug)
+      .then(({ status, data: post }) => {
+        // console.log(post);
+
+        return {
+          post,
+        };
+      })
+      .catch(err => {
+        error({ statusCode: 404, message: 'Post not found' });
+        // console.log({err});
+      });
   },
 };
 </script>
