@@ -43,14 +43,13 @@
           :full-height="showFullHeightHeader"
           :background="siteHeaderBackground"
         >
-          <app-hero slot="lower" v-if="$slots.heroCaption && $slots.heroDescription">
+          <app-hero slot="lower" v-if="isHeroShowing">
             <slot name="heroCaption" slot="heroCaption"></slot>
             <slot name="heroDescription" slot="heroDescription"></slot>
-            <app-social-icons
+            <app-common-social
               v-if="showSocial"
               slot="heroSocial"
-              :social="$store.getters['social/getMediaItems']"
-            ></app-social-icons>
+            ></app-common-social>
             <slot name="heroLower" slot="heroLower"></slot>
           </app-hero>
         </app-site-header>
@@ -78,6 +77,7 @@ import Vue from 'vue';
 
 // Just to make things easier so tha
 Vue.component('app-hero', require('@/components/Hero').default);
+Vue.component('app-common-social', require('@/components/CommonSocial').default);
 Vue.component('app-icons', require('@/components/Icons').default);
 Vue.component('app-site-header', require('@/components/SiteHeader').default);
 Vue.component('app-site-footer', require('@/components/SiteFooter').default);
@@ -110,6 +110,12 @@ export default {
     showFullHeightHeader: {
       type: Boolean,
       default: false,
+    },
+  },
+
+  computed: {
+    isHeroShowing() {
+      return this.$slots.heroCaption || this.$slots.heroDescription || this.$slots.heroLower;
     },
   },
 
