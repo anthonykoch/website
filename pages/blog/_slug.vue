@@ -41,31 +41,38 @@
         </div>
 
         <div class="Sidebar-social  u-textCenter">
-          <app-social-icons :social="social"></app-social-icons>
+          <app-common-social></app-common-social>
         </div>
       </div>
     </div>
 
     <div slot="before" class="BlogToolbar">
-      <div>
-        <button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322 222"><path d="M2 95h320v32H2zM2-1h320v32H2zM2 191h320v32H2z"/></svg>
-        </button>
-      </div>
-      <div>
-        <button
-          @click="scrollToTop"
-          class="BlogToolbar-backToTop BlogToolbar-button"
-          title="Back to top"
-        >
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 328"><path d="M195.7 94.8c-3.1 3.1-8 3-11.3 0L110 28.4V313c0 4.4-3.6 8-8 8s-8-3.6-8-8V28.4L19.6 94.7c-3.4 2.9-8.1 3.2-11.2.1-3.1-3.1-3.3-8.5-.1-11.4 0 0 87-79.2 88-80S99.1 1 102 1s4.9 1.6 5.7 2.4 88 80 88 80c1.5 1.5 2.3 3.6 2.3 5.7s-.8 4.1-2.3 5.7z"/></svg>
-        </button>
-      </div>
+      <transition name="tr-fade" :duration="250">
+        <div v-show="isBlogToolbarVisible">
+          <!--
+            <div>
+              I don't think there's a point in having this when there's a "back to top" button
+              <button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322 222"><path d="M2 95h320v32H2zM2-1h320v32H2zM2 191h320v32H2z"/></svg>
+              </button>
+            </div>
+          -->
+          <div>
+            <button
+              @click="scrollToTop"
+              class="BlogToolbar-backToTop BlogToolbar-button"
+              title="Back to top"
+            >
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 328"><path d="M195.7 94.8c-3.1 3.1-8 3-11.3 0L110 28.4V313c0 4.4-3.6 8-8 8s-8-3.6-8-8V28.4L19.6 94.7c-3.4 2.9-8.1 3.2-11.2.1-3.1-3.1-3.3-8.5-.1-11.4 0 0 87-79.2 88-80S99.1 1 102 1s4.9 1.6 5.7 2.4 88 80 88 80c1.5 1.5 2.3 3.6 2.3 5.7s-.8 4.1-2.3 5.7z"/></svg>
+            </button>
+          </div>
+        </div>
+      </transition>
     </div>
 
     <article class="Post">
       <div class="Post__container">
-        <header class="Post__header">
+        <header class="Post__header" ref="postHeader">
           <div class="u-sizeReadable u-mxauto">
               <h1 class="Post__title">
                 <a :href="$route.path" class="Link Link--dark">
@@ -105,8 +112,11 @@
 <script>
 import { mapState } from 'vuex';
 import Disqus from 'vue-disqus'
+import throttle from 'lodash/throttle';
 
 import * as api from "@/core/api";
+
+const VISIBILITY_OFFSET = 300;
 
 export default {
   scrollToTop: true,
@@ -119,15 +129,35 @@ export default {
     scrollToTop() {
       window.scrollTo(0, 0);
     },
+
+    /**
+     * Returns true if the window has scrolled past the bottom of the post header
+     */
+    getBlogToolbarVisiblity() {
+      if (!process.browser) {
+        return false;
+      }
+
+      const offsetTop =
+        this.$refs.postHeader.getBoundingClientRect().top
+        + this.$refs.postHeader.offsetHeight
+        + document.body.scrollTop
+        + VISIBILITY_OFFSET;
+
+      return document.documentElement.scrollTop > offsetTop;
+    },
+
+    updateBlogToolbarVisiblity: throttle(function () {
+      console.log(this.getBlogToolbarVisiblity());
+
+      this.isBlogToolbarVisible = this.getBlogToolbarVisiblity();
+    }, 300, { trailing: true }),
   },
 
-  props: {
-    social: {
-      type: Array,
-      default() {
-        return this.$store.getters['social/getMediaItems'];
-      },
-    },
+  data() {
+    return {
+      isBlogToolbarVisible: false,
+    };
   },
 
   computed: {
@@ -138,6 +168,7 @@ export default {
           isLogoFixed: true,
           allowNavLinkActiveClass: false,
           hasDarkbackground: false,
+          hasDarkLinks: true,
           forceLogoActiveClass: true,
         },
       };
@@ -167,8 +198,14 @@ export default {
       })
       .catch(err => {
         error({ statusCode: 404, message: 'Post not found' });
-        // console.log({err});
       });
+  },
+
+  created() {
+    if (process.browser) {
+      window.addEventListener('scroll', this.updateBlogToolbarVisiblity);
+      window.addEventListener('resize', this.updateBlogToolbarVisiblity);
+    }
   },
 };
 </script>

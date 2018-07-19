@@ -44,6 +44,7 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 - Edit some of the articles errors like in medium image loading and favorite features of es2015
 - Add codepen js to article pages
 - Fix post previews being offset because of max-width
+- Update about page and various pieces of text to sound more professional.
 
 #c5d6bb
 

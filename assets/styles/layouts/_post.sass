@@ -14,7 +14,52 @@
 .PostMeta-author
   display: inline-block
   margin-left: 6px
-  color: #dddddd
+  color: #aaaaaa
+
+
+
+.BlogToolbar
+  position: fixed
+  top: 50px
+  right: 50px
+  // display: flex
+  text-align: center
+  // justify-content: center
+  z-index: $app-layer-blog-toolbar
+
+.BlogToolbar-button
+  background-color: transparent
+  border: 1px solid color('background', 'dark')
+  border-radius: 3px
+  display: inline-block
+  margin-bottom: 1rem
+  padding: 16px 0
+  outline: 0
+  transition: 200ms border-color
+  width: 42px
+
+  svg
+    fill: color('background', 'dark')
+    transition: fill 200ms
+
+  &:hover
+    border-color: color('primary')
+
+    svg
+      fill: #dddddd
+      fill: color('primary')
+
+.BlogToolbar-menu
+  svg
+    display: block
+    margin: 0 auto
+    width: 18px
+
+.BlogToolbar-backToTop
+  svg
+    margin: 0 auto
+    width: 14px
+    display: block
 
 
 
@@ -36,24 +81,17 @@
 ///    of the site header's background image.
 ///
 .Post__header
-  background-color: color('background', 'dark')
-  // margin-left: auto
-  // margin-right: auto
-  // margin-top: -180px
-  // margin-top: spacing(6)
   padding-top: spacing(5)
-  padding-bottom: spacing(6)
+  padding-bottom: spacing(2)
   position: relative
   width: 100%
   left: 0
-  // top: -400px
   text-align: center
   z-index: $app-layer-post-header
-  // max-width: $app-post-max-width
 
 .Post__title
-  font-family: rift-soft
-  font-size: rem(50px)
+  font-family: $app-font-family-1
+  font-size: rem(52px)
   font-weight: 600
   letter-spacing: rem(3px)
   line-height: 1.2
@@ -62,12 +100,11 @@
 .Post__title a
   &:link,
   &:visited
-    color: color('primary')
-    // color: #565656
+    color: #565656
 
   &:hover,
   &:active
-    color: color('foreground', 'lightest')
+    color: bbb
 
 .Post__body
   padding: triple($app-gutter) 0 double($app-gutter)

@@ -4,10 +4,7 @@
     :showFooter="false"
     :showSocial="false"
   >
-    <div
-      slot="heroLower"
-      style=""
-    >
+    <div slot="heroLower">
       <div class="Title Title--alternate u-textCenter">
         <p style="font-size: 2rem" class="u-mb">
           Welp, this page doesn't exist.

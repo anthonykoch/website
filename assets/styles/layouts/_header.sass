@@ -62,7 +62,7 @@ $site-nav-link-font-family: $app-font-family-1;
 
 
 .SiteNav
-  background-color: color('background', 'dark')
+  // background-color: color('background', 'dark')
   flex: 1
   // padding-left: $app-gutter * 2
   text-align: right
@@ -128,63 +128,6 @@ $site-nav-link-font-family: $app-font-family-1;
 .SiteHeader__lower
   position: relative
   z-index: $app-layer-site-header-lower
-
-
-
-
-=reset-button
-  background-color: transparent
-  border: 0
-  display: inline-block
-
-
-
-.BlogToolbar
-  position: fixed
-  top: 40px
-  right: 50px
-  // display: flex
-  text-align: center
-  // justify-content: center
-  z-index: $app-layer-blog-toolbar
-
-.BlogToolbar-button
-  +reset-button
-  border: 1px solid color('background', 'dark')
-  border-radius: 3px
-  // background-color: red
-  display: block
-  margin-bottom: 1rem
-  padding: 16px 0
-  outline: 0
-  transition: 200ms border-color
-  width: 44px
-
-  svg
-    fill: color('background', 'dark')
-    transition: fill 200ms
-
-  &:hover
-    border-color: color('primary')
-
-    svg
-      fill: #dddddd
-      fill: color('primary')
-
-.BlogToolbar-menu
-  svg
-    display: block
-    margin: 0 auto
-    width: 20px
-
-.BlogToolbar-backToTop
-  svg
-    margin: 0 auto
-    width: 14px
-    display: block
-
-
-
 
 
 
