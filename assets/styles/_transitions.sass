@@ -13,6 +13,32 @@
 
 
 
+.tr-vertical-text-rotate-enter-active,
+.tr-vertical-text-rotate-leave-active
+  opacity: 1
+  display: inline-block
+  transition-duration: 500ms, 500ms
+  transition-property: opacity, transform
+  transition-timing-function: ease-in-out
+
+.tr-vertical-text-rotate-enter
+  opacity: 0
+  transform: translate(0, 20px)
+
+.tr-vertical-text-rotate-enter-to
+  transform: translate(0, 0)
+
+.tr-vertical-text-rotate-leave
+  opacity: 0
+  transform: translate(0, 0)
+
+.tr-vertical-text-rotate-leave-to
+  opacity: 0
+  transform: translate(0, 20px)
+
+
+
+
 
 // TOOD: Uncomment
 // .page-enter-active

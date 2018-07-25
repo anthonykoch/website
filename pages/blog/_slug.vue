@@ -116,7 +116,7 @@ import throttle from 'lodash/throttle';
 
 import * as api from "@/core/api";
 
-const VISIBILITY_OFFSET = 300;
+const VISIBILITY_OFFSET = 1200;
 
 export default {
   scrollToTop: true,

@@ -2,12 +2,12 @@
   <page
     :show-social="false"
   >
-    <div slot="heroCaption">My start in programming</div>
+    <div slot="heroCaption">Freelance developer</div>
     <div slot="heroDescription">
-      I started out writing JavaScript in Notepad for fun, and tried to recreate things like jQuery in order to gain understanding of the syntax and concepts of the language. I've since found myself really enjoying front-end development, and have made various projects, some of which I've put on my <a href="http://codepen.io/anthonykoch/">codepen</a> and <a href="https://github.com/anthonykoch">github</a>.
+      I'm freelance developer working remotely with companies all over the world. I started out writing JavaScript in Notepad for fun, and tried to recreate things like jQuery in order to gain understanding of the syntax and concepts of the language. I've since found myself really enjoying front-end development, and have made various projects, some of which I've put on my <a href="http://codepen.io/anthonykoch/">codepen</a> and <a href="https://github.com/anthonykoch">github</a>.
     </div>
 
-    <div class="u-flex">
+    <!--<div class="u-flex">
       <div class="side-image about-office-background u-size12of12 u-size6of12@sm"></div>
       <section class="u-size12of12 u-size6of12@sm u-textCenter">
         <div class="u-px5 u-py8">
@@ -21,9 +21,9 @@
           </div>
         </div>
       </section>
-    </div>
+    </div>-->
 
-    <div class="u-flex">
+    <!--<div class="u-flex">
       <div class="side-image about-jekyll-background u-size12of12 u-size6of12@lg u-order1 u-order2@lg"></div>
       <section class="u-size12of12 u-size6of12@sm u-textCenter">
         <div class="u-px5 u-py8">
@@ -39,7 +39,7 @@
           </div>
         </div>
       </section>
-    </div>
+    </div>-->
   </page>
 </template>
 

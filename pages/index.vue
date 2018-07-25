@@ -1,9 +1,14 @@
 <template>
-  <page>
-    <div slot="heroCaption">Front-End Developer</div>
-    <div slot="heroDescription">
+  <page
+    :showSocial="false"
+  >
+    <!--<div slot="heroLower">
+      <div class="meme"></div>
+    </div>-->
+    <!--<div slot="heroCaption">Front-End Developer</div>-->
+    <!--<div slot="heroDescription">
       Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development. I'm a lover of JavaScript, Python, and simple code.
-    </div>
+    </div>-->
 
     <transition
       name="tr-fade"
@@ -16,6 +21,111 @@
         v-show="overlays.projects.isShowing"
       ></app-overlay>
     </transition>
+
+    <div slot="heroLower">
+      <div class="s-Hero">
+        <div>
+          <div class="s-Hero-title">
+            <span>Need a </span>
+            <transition
+              name="tr-vertical-text-rotate"
+              @afterEnter="onHeroShowing"
+              @afterLeave="onHeroHidden"
+            >
+              <span
+                class="s-Hero-titlePart"
+                v-show="isHeroShowing"
+                style="transition-delay: 100ms"
+              >
+                {{ activeHero.title }}
+              </span>
+            </transition>
+          </div>
+        </div>
+        <div>
+          <transition
+            name="tr-vertical-text-rotate"
+          >
+            <p
+              class="s-Hero-caption"
+              v-show="isHeroShowing"
+            >
+              {{ activeHero.caption }}
+            </p>
+          </transition>
+        </div>
+        <!--<div>
+          <transition
+            name="tr-vertical-text-rotate"
+          >
+            <button
+              class="s-Hero-cta"
+            >
+               v-show="isHeroShowing"
+              Get in touch
+               {{ activeHero.cta }}
+            </button>
+
+          </transition>
+        </div>-->
+      </div>
+    </div>
+
+    <section id="work">
+      <div class="u-siteWrapper u-pt7 u-px5">
+        <div class="FeatureWork">
+          <h2 class="Title Title--alternate Title--dark">
+            <span>Featured Work</span>
+            <span class="Title__caption">
+              Samples of my work
+            </span>
+          </h2>
+
+          <div class="FeaturedWork-section">
+            <div class="FeaturedWork-images">
+              <div>
+                <div class="WorkImages">
+                  <div class="MemeTag  WorkImages-tag">Website Development</div>
+                  <div class="WorkImages-container">
+                    <img src="~/assets/images/work/mf-1@2x.png" alt="" class="WorkImages-image">
+                  </div>
+                </div>
+              </div>
+              <!-- <div class="FeaturedWork-imageItem">
+                <div></div>
+              </div>
+              <div class="FeaturedWork-imageItem">
+                <div></div>
+              </div>
+              <div class="FeaturedWork-imageItem">
+                <div></div>
+              </div>
+              <div class="FeaturedWork-imageItem">
+                <div></div>
+              </div> -->
+            </div>
+            <div class="FeaturedWork-about">
+              <div class="FeatureWork-title">
+                Modern Fertility
+              </div>
+              <p class="FeatureWork-text">
+                Modern Fertility contacted me to help develop their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their idea out to the world.
+              </p>
+              <ul class="FeaturedWork-list">
+                <li>Front-end development</li>
+                <li>Integrating a checkout system</li>
+                <li>Developed several landing pages </li>
+              </ul>
+
+              <p class="FeaturedWork-footnote">
+                Note: Their website has changed quite a bit recently. However, their current landing page (as of July, 2018) was still largely developed by me.
+              </p>
+              <button class="FeaturedWork-cta">View Website</button>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
 
     <section id="projects" class="u-flex">
       <!-- <div class="u-size4of12"></div>
@@ -43,7 +153,7 @@
         <h2 class="Title Title--alternate Title--dark">
           <span>Codepen</span>
           <span class="Title__caption">
-            My various codepen projects and experiments
+            Various projects and experiments
           </span>
         </h2>
       </div>
@@ -88,6 +198,26 @@ export default {
 
   data() {
     return {
+      console,
+      activeHeroIndex: 0,
+      isHeroShowing: true,
+      heroItems: [
+        {
+          cta: 'Get in touch',
+          title: 'mobile ready website?',
+          caption: 'I develop websites that work excellently across a wide range of devices.',
+        },
+        {
+          cta: 'Hire me',
+          title: 'pixel perfect landing page?',
+          caption: 'Have a design that needs implementation? I can bring the design to life.',
+        },
+        {
+          cta: '',
+          title: 'help on a project?',
+          caption: 'I work in React, Vue, jQuery, or just vanilla JavaScript.',
+        },
+      ],
       navigatedProject: null,
       overlays: {
         projects: {
@@ -111,6 +241,10 @@ export default {
       featuredProject: state => state.projects.github.editorconnect,
     }),
 
+    activeHero() {
+      return this.heroItems[this.activeHeroIndex];
+    },
+
     images() {
       return {
         plaidHorizontal: require('~/assets/images/logos/plaid-horizontal.svg'),
@@ -120,6 +254,36 @@ export default {
   },
 
   methods: {
+    onMeme() {
+      console.log('hey ma dude');
+    },
+
+    showNextHero() {
+      this.activeHeroIndex =
+        this.activeHeroIndex + 1 >= this.heroItems.length
+          ? 0
+          : this.activeHeroIndex + 1;
+    },
+
+    onHeroHidden() {
+      console.log('hidden');
+      this.showNextHero();
+      setTimeout(() => {
+        this.isHeroShowing = true;
+      }, 100);
+    },
+
+    onHeroShowing() {
+      console.log('showing');
+      this.hideHero();
+    },
+
+    hideHero() {
+      setTimeout(() => {
+        this.isHeroShowing = false;
+      }, 3500);
+    },
+
     navigateToProject(e) {
       // TODO: Make this triggerable by vue attribute
       this.overlays.projects.isShowing = true;
@@ -135,6 +299,12 @@ export default {
       this.overlays.projects.isShowing = true;
       this.overlays.projects.background = project.fade;
     },
+  },
+
+  mounted() {
+    // this.showPreviousHero();
+    this.hideHero();
+    console.log(this.activeHeroIndex);
   },
 };
 </script>
