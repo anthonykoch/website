@@ -15,7 +15,7 @@
       @if (type-of($grid-total-columns) != 'number')
         @error 'grid column size from $app-grid-sizes is not a number, got #{$grid-total-columns}'
 
-      $grid-total-columns: strip-units($grid-total-columns)
+      $grid-total-columns: strip-unit($grid-total-columns)
 
       @for $column-index from 1 through $grid-total-columns
         .u-size#{$column-index}of#{$grid-total-columns}#{$suffix}
