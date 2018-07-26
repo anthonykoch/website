@@ -3,9 +3,10 @@ export default {
   state: {
     links: [
       {
-        text: 'about',
-        href: '/about',
-        active: '/about/',
+        text: 'work',
+        href: '/#work',
+        active: '/#work',
+        scrollTo: '#work',
       },
       {
         text: 'blog',

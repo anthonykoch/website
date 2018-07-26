@@ -1,5 +1,6 @@
 <template>
   <page
+    :theme="theme"
     :show-social="false"
   >
     <!-- <div slot="before">
@@ -11,7 +12,7 @@
       These are my various writings, mostly on topics surrounding front-end development.
     </div>
     <section>
-      <div class="u-sizeReadable u-mxauto">
+      <div class="u-mxauto [ Container is-smallWidth ]">
         <ul class="PostList u-pt8">
           <li class="PostList__item u-pb8"
             v-for="(meta, index) in postsMeta"
@@ -41,7 +42,11 @@ export default {
 
   data() {
     return {
-
+      theme: {
+        hero: {
+          isSmallWidth: true,
+        },
+      },
     };
   },
 

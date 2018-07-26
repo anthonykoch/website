@@ -42,7 +42,7 @@ $color-secondary: $green;
 $app-base-border-color: #44413a;
 
 // Foreground colors
-$color-foreground: #444444;
+$color-foreground: #333333;
 $color-foreground-alternate: #bdbdbd;
 $color-foreground--meta: #989b9e;
 
@@ -313,34 +313,3 @@ $app-button-outline-foreground: $color-primary;
 $app-button-outline-foreground-active: #444444;
 $app-button-outline-background: transparent;
 $app-button-outline-background-active: $color-primary;
-
-
-
-
-@keyframes meme {
-  0% {
-    opacity: 0;
-    transform: translate(30%, 30%) scale(0.9);
-  }
-
-  100% {
-    transform: translate(0, 0) scale(1);
-    opacity: 1;
-  }
-}
-
-.meme {
-  animation: meme 2000ms cubic-bezier(0.645, 0.045, 0.355, 1);
-  // background-image: url('~/assets/images/modernfertility/landing+c.jpg');
-  background-color: red;
-  background-position: center top;
-  background-repeat: no-repeat;
-  background-size: 1800px auto;
-  bottom: 0;
-  box-shadow: 0 rem(18px) rem(40px) rem(-12px) rgba(0,0,0,0.32);
-  position: absolute;
-  height: 300px;
-  right: 0;
-  width: 600px;
-}
-

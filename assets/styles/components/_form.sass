@@ -1,24 +1,73 @@
 
-$input-background: white
-$input-foreground: #222222
-$input-placeholder-foreground: #555555
-$input-padding-v: 1rem
-$input-padding-h: 1.5rem
-$input-font-size: rem(15.4px)
-$input-font-family: $app-default-font-family
-$input-placeholder-font-size: rem(15px)
-$input-border-width: rem(2px)
-$input-border-style: solid
-$input-border-color: #dddddd
-$input-border-color--focus: color('primary')
+$app-input-padding-t: 16px
+$app-input-padding-r: 0
+$app-input-padding-b: 16px
+$app-input-padding-l: 16px
+$app-label-left: $app-input-padding-l
 
-$form-width: rem(500px)
+.Input,
+.TextArea
+  background-color: transparent
+  // background-color: rgba(white, 0.9)
+  border: 0
+  color: rgba(black, 0.6)
+  border-color: rgba(black, 0.5)
+  border-style: solid
+  border-bottom-width: 2px
+  font-size: 15px
+  outline: 0
+  position: relative
+  padding: $app-input-padding-t $app-input-padding-r $app-input-padding-b $app-input-padding-l
+  transition: background-color 300ms
+  width: 100%
+  // z-index: 1
 
-.Input
-  +input()
+  &::placeholder
+    font-family: $app-font-family-1
+    font-size: 17px
+    font-weight: 500
+    letter-spacing: 1px
 
-.Input--textarea
-  min-height: rem(200px)
+  &:focus,
+  &:active
+    background-color: rgba(black, 0.06)
+    // background-color: rgba(white, 1)
+    // border-color: color('primary')
+
+.Input.is-valid
+  border-color: #29e6b2
+
+.TextArea
+  // border-left-width: 2px
+  min-height: 300px
+
+.InputGroup
+  padding-top: 30px
+  position: relative
 
 .Form
-  max-width: $form-width
+  &.has-smallWidth
+    margin: 0 auto
+    max-width: 570px
+
+.Label
+  display: inline-block
+  color: rgba(black, 0.6)
+  font-size: 16px
+  font-family: $app-font-family-1
+  font-weight: 500
+  letter-spacing: 0.5px
+  transform: translate(0, 41px)
+  position: absolute
+  pointer-events: none
+  top: 0
+  left: $app-label-left
+  transition: transform 300ms
+
+.TextArea.has-label-lifted + .Label,
+.Input.has-label-lifted + .Label
+  transform: translate(0, 0)
+
+
+.ContactSection
+  background-color: #f2f2f2

@@ -43,7 +43,7 @@
           :full-height="showFullHeightHeader"
           :background="siteHeaderBackground"
         >
-          <app-hero slot="lower" v-if="isHeroShowing">
+          <app-hero slot="lower" v-if="isHeroShowing" v-bind="theme.hero">
             <slot name="heroCaption" slot="heroCaption"></slot>
             <slot name="heroDescription" slot="heroDescription"></slot>
             <app-common-social
@@ -87,6 +87,8 @@ Vue.component('app-project-preview-list', require('@/components/ProjectPreviewLi
 Vue.component('app-ripple', require('@/components/Ripple').default);
 Vue.component('app-overlay', require('@/components/Overlay').default);
 Vue.component('app-post-preview', require('@/components/PostPreview').default);
+Vue.component('app-input', require('@/components/Input').default);
+Vue.component('app-text-area', require('@/components/TextArea').default);
 
 export default {
   props: {

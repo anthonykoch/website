@@ -90,21 +90,186 @@ $app-codepen-projects-image-count: 6
 
 
 
+.Title
+  &.type-1
+    font-family: $app-font-family-1
+    font-size: 32px
+    text-transform: uppercase
+    font-weight: 500
+    letter-spacing: 2px
 
-.Overlay
-  +position(fixed, 0 null null 0)
-  +size(100%)
-  background: rgba(color('background'), 0.5)
-  z-index: $app-layer-overlay
 
-.Overlay.is-white
-  background-color: #ffffff
 
-.Overlay.is-codepen
-  background-color: #1a1c1d
+$app-featured-work-padding: 30px
 
-.Overlay.is-dark
-  background-color: #2b292b
+.FeatureWork
+  max-width: 1080px
+  margin: 0 auto 200px
+
+.FeaturedWork-section
+  align-items: flex-start
+  display: flex
+  flex-wrap: nowrap
+  margin-left: -$app-featured-work-padding
+  margin-right: -$app-featured-work-padding
+  margin-bottom: spacing(9)
+
+.FeaturedWork-images
+  // display: flex
+  // flex-wrap: wrap
+  padding-left: $app-featured-work-padding
+  padding-right: $app-featured-work-padding
+  margin-left: half(-$app-featured-work-padding)
+  margin-right: half(-$app-featured-work-padding)
+  width: 65%
+
+// .FeaturedWork-imageItem
+//   height: 280px
+//   padding: 10px
+//   position: relative
+//   width: 45%
+
+//   &:nth-child(1) div
+//     background-image: url('~/assets/images/work/1@2x.png')
+
+//   &:nth-child(3) div
+//     background-image: url('~/assets/images/work/2@2x.png')
+
+//   &:nth-child(2) div
+//     background-image: url('~/assets/images/work/3@2x.png')
+
+//   div
+//     background-position: center
+//     background-size: cover
+//     height: 100%
+//     width: 100%
+
+.FeaturedWork-about
+  padding-left: $app-featured-work-padding
+  padding-right: $app-featured-work-padding
+  // margin-top: 20px
+  margin-left: 20px
+  width: 40%
+
+.FeatureWork-title
+  font-family: $app-font-family-1
+  font-size: 22px
+  font-weight: 500
+  letter-spacing: 2px
+  margin-bottom: 20px
+
+  &:before
+    background-color: #6196cc
+    content: ''
+    height: 4px
+    width: 30px
+    display: inline-block
+    vertical-align: middle
+    margin-right: 26px
+
+.FeaturedWork-list
+  margin-bottom: 44px
+  margin-left: 54px
+
+  > li
+    margin-bottom: 5px
+
+    &:before
+      background-color: #6196cc
+      content: ''
+      height: 3px
+      width: 20px
+      display: inline-block
+      vertical-align: middle
+      margin-right: 10px
+
+.FeatureWork-text
+  line-height: 2
+  margin-bottom: 44px
+  margin-left: 20px
+
+.FeaturedWork-footnote
+  font-size: 13px
+  font-style: italic
+  line-height: 1.7
+  margin-bottom: 47px
+  margin-left: 20px
+
+.FeaturedWork-cta
+  // background-color: #E6E6E6
+  border: 0
+  // border: 2px solid rgba(black, 0.7)
+  font-size: 12px
+  letter-spacing: 2px
+  outline: 0
+  padding: 0 0
+  // padding: 16px 45px
+  text-transform: uppercase
+  margin-left: 20px
+
+
+
+
+
+
+.Tag
+  background-color: #FFE083
+  box-shadow: 0 28px 40px 0 rgba(0,0,0, 0.05)
+  border-radius: 4px
+  font-size: 10px
+  letter-spacing: 1.25px
+  padding: 12px 20px
+  display: inline-block
+  position: relative
+  text-transform: uppercase
+
+  &.is-absolute
+    position: absolute
+    left: -25px
+
+    &:before
+      // FIXME: Why does this not work???!!>!1 +triangle('up-right', 22px, 18px, #F2D26F)
+      border-color: transparent #F2D26F transparent transparent
+      border-width: 0 24px 10px 0
+      border-style: solid
+      bottom: 1px
+      content: ''
+      height: 0
+      left: 1px
+      position: absolute
+      transform: translate(0%, 100%)
+      width: 0
+      z-index: -1
+
+
+
+
+
+
+.WorkImages
+  position: relative
+
+.WorkImages-container
+  box-shadow: 0 16px 46px -8px rgba(#828282, 0.3)
+  position: relative
+
+  &.has-dark-shadow
+    box-shadow: 0 16px 46px -4px rgba(#BEBEBE, 0.5)
+
+.WorkImages-image
+  +absolute-fill
+  border-radius: 6px
+
+// 1. The height of the images
+.WorkImages-aspectFill
+  padding-bottom: 60% // [1]
+
+
+.WorkImages-tag
+  top: 20px
+
+
+
 
 
 
@@ -163,6 +328,7 @@ $app-codepen-projects-image-count: 6
 
 
 
+$app-project-preview-list-gutter: spacing(1)
 
 .CodepenProjects
   background-color: hsla(0,0%,95%,1)
@@ -174,6 +340,8 @@ $app-codepen-projects-image-count: 6
   flex-wrap: wrap
   justify-content: space-between
   opacity: 1
+  margin-left: (-$app-project-preview-list-gutter)
+  margin-right: (-$app-project-preview-list-gutter)
   padding: 0 0 spacing(1)
   transition: opacity 0.4s
 
@@ -183,7 +351,7 @@ $app-codepen-projects-image-count: 6
   flex: 0 0 auto
   line-height: 0
   max-width: $width
-  padding: 0 0 spacing(3)
+  padding: 0 $app-project-preview-list-gutter spacing(3)
   width: 33.333333%
 
 @media (max-width: rem(1300px))

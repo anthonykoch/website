@@ -1,42 +1,3 @@
-/**
- * Shared styles between pages
- */
-
-.Hero
-  // FIXME +row(xxlarge)
-  padding-top: ($app-gutter * 8)
-
-.Hero__caption
-  +title('alternate')
-
-.Hero__description
-  color: #dddddd
-  font-size: rem(17px)
-  max-width: app-breakpoint('sm')
-  padding: 1.5rem 0 2rem
-
-/**
- * 1. Push the header down so the background image doesn't show under the text,
- *    making it unreadable.
- */
-@media (max-width: app-breakpoint('sm'))
-  .Hero
-    padding-top: ($app-gutter * 3)
-
-  .Hero__description
-    padding-bottom: ($app-gutter * 14.5) // [1]
-
-
-
-.Background-white
-  background-color: white
-
-.Background-gray
-  background-color: #eeeeee
-
-.Background-primary
-  background-color: color('primary')
-
 
 
 .side-image
@@ -49,6 +10,9 @@
   margin: 0 auto
   max-width: breakpoint('lg')
   padding: ($app-gutter * 4) $app-gutter
+
+
+
 
 
 

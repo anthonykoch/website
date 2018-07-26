@@ -31,79 +31,66 @@
   &:active
     filter: $app-button-drop-shadow-active
 
+  &.has-lightBackground
+    background-color: #f2f2f2
 
+    &:link,
+    &:visited
+      background-color: #f2f2f2
 
+  &.is-sizeLarge
+    line-height: $app-button-line-height-lg
+    padding: $app-button-padding-t-lg $app-button-padding-r-lg $app-button-padding-b-lg $app-button-padding-l-lg
 
-.Button--has-shadow
-  filter: $app-button-drop-shadow
+  &.has-hoverEffect1
+    position: relative
 
+    &:before,
+    &:after
+      content: ''
+      background-color: #2b292b
+      height: 100%
+      left: 0
+      opacity: 0
+      position: absolute
+      transform: scaleX(0)
+      transition: opacity 400ms ease-in, transform 500ms
+      transform-origin: 0% 50%
+      width: 100%
+      z-index: -1
 
-
-
-.Button--outline
-  background-color: $app-button-outline-background
-  border: rem(2px) solid $app-button-outline-border-color
-  color: $app-button-outline-foreground
-  filter: none
-
-  &:link,
-  &:visited
-    background-color: $app-button-outline-background
-    color: $app-button-outline-foreground
-
-  &:hover,
-  &:active
-    background-color: $app-button-outline-background-active
-    color: $app-button-outline-foreground-active
-
-
-
-
-.Button--large
-  line-height: $app-button-line-height-lg
-  padding: $app-button-padding-t-lg $app-button-padding-r-lg $app-button-padding-b-lg $app-button-padding-l-lg
-
-
-
-
-.Button--light
-  background-color: white
-
-  &:link,
-  &:visited
-    background-color: white
-
-
-
-
-.Button--hover-stripe-bottom
-  position: relative
-
-  &:before,
-  &:after
-    // border-radius: inherit
-    content: ''
-    background-color: #2b292b
-    height: 100%
-    left: 0
-    opacity: 0
-    position: absolute
-    transform: scaleX(0)
-    transition: opacity 400ms ease-in, transform 500ms
-    transform-origin: 0% 50%
-    width: 100%
-    z-index: -1
-
-  &:before
-    bottom: 0
-
-  &:hover,
-  &:active
-    color: white
-    transition: all 400ms
     &:before
-      transform: scaleX(1)
-      opacity: 1
+      bottom: 0
+
+    &:hover,
+    &:active
+      color: white
+      transition: all 400ms
+
+      &:before
+        transform: scaleX(1)
+        opacity: 1
+
+
+
+// .Button--outline
+//   background-color: $app-button-outline-background
+//   border: rem(2px) solid $app-button-outline-border-color
+//   color: $app-button-outline-foreground
+//   filter: none
+
+//   &:link,
+//   &:visited
+//     background-color: $app-button-outline-background
+//     color: $app-button-outline-foreground
+
+//   &:hover,
+//   &:active
+//     background-color: $app-button-outline-background-active
+//     color: $app-button-outline-foreground-active
+
+
+
 
 
 

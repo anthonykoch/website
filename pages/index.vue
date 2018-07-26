@@ -23,9 +23,10 @@
     </transition>
 
     <div slot="heroLower">
-      <div class="s-Hero">
+      <div class="LandingHero">
         <div>
-          <div class="s-Hero-title">
+          <p class="LandingHero-availability">Available for projects</p>
+          <div class="LandingHero-title">
             <span>Need a </span>
             <transition
               name="tr-vertical-text-rotate"
@@ -33,7 +34,7 @@
               @afterLeave="onHeroHidden"
             >
               <span
-                class="s-Hero-titlePart"
+                class="LandingHero-titlePart"
                 v-show="isHeroShowing"
                 style="transition-delay: 100ms"
               >
@@ -47,62 +48,44 @@
             name="tr-vertical-text-rotate"
           >
             <p
-              class="s-Hero-caption"
+              class="LandingHero-caption"
               v-show="isHeroShowing"
             >
               {{ activeHero.caption }}
             </p>
           </transition>
         </div>
-        <!--<div>
-          <transition
-            name="tr-vertical-text-rotate"
-          >
-            <button
-              class="s-Hero-cta"
-            >
-               v-show="isHeroShowing"
-              Get in touch
-               {{ activeHero.cta }}
-            </button>
-
-          </transition>
-        </div>-->
       </div>
     </div>
 
     <section id="work">
       <div class="u-siteWrapper u-pt7 u-px5">
         <div class="FeatureWork">
-          <h2 class="Title Title--alternate Title--dark">
+          <h2 class="Title type-1">
             <span>Featured Work</span>
-            <span class="Title__caption">
-              Samples of my work
-            </span>
           </h2>
 
           <div class="FeaturedWork-section">
             <div class="FeaturedWork-images">
               <div>
                 <div class="WorkImages">
-                  <div class="MemeTag  WorkImages-tag">Website Development</div>
                   <div class="WorkImages-container">
-                    <img src="~/assets/images/work/mf-1@2x.png" alt="" class="WorkImages-image">
+                    <div class="WorkImages-aspectFill">
+                      <img
+                        src="~/assets/images/work/mf-work-1@2x.png"
+                        alt=""
+                        class="WorkImages-image"
+                      >
+                      <!--<img
+                        src="~/assets/images/work/mf-work-2@2x.png"
+                        alt=""
+                        class="WorkImages-image"
+                      >-->
+                    </div>
+                    <div class="[ Tag is-absolute ]  WorkImages-tag">Web Development</div>
                   </div>
                 </div>
               </div>
-              <!-- <div class="FeaturedWork-imageItem">
-                <div></div>
-              </div>
-              <div class="FeaturedWork-imageItem">
-                <div></div>
-              </div>
-              <div class="FeaturedWork-imageItem">
-                <div></div>
-              </div>
-              <div class="FeaturedWork-imageItem">
-                <div></div>
-              </div> -->
             </div>
             <div class="FeaturedWork-about">
               <div class="FeatureWork-title">
@@ -112,22 +95,50 @@
                 Modern Fertility contacted me to help develop their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their idea out to the world.
               </p>
               <ul class="FeaturedWork-list">
-                <li>Front-end development</li>
-                <li>Integrating a checkout system</li>
-                <li>Developed several landing pages </li>
+                <li>Fully responsive website</li>
+                <li>Integrated checkout system</li>
+                <li>Landing page development </li>
+                <li>Dashboard development</li>
               </ul>
 
-              <p class="FeaturedWork-footnote">
+              <!--<p class="FeaturedWork-footnote">
                 Note: Their website has changed quite a bit recently. However, their current landing page (as of July, 2018) was still largely developed by me.
-              </p>
+              </p>-->
               <button class="FeaturedWork-cta">View Website</button>
+            </div>
+          </div>
+
+
+          <div class="FeaturedWork-section  u-mb6 u-itemsCenter">
+            <div class="FeaturedWork-images  u-order1">
+              <div>
+                <div class="WorkImages">
+                  <div class="WorkImages-container has-dark-shadow">
+                    <div class="WorkImages-aspectFill">
+                      <img src="~/assets/images/work/plaid-work-1@2x.png" alt="" class="WorkImages-image">
+                      <div class="[ Tag is-absolute ]  WorkImages-tag ">Web Development</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="FeaturedWork-about">
+              <div class="FeatureWork-title">
+                Plaid Technologies
+              </div>
+              <p class="FeatureWork-text">
+                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included creating pages from scratch, improving documention, and maintenance.
+              </p>
+              <!--<button class="FeaturedWork-cta">View Website</button>-->
             </div>
           </div>
         </div>
       </div>
     </section>
 
+
     <section id="projects" class="u-flex">
+
       <!-- <div class="u-size4of12"></div>
       <div class="Slider u-size4of12 u-mxauto">
         <div class="Slider-container" style="width: 500%">
@@ -148,17 +159,17 @@
       <div class="u-size4of12"></div> -->
     </section>
 
-    <section id="codepen">
+    <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
       <div class="u-siteWrapper u-pt7 u-px5">
-        <h2 class="Title Title--alternate Title--dark">
-          <span>Codepen</span>
-          <span class="Title__caption">
+        <h2 class="Title type-1">
+          <span>Personal Projects</span>
+          <!--<span class="Title__caption">
             Various projects and experiments
-          </span>
+          </span>-->
         </h2>
       </div>
 
-      <div class="CodepenProjects">
+      <div class="CodepenProjects" style="background-color: transparent">
         <div class="u-siteWrapper u-px5">
           <app-project-preview-list
             :projects="projects"
@@ -168,7 +179,7 @@
           <div class="u-textCenter">
             <a
               href="https://codepen.io/anthonykoch/"
-              class="Button Button--light Button--large Button--hover-stripe-bottom"
+              class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
             >
               View more on Codepen &rarr;
             </a>
@@ -176,6 +187,10 @@
           </div>
         </div>
       </div>
+    </section>
+
+    <section id="contact">
+      .
     </section>
 
     <!-- /Users/tony/Documents/Github/companies/plaid/screenshots -->
@@ -209,7 +224,7 @@ export default {
         },
         {
           cta: 'Hire me',
-          title: 'pixel perfect landing page?',
+          title: 'design developed?',
           caption: 'Have a design that needs implementation? I can bring the design to life.',
         },
         {

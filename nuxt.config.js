@@ -339,8 +339,7 @@ module.exports = {
   },
 
   plugins: [
-    '~plugins/context',
-    '~plugins/logger',
+    '~plugins/bootstrap',
     '~/plugins/disqus',
 
     // Might need highlighter later
