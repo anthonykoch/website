@@ -20,11 +20,9 @@
 
 .BlogToolbar
   position: fixed
-  top: 50px
-  right: 50px
-  // display: flex
+  right: spacing(1)
   text-align: center
-  // justify-content: center
+  top: 50px
   z-index: $app-layer-blog-toolbar
 
 .BlogToolbar-button
@@ -33,10 +31,10 @@
   border-radius: 3px
   display: inline-block
   margin-bottom: 1rem
-  padding: 16px 0
   outline: 0
+  padding: 16px 0
   transition: 200ms border-color
-  width: 42px
+  width: 38px
 
   svg
     fill: color('background', 'dark')
@@ -58,7 +56,7 @@
 .BlogToolbar-backToTop
   svg
     margin: 0 auto
-    width: 14px
+    width: 12px
     display: block
 
 
@@ -81,17 +79,17 @@
 ///    of the site header's background image.
 ///
 .Post__header
-  padding-top: spacing(5)
+  left: 0
+  padding-top: spacing(4)
   padding-bottom: spacing(2)
   position: relative
-  width: 100%
-  left: 0
   text-align: center
+  width: 100%
   z-index: $app-layer-post-header
 
 .Post__title
   font-family: $app-font-family-1
-  font-size: rem(52px)
+  font-size: rem(44px)
   font-weight: 600
   letter-spacing: rem(3px)
   line-height: 1.2
@@ -100,15 +98,19 @@
 .Post__title a
   &:link,
   &:visited
-    color: #565656
+    color: #333333
 
   &:hover,
   &:active
-    color: bbb
+    color: #bbbbbb
 
 .Post__body
-  padding: triple($app-gutter) 0 double($app-gutter)
   font-size: $app-post-font-size
+  line-height: 1.7
+  padding-bottom: spacing(2)
+  padding-left: spacing(1)
+  padding-right: spacing(1)
+  padding-top: spacing(3)
 
 
 
@@ -142,3 +144,25 @@
   display: inline-block
   text-align: right
   text-transform: capitalize
+
+
+
++app-breakpoint-min(lg)
+  .Post__title
+    font-size: rem(52px)
+
+  .Post__body
+    font-size: $app-post-font-size-at-lg
+    line-height: 1.7
+    padding-right: spacing(4.5)
+    padding-right: spacing(2)
+
+  .BlogToolbar
+    right: 50px
+
+  .BlogToolbar-button
+    width: 42px
+
+  .BlogToolbar-backToTop
+    svg
+      width: 14px

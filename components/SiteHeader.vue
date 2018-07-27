@@ -1,8 +1,8 @@
 <template>
     <header
-      :style="background"
       :class="{
-        'has-dark-background': hasDarkbackground,
+        'has-darkBackground': hasDarkbackground,
+        'has-blogBackground': hasBlogBackground,
         'is-collapsed': isCollapsed,
         'is-fullHeight': fullHeight,
       }"
@@ -62,6 +62,16 @@
 
 export default {
   props: {
+    background: {
+      type: Object,
+      default() {
+        return {};
+      },
+    },
+    hasBlogBackground: {
+      type: Boolean,
+      default: true,
+    },
     hasDarkbackground: {
       type: Boolean,
       default: true,
@@ -85,9 +95,6 @@ export default {
     hasDarkLinks: {
       type: Boolean,
       default: false,
-    },
-    background: {
-      type: Object,
     },
     fullHeight: {
       type: Boolean,

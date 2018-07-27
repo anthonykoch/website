@@ -41,7 +41,6 @@
         <app-site-header
           v-bind="theme.siteHeader"
           :full-height="showFullHeightHeader"
-          :background="siteHeaderBackground"
         >
           <app-hero slot="lower" v-if="isHeroShowing" v-bind="theme.hero">
             <slot name="heroCaption" slot="heroCaption"></slot>
@@ -72,7 +71,6 @@
 </template>
 
 <script>
-
 import Vue from 'vue';
 
 // Just to make things easier so tha
@@ -97,9 +95,6 @@ export default {
       default() {
         return {};
       },
-    },
-    siteHeaderBackground: {
-      default: null,
     },
     showSocial: {
       type: Boolean,

@@ -239,7 +239,7 @@ $app-headings: (h1, h2, h3, h4, h5, h6);
 
 // Base element tag styles
 $app-code-background: #e6e6e6;
-$app-code-font-size: em(13px);
+$app-code-font-size: 0.825em;
 $app-pre-background: #eeeeee;
 $app-pre-font-size: rem(14px);
 $app-blockquote-padding-x: $app-gutter;
@@ -275,15 +275,15 @@ $app-list-padding-v: double($app-gutter);
 
 
 $app-post-font-size: rem(16px);
-$app-post-max-width: rem(590px);
+$app-post-font-size-at-lg: rem(16px);
 $app-post-header-background: #eeeeee;
 $app-post-body-children: ();
 $app-post-header-background: $color-secondary;
 
 
 
-$app-md-max-width: $app-post-max-width;
-
+$app-md-max-width: rem(520px);
+$app-md-max-width-at-lg: rem(590px);
 
 
 $app-project-preview-border-radius: 3px;

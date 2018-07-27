@@ -45,15 +45,10 @@
   +site-nav-link
   display: inline-block
 
-  &.is-fixed
-    position: fixed
-
 
 
 .SiteNav
-  // background-color: color('background', 'dark')
   flex: 1
-  // padding-left: $app-gutter * 2
   text-align: right
 
 .SiteNav__list
@@ -75,22 +70,23 @@
   width: 100%
   z-index: $app-layer-site-header
 
-  &:before
-    +absolute-fill
-    content: ''
-    background-image: url('~/assets/images/background-1+c.jpg')
-    background-attachment: fixed
-    background-position: 100% 80%
-    background-repeat: no-repeat
-    background-size: cover
-    opacity: 0.12
-    z-index: -1
-
   &.is-collapsed
     min-height: 0
 
-  &.has-dark-background
+  &.has-darkBackground
+    &:before
+      +absolute-fill
+      content: ''
+      z-index: -1
+
+  &.has-darkBackground
     background-color: $app-site-header-background
+
+    &:before
+      background-image: url('~/assets/images/background-1+c.jpg')
+      background-attachment: fixed
+      background-position: 100% 80%
+      opacity: 0.12
 
   &.is-fullHeight
     min-height: 100vh
@@ -113,6 +109,13 @@
 // .SiteHeader__lower
 //   position: relative
 //   z-index: $app-layer-site-header-lower
+
+
++app-breakpoint-min(lg)
+  .Logo__link
+    &.is-fixed
+      position: fixed
+
 
 
 
@@ -140,9 +143,18 @@
     padding-left: 0
     text-align: center
 
+  .SiteNav__list
+    display: flex
+
   .SiteNav__list__item
-    flex: 33.33333%
+    flex-basis: auto
     margin: 0
+    width: 33.33333%
+
+  .Logo__link
+  .SiteNav__list__item__link
+    padding-left: 0
+    padding-right: 0
 
   .SiteNav__list__item__link
     padding-bottom: 10px

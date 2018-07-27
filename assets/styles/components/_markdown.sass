@@ -16,6 +16,11 @@
     margin-right: auto
     max-width: $app-md-max-width
 
+    +app-breakpoint-min(lg)
+      max-width: $app-md-max-width-at-lg
+
+
+
   > blockquote,
   > figure,
   > img,
@@ -37,8 +42,11 @@
   > ul
     +list(bullet)
 
-  > p
-    padding-bottom: $app-text-spacing
+  > p,
+  > ul,
+  > ol,
+  > dl
+    padding-bottom: spacing(2.25)
 
   > .md-fullWidth
     margin-left: 0
