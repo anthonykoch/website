@@ -12,7 +12,7 @@
       These are my various writings, mostly on topics surrounding front-end development.
     </div>
     <section>
-      <div class="u-mxauto [ Container is-smallWidth ]">
+      <div class="[ Container is-smallWidth ] u-gutter u-mxauto">
         <ul class="PostList u-pt8">
           <li class="PostList__item u-pb8"
             v-for="(meta, index) in postsMeta"

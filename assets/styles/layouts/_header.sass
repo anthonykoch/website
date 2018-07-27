@@ -89,7 +89,7 @@ $site-nav-link-font-family: $app-font-family-1;
   &:before
     +absolute-fill
     content: ''
-    background-image: url('~/assets/images/sidebar-background-1+c.jpg')
+    background-image: url('~/assets/images/background-1+c.jpg')
     background-attachment: fixed
     background-position: 100% 80%
     background-repeat: no-repeat
@@ -136,6 +136,10 @@ $site-nav-link-font-family: $app-font-family-1;
   .SiteHeader__container
     display: block
 
+  .Logo,
+  .Logo__link
+    width: 100%
+
   .Logo__link
     &:link,
     &:visited
@@ -152,4 +156,5 @@ $site-nav-link-font-family: $app-font-family-1;
     margin: 0
 
   .SiteNav__list__item__link
-    +padding(null 0)
+    padding-bottom: 10px
+    padding-top: 10px

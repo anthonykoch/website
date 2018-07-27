@@ -22,11 +22,10 @@
     vertical-align: middle
     width: 7px
 
-
 .LandingHero-title
   color: #bdbdbd
   font-family: $app-font-family-1
-  font-size: rem(48px)
+  font-size: rem(40px)
   font-weight: 600
   letter-spacing: 1px
   // max-width: 900px
@@ -43,10 +42,10 @@
 .LandingHero-caption
   color: white
   font-family: $app-font-family-2
-  font-size: 18px
+  font-size: 17px
   font-weight: 400
   // font-style: italic
-  line-height: 1.9
+  line-height: 1.5
   margin-top: 10px
   // letter-spacing: -1px
 
@@ -66,6 +65,12 @@
   margin-top: 20px
 
 
++app-breakpoint-min(sm)
+  .LandingHero-title
+    font-size: rem(48px)
+
+  .LandingHero-caption
+    font-size: 18px
 
 
 
@@ -81,13 +86,6 @@
   max-width: rem(670px)
   padding: 1.5rem 0 2rem
 
-/**
- * 1. Push the header down so the background image doesn't show under the text,
- *    making it unreadable.
- */
 @media (max-width: app-breakpoint('sm'))
   .Hero
     padding-top: ($app-gutter * 3)
-
-  .Hero__description
-    padding-bottom: ($app-gutter * 14.5) // [1]

@@ -37,7 +37,7 @@
             >
               <!-- TODO: Active blog link should be active if -->
               <nuxt-link
-                :v-scroll-to="link.scrollTo"
+                v-scroll-to="link.scrollTo"
                 :active-class="siteNavLinkActiveClass"
                 :to="link.href"
                 :class="{

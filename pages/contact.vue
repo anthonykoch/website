@@ -9,30 +9,32 @@
     </p>
 
     <section id="contact" class="u-pb7 u-pt7">
-      <form action="" class="Container is-formWidth u-mxauto">
-        <div class="u-flex u-mb4">
-          <div class="u-size6of12">
+      <form action="" class="Container is-formWidth u-mxauto" validate>
+        <div class="u-flex u-mb3@sm">
+          <div class="u-size12of12 u-size6of12@sm u-mb3 u-mb0@sm">
             <app-input
               label="Name or Company Name *"
               :input="{
                 required: true,
                 name: 'full_name',
                 id: 'full_name',
+                autocomplete: 'name',
               }"
             ></app-input>
           </div>
-          <div class="u-size6of12">
+          <div class="u-size12of12 u-size6of12@sm u-mb3 u-m0@sm">
             <app-input
               label="Subject"
               :input="{
                 type: 'text',
                 name: 'subject',
                 id: 'subject',
+                autocomplete: 'off',
               }"
             ></app-input>
           </div>
         </div>
-        <div class="u-mb4">
+        <div class="u-mb3">
           <app-input
               label="Email"
               :input="{
@@ -40,20 +42,25 @@
                 type: 'email',
                 name: 'email',
                 id: 'email',
+                autocomplete: 'email',
               }"
             ></app-input>
         </div>
-        <div class="u-mb4">
+        <div class="u-mb3">
           <app-text-area
             label="Message"
             :input="{
               required: true,
               name: 'message',
               id: 'message',
+              autocomplete: 'off',
             }"
           ></app-text-area>
         </div>
-        <button class="Button has-lightBackground is-sizeLarge has-hoverEffect1">
+        <button
+          class="Button has-lightBackground is-sizeLarge has-hoverEffect1"
+          type="submit"
+        >
           Send message
         </button>
       </form>

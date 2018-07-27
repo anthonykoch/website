@@ -25,7 +25,9 @@
     <div slot="heroLower">
       <div class="LandingHero">
         <div>
-          <p class="LandingHero-availability">Available for projects</p>
+          <p class="LandingHero-availability">
+            <nuxt-link to="contact" class="Link is-white">Available for projects</nuxt-link>
+          </p>
           <div class="LandingHero-title">
             <span>Need a </span>
             <transition
@@ -59,23 +61,26 @@
     </div>
 
     <section id="work">
-      <div class="u-siteWrapper u-pt7 u-px5">
+      <div class="u-siteWrapper u-pt4 u-pt7@lg u-gutter">
+
         <div class="FeatureWork">
-          <h2 class="Title type-1">
+          <h2 class="Title type-1  u-pl5@lg u-textCenter u-textLeft@lg">
             <span>Featured Work</span>
           </h2>
 
-          <div class="FeaturedWork-section">
-            <div class="FeaturedWork-images">
-              <div>
+          <div class="FeaturedWork-grid">
+            <div class="FeaturedWork-column is-left">
+              <div class="FeaturedWork-media u-pl2 u-pl0@lg">
                 <div class="WorkImages">
                   <div class="WorkImages-container">
                     <div class="WorkImages-aspectFill">
-                      <img
-                        src="~/assets/images/work/mf-work-1@2x.png"
-                        alt=""
-                        class="WorkImages-image"
-                      >
+                      <a href="https://modernfertility.com/" class="u-block">
+                        <img
+                          src="~/assets/images/work/mf-work-1@2x.png"
+                          alt=""
+                          class="WorkImages-image"
+                        >
+                      </a>
                       <!--<img
                         src="~/assets/images/work/mf-work-2@2x.png"
                         alt=""
@@ -87,31 +92,34 @@
                 </div>
               </div>
             </div>
-            <div class="FeaturedWork-about">
-              <div class="FeatureWork-title">
-                Modern Fertility
-              </div>
-              <p class="FeatureWork-text">
-                Modern Fertility contacted me to help develop their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their idea out to the world.
-              </p>
-              <ul class="FeaturedWork-list">
-                <li>Fully responsive website</li>
-                <li>Integrated checkout system</li>
-                <li>Landing page development </li>
-                <li>Dashboard development</li>
-              </ul>
+            <div class="FeaturedWork-column is-right is-pushedRight has-paddingLeft">
+              <div>
+                <div class="FeatureWork-title">
+                  Modern Fertility
+                </div>
+                <p class="FeatureWork-text">
+                  Modern Fertility contacted me to help develop their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their idea out to the world.
+                </p>
+                <ul class="FeaturedWork-list">
+                  <li>Fully responsive website</li>
+                  <li>Integrated checkout system</li>
+                  <li>Landing page development </li>
+                  <li>Dashboard development</li>
+                </ul>
 
-              <!--<p class="FeaturedWork-footnote">
-                Note: Their website has changed quite a bit recently. However, their current landing page (as of July, 2018) was still largely developed by me.
-              </p>-->
-              <button class="FeaturedWork-cta">View Website</button>
+                <!--<p class="FeaturedWork-footnote">
+                  Note: Their website has changed quite a bit recently. However, their current landing page (as of July, 2018) was still largely developed by me.
+                </p>-->
+                <div class="u-textCenter u-textLeft@lg">
+                  <button class="FeaturedWork-cta">View Website</button>
+                </div>
+              </div>
             </div>
           </div>
 
-
-          <div class="FeaturedWork-section  u-mb6 u-itemsCenter">
-            <div class="FeaturedWork-images  u-order1">
-              <div>
+          <div class="FeaturedWork-grid  u-mb6 u-itemsCenter">
+            <div class="FeaturedWork-column is-left  u-order1@lg">
+              <div class="FeaturedWork-media u-pl2 u-pl0@lg">
                 <div class="WorkImages">
                   <div class="WorkImages-container has-dark-shadow">
                     <div class="WorkImages-aspectFill">
@@ -122,24 +130,25 @@
                 </div>
               </div>
             </div>
-            <div class="FeaturedWork-about">
+            <div class="FeaturedWork-column is-right is-pushedLeft has-paddingRight">
               <div class="FeatureWork-title">
                 Plaid Technologies
               </div>
               <p class="FeatureWork-text">
-                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included creating pages from scratch, improving documention, and maintenance.
+                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included creating pages from scratch, developing features, and daily maintenance.
               </p>
-              <!--<button class="FeaturedWork-cta">View Website</button>-->
             </div>
           </div>
+
         </div>
+
       </div>
     </section>
 
 
-    <section id="projects" class="u-flex">
+    <!--<section id="projects" class="u-flex">
 
-      <!-- <div class="u-size4of12"></div>
+       <div class="u-size4of12"></div>
       <div class="Slider u-size4of12 u-mxauto">
         <div class="Slider-container" style="width: 500%">
           <div class="Slider-slide" style="width: 20%">
@@ -156,16 +165,27 @@
           </div>
         </div>
       </div>
-      <div class="u-size4of12"></div> -->
+      <div class="u-size4of12"></div>
+    </section>-->
+
+    <section id="contact" class="u-py4 u-py7">
+      <div class="u-textCenter">
+        <h2 class="Title2 Title  u-gutter">
+          Have a project in mind?
+        </h2>
+        <nuxt-link
+          to="contact"
+          class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
+        >
+          Get in touch
+        </nuxt-link>
+      </div>
     </section>
 
     <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
       <div class="u-siteWrapper u-pt7 u-px5">
         <h2 class="Title type-1">
           <span>Personal Projects</span>
-          <!--<span class="Title__caption">
-            Various projects and experiments
-          </span>-->
         </h2>
       </div>
 
@@ -174,6 +194,7 @@
           <app-project-preview-list
             :projects="projects"
             @navigate="setNavigatedProject"
+            ref="projects"
           >
           </app-project-preview-list>
           <div class="u-textCenter">
@@ -187,10 +208,6 @@
           </div>
         </div>
       </div>
-    </section>
-
-    <section id="contact">
-      .
     </section>
 
     <!-- /Users/tony/Documents/Github/companies/plaid/screenshots -->
@@ -218,17 +235,14 @@ export default {
       isHeroShowing: true,
       heroItems: [
         {
-          cta: 'Get in touch',
-          title: 'mobile ready website?',
+          title: 'website?',
           caption: 'I develop websites that work excellently across a wide range of devices.',
         },
         {
-          cta: 'Hire me',
           title: 'design developed?',
           caption: 'Have a design that needs implementation? I can bring the design to life.',
         },
         {
-          cta: '',
           title: 'help on a project?',
           caption: 'I work in React, Vue, jQuery, or just vanilla JavaScript.',
         },
@@ -262,8 +276,6 @@ export default {
 
     images() {
       return {
-        plaidHorizontal: require('~/assets/images/logos/plaid-horizontal.svg'),
-        mfVerticalLockup: require('~/assets/images/logos/mf-vertical-lockup.svg'),
       };
     },
   },
@@ -320,6 +332,21 @@ export default {
     // this.showPreviousHero();
     this.hideHero();
     console.log(this.activeHeroIndex);
+    console.log(this.$refs.projects.$refs.project);
+
+    // HACK: This is a hack for autoplay because Vue randomly doesn't autoplay
+    //       videos when on page load
+    // this.$refs.projects.$refs.project.forEach(project => {
+    //   const el = project.$refs.background;
+
+    //   if (el.tagName === 'VIDEO') {
+    //     setTimeout(() => {
+    //       console.log(el.play().catch('lool'));
+
+    //     }, 0);
+    //   }
+    // });
+
   },
 };
 </script>

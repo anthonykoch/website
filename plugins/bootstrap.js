@@ -3,6 +3,8 @@ import VueScrollTo from 'vue-scrollto';
 
 import logger from '@/core/logger';
 
+global.Waypoint = require('waypoints/src/entries/noframework');
+
 Vue.use(VueScrollTo);
 
 // This kicks off the compilation for the posts

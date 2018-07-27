@@ -13,83 +13,6 @@ $app-codepen-projects-image-count: 6
 
 
 
-
-.Slider
-  position: relative
-
-  // &:before
-  //   +absolute-fill
-  //   background-color: rgba(black, 0.2)
-  //   content: ''
-  //   z-index: 1
-
-.Slider-container
-  display: flex
-  flex-wrap: nowrap
-  height: 400px
-  transform: translate(0%, 0%)
-  transition: transform 700ms $app-cubic-bezier-1
-
-.Slider-slide
-  background-color: rgba(black, 0.2)
-  // background-image: linear-gradient(to right, black, white)
-  position: relative
-  height: 100%
-
-
-
-
-// @keyframes
-//   0%
-//     transform: translate(-50%, -50%)
-
-//   100%
-//     transform: translate(-50%)
-
-
-// .project
-//   width: 960px
-//   background-color: red
-
-
-
-
-
-
-.WorkImage
-  +absolute-fill
-  background-repeat: no-repeat
-  background-size: cover
-  // opacity: 0.7
-  // background-color: rgba(black, 0.2)
-
-  &:after
-    +absolute-fill
-    background-color: rgba(black, 0.6)
-    content: ''
-    z-index: 1
-    // background-image: linear-gradient(to bottom, black, transparent)
-
-  &.is-1
-    background-image: url('~/assets/images/plaid/financial-institutions+c.png')
-
-  &.is-2
-    background-image: url('~/assets/images/plaid/solutions-money-movement+c.png')
-
-  &.is-3
-    background-image: url('~/assets/images/plaid/pricing+c.png')
-
-  &.is-4
-    background-image: url('~/assets/images/modernfertility/landing+c.jpg')
-
-  &:hover
-    animation: scrollmedude 10000
-
-
-
-
-
-
 .Title
   &.type-1
     font-family: $app-font-family-1
@@ -103,53 +26,26 @@ $app-codepen-projects-image-count: 6
 $app-featured-work-padding: 30px
 
 .FeatureWork
+  margin: 0 auto 0 auto
   max-width: 1080px
-  margin: 0 auto 200px
 
-.FeaturedWork-section
+.FeaturedWork-grid
   align-items: flex-start
   display: flex
-  flex-wrap: nowrap
-  margin-left: -$app-featured-work-padding
-  margin-right: -$app-featured-work-padding
-  margin-bottom: spacing(9)
+  flex-wrap: wrap
+  margin-bottom: spacing(4)
 
-.FeaturedWork-images
-  // display: flex
-  // flex-wrap: wrap
-  padding-left: $app-featured-work-padding
-  padding-right: $app-featured-work-padding
-  margin-left: half(-$app-featured-work-padding)
-  margin-right: half(-$app-featured-work-padding)
-  width: 65%
+.FeaturedWork-column
+  &.is-left
+    margin-bottom: spacing(2)
+    width: 100%
 
-// .FeaturedWork-imageItem
-//   height: 280px
-//   padding: 10px
-//   position: relative
-//   width: 45%
-
-//   &:nth-child(1) div
-//     background-image: url('~/assets/images/work/1@2x.png')
-
-//   &:nth-child(3) div
-//     background-image: url('~/assets/images/work/2@2x.png')
-
-//   &:nth-child(2) div
-//     background-image: url('~/assets/images/work/3@2x.png')
-
-//   div
-//     background-position: center
-//     background-size: cover
-//     height: 100%
-//     width: 100%
-
-.FeaturedWork-about
-  padding-left: $app-featured-work-padding
-  padding-right: $app-featured-work-padding
-  // margin-top: 20px
-  margin-left: 20px
-  width: 40%
+  &.is-right
+    margin-bottom: spacing(2)
+    max-width: 500px
+    margin-right: auto
+    margin-left: auto
+    width: 100%
 
 .FeatureWork-title
   font-family: $app-font-family-1
@@ -168,7 +64,7 @@ $app-featured-work-padding: 30px
     margin-right: 26px
 
 .FeaturedWork-list
-  margin-bottom: 44px
+  margin-bottom: 54px
   margin-left: 54px
 
   > li
@@ -207,8 +103,59 @@ $app-featured-work-padding: 30px
   text-transform: uppercase
   margin-left: 20px
 
+.FeaturedWork-media
+  max-width: 600px
+  margin-left: auto
+  margin-right: auto
 
 
++app-breakpoint-min(lg)
+  .FeaturedWork-media
+    max-width: 100%
+    margin-left: 0
+    margin-right: 0
+
+  .FeatureWork-content
+    margin-left: 20px
+
+
++app-breakpoint-min(lg)
+  .FeaturedWork-grid
+    margin-bottom: spacing(7)
+    // margin-left: half(-$app-featured-work-padding)
+    // margin-right: half(-$app-featured-work-padding)
+
+  .FeaturedWork-column
+    &.is-left
+      width: 62%
+
+    &.is-right
+      max-width: 100%
+      width: 38%
+
+    &.has-paddingLeft
+      padding-left: $app-featured-work-padding
+
+    &.has-paddingRight
+      padding-right: $app-featured-work-padding
+
+    &.is-pushedRight
+      position: relative
+      left: 10px
+
+    &.is-pushedLeft
+      position: relative
+      right: 10px
+
+
+
++app-breakpoint-min(xlg)
+  .FeaturedWork-column
+    &.is-pushedRight
+      left: 30px
+
+    &.is-pushedLeft
+      right: 30px
 
 
 
@@ -251,7 +198,8 @@ $app-featured-work-padding: 30px
 
 .WorkImages-container
   box-shadow: 0 16px 46px -8px rgba(#828282, 0.3)
-  position: relative
+  margin-left: auto
+  margin-right: auto
 
   &.has-dark-shadow
     box-shadow: 0 16px 46px -4px rgba(#BEBEBE, 0.5)
@@ -264,11 +212,12 @@ $app-featured-work-padding: 30px
 .WorkImages-aspectFill
   padding-bottom: 60% // [1]
 
-
 .WorkImages-tag
-  top: 20px
+  top: 10px
 
-
++app-breakpoint-min(lg)
+  .WorkImages-tag
+    top: 20px
 
 
 

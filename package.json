@@ -21,6 +21,7 @@
     "date-fns": "^2.0.0-alpha.8",
     "esm": "^3.0.34",
     "front-matter": "^2.3.0",
+    "waypoints": "https://github.com/summerisgone/waypoints/tarball/master",
     "highlight.js": "^9.12.0",
     "markdown-it": "^8.4.1",
     "nuxt": "1.4.0",
