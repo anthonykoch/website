@@ -204,14 +204,10 @@
             >
               View more on Codepen &rarr;
             </a>
-            <!-- <a href="https://codepen.io/anthonykoch/" class="ViewMore">View more of my projects on Codepen &rarr;</a> -->
           </div>
         </div>
       </div>
     </section>
-
-    <!-- /Users/tony/Documents/Github/companies/plaid/screenshots -->
-    <!-- <img src="http://localhost:3020/plaid/screenshots/june 19 2018/pricing.png" alt=""> -->
   </page>
 </template>
 
