@@ -52,11 +52,31 @@
   text-align: right
 
 .SiteNav__list
+  align-items: center
   display: inline-flex
+
+// .SiteNav__list__item
 
 .SiteNav__list__item__link
   +site-nav-link
   letter-spacing: rem(2px)
+
+.SiteNav__list__icon-link
+  align-items: center
+  display: flex
+  padding: 0.5rem
+
+  &.is-github
+    max-width: 4rem
+
+    svg
+      width: rem(22px)
+      margin: 0 auto
+
+  &.is-dark
+    svg
+      fill: $app-site-nav-link-foreground
+
 
 
 
@@ -69,6 +89,7 @@
   position: relative
   width: 100%
   z-index: $app-layer-site-header
+  transition: all 300ms
 
   &.is-collapsed
     min-height: 0
@@ -83,9 +104,10 @@
     background-color: $app-site-header-background
 
     &:before
-      background-image: url('~/assets/images/background-1+c.jpg')
       background-attachment: fixed
+      background-image: url('~/assets/images/background-1+c.jpg')
       background-position: 100% 80%
+      background-size: cover
       opacity: 0.12
 
   &.is-fullHeight
@@ -106,9 +128,6 @@
   position: relative
   width: 100%
 
-// .SiteHeader__lower
-//   position: relative
-//   z-index: $app-layer-site-header-lower
 
 
 +app-breakpoint-min(lg)
@@ -118,13 +137,19 @@
 
 
 
-
 /**
  * Breaks the site navigation and "logo" onto two separate lines.
  * The breakpoint is targeted for the point at which the site nav
  * and logo layouts start breaking.
  */
 @media (max-width: 730px)
+  .SiteHeader
+    &.has-darkBackground
+      &:before
+        background-position: 80% 50%
+        background-size: cover
+        // background-position: 100% 100%
+
   .SiteHeader__container
     display: block
 
@@ -147,9 +172,12 @@
     display: flex
 
   .SiteNav__list__item
-    flex-basis: auto
+    flex: 1
+    text-align: center
     margin: 0
-    width: 33.33333%
+
+    &.has-icon
+      max-width: 4rem
 
   .Logo__link
   .SiteNav__list__item__link

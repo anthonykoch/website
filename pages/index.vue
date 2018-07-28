@@ -74,35 +74,56 @@
                 <div class="WorkImages">
                   <div class="WorkImages-container">
                     <div class="WorkImages-aspectFill">
-                      <a href="https://modernfertility.com/" class="u-block">
-                        <img
-                          src="~/assets/images/work/mf-work-1@2x.png"
-                          alt=""
-                          class="WorkImages-image"
+                      <transition name="tr-fade">
+                        <a
+                          href="https://modernfertility.com/"
+                          class="WorkImages-link"
+                          rel="noreferrer noopener"
+                          target="_blank"
+                          v-show="activeMFImageIndex === 0"
                         >
-                      </a>
-                      <!--<img
-                        src="~/assets/images/work/mf-work-2@2x.png"
-                        alt=""
-                        class="WorkImages-image"
-                      >-->
+                          <img
+                            src="~/assets/images/work/mf-work-1@2x.png"
+                            alt="modern fertility landing page"
+                            class="WorkImages-image"
+                          >
+                        </a>
+                      </transition>
+                      <transition name="tr-fade">
+                        <a
+                          href="https://modernfertility.com/"
+                          class="WorkImages-link"
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          v-show="activeMFImageIndex === 1"
+                        >
+                          <img
+                            src="~/assets/images/work/mf-work-2@2x.png"
+                            alt="modern fertility landing page"
+                            class="WorkImages-image"
+                          >
+                        </a>
+                      </transition>
                     </div>
                     <div class="[ Tag is-absolute ]  WorkImages-tag">Web Development</div>
                   </div>
                 </div>
               </div>
             </div>
+
             <div class="FeaturedWork-column is-right is-pushedRight has-paddingLeft">
               <div>
                 <div class="FeatureWork-title">
                   Modern Fertility
                 </div>
                 <p class="FeatureWork-text">
-                  Modern Fertility contacted me to help develop their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their idea out to the world.
+                  Modern Fertility approached me to assist them in developing their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their new business concept out to the world.
+                </p>
+                <p>
                 </p>
                 <ul class="FeaturedWork-list">
-                  <li>Fully responsive website</li>
-                  <li>Integrated checkout system</li>
+                  <li>Developed design into responsive website</li>
+                  <li>Developed checkout system</li>
                   <li>Landing page development </li>
                   <li>Dashboard development</li>
                 </ul>
@@ -111,13 +132,25 @@
                   Note: Their website has changed quite a bit recently. However, their current landing page (as of July, 2018) was still largely developed by me.
                 </p>-->
                 <div class="u-textCenter u-textLeft@lg">
-                  <button class="FeaturedWork-cta">View Website</button>
+                  <a
+                    href="https://modernfertility.com/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="FeaturedWork-cta"
+                  >
+                    View Website
+                  </a>
                 </div>
               </div>
             </div>
           </div>
 
-          <div class="FeaturedWork-grid  u-mb6 u-itemsCenter">
+          <!--<div class="u-mxauto u-textCenter" style="max-width: 500px; margin: 60px 0">
+            <p></p>
+          </div>-->
+
+
+          <div class="FeaturedWork-grid u-mb8 u-itemsCenter">
             <div class="FeaturedWork-column is-left  u-order1@lg">
               <div class="FeaturedWork-media u-pl2 u-pl0@lg">
                 <div class="WorkImages">
@@ -168,7 +201,7 @@
       <div class="u-size4of12"></div>
     </section>-->
 
-    <section id="contact" class="u-py4 u-py7">
+    <section id="contact" class="u-pb8">
       <div class="u-textCenter">
         <h2 class="Title2 Title  u-gutter">
           Have a project in mind?
@@ -227,6 +260,7 @@ export default {
   data() {
     return {
       console,
+      activeMFImageIndex: 0,
       activeHeroIndex: 0,
       isHeroShowing: true,
       heroItems: [
@@ -239,8 +273,8 @@ export default {
           caption: 'Have a design that needs implementation? I can bring the design to life.',
         },
         {
-          title: 'help on a project?',
-          caption: 'I work in React, Vue, jQuery, or just vanilla JavaScript.',
+          title: 'hand on a project?',
+          caption: `I'm experienced with React and Vue, but am always excited to take on new challenges.`,
         },
       ],
       navigatedProject: null,
@@ -277,8 +311,16 @@ export default {
   },
 
   methods: {
-    onMeme() {
-      console.log('hey ma dude');
+    loopImages() {
+      setTimeout(() => {
+        this.activeMFImageIndex += 1;
+
+        if (this.activeMFImageIndex > 1) {
+          this.activeMFImageIndex = 1;
+        }
+
+        this.loopImages();
+      }, 3000);
     },
 
     showNextHero() {
@@ -301,10 +343,10 @@ export default {
       this.hideHero();
     },
 
-    hideHero() {
+    hideHero(delay=3500) {
       setTimeout(() => {
         this.isHeroShowing = false;
-      }, 3500);
+      }, delay);
     },
 
     navigateToProject(e) {
@@ -317,7 +359,6 @@ export default {
     },
 
     setNavigatedProject(e, project) {
-
       this.navigatedProject = project;
       this.overlays.projects.isShowing = true;
       this.overlays.projects.background = project.fade;
@@ -325,24 +366,7 @@ export default {
   },
 
   mounted() {
-    // this.showPreviousHero();
-    this.hideHero();
-    console.log(this.activeHeroIndex);
-    console.log(this.$refs.projects.$refs.project);
-
-    // HACK: This is a hack for autoplay because Vue randomly doesn't autoplay
-    //       videos when on page load
-    // this.$refs.projects.$refs.project.forEach(project => {
-    //   const el = project.$refs.background;
-
-    //   if (el.tagName === 'VIDEO') {
-    //     setTimeout(() => {
-    //       console.log(el.play().catch('lool'));
-
-    //     }, 0);
-    //   }
-    // });
-
+    this.hideHero(2000);
   },
 };
 </script>
