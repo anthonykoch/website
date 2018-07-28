@@ -2,7 +2,6 @@
 
 import Vuex from 'vuex';
 
-import social from './social';
 import projects from './projects';
 import posts from './posts';
 import navigation from './navigation';
@@ -28,7 +27,6 @@ export const storeDefinitions = {
     projects,
     posts,
     navigation,
-    social,
     pages,
   },
 };

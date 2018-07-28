@@ -3,19 +3,17 @@
   +size(1.5rem)
 
 .IconList
-  +margin(null negative($app-icon-item-gutter))
   display: inline-block
   line-height: 0
   user-select: none
 
 .IconList__item
   display: inline-block
-  padding: 0 $app-icon-item-gutter
 
 .IconList__link
-  +size(2.4rem)
   border-radius: 100%
   display: block
+  margin-right: 2.5rem
   position: relative
   text-align: center
 
@@ -28,5 +26,6 @@
     color: $app-icon-list-link-foreground--active
 
   & svg
-    +center
     fill: currentColor
+    height: 1.5rem
+    width: 1.5rem

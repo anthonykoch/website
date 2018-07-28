@@ -34,8 +34,6 @@
 
     <slot name="sidebar"></slot>
 
-    <app-icons></app-icons>
-
     <div class="Page-inner">
       <div>
         <app-site-header
@@ -45,10 +43,10 @@
           <app-hero slot="lower" v-if="isHeroShowing" v-bind="theme.hero">
             <slot name="heroCaption" slot="heroCaption"></slot>
             <slot name="heroDescription" slot="heroDescription"></slot>
-            <app-common-social
+            <app-social-icons
               v-if="showSocial"
               slot="heroSocial"
-            ></app-common-social>
+            ></app-social-icons>
             <slot name="heroLower" slot="heroLower"></slot>
           </app-hero>
         </app-site-header>
@@ -75,8 +73,6 @@ import Vue from 'vue';
 
 // Just to make things easier so tha
 Vue.component('app-hero', require('@/components/Hero').default);
-Vue.component('app-common-social', require('@/components/CommonSocial').default);
-Vue.component('app-icons', require('@/components/Icons').default);
 Vue.component('app-site-header', require('@/components/SiteHeader').default);
 Vue.component('app-site-footer', require('@/components/SiteFooter').default);
 Vue.component('app-social-icons', require('@/components/SocialIcons').default);

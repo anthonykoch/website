@@ -90,22 +90,23 @@ export default {
   },
 
   mounted() {
-    if (this.hasBackgroundVideo()) {
-      this.waypoint = new Waypoint({
-        element: this.$refs.background,
-        handler: () => {
-          this.$refs.background.play();
-          this.waypoint.destroy();
-        },
-        offset: '55%',
-      });
-    }
+    // FIXME: This randomly breaks, soooooo...
+    // if (this.hasBackgroundVideo()) {
+    //   this.waypoint = new Waypoint({
+    //     element: this.$refs.background,
+    //     handler: () => {
+    //       this.$refs.background.play();
+    //       this.waypoint.destroy();
+    //     },
+    //     offset: '55%',
+    //   });
+    // }
   },
 
   destroy() {
-    if (this.waypoint) {
-      this.waypoint.destroy();
-    }
+    // if (this.waypoint) {
+    //   this.waypoint.destroy();
+    // }
   },
 };
 

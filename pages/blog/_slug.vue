@@ -40,7 +40,7 @@
         </div>
 
         <div class="Sidebar-social  u-textCenter">
-          <app-common-social></app-common-social>
+          <app-social-icons></app-social-icons>
         </div>
       </div>
     </div>
