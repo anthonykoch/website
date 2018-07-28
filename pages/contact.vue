@@ -4,12 +4,18 @@
   >
     <span slot="heroCaption">Contact me</span>
     <p slot="heroDescription">
-      Have a project in mind or just a general question? You can get in touch with me through the contact form below or email me at
+      Have a project in mind or just a general question? You can get in touch with me through by emailing me at
+      <!-- Have a project in mind or just a general question? You can get in touch with me through the contact form below or email me at -->
       <a href="mailto:hello@anthonykoch.com">hello@anthonykoch.com</a>
     </p>
 
-    <section id="contact" class="u-pb7 u-pt7">
-      <form action="" class="Container is-formWidth u-mxauto" validate>
+    <!--<section id="contact" class="u-pb7 u-pt7">
+      <form
+        action=""
+        class="Container is-formWidth u-mxauto"
+        validate
+        method="POST"
+      >
         <div class="u-flex u-mb3@sm">
           <div class="u-size12of12 u-size6of12@sm u-mb3 u-mb0@sm">
             <app-input
@@ -36,7 +42,7 @@
         </div>
         <div class="u-mb3">
           <app-input
-              label="Email"
+              label="Email *"
               :input="{
                 required: true,
                 type: 'email',
@@ -48,7 +54,7 @@
         </div>
         <div class="u-mb3">
           <app-text-area
-            label="Message"
+            label="Message *"
             :input="{
               required: true,
               name: 'message',
@@ -64,7 +70,7 @@
           Send message
         </button>
       </form>
-    </section>
+    </section>-->
   </page>
 </template>
 
@@ -77,6 +83,9 @@ export default {
   data() {
     return {
       theme: {
+        siteHeader: {
+          isFullHeight: true,
+        },
         hero: {
           isSmallWidth: true,
         },
