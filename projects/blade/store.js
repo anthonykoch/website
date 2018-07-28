@@ -2,16 +2,9 @@
 
 import path from 'path';
 
-import storage from 'store';
+import uniqueId from 'lodash/uniqueId';
 
-import Blade from '../../vendor/blade';
-
-const STORAGE_KEY = 'state';
-
-{
-	let id = 0;
-	var uniqueId = () => id++;
-}
+import Blade from 'bladejs/dist/blade.js';
 
 const isSameId = (a, b) => +a === +b;
 
@@ -20,7 +13,6 @@ const isSamePath = (a, b) => {
 };
 
 const master = {
-
 	id: uniqueId(),
 
 	path: '/layouts/master.blade',
@@ -56,7 +48,6 @@ const master = {
 };
 
 const home = {
-
 	id: uniqueId(),
 
 	path: '/pages/home.blade',
@@ -88,12 +79,10 @@ const home = {
 
 @stop
 `
-
 };
 
 const user = {
-
-	id: uniqueId(),
+  id: uniqueId(),
 
 	path: '/includes/user.blade',
 
@@ -102,13 +91,9 @@ const user = {
 		end: 87
 	},
 
-	header:
-`{
-  "file": "/includes/user.blade"
-}`,
+	header: `{\n  "file": "/includes/user.blade"\n}`,
 
-	contents: `Have a great day!`
-
+	contents: `Have a great day!`,
 };
 
 const defaultFiles = [master, home, user];
@@ -131,7 +116,7 @@ Array(2).fill(Number).forEach(function () {
 	});
 });
 
-const initialState = {
+const state = {
 
 	files: defaultFiles.slice(0),
 
@@ -145,14 +130,8 @@ const initialState = {
 
 	output: '',
 
-	error: ''
-
+	error: '',
 };
-
-const state =
-	storage.has(STORAGE_KEY)
-		? storage.get(STORAGE_KEY)
-		: initialState;
 
 const mutations = {
 
@@ -257,7 +236,7 @@ const mutations = {
 
 			header: `{\n  "file": "${newFilePath.replace(/"/g, '\\"')}"\n}`,
 
-			contents: `<div>\n \n</div>`,
+			contents: `<div>\n {{ file }}\n</div>`,
 
 		};
 
@@ -315,12 +294,6 @@ const methods = {
 	getFileById(state, id) {
 		return state.files.find(file => isSameId(file.id, id)) || null;
 	}
-
-};
-
-const getters = {
-
-	//
 
 };
 
@@ -383,15 +356,7 @@ function renderFile(file, { files: _files }) {
 }
 
 export default {
-
-	strict: process.env.NODE_ENV !== 'production',
-
 	state,
-
-	getters,
-
 	actions,
-
 	mutations
-
 };
