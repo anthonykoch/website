@@ -168,7 +168,7 @@
                 Plaid Technologies
               </div>
               <p class="FeatureWork-text">
-                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included creating pages from scratch, developing features, and daily maintenance.
+                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included turning designs into pixel perfect code, developing various features around the site, and improving load performance for the site.
               </p>
             </div>
           </div>
@@ -216,7 +216,7 @@
     </section>
 
     <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
-      <div class="u-siteWrapper u-pt7 u-px5">
+      <div class="u-siteWrapper u-px5@lg u-px0  u-textCenter u-textLeft@lg">
         <h2 class="Title type-1">
           <span>Personal Projects</span>
         </h2>
@@ -274,7 +274,7 @@ export default {
         },
         {
           title: 'hand on a project?',
-          caption: `I'm experienced with React and Vue, but am always excited to take on new challenges.`,
+          caption: `I'm experienced with React, Vue, and vanilla JS, but am always excited to take on new challenges.`,
         },
       ],
       navigatedProject: null,
