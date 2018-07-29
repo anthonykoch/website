@@ -19,7 +19,7 @@
 
       @for $column-index from 1 through $grid-total-columns
         .u-size#{$column-index}of#{$grid-total-columns}#{$suffix}
-          +grid-column($column-index, $grid-total-columns, $important: true)
+          +make-grid-column($column-index, $grid-total-columns, $important: true)
 
 
 

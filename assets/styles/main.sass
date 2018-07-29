@@ -5,20 +5,11 @@
 // in terms of least to most specific.
 //
 // We start with components, since we want to allow overriding them
-// in layouts and pages. Helpers are declared last so they override
-// all other selectors as long as descendant selectors aren't used.
+// in layouts and pages. Helpers are declared last as they override
+// all other selectors by use of an !important.
 //
 
-@import 'vendor/bourbon/bourbon'
-@import '~sassdash/index'
-
-@import 'tools/other'
-@import 'tools/math'
-@import 'tools/breakpoints'
-@import 'tools/grid'
-@import 'tools/elements'
-
-@import 'variables'
+@import 'bootstrap'
 
 @import 'animations'
 @import 'transitions'
@@ -53,6 +44,9 @@
 @import 'pages/home'
 @import 'pages/error404'
 
+// Contains shameful code
+@import 'shame'
+
 @import 'utilities/helpers'
 @import 'utilities/spacing'
 @import 'utilities/typography'
@@ -61,4 +55,3 @@
 @import 'utilities/colors'
 @import 'utilities/accessibility'
 
-@import 'shame'

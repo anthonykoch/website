@@ -20,13 +20,10 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 - Use this for when switching between posts
 
 
-     transform: scale(0.7) translateY(50px);
+    transform: scale(0.7) translateY(50px);
     transform-origin: 50% top;
     transition: transform 400ms;
 
-- Convert all old BEM to SUIT style
-- Use mixins for including styles into elements like headings and don't forgot to prefix these with `make-`
-- Fix the logo link text color on post pages
 - Change colors to variables
 - Edit some of the articles errors like in medium image loading and favorite features of es2015
 - Add codepen js to article pages
@@ -35,24 +32,3 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 
 
 #c5d6bb
-
-
-
-// /**
-//  * Creates a row
-//  */
-// =row($args: ())
-//   $max-width: app-size('xxlg')
-//   +margin(null auto)
-//   +padding(null $row-gutter)
-
-//   @each $item in $args
-//     @if app-breakpoint($item)
-//       $max-width: app-breakpoint($item)
-//       @else
-//   display: block
-//   max-width: app-size('xxlg')
-
-//   @media (max-width: app-breakpoint('xsm'))
-//     +padding(null $row-gutter-at-small)
-

@@ -1,8 +1,16 @@
+// This file is for when using Vue <style lang="scss"> tags.
+// Nothing will compile from this file alone, it's just for
+// importing all of the variables, mixins, and functions that
+// the rest of the app uses.
+
 @import 'vendor/bourbon/bourbon'
+@import '~sassdash/index'
+
+@import 'tools/other'
+@import 'tools/math'
+@import 'tools/breakpoints'
+@import 'tools/grid'
+@import 'tools/link'
+@import 'tools/list'
 
 @import 'variables'
-@import 'tools/breakpoints'
-@import 'tools/elements'
-@import 'tools/grid'
-@import 'tools/math'
-@import 'tools/other'
