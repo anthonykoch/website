@@ -1,84 +1,21 @@
-/**
- * Styles for titles and headings
- */
 
-.Title
-  +title
+.Heading
+  font-family: $app-font-family-1
 
-.Title--small
-  +title('small')
-  color: #555555
+  &.is-type1
+    font-size: 32px
+    text-transform: uppercase
+    font-weight: 500
+    letter-spacing: 2px
 
-.Title--alternate
-  +title('alternate')
+  &.is-type2
+    color: color('primary')
+    font-size: rem(22px)
+    font-weight: 600
+    letter-spacing: rem(4px)
+    line-height: 1.3
+    text-transform: uppercase
 
-.Title--dark
-  color: color('foreground')
-
-
-
-.Title__caption
-  color: #bdbdbd
-  font-size: 0.55em
-  letter-spacing: rem(3px)
-  line-height: inherit
-  margin-left: 3px
-
-.Title__caption--light
-  color: #dddddd
-
-.Title--underline
-  display: inline-block
-  margin-bottom: $base-spacing
-  padding-bottom: 0
-  padding-right: rem(80px)
-  position: relative
-
-  &:before
-    +position(absolute, null null -6px 0)
-    border-bottom: 2px solid rgba(color('link'), 0.4)
-    content: ''
-    height: 2px
-    transform: scale(0)
-    transform-origin: 0 50%
-    transition: transform 2s $ease-out-quint, opacity 0.4s ease-in
-    width: 100%
-
-  &.is-seen:before
-    opacity: 1
-    transform: scale(1)
-
-  @media (max-width: breakpoint('large'))
-    padding-right: 0
-
-
-
-@media (max-width: breakpoint('medium'))
-  .Title__caption
-    display: block
-    line-height: 1.6
-    margin-left: 0
-    margin-top: 0.3em
-
-  .Title--underline
-    display: block
-    transform: scale(1)
-
-
-
-.Paragraphs
-  exists: true
-
-.Paragraphs--small > p
-  font-size: rem(15px)
-
-.Paragraphs--light > p
-  color: #777571
-
-
-
-.Quote
-  font-family: Cambria
-  font-size: rem(20px)
-  font-style: italic
-  line-height: 1.4
+  &.is-type3
+    font-size: 2.5rem
+    padding-bottom: double($app-gutter)

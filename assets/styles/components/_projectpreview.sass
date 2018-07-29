@@ -1,0 +1,120 @@
+
+.ProjectPreview
+  cursor: pointer
+  display: block
+  outline: 0
+  position: relative
+  -webkit-tap-highlight-color: transparent
+  width: 100%
+  z-index: 1
+
+  &.is-animated
+    transition-duration: 0.7s
+    transition-property: transform, opacity
+    transition-timing-function: ease-out
+
+  &.is-showing
+    opacity: 1
+    pointer-events: auto
+    transform: none
+
+.nojs .ProjectPreview
+  opacity: 1
+  pointer-events: auto
+  transform: none
+
+.ProjectPreview:hover,
+.ProjectPreview:active,
+.ProjectPreview:focus
+  .ProjectPreview-background:before
+    opacity: 1
+
+  .ProjectPreview-title
+    opacity: 1
+    transform: translate(-50.5%, -50%)
+
+.ProjectPreview-container
+  border-radius: $app-project-preview-border-radius
+  box-shadow: $app-box-shadow-1
+  overflow: hidden
+  padding-bottom: 56.25%
+  position: relative
+
+.ProjectPreview-background
+  +absolute-fill
+  background-color: #eeeeee
+  background-position: center
+  background-size: cover
+  border-radius: inherit
+
+  &:before
+    +absolute-fill
+    background: rgba(color('background', 'dark'), 0.92)
+    border-radius: inherit
+    content: ''
+    opacity: 0
+    transition-duration: 0.3s
+    transition-property: background, opacity
+    transition-timing-function: $ease-in-out-cubic
+
+  &:after
+    +absolute-fill
+    background-image: linear-gradient(to bottom, rgba(black, 0.15) -4px, transparent 90px)
+    content: ''
+
+
+.ProjectPreview-icon
+  border-radius: 50%
+  display: inline-block
+  fill: #eeeeee
+  filter: drop-shadow(0 0 6px rgba(0,0,0, 0.3))
+  padding: rem(7px) rem(5px)
+  position: absolute
+
+  > svg
+    +size(26px)
+
+.ProjectPreview-title
+  +center
+  backface-visibility: hidden
+  border: rem(2px) solid rgba(white, 0.8)
+  box-shadow: 0 rem(2px) rem(10px) 0 rgba(black, 0.1)
+  color: rgba(white, 0.9)
+  font-family: $app-heading-font-family
+  // border-radius: 3px // TODO: Figure out if this should have a border radius or not
+  font-size: rem(14px)
+  font-weight: 500
+  letter-spacing: rem(2px)
+  opacity: 0
+  padding: rem(20px) rem(40px)
+  text-shadow: 0 rem(1px) rem(8px) rgba(black, 0.3)
+  text-transform: uppercase
+  transform: translate(-50%, 0%)
+  transition: transform 0.45s, opacity 0.45s
+  user-select: none
+  -webkit-font-smoothing: subpixel-antialiased
+  white-space: nowrap
+
+.ProjectPreview-meta
+  align-items: center
+  // color: hsla(343, 82%, 50%, 1)
+  color: rgba(white, 0.9)
+  display: flex
+  font-family: $app-font-family-1
+  font-size: 16px
+  font-weight: 500
+  justify-content: space-between
+  padding: 10px 10px
+  position: absolute
+  right: 0px
+  text-shadow: 1px 0 1px rgba(black, 0.1)
+  top: 0
+
+.ProjectPreview-likes
+  // fill: hsla(343, 82%, 50%, 1)
+  fill: rgba(white, 0.9)
+  // filter: drop-shadow(3px 3px 10px rgba(black, 0.1))
+  margin-right: 4px
+  width: 18px
+
+

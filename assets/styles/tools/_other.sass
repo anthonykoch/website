@@ -1,0 +1,96 @@
+
+//
+// Returns a color from the colors map
+// TODO: Deprecate
+// @type {Color}
+//
+@function color($key: 'primary', $variant: 'base')
+  $color: null
+  $color-spectrum: map-get($colors, $key)
+
+  @if $color-spectrum
+    $color: map-get($color-spectrum, $variant)
+
+  @return $color
+
+
+//
+// Converts a pixel based unit into a rem base unit. $global-font-size should be in pixels
+//
+// @example
+//   h1 { font-size: rem(32);   }   // => h1 { font-size: 3.2rem; }
+//   h1 { font-size: rem(32px); }   // => h1 { font-size: 3.2rem; }
+//   h1 { font-size: rem(3.2rem); } // => h1 { font-size: 3.2rem; }
+//   h1 { font-size: rem(3.2em); }  // => Error
+//
+
+@function rem($number, $context: 16px)
+  @if unit($context) != 'px'
+    @error '$global-font-size unit should be in pixels'
+
+
+  @if unitless($number)
+    @return ($number / strip-unit($context)) * 1rem
+  @elseif unit($number) == 'px'
+    @return strip-unit(($number / $context)) * 1rem
+  @elseif unit($number) == 'rem'
+    @return $number
+  @else
+    @error 'rem(): Can not convert number to rem "#{$number}"'
+
+
+
+
+//
+// Returns an image prefixed with a path. This does not smartly join the paths,
+// it only concatenates the two parts together.
+//
+// Note: The path in $config should end with a forward slash, e.g. '../images/'
+//
+// @param  {String} $url
+// @return {String} The image prefixed with the path
+//
+@function app-image($url)
+  @return map-get($config, 'images') + $url
+
+//
+// Returns a multiple of the base gutter
+// @param  {Number} $multiplier
+// @return {Number}
+//
+@function spacing($multiplier)
+  @return $app-gutter * $multiplier
+
+
+
+//
+// Centers an element optionally verticall or horizontally
+// within its parent element.
+// @param string $which Maybe be 'vertical' or 'horizontal', defaults to both
+//
+=center($which: null)
+  position: absolute
+
+  @if $which == 'vertical'
+    top: 50%
+    transform: translateY(-50%)
+
+  @else if $which == 'horizontal'
+    left: 50%
+    transform: translateX(-50%)
+
+  @else
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+
+
+
+
+
+//
+// Causes an element to fill its parent's contianer using absolute positioning
+//
+=absolute-fill
+  +position(absolute, 0 null null 0)
+  +size(100%)

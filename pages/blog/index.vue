@@ -1,29 +1,25 @@
 <template>
-  <div>
-
-    <app-site-header>
-      <app-hero
-        slot="lower"
-      >
-        <div slot="caption">My writings</div>
-        <div slot="description">
-          These are my various writings, mostly on topics surrounding front-end development.
-        </div>
-      </app-hero>
-    </app-site-header>
-
+  <page
+    :theme="theme"
+    :show-social="false"
+  >
+    <div slot="heroCaption">My writings</div>
+    <div slot="heroDescription">
+      These are my various writings, mostly on topics surrounding front-end development.
+    </div>
     <section>
-      <div class="row row--readable">
-        <ul class="PostList">
-          <li class="PostList__item" v-for="meta in postsMeta">
+      <div class="[ Container is-smallWidth ] u-gutter u-mxauto">
+        <ul class="PostList u-pt8">
+          <li class="PostList__item u-pb8"
+            v-for="(meta, index) in postsMeta"
+            :key="index"
+          >
             <app-post-preview :meta="meta"></app-post-preview>
           </li>
         </ul>
       </div>
     </section>
-
-    <app-site-footer></app-site-footer>
-  </div>
+  </page>
 </template>
 
 <script>
@@ -36,9 +32,17 @@ export default {
     await $store.dispatch('posts/loadMeta');
   },
 
+  components: {
+    page: require('@/layouts/main').default,
+  },
+
   data() {
     return {
-
+      theme: {
+        hero: {
+          isSmallWidth: true,
+        },
+      },
     };
   },
 
@@ -49,12 +53,3 @@ export default {
   },
 };
 </script>
-
-
-<style scoped>
-
-.PostList {
-  /*padding-top: 2rem;*/
-}
-
-</style>

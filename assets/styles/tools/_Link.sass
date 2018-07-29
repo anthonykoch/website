@@ -1,0 +1,27 @@
+
+=make-link
+  &:link,
+  &:visited
+    color: color('link')
+
+  &:hover,
+  &:active
+    color: color('link', 'hover')
+
+=make-link-dark
+  &:link,
+  &:visited
+    color: color('foreground')
+
+  &:hover,
+  &:active
+    color: color('foreground', 'alternate')
+
+=make-link-light
+  &:link,
+  &:visited
+    color: color('foreground', 'alternate')
+
+  &:hover,
+  &:active
+    color: color('foreground')

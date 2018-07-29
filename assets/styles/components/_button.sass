@@ -1,43 +1,3 @@
-/**
- * file: _button.sass
- * Contains styles for buttons.
- * The button classes may be used on links, divs, or actual button elements.
- */
-
-$app-button-background: $color-primary
-$app-button-background-hover: rgba(white, 0.85)
-$app-button-foreground: #202020
-$app-button-foreground-active: #292929
-$app-button-border-radius: $base-border-radius
-$app-button-border-width: 0
-$app-button-border-color: transparent
-$app-button-letter-spacing: rem(2px)
-$app-button-font-size: rem(12px)
-$app-button-line-height: 1.6
-$app-button-transition-duration: 300ms
-
-$app-button-drop-shadow: drop-shadow(rem(3px) rem(3px) rem(6px) rgba(black, 0.3))
-$app-button-drop-shadow-active: drop-shadow(rem(1px) rem(1px) rem(2px) rgba(black, 0.17))
-
-$app-button-padding-t: rem(18px)
-$app-button-padding-b: rem(18px)
-$app-button-padding-r: rem(42px)
-$app-button-padding-l: rem(42px)
-$app-button-padding-b-lg: 22px
-$app-button-padding-t-lg: 22px
-$app-button-padding-l-lg: rem(56px)
-$app-button-padding-r-lg: rem(56px)
-$app-button-line-height-lg: 1.6
-
-$app-button-outline-border-color: #dddddd
-$app-button-outline-border-color: $color-primary
-$app-button-outline-foreground: $color-primary
-$app-button-outline-foreground-active: #444444
-$app-button-outline-background: transparent
-$app-button-outline-background-active: $color-primary
-
-
-
 
 .Button
   background-color: $app-button-background
@@ -47,7 +7,7 @@ $app-button-outline-background-active: $color-primary
   cursor: pointer
   display: inline-block
   font-size: $app-button-font-size
-  font-weight: 600
+  font-weight: 400
   letter-spacing: 0.1rem
   line-height: $app-button-line-height
   outline: 0
@@ -71,107 +31,75 @@ $app-button-outline-background-active: $color-primary
   &:active
     filter: $app-button-drop-shadow-active
 
+  &.has-lightBackground
+    background-color: #f2f2f2
 
+    &:link,
+    &:visited
+      background-color: #f2f2f2
 
+  &.is-sizeLarge
+    line-height: $app-button-line-height-lg
+    padding: $app-button-padding-t-lg $app-button-padding-r-lg $app-button-padding-b-lg $app-button-padding-l-lg
 
-.Button--has-shadow
-  filter: $app-button-drop-shadow
+  &.has-hoverEffect1
+    position: relative
 
+    &:before,
+    &:after
+      content: ''
+      background-color: #2b292b
+      height: 100%
+      left: 0
+      opacity: 0
+      position: absolute
+      transform: scaleX(0)
+      transition: opacity 400ms ease-in, transform 500ms
+      transform-origin: 0% 50%
+      width: 100%
+      z-index: -1
 
-
-
-.Button--outline
-  background-color: $app-button-outline-background
-  border: rem(2px) solid $app-button-outline-border-color
-  color: $app-button-outline-foreground
-  filter: none
-
-  &:link,
-  &:visited
-    background-color: $app-button-outline-background
-    color: $app-button-outline-foreground
-
-  &:hover,
-  &:active
-    background-color: $app-button-outline-background-active
-    color: $app-button-outline-foreground-active
-
-
-
-
-.Button--large
-  line-height: $app-button-line-height-lg
-  padding: $app-button-padding-t-lg $app-button-padding-r-lg $app-button-padding-b-lg $app-button-padding-l-lg
-
-
-
-
-.Button--light
-  background-color: white
-
-  &:link,
-  &:visited
-    background-color: white
-
-
-
-
-.Button--hover-stripe-bottom
-  position: relative
-
-  &:before,
-  &:after
-    content: ''
-    background-color: #2b292b
-    height: 100%
-    left: 0
-    opacity: 0
-    position: absolute
-    transform: scaleX(0)
-    transition: opacity 400ms ease-in, transform 500ms
-    transform-origin: 0% 50%
-    width: 100%
-    z-index: -1
-
-  &:before
-    bottom: 0
-
-  &:hover,
-  &:active
-    color: white
-    transition: all 400ms
     &:before
-      transform: scaleX(1)
-      opacity: 1
+      bottom: 0
+
+    &:hover,
+    &:active
+      color: white
+      transition: all 400ms
+
+      &:before
+        transform: scaleX(1)
+        opacity: 1
 
 
 
 
-/**
- * A wrapper for a group of buttons to give them space
- * from each other.
- * FIXME: Buttons may not be flush by setting margin
- */
-.ButtonGroup
-  $gutter: half(2rem)
-  margin-bottom: $base-spacing
 
-  &--flush
-    +margin(null negative($gutter))
+// .Button--outline
+//   background-color: $app-button-outline-background
+//   border: rem(2px) solid $app-button-outline-border-color
+//   color: $app-button-outline-foreground
+//   filter: none
 
-  & > .Button
-    margin: 0 $gutter
+//   &:link,
+//   &:visited
+//     background-color: $app-button-outline-background
+//     color: $app-button-outline-foreground
+
+//   &:hover,
+//   &:active
+//     background-color: $app-button-outline-background-active
+//     color: $app-button-outline-foreground-active
 
 
 
 
-/**
- * Puts the buttons at full width at smaller screen sizes
- */
+
+
+
+//
+// Puts the buttons at full width at smaller screen sizes
+//
 @media screen and (max-width: rem(460px))
   .Button
     width: 100%
-
-  .ButtonGroup__item
-    margin-bottom: $base-spacing
-    margin-right: 0

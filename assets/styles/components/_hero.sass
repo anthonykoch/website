@@ -1,0 +1,91 @@
+
+.LandingHero
+  max-width: 960px
+  margin: 0 auto
+
+.LandingHero-availability
+  color: white
+  font-size: 11px
+  letter-spacing: 1px
+  margin-bottom: 14px
+  text-transform: uppercase
+
+  &:before
+    background-color: $green
+    border-radius: 100%
+    content: ''
+    display: inline-block
+    margin-bottom: 2px
+    height: 7px
+    margin-right: 4px
+    vertical-align: middle
+    width: 7px
+
+.LandingHero-title
+  color: #bdbdbd
+  font-family: $app-font-family-1
+  font-size: rem(40px)
+  font-weight: 600
+  letter-spacing: 1px
+  // max-width: 900px
+  line-height: 54px
+
+.LandingHero-titlePart
+  color: color('primary')
+  display: inline-block
+
+  // padding: 0 2px;
+  // background: #e8b92c;
+  // display: inline-block
+
+.LandingHero-caption
+  color: white
+  font-family: $app-font-family-2
+  font-size: 17px
+  font-weight: 400
+  // font-style: italic
+  line-height: 1.5
+  margin-top: 10px
+  // letter-spacing: -1px
+
+.LandingHero-cta
+  background-color: transparent
+  // background-color: rgba(#FFE083, 0.7)
+  border: 0
+  // border-radius: 3px
+  border-bottom: 2px solid #FFE083
+  color: rgba(white, 0.9)
+  font-family: $app-font-family-2
+  font-size: rem(12px)
+  text-transform: uppercase
+  outline: 0
+  letter-spacing: 2px
+  padding: rem(10px) rem(30px)
+  margin-top: 20px
+
++app-breakpoint-min(sm)
+  .LandingHero-title
+    font-size: rem(48px)
+
+  .LandingHero-caption
+    font-size: 18px
+
+
+
+
+
+.Hero
+  padding-top: ($app-gutter * 8)
+
+.Hero-caption
+  pass
+
+.Hero-description
+  color: #dddddd
+  font-size: rem(17px)
+  max-width: rem(670px)
+  padding: 1.5rem 0 2rem
+
+@media (max-width: app-breakpoint('sm'))
+  .Hero
+    padding-top: ($app-gutter * 3)

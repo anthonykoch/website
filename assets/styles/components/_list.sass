@@ -1,20 +1,9 @@
-/**
- * file: _list.sass
- */
-
-ul,
-ol
-  counter-reset: list-counter
 
 .List
   counter-reset: list-counter
 
-.List--bullet
-  +list('bullet')
+  &.is-bullet
+    +make-list-bullet
 
-.List--number
-  +list('number')
-
-.DefinitionList
-  &--flush > dd
-    margin-left: 0
+  &.is-number
+    +make-list-number

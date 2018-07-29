@@ -1,129 +1,168 @@
-/**
- * file: _post.sass
- */
 
-$post-font-size: rem(16px)
-$post-max-width: rem(800px)
-$post-header-background: #eeeeee
-$post-gutter: double($row-gutter)
-$post-elements: (blockquote, figure, img, ul, ol, li, p, dl, div, pre)
-$post-body-children: ()
+.PostMeta
+  font-size: 14px
+  font-weight: 400
+  line-height: 1.4
+  text-align: center
 
-@each $selector in join($headings, $post-elements)
-  $post-body-children: join($post-body-children, '.Post__body > ' + $selector + ',')
+.PostMeta-date
+  color: #aaaaaa
+  font-style: italic
+  display: inline-block
+  text-transform: capitalize
+
+.PostMeta-author
+  display: inline-block
+  margin-left: 6px
+  color: #aaaaaa
 
 
 
-/**
- * z-indexed over the header wrapper
- */
+.BlogToolbar
+  position: fixed
+  right: spacing(1)
+  text-align: center
+  top: 50px
+  z-index: $app-layer-blog-toolbar
+
+.BlogToolbar-button
+  background-color: transparent
+  border: 1px solid color('background', 'dark')
+  border-radius: 3px
+  display: inline-block
+  margin-bottom: 1rem
+  outline: 0
+  padding: 16px 0
+  transition: 200ms border-color
+  width: 38px
+
+  svg
+    fill: color('background', 'dark')
+    transition: fill 200ms
+
+  &:hover
+    border-color: color('primary')
+
+    svg
+      fill: #dddddd
+      fill: color('primary')
+
+.BlogToolbar-menu
+  svg
+    display: block
+    margin: 0 auto
+    width: 18px
+
+.BlogToolbar-backToTop
+  svg
+    margin: 0 auto
+    width: 12px
+    display: block
+
+
+
+///
+/// 1. z-indexed over the header wrapper
+///
 .PostList
   margin: 0 auto
-  padding-top: 6rem
   position: relative
-  z-index: 1 /* [1] */
-
-.PostList__item
-  padding-bottom: 6rem
+  z-index: 1 // [1]
 
 .Post
-  font-size: $post-font-size
+  font-size: $app-post-font-size
   line-height: 1.8
+  position: relative
 
-/**
- * 1. Causes the text to be title to be directly in the middle
- *    of the site header's background image.
- */
-.Post__header
-  padding: 0 $row-gutter
-  position: absolute
-  top: half($site-header-height--post) /* [1] */
-  transform: translateY(30%)
+///
+/// 1. Causes the text to be title to be directly in the middle
+///    of the site header's background image.
+///
+.Post-header
+  left: 0
+  padding-top: spacing(4)
+  padding-bottom: spacing(2)
+  position: relative
+  text-align: center
   width: 100%
+  z-index: $app-layer-post-header
 
-.Post__title
-  +row(readable)
-  font-family: $heading-font-family
-  font-size: 1.75rem
-  font-weight: 900
-  letter-spacing: rem(4px)
-  line-height: 1.4
-  padding-bottom: $base-spacing
-  text-transform: uppercase
+.Post-title
+  font-family: $app-font-family-1
+  font-size: rem(44px)
+  font-weight: 600
+  letter-spacing: rem(3px)
+  line-height: 1.2
+  padding-bottom: double($app-gutter)
 
-.Post__title a
+.Post-title a
   &:link,
   &:visited
-    color: color('primary')
+    color: #333333
 
   &:hover,
   &:active
-    color: color('foreground', 'lightest')
+    color: #bbbbbb
 
-.Post__meta-list
-  +row(readable)
-  color: #aaaaaa
-  line-height: $base-spacing
-
-#{$post-body-children}
-  +padding(null $post-gutter)
-  +margin(null auto)
-  color: lighten(color('foreground'), 4)
-  max-width: $post-max-width
-
-.Post__body
-  padding: double($base-spacing) 0 $base-spacing
-
-  > #{$headings}
-    color: #404040
-    padding-top: 1rem
-
-  > ol
-    +list(number)
-
-  > ul
-    +list(bullet)
-
-  > .full-width
-    max-width: initial
+.Post-body
+  background-color: hsla(0, 0%, 98%, 1)
+  font-size: $app-post-font-size
+  line-height: 1.7
+  padding-bottom: spacing(2)
+  padding-left: spacing(1)
+  padding-right: spacing(1)
+  padding-top: spacing(3)
 
 
 
-/**
- * 1. Make code displays full width on mobile for max viewability
- */
-@media (max-width: breakpoint('medium'))
-  #{$post-body-children}
-    +padding(null $row-gutter-at-small)
+.PostPreview-title
+  font-family: $app-font-family-1
+  letter-spacing: 2px
+  font-weight: 600
+  font-size: rem(32px)
+  padding-bottom: 1rem
 
-  .Post__body > .highlighter-rouge
-    padding-left: 0 !important
-    padding-right: 0 !important
+.PostPreview-link
+  +make-link
 
-
-
-.PostPreview__title
-  +title('small')
-  font-family: Lato, Arial, sans-serif
-  font-size: 1.4rem
-  padding-bottom: 1.125rem
-
-.PostPreview__link
-  +link
-
-.PostPreview__meta
+.PostPreview-meta
   color: #666666
-  font-size: rem(14px)
+  font-family: $app-font-family-2
+  display: inline-block
+  font-weight: 400
+  font-size: rem(11px)
   letter-spacing: rem(1px)
+  text-transform: uppercase
   padding-bottom: 1.25rem
 
-.PostPreview__body
-  font-size: $post-font-size
-  padding: 0 0 half($base-spacing)
+.PostPreview-body
+  font-size: $app-post-font-size
+  padding: 0 0 $app-gutter
 
-.PostPreview__more
-  +clearfix
-  +link
+.PostPreview-more
+  +make-link
   display: inline-block
   text-align: right
   text-transform: capitalize
+
+
+
++app-breakpoint-min(lg)
+  .Post-title
+    font-size: rem(52px)
+
+  .Post-body
+    font-size: $app-post-font-size-at-lg
+    line-height: 1.7
+    padding-right: spacing(4.5)
+    padding-right: spacing(2)
+
+  .BlogToolbar
+    right: 50px
+
+  .BlogToolbar-button
+    width: 42px
+
+  .BlogToolbar-backToTop
+    svg
+      width: 14px

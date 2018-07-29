@@ -1,12 +1,13 @@
-/**
- * file: _links.sass
- */
+.Link
+  &.is-white
+    &:link,
+    &:visited,
+    &:hover,
+    &:active
+      color: rgba(white, 0.9)
 
-.Link--dark
-  +link('dark')
+  &.is-dark
+    +make-link-dark
 
-.Link--light
-  +link('light')
-
-.Link--underline
-  +link('underline')
+  &.is-light
+    +make-link-light

@@ -1,9 +1,23 @@
 
 # My website
 
-This is my site. Cool, init?
+A static site generated with [Nuxt.js](https://nuxtjs.org/). Cool, init?
 
 ## Todo
 
-- Change the output path to api/posts/all
-- Convert markdown file to json
+- Find out why linting doesn't work and/or get better linting rules
+- Replace all colors with variables
+- Add these to package.json and modify webpack to handle css plugins
+
+- Maybe add js to fullscreen an image
+- Use this for when switching between posts
+
+  transform: scale(0.7) translateY(50px);
+  transform-origin: 50% top;
+  transition: transform 400ms;
+
+- Edit some of the articles errors like in medium image loading and favorite features of es2015
+- Add disqus back to articles
+
+
+#c5d6bb

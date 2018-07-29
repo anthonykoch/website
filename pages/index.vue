@@ -1,18 +1,7 @@
 <template>
-  <div>
-    <app-site-header>
-      <app-hero slot="lower">
-        <div slot="caption">Front-End Developer</div>
-        <div slot="description">
-          Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development. I'm a lover of JavaScript, Python, and simple code.
-        </div>
-        <app-social-icons
-          slot="social"
-          :social="$store.getters['social/getMediaItems']"
-        ></app-social-icons>
-      </app-hero>
-    </app-site-header>
-
+  <page
+    :showSocial="false"
+  >
     <transition
       name="tr-fade"
       @after-enter="navigateToProject"
@@ -25,184 +14,198 @@
       ></app-overlay>
     </transition>
 
-    <section class="Band Band--small u-collapse-bottom">
-      <div class="row row--xxlarge">
-        <h2 class="Title Title--alternate Title--dark">
-          <span>Codepen</span>
-          <span class="Title__caption">
-            My various codepen projects and experiments
-          </span>
-        </h2>
-      </div>
-
-      <div class="CodepenProjects">
-        <div class="row row--xxlarge">
-          <app-project-preview-list
-            :projects="projects"
-            @navigate="setNavigatedProject"
-          >
-          </app-project-preview-list>
-          <div class="u-text-center">
-            <a
-              href="https://codepen.io/anthonykoch/"
-              class="Button Button--light Button--large Button--hover-stripe-bottom"
+    <div slot="heroLower">
+      <div class="LandingHero">
+        <div>
+          <p class="LandingHero-availability">
+            <nuxt-link to="contact" class="Link is-white">Available for projects</nuxt-link>
+          </p>
+          <div class="LandingHero-title">
+            <span>Need a </span>
+            <transition
+              name="tr-vertical-text-rotate"
+              @afterEnter="onHeroShowing"
+              @afterLeave="onHeroHidden"
             >
-              View more on Codepen &rarr;
-            </a>
-            <div class="Band"></div>
-            <!-- <a href="https://codepen.io/anthonykoch/" class="ViewMore">View more of my projects on Codepen &rarr;</a> -->
+              <span
+                class="LandingHero-titlePart"
+                v-show="isHeroShowing"
+                style="transition-delay: 100ms"
+              >
+                {{ activeHero.title }}
+              </span>
+            </transition>
           </div>
         </div>
-      </div>
-    </section>
-<!--
-    editorconnect:
-  title: Editor Connect
-  subtitle: Node script
-  icon:
-    name: icon-nodejs
-  description: |
-      <p>
-        This is a plugin (more of a node script) which was created to eliminate the back and forth checks between the text editor and a gulp process.
-        <em>It has not yet been published to npm.</em>
-      </p>
-      <p>
-        With every gulp task that errors out, a message is sent to text editor for it to display the error message. Errors are removed an redisplayed after every task error. This works for Sass, React, or anything that emits an error with a line number.
-      </p>
-      <p>
-        Some of the features including scrolling to the line where the error occurred and showing an icon on the line the error occurred. Currently only Sublime Text 3 is supported.
-      </p>
-  links:
-    repository: https://github.com/anthonykoch/editor-connect
-  tags: ['NodeJS', 'Javascript', 'Python']
-  quote: 'No more switching between the text editor and a gulp process!'
-  image:
-    url: './projects/jsx.png'
-    alt: 'A JSX error showing in Sublime Text'
-  thumbnail:
-    url: '/projects/jsx--thumb.png'
-    height: 18
-    width: 30
-    blur: 5
-    intrinsic: 60%
- -->
-
-    <section>
-      <!-- <div class="Projects">
-        <header class="Projects__header">
-          <div class="row row--xxlarge">
-            <h3 class="Title Title--alternate">
-              <span>Github Projects</span>
-              <span class="Title__caption Title__caption--light">
-                Various plugins and scripts
-              </span>
-            </h3>
-          </div>
-          <div class="row row--xlarge">
-            <p class="Projects__header__quote">
-              Connecting the editor and GulpJS for error reporting
+        <div>
+          <transition
+            name="tr-vertical-text-rotate"
+          >
+            <p
+              class="LandingHero-caption"
+              v-show="isHeroShowing"
+            >
+              {{ activeHero.caption }}
             </p>
-          </div>
-        </header>
+          </transition>
+        </div>
+      </div>
+    </div>
 
-        <ul class="ProjectList">
-          <li class="ProjectList__item row row--xlarge">
-            <div class="Project Project--first">
+    <section id="work">
+      <div class="u-siteWrapper u-pt4 u-pt7@lg u-gutter">
 
-              <div class="Project__media  u-size6of12 u-size12of12@xlarge">
-                <a
-                  :href="featuredProject.links.repository"
-                  class="Project__link"
-                >
-                  <img
-                    class="Project__image"
-                    :src="contexts.image(featuredProject.image.url)"
-                    :alt="featuredProject.image.alt">
-                </a>
-              </div>
-              <div class="Project__details
-                    Project__details--is-inside-first
-                    u-size6of12 u-size12of12@xlarge">
+        <div class="FeatureWork">
+          <h2 class="Heading is-type1  u-pl5@lg u-textCenter u-textLeft@lg">
+            <span>Featured Work</span>
+          </h2>
 
-                <div class="Project__title-container">
-                  <div class="Project__subtitle">
-                    {{ featuredProject.subtitle }}
-                  </div>
-                  <h3 class="Project__title">
-                    <a
-                      :href="featuredProject.links.repository"
-                      class="Project__title__link"
-                    >
-                      {{ featuredProject.title }}
-                    </a>
-
-                    <div
-                      v-if="featuredProject.icon"
-                      class="Project__icon u-foreground-node-fg"
-                    >
-                      <svg class="svg-icon">
-                        <use xlink:href="'#' + featuredProject.icon.name"></use>
-                      </svg>
+          <div class="FeaturedWork-grid">
+            <div class="FeaturedWork-column is-left">
+              <div class="FeaturedWork-media u-pl2 u-pl0@lg">
+                <div class="WorkImages">
+                  <div class="WorkImages-container">
+                    <div class="WorkImages-aspectFill">
+                      <transition name="tr-fade">
+                        <a
+                          href="https://modernfertility.com/"
+                          class="WorkImages-link"
+                          rel="noreferrer noopener"
+                          target="_blank"
+                          v-show="activeMFImageIndex === 0"
+                        >
+                          <img
+                            src="~/assets/images/work/mf-work-1@2x.png"
+                            alt="modern fertility landing page"
+                            class="WorkImages-image"
+                          >
+                        </a>
+                      </transition>
+                      <transition name="tr-fade">
+                        <a
+                          href="https://modernfertility.com/"
+                          class="WorkImages-link"
+                          target="_blank"
+                          rel="noreferrer noopener"
+                          v-show="activeMFImageIndex === 1"
+                        >
+                          <img
+                            src="~/assets/images/work/mf-work-2@2x.png"
+                            alt="modern fertility landing page"
+                            class="WorkImages-image"
+                          >
+                        </a>
+                      </transition>
                     </div>
-                  </h3>
-                </div>
-                <div
-                  v-html="featuredProject.description"
-                  class="Project__description  Paragraphs Paragraphs--light  u-collapse-last"
-                >
+                    <div class="[ Tag is-absolute ]  WorkImages-tag">Web Development</div>
+                  </div>
                 </div>
               </div>
             </div>
-          </li>
 
-          <li class="ProjectList__item">
-            <div class="Project Project--other  Band">
-              <div class="row row--xlarge">
-                <h2 class="Title Title--alternate Title--dark  u-text-center">
-                  <span>Other Notable Projects</span>
-                </h2>
-
-                <ul class="ProjectOtherList">
-                  <li class="ProjectOtherList__item">
-                    <h3 class="Project__title">
-                      <a href="https://github.com/anthonykoch/bladejs" class="ProjectOtherTitle">BladeJS</a>
-                    </h3>
-                    <div class="Paragraphs Paragraphs--light Paragraphs--small">
-                      <p>
-                        An implementation of Laravel's Blade templating engine in JavaScript. This project was written purely for fun on my off days. It took a couple of months as I also wrote Blade Expression at the same time.
-                      </p>
-                    </div>
-                  </li>
-                  <li class="ProjectOtherList__item">
-                    <h3 class="Project__title">
-                      <a href="https://github.com/anthonykoch/blade-expression" class="ProjectOtherTitle">
-                        Blade Expression
-                      </a>
-                    </h3>
-                    <div class="Paragraphs Paragraphs--light Paragraphs--small">
-                      <p>
-                        A parser for JavaScript expressions created according to the ES6 specification. This parser was written for BladeJS so that Blade could output errors at compile time. It continues to be a work in progress.
-                      </p>
-                    </div>
-                  </li>
+            <div class="FeaturedWork-column is-right is-pushedRight has-paddingLeft">
+              <div>
+                <div class="FeatureWork-title">
+                  Modern Fertility
+                </div>
+                <p class="FeatureWork-text">
+                  Modern Fertility approached me to assist them in developing their website. At the time, I was the sole front-end developer, working alongside Tom Chokel to help Carly and Afton to help get their new business concept out to the world.
+                </p>
+                <p>
+                </p>
+                <ul class="FeaturedWork-list">
+                  <li>Developed design into responsive website</li>
+                  <li>Developed checkout system</li>
+                  <li>Landing page development </li>
+                  <li>Dashboard development</li>
                 </ul>
-              </div>
-
-              <div class="row row--full">
-                <div class="u-text-center">
-                  <a href="/blade" class="Button Button--large">
-                    Try BladeJS live
+                <div class="u-textCenter u-textLeft@lg">
+                  <a
+                    href="https://modernfertility.com/"
+                    target="_blank"
+                    rel="noreferrer noopener"
+                    class="FeaturedWork-cta"
+                  >
+                    View Website
                   </a>
                 </div>
               </div>
             </div>
-          </li>
-        </ul>
-      </div> -->
+          </div>
+
+          <!--<div class="u-mxauto u-textCenter" style="max-width: 500px; margin: 60px 0">
+            <p>Should probably say more</p>
+          </div>-->
+
+          <div class="FeaturedWork-grid u-mb8 u-itemsCenter">
+            <div class="FeaturedWork-column is-left  u-order1@lg">
+              <div class="FeaturedWork-media u-pl2 u-pl0@lg">
+                <div class="WorkImages">
+                  <div class="WorkImages-container has-dark-shadow">
+                    <div class="WorkImages-aspectFill">
+                      <img src="~/assets/images/work/plaid-work-1@2x.png" alt="" class="WorkImages-image">
+                      <div class="[ Tag is-absolute ]  WorkImages-tag ">Web Development</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="FeaturedWork-column is-right is-pushedLeft has-paddingRight">
+              <div class="FeatureWork-title">
+                Plaid Technologies
+              </div>
+              <p class="FeatureWork-text">
+                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included turning designs into pixel perfect code, developing various features around the site, and improving performance for the site.
+              </p>
+            </div>
+          </div>
+
+        </div>
+
+      </div>
     </section>
 
-    <app-site-footer></app-site-footer>
-  </div>
+    <section id="contact" class="u-pb8">
+      <div class="u-textCenter">
+        <h2 class="[ Heading is-type3 ]  u-gutter">
+          Have a project in mind?
+        </h2>
+        <nuxt-link
+          to="contact"
+          class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
+        >
+          Get in touch
+        </nuxt-link>
+      </div>
+    </section>
+
+    <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
+      <div class="u-siteWrapper u-px0  u-textCenter u-textLeft@lg">
+        <h2 class="[ Heading is-type1 ] u-px5@lg">
+          <span>Personal Projects</span>
+        </h2>
+      </div>
+
+      <div class="CodepenProjects" style="background-color: transparent">
+        <div class="u-siteWrapper u-px5">
+          <app-project-preview-list
+            :projects="projects"
+            @navigate="setNavigatedProject"
+            ref="projects"
+          >
+          </app-project-preview-list>
+          <div class="u-textCenter">
+            <a
+              href="https://codepen.io/anthonykoch/"
+              class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
+            >
+              View more on Codepen &rarr;
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </page>
 </template>
 
 <script>
@@ -215,11 +218,29 @@ export default {
   },
 
   components: {
-    //
+    page: require('@/layouts/main').default,
   },
 
   data() {
     return {
+      console,
+      activeMFImageIndex: 0,
+      activeHeroIndex: 0,
+      isHeroShowing: true,
+      heroItems: [
+        {
+          title: 'website?',
+          caption: 'I develop websites that work excellently across a wide range of devices.',
+        },
+        {
+          title: 'design developed?',
+          caption: 'Have a design that needs implementation? I can bring the design to life.',
+        },
+        {
+          title: 'hand on a project?',
+          caption: `I'm experienced with React, Vue, and vanilla JS, but am always excited to take on new challenges.`,
+        },
+      ],
       navigatedProject: null,
       overlays: {
         projects: {
@@ -242,10 +263,56 @@ export default {
       projects: state => state.projects.codepen,
       featuredProject: state => state.projects.github.editorconnect,
     }),
+
+    activeHero() {
+      return this.heroItems[this.activeHeroIndex];
+    },
+
+    images() {
+      return {
+      };
+    },
   },
 
   methods: {
+    loopImages() {
+      setTimeout(() => {
+        this.activeMFImageIndex += 1;
+
+        if (this.activeMFImageIndex > 1) {
+          this.activeMFImageIndex = 1;
+        }
+
+        this.loopImages();
+      }, 3000);
+    },
+
+    showNextHero() {
+      this.activeHeroIndex =
+        this.activeHeroIndex + 1 >= this.heroItems.length
+          ? 0
+          : this.activeHeroIndex + 1;
+    },
+
+    onHeroHidden() {
+      this.showNextHero();
+      setTimeout(() => {
+        this.isHeroShowing = true;
+      }, 100);
+    },
+
+    onHeroShowing() {
+      this.hideHero();
+    },
+
+    hideHero(delay=3500) {
+      setTimeout(() => {
+        this.isHeroShowing = false;
+      }, delay);
+    },
+
     navigateToProject(e) {
+      // TODO: Make this triggerable by vue attribute
       this.overlays.projects.isShowing = true;
 
       setTimeout(() => {
@@ -254,11 +321,14 @@ export default {
     },
 
     setNavigatedProject(e, project) {
-
       this.navigatedProject = project;
       this.overlays.projects.isShowing = true;
       this.overlays.projects.background = project.fade;
     },
+  },
+
+  mounted() {
+    this.hideHero(2000);
   },
 };
 </script>

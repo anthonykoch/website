@@ -1,0 +1,9 @@
+.Page-content
+  position: relative
+
+  &.has-sidebar
+    padding-left: 0
+
+  +app-breakpoint-min(lg)
+    &.has-sidebar
+      padding-left: $app-page-sidebar-width

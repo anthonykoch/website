@@ -13,16 +13,42 @@
 
 
 
+.tr-vertical-text-rotate-enter-active,
+.tr-vertical-text-rotate-leave-active
+  opacity: 1
+  display: inline-block
+  transition-duration: 500ms, 500ms
+  transition-property: opacity, transform
+  transition-timing-function: ease-in-out
 
-
-.page-enter-active
-  transition: all 150ms 100ms ease-out
-
-.page-leave-active
-  transition: all 150ms 100ms ease-out
-
-.page-enter,
-.page-leave-active
+.tr-vertical-text-rotate-enter
   opacity: 0
-  transform-origin: 50% 50%
+  transform: translate(0, 20px)
+
+.tr-vertical-text-rotate-enter-to
+  transform: translate(0, 0)
+
+.tr-vertical-text-rotate-leave
+  opacity: 0
+  transform: translate(0, 0)
+
+.tr-vertical-text-rotate-leave-to
+  opacity: 0
+  transform: translate(0, 20px)
+
+
+
+
+
+// TOOD: Uncomment
+// .page-enter-active
+//   transition: all 150ms 100ms ease-out
+
+// .page-leave-active
+//   transition: all 150ms 100ms ease-out
+
+// .page-enter,
+// .page-leave-active
+//   opacity: 0
+//   transform-origin: 50% 50%
 

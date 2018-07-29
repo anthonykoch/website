@@ -28,12 +28,10 @@ export default {
       return api.getPost(slug)
         .then(res => {
           $store.commit('LOAD_POST', res.data);
-          // console.log('commiting:', slug, res.data.slug)
           // console.log('loaded:', response.data.slug, response.data.slug===slug, {error, response});
 
         })
         .catch(err => {
-          // console.log('err', err)
 
           return err;
         });

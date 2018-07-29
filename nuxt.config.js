@@ -7,10 +7,24 @@ const glob = require('glob');
 const { inspect } = require('util');
 
 const _ = require('lodash');
-const datefns = require('date-fns');
 const MarkdownIt = require('markdown-it');
-const frontmatter = require('front-matter');
 const hljs = require('highlight.js');
+const datefns = require('date-fns');
+
+const { default: TransformFilePlugin } = requireModule('./.webpack/transform-file-plugin');
+
+const {
+  getFrontMatter,
+  getPostExcerpt,
+  createPostsJsonAssets,
+  createPostsMetaAssets,
+} = requireModule('./.webpack/post-helpers.js');
+
+const {
+  stripFileDate,
+  transformer,
+  when,
+} = requireModule('./.webpack/utils');
 
 const md = new MarkdownIt({
   html: true,
@@ -18,170 +32,32 @@ const md = new MarkdownIt({
   highlight(content, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return hljs.highlight(lang, content, true).value
+        return `<pre class="hljs"><code>${
+          hljs.highlight(lang, content, true).value
+        }</code></pre>`;
       } catch (err) {
-        // console.log(lang,  content)
         throw err;
       }
     }
-
-    // console.log(lang, content);
 
     return md.utils.escapeHtml(content);
   },
 });
 
-const TransformFilePlugin = requireModule('./.webpack/transform-file-plugin').default;
-
-const {
-  stripFileDate,
-  getPathSlug,
-  interpolatePath,
-  convertToAssets,
-  validateBaseFile,
-  runTransforms,
-  transformer,
-  when,
-} = requireModule('./.webpack/utils');
-
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const DIR_POSTS = '_posts';
-const JSON_INDENT = 2;
 const ROUTE_BLOG = '/blog';
-
-/**
- * Adds the parsed front matter to the file object
- */
-const getFrontMatter =
-  () =>
-    (file) => {
-      const data = frontmatter(file.contents);
-
-      if (!frontmatter.test(file.contents)) {
-        throw new Error(`Could not find frontmatter in "${filename}"`);
-      }
-
-      return _.merge({}, file, {
-        frontmatter: data.attributes,
-        contents: data.body,
-      });
-    };
-
-/**
- * Adds the excerpt of a post to the file meta
- *
- * Is a "plugin" to be utilized by the parseMarkdown function.
- */
-const getPostExcerpt =
-  ({ renderExcerpt=true, defaultSeparator='<!-- endexcerpt -->', md }={}) =>
-    (file) => {
-    let excerpt = null;
-    let excerptIndex = null;
-    let excerptLoc = null;
-
-    if (!_.isObject(file.frontmatter)) {
-      throw new Error(`frontmatter does not exist on file ${file.path}`);
-    }
-
-    if (file.frontmatter.excerpt) {
-      // Use a custom defined excerpt from the frontmatter
-      excerpt = String(file.frontmatter.excerpt);
-    } else {
-      const separator =
-        [frontmatter.excerpt_separator, frontmatter.excerptSeparator, defaultSeparator]
-          .find(item => item != null);
-
-      if (separator != null) {
-        excerptIndex = file.contents.indexOf(separator);
-
-        if (excerptIndex > -1) {
-          excerpt = file.contents.substring(0, excerptIndex);
-          excerptLoc = {
-            start: 0,
-            end: excerptIndex,
-          };
-        }
-      }
-    }
-
-    return _.merge({}, file, {
-      contents: file.contents,
-      meta: {
-        excerpt: {
-          content: renderExcerpt && excerpt != null ? md.render(excerpt) : excerpt,
-          loc: excerptLoc,
-        },
-      },
-    });
-  };
-
-  /**
-   * Convers a list of files to JSON and returns an asset mapping.
-   *
-   * @param  {Array<File>} files
-   * @param  {Number} options.indent - The indent for the json
-   * @param  {Number} options.output - Interpolation name e.g. '[name]-[hash:8].json'
-   * @return {Object.<string>}
-   */
-const createPostsJsonAssets = (files, options={}) => {
-  const posts = files.reduce((assets, file) => {
-    const slug = getPathSlug(file.path);
-
-    assets[file.path] =
-      JSON.stringify({
-          excerpt: file.meta.excerpt,
-          ...file.frontmatter,
-          humanized: file.humanized,
-          url: path.posix.normalize(`${ROUTE_BLOG}/${slug}`),
-          slug,
-          contents: file.contents,
-        },
-        null,
-        options.indent || 0
-      );
-
-      return assets;
-    }, {});
-
-  return convertToAssets(posts, {
-    output: options.output,
-  });
-};
-
-/**
- * Converts a list of files to a list of meta of each file and returns
- * an asset mapping containg the meta file.
- *
- * @type {Object.<Array<Object>>}
- */
-const createPostsMetaAssets =
-  (files, { output='postmeta.json', indent=0 }={}) => {
-    const meta = files.map(file => {
-      return {
-        excerpt: file.meta.excerpt,
-        ...file.frontmatter,
-        humanized: file.humanized,
-        url: path.posix.normalize(`${ROUTE_BLOG}/${getPathSlug(file.path)}`),
-        slug: getPathSlug(file.path),
-      };
-    }).sort((a, b) => datefns.compareDesc(a.created_at, b.created_at));
-
-    return convertToAssets({
-      'postsmeta.json': JSON.stringify(meta, null, indent),
-    }, {
-      output: output,
-    });
-  };
+const JSON_INDENT = 2;
 
 let appenv = {
-  baseUrl: 'http://localhost:3000',
   apiPath: '/_nuxt/api',
+  baseUrl: 'http://localhost:3000',
 };
 
 if (IS_PRODUCTION) {
   appenv = {
-    baseUrl: 'http://localhost:8080',
     apiPath: '/_nuxt/api',
+    baseUrl: 'http://localhost:3000',
   };
 }
 
@@ -213,17 +89,24 @@ module.exports = {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: 'Nuxt.js project' },
+      { hid: 'description', name: 'description', content: 'Freelance front-end web developer producing high quality work with an exceptional eye for detail. Mentor. Lover of JavaScript.' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'robots', content: 'index,follow' },
+
+      // TODO: If this is even how this is even done anymore
+      // { name: "twitter:card", content: "summary" },
+      // { name: "twitter:site", content: "@twitter" },
+      // { name: "twitter:title", content: "{{ page.title }}" },
+      // { name: "twitter:description", content: "{{ page.description }}" },
+      // { name: "twitter:url", content: "{{ page.url }}"},
+    ],
+    script: [
+      { async: true, src: '//assets.codepen.io/assets/embed/ei.js' },
     ],
     link: [
-      {
-        href: 'https://fonts.googleapis.com/css?family=Lato:400,300,700, 800,900|Source+Sans+Pro:200,200italic,300,300italic,400,400italic,600,700|Source+Code+Pro:400,600,700',
-       rel: 'stylesheet',
-       type: 'text/css',
-     },
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'stylesheet', href: 'https://use.typekit.net/nsr0hmh.css' },
+      { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' },
     ]
   },
   /*
@@ -241,7 +124,10 @@ module.exports = {
     },
 
     postcss: [
-
+      // require('cssnano')({
+      //   preset: 'default',
+      // }),
+      // require('autoprefixer')(),
     ],
 
     extend(config, { isClient }) {
@@ -336,8 +222,7 @@ module.exports = {
   },
 
   plugins: [
-    '~plugins/context',
-    '~plugins/logger',
+    '~plugins/bootstrap',
     '~/plugins/disqus',
 
     // Might need highlighter later

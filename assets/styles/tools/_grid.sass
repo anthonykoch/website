@@ -1,0 +1,34 @@
+
+//
+// Calculates the width of a column based on the default
+// parameter $grid-columns
+// Example:
+//    $width: grid-column(1) // 8.33333%
+//    $width: grid-column(1, $grid-total-columns: 15) // 6.66667%
+//
+// @param {number} column       The number of columns to span
+// @param {number} grid-columns The total number of columns in the grid
+// @return {percentage}
+//
+
+@function grid-column($column, $grid-total-columns: $grid-total-columns)
+  @return percentage($column / $grid-total-columns)
+
+
+//
+// Outputs properties for a grid column.
+// Keep this in mind: https://github.com/philipwalton/flexbugs
+//
+// 1. See https://www.sitepoint.com/a-tale-of-css-and-sass-precision/
+//
+
+=make-grid-column($column-index, $grid-columns, $important: false)
+  $width: grid-column($column-index, $grid-columns)
+  $important-string: if($important, '!important', '')
+
+  flex-basis: auto #{$important-string}
+
+  @if (is-float($width))
+    width: calc(100% * #{$column-index} / #{$grid-columns}) #{$important-string} // [1]
+  @else
+    width: $width #{$important-string}
