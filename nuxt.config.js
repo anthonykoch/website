@@ -13,6 +13,19 @@ const datefns = require('date-fns');
 
 const { default: TransformFilePlugin } = requireModule('./.webpack/transform-file-plugin');
 
+const {
+  getFrontMatter,
+  getPostExcerpt,
+  createPostsJsonAssets,
+  createPostsMetaAssets,
+} = requireModule('./.webpack/post-helpers.js');
+
+const {
+  stripFileDate,
+  transformer,
+  when,
+} = requireModule('./.webpack/utils');
+
 const md = new MarkdownIt({
   html: true,
   linkify: false,
@@ -30,25 +43,6 @@ const md = new MarkdownIt({
     return md.utils.escapeHtml(content);
   },
 });
-
-
-const {
-  getFrontMatter,
-  getPostExcerpt,
-  createPostsJsonAssets,
-  createPostsMetaAssets,
-} = requireModule('./.webpack/post-helpers.js');
-
-const {
-  stripFileDate,
-  getPathSlug,
-  interpolatePath,
-  convertToAssets,
-  validateBaseFile,
-  runTransforms,
-  transformer,
-  when,
-} = requireModule('./.webpack/utils');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const DIR_POSTS = '_posts';
