@@ -201,6 +201,11 @@ export default {
       });
   },
 
+  destroyed() {
+    window.removeEventListener('scroll', this.updateBlogToolbarVisiblity);
+    window.removeEventListener('resize', this.updateBlogToolbarVisiblity);
+  },
+
   mounted() {
     window.addEventListener('scroll', this.updateBlogToolbarVisiblity);
     window.addEventListener('resize', this.updateBlogToolbarVisiblity);

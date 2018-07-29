@@ -93,6 +93,9 @@ module.exports = {
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'robots', content: 'index,follow' },
     ],
+    script: [
+      { async: true, src: '//assets.codepen.io/assets/embed/ei.js' },
+    ],
     link: [
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://use.typekit.net/nsr0hmh.css' },

@@ -103,7 +103,7 @@ export default {
     // }
   },
 
-  destroy() {
+  destroyed() {
     // if (this.waypoint) {
     //   this.waypoint.destroy();
     // }

@@ -23,13 +23,6 @@
     <meta name="twitter:url" content="{{ page.url }}">
      -->
 
-    <!-- vendor.js -->
-    <!-- app.js -->
-    <!--
-      TODO: import() this link
-     <script async src="//assets.codepen.io/assets/embed/ei.js"></script>
-   -->
-
     <slot name="before"></slot>
 
     <slot name="sidebar"></slot>
