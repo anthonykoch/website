@@ -160,6 +160,12 @@ export default {
     }, 400, { trailing: true }),
   },
 
+  head() {
+    return {
+      title: this.post.title,
+    };
+  },
+
   data() {
     return {
       isBlogToolbarVisible: false,

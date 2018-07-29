@@ -20,7 +20,10 @@ export default {
 
   head() {
     return {
-
+      title: 'BladeJS',
+      meta: [
+        { hid: 'description', name: 'description', content: `BladeJS is a JavaScript implementation of Laravel's Blade templating engine.` },
+      ],
     };
   },
 

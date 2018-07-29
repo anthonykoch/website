@@ -46,6 +46,15 @@ export default {
     };
   },
 
+  head() {
+    return {
+      title: 'Blog',
+      meta: [
+        { hid: 'description', name: 'description', content: `These are my various writings, mostly on topics surrounding front-end development.` },
+      ],
+    };
+  },
+
   computed: {
     ...mapState({
       postsMeta: state => state.posts.meta,
