@@ -1,10 +1,11 @@
 
 # My website
 
-v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
+A static site generated with [Nuxt.js](https://nuxtjs.org/). Cool, init?
 
 ## Todo
 
+- Find out why linting doesn't work and/or get better linting rules
 - Replace all colors with variables
 - Add these to package.json and modify webpack to handle css plugins
 
@@ -17,5 +18,6 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 
 - Edit some of the articles errors like in medium image loading and favorite features of es2015
 - Add disqus back to articles
+
 
 #c5d6bb

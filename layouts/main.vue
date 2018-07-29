@@ -14,15 +14,6 @@
       Like, wtf.
      -->
 
-    <!-- TODO: Twitter cards -->
-    <!--
-    <meta name="twitter:card" content="summary" />
-    <meta name="twitter:site" content="{{ site.social.twitter.handle }}" />
-    <meta name="twitter:title" content="{{ page.title }}" />
-    <meta name="twitter:description" content="{{ page.description }}" />
-    <meta name="twitter:url" content="{{ page.url }}">
-     -->
-
     <slot name="before"></slot>
 
     <slot name="sidebar"></slot>

@@ -92,6 +92,13 @@ module.exports = {
       { hid: 'description', name: 'description', content: 'Freelance front-end web developer producing high quality work with an exceptional eye for detail. Mentor. Lover of JavaScript.' },
       { 'http-equiv': 'X-UA-Compatible', content: 'IE=edge' },
       { name: 'robots', content: 'index,follow' },
+
+      // TODO: If this is even how this is even done anymore
+      // { name: "twitter:card", content: "summary" },
+      // { name: "twitter:site", content: "@twitter" },
+      // { name: "twitter:title", content: "{{ page.title }}" },
+      // { name: "twitter:description", content: "{{ page.description }}" },
+      // { name: "twitter:url", content: "{{ page.url }}"},
     ],
     script: [
       { async: true, src: '//assets.codepen.io/assets/embed/ei.js' },

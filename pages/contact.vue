@@ -9,7 +9,9 @@
       <a href="mailto:hello@anthonykoch.com">hello@anthonykoch.com</a>
     </p>
 
-    <!--<section id="contact" class="u-pb7 u-pt7">
+    <!--
+      TODO: Figure out where the form data should be sent
+      <section id="contact" class="u-pb7 u-pt7">
       <form
         action=""
         class="Container is-formWidth u-mxauto"

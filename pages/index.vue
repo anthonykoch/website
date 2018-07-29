@@ -2,14 +2,6 @@
   <page
     :showSocial="false"
   >
-    <!--<div slot="heroLower">
-      <div class="meme"></div>
-    </div>-->
-    <!--<div slot="heroCaption">Front-End Developer</div>-->
-    <!--<div slot="heroDescription">
-      Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development. I'm a lover of JavaScript, Python, and simple code.
-    </div>-->
-
     <transition
       name="tr-fade"
       @after-enter="navigateToProject"
@@ -127,10 +119,6 @@
                   <li>Landing page development </li>
                   <li>Dashboard development</li>
                 </ul>
-
-                <!--<p class="FeaturedWork-footnote">
-                  Note: Their website has changed quite a bit recently. However, their current landing page (as of July, 2018) was still largely developed by me.
-                </p>-->
                 <div class="u-textCenter u-textLeft@lg">
                   <a
                     href="https://modernfertility.com/"
@@ -146,9 +134,8 @@
           </div>
 
           <!--<div class="u-mxauto u-textCenter" style="max-width: 500px; margin: 60px 0">
-            <p></p>
+            <p>Should probably say more</p>
           </div>-->
-
 
           <div class="FeaturedWork-grid u-mb8 u-itemsCenter">
             <div class="FeaturedWork-column is-left  u-order1@lg">

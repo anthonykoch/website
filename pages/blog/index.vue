@@ -3,10 +3,6 @@
     :theme="theme"
     :show-social="false"
   >
-    <!-- <div slot="before">
-      <div class="Sidebar"></div>
-      <div class="Sidebar2"></div>
-    </div> -->
     <div slot="heroCaption">My writings</div>
     <div slot="heroDescription">
       These are my various writings, mostly on topics surrounding front-end development.
@@ -57,29 +53,3 @@ export default {
   },
 };
 </script>
-
-<style lang="scss">
-
-// .Sidebar {
-//   background-color: rgba(white, 0.2);
-//   height: 500px;
-//   left: 0;
-//   top: 0;
-//   position: absolute;
-//   width: 300px;
-// }
-
-// .Sidebar2 {
-//   background-color: rgba(black, 0.2);
-//   width: 300px;
-//   position: absolute;
-//   left: 0;
-//   height: 400vh;
-//   top: 500px;
-// }
-
-// .SiteHeader-lower {
-//   padding-left: 300px;
-// }
-
-</style>
