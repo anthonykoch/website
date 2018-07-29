@@ -165,7 +165,7 @@ export const createPostsMetaAssets =
         url: path.posix.normalize(`${blogRoute}/${getPathSlug(file.path)}`),
         slug: getPathSlug(file.path),
       };
-    }).sort((a, b) => datefns.compareAsc(a.created_at, b.created_at));
+    }).sort((a, b) => datefns.compareDesc(a.created_at, b.created_at));
 
     return convertToAssets({
       'postsmeta.json': JSON.stringify(meta, null, indent),
