@@ -17,12 +17,7 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 ```
 
 - Maybe add js to fullscreen an image
-- Show work as images and make it like that shipify slider
 - Add make-grid-column
-- Refactor gutter and spacing variables
-- Update various bits of spacing throughout the website that were changed when consildating gutter values
-- Update codepen title font size
-- Figure out design for date meta in post preview
 - Use this for when switching between posts
 
 
@@ -30,11 +25,6 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
     transform-origin: 50% top;
     transition: transform 400ms;
 
-- darken post font color
-- change code theme to oceanremove side padding
-- Complete and move the .md class
-- Complete mobile styles for post
-- Make logo text fixed on blog post
 - Remove asterisk comments from Sass
 - Fix list margin left in post/md styles
 - Convert all old BEM to SUIT style

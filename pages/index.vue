@@ -168,7 +168,7 @@
                 Plaid Technologies
               </div>
               <p class="FeatureWork-text">
-                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included turning designs into pixel perfect code, developing various features around the site, and improving load performance for the site.
+                I was brought on by Plaid Technologies as a remote front-end developer. Responsibilities included turning designs into pixel perfect code, developing various features around the site, and improving performance for the site.
               </p>
             </div>
           </div>
@@ -177,29 +177,6 @@
 
       </div>
     </section>
-
-
-    <!--<section id="projects" class="u-flex">
-
-       <div class="u-size4of12"></div>
-      <div class="Slider u-size4of12 u-mxauto">
-        <div class="Slider-container" style="width: 500%">
-          <div class="Slider-slide" style="width: 20%">
-            <div class="WorkImage is-1"></div>
-          </div>
-          <div class="Slider-slide" style="width: 20%">
-            <div class="WorkImage is-2"></div>
-          </div>
-          <div class="Slider-slide" style="width: 20%">
-            <div class="WorkImage is-3"></div>
-          </div>
-          <div class="Slider-slide" style="width: 20%">
-            <div class="WorkImage is-4"></div>
-          </div>
-        </div>
-      </div>
-      <div class="u-size4of12"></div>
-    </section>-->
 
     <section id="contact" class="u-pb8">
       <div class="u-textCenter">
@@ -216,8 +193,8 @@
     </section>
 
     <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
-      <div class="u-siteWrapper u-px5@lg u-px0  u-textCenter u-textLeft@lg">
-        <h2 class="Title type-1">
+      <div class="u-siteWrapper u-px0  u-textCenter u-textLeft@lg">
+        <h2 class="Title type-1 u-px5@lg">
           <span>Personal Projects</span>
         </h2>
       </div>
@@ -331,7 +308,6 @@ export default {
     },
 
     onHeroHidden() {
-      console.log('hidden');
       this.showNextHero();
       setTimeout(() => {
         this.isHeroShowing = true;
@@ -339,7 +315,6 @@ export default {
     },
 
     onHeroShowing() {
-      console.log('showing');
       this.hideHero();
     },
 
