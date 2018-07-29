@@ -30,14 +30,14 @@
   >
     <div class="Sidebar" slot="sidebar">
       <div class="Sidebar-inner">
-        <div class="Meme u-mb3">
-          <span class="Meme-upper">Next:</span>
-          <span class="Meme-lower">Understanding JavaScript Prototypes</span>
-        </div>
-        <div class="Meme u-mb3">
-          <span class="Meme-upper">Previous:</span>
-          <span class="Meme-lower">Medium style image loading</span>
-        </div>
+        <a :href="post.next.url" class="SidebarButton u-mb3" v-if="post.next">
+          <span class="SidebarButton-upper">Next:</span>
+          <span class="SidebarButton-lower">{{ post.next.title }}</span>
+        </a>
+        <a :href="post.previous.url" class="SidebarButton u-mb3" v-if="post.previous">
+          <span class="SidebarButton-upper">Previous:</span>
+          <span class="SidebarButton-lower">{{ post.previous.title }}</span>
+        </a>
 
         <div class="Sidebar-social  u-textCenter">
           <app-social-icons></app-social-icons>

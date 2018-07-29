@@ -46,9 +46,10 @@
 
 
 
-.Meme
+.SidebarButton
   // border: 1px solid rgba(white, 0.5)
   // border-bottom: 2px solid rgba(white, 0.5)
+  display: block
   // border: 1px solid rgba(black, 0.3)
   // border-radius: 4px
   background-color: transparent
@@ -63,11 +64,15 @@
   transition: background-color 300ms
   user-select: none
 
+  &:link,
+  &:visited
+    color: rgba(white, 0.8)
+
   &:hover
     background-color: rgba(white, 0.6)
     color: rgba(black, 0.6)
 
-.Meme-upper
+.SidebarButton-upper
   display: inline-block
   font-family: $app-font-family-1
   font-weight: 700
@@ -80,7 +85,7 @@
   display: block
 
 
-.Meme-lower
+.SidebarButton-lower
   display: inline-block
   // border-bottom: 2px solid rgba(white, 0.5)
   // font-family: $app-font-family-1

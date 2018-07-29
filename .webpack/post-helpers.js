@@ -91,24 +91,54 @@ export const getPostExcerpt =
 export const createPostsJsonAssets = (files, options={}) => {
   const { blogRoute=ROUTE_BLOG } = options;
 
-  const posts = files.reduce((assets, file) => {
-    const slug = getPathSlug(file.path);
+  const posts =
+    files
+      .sort((a, b) =>
+        datefns.compareAsc(a.frontmatter.created_at, b.frontmatter.created_at)
+      )
+      .reduce((assets, file, index, files) => {
+        const slug = getPathSlug(file.path);
 
-    assets[file.path] =
-      JSON.stringify({
-          excerpt: file.meta.excerpt,
-          ...file.frontmatter,
-          humanized: file.humanized,
-          url: path.posix.normalize(`${blogRoute}/${slug}`),
-          slug,
-          contents: file.contents,
-        },
-        null,
-        options.indent || 0
-      );
+        const nextFile =
+          (index <= files.length - 1)
+            ? files[index + 1]
+            : null;
 
-      return assets;
-    }, {});
+        const previousFile = index === 0 ? null : files[index - 1];
+
+        const next =
+          nextFile == null
+            ? null
+            : {
+              url: path.posix.normalize(`${blogRoute}/${getPathSlug(nextFile.path)}`),
+              ...nextFile.frontmatter,
+            };
+
+        const previous =
+          previousFile == null
+            ? null
+            : {
+              url: path.posix.normalize(`${blogRoute}/${getPathSlug(previousFile.path)}`),
+              ...previousFile.frontmatter,
+            };
+
+        assets[file.path] =
+          JSON.stringify({
+              excerpt: file.meta.excerpt,
+              ...file.frontmatter,
+              humanized: file.humanized,
+              url: path.posix.normalize(`${blogRoute}/${slug}`),
+              slug,
+              next,
+              previous,
+              contents: file.contents,
+            },
+            null,
+            options.indent || 0
+          );
+
+          return assets;
+        }, {});
 
   return convertToAssets(posts, {
     output: options.output,
@@ -135,7 +165,7 @@ export const createPostsMetaAssets =
         url: path.posix.normalize(`${blogRoute}/${getPathSlug(file.path)}`),
         slug: getPathSlug(file.path),
       };
-    }).sort((a, b) => datefns.compareDesc(a.created_at, b.created_at));
+    }).sort((a, b) => datefns.compareAsc(a.created_at, b.created_at));
 
     return convertToAssets({
       'postsmeta.json': JSON.stringify(meta, null, indent),

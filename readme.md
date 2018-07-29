@@ -17,6 +17,5 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 
 - Edit some of the articles errors like in medium image loading and favorite features of es2015
 - Add disqus back to articles
-- Add next and previous article ID to post json data
 
 #c5d6bb
