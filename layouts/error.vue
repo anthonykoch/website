@@ -1,15 +1,15 @@
 <template>
   <page
-    :showFullHeightHeader="true"
     :showFooter="false"
     :showSocial="false"
+    :theme="theme"
   >
     <div slot="heroLower">
-      <div class="[ Heading is-type2 ] u-textCenter">
+      <div class="[ Heading is-type2 ] u-textCenter u-mb4">
         <p style="font-size: 2rem">
           Welp, this page doesn't exist.
         <a
-          class="Link is-light  u-mb4"
+          class="Link is-light  u-block u-inlineBlock@sm"
           href="/"
           style="font-size: 2rem"
         >
@@ -23,15 +23,24 @@
         </div>
       </div>
     </div>
+    <slot></slot>
   </page>
 </template>
 
 <script>
-import page from '@/layouts/main.vue';
-
 export default {
   components: {
-    page,
+    page: require('@/layouts/main.vue').default,
+  },
+
+  data() {
+    return {
+      theme: {
+        siteHeader: {
+          isFullHeight: true,
+        },
+      },
+    };
   },
 }
 </script>

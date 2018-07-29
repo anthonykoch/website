@@ -132,7 +132,7 @@
               <div class="u-text-center">
                 <!-- <div style="margin-bottom: 10px; color: #6a6f71">Did you know?</div> -->
                 <div class="br-FilesPane-backgroundComment">
-                  <span class="u-inline-block">
+                  <span class="u-inlineBlock">
                     {{ paneMessage }}
                   </span>
                 </div>
