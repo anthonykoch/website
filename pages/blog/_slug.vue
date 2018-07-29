@@ -69,7 +69,7 @@
       </transition>
     </div>
 
-    <article class="Post" id="#post">
+    <article class="Post" id="post">
       <div class="Post__container">
         <header class="Post-header u-gutter" ref="postHeader">
           <div class="u-sizeReadable u-mxauto">
