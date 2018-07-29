@@ -5,11 +5,11 @@
 @function app-breakpoint-suffix($breakpoint-name)
   @return if($breakpoint-name == 'default', '', '\\@' + $breakpoint-name)
 
-/**
- * Returns a breakpoint number from the breakpoints map
- * @param  {String} $key
- * @return {Number}
- */
+//
+// Returns a breakpoint number from the breakpoints map
+// @param  {String} $key
+// @return {Number}
+//
 
 =app-breakpoint-min($breakpoint-name)
   @if $breakpoint-name == 'default'

@@ -1,14 +1,7 @@
 
-$app-input-padding-t: 16px
-$app-input-padding-r: 0
-$app-input-padding-b: 16px
-$app-input-padding-l: 16px
-$app-label-left: $app-input-padding-l
-
 .Input,
 .TextArea
   background-color: transparent
-  // background-color: rgba(white, 0.9)
   border: 0
   color: rgba(black, 0.6)
   border-color: rgba(black, 0.5)
@@ -20,7 +13,6 @@ $app-label-left: $app-input-padding-l
   padding: $app-input-padding-t $app-input-padding-r $app-input-padding-b $app-input-padding-l
   transition: background-color 300ms
   width: 100%
-  // z-index: 1
 
   &::placeholder
     font-family: $app-font-family-1
@@ -31,24 +23,34 @@ $app-label-left: $app-input-padding-l
   &:focus,
   &:active
     background-color: rgba(black, 0.06)
-    // background-color: rgba(white, 1)
-    // border-color: color('primary')
 
 .Input.is-valid
   border-color: #29e6b2
 
 .TextArea
-  // border-left-width: 2px
   min-height: 300px
+
+
+
+
+
 
 .InputGroup
   padding-top: 30px
   position: relative
 
+
+
+
+
 .Form
   &.has-smallWidth
     margin: 0 auto
     max-width: 570px
+
+
+
+
 
 .Label
   display: inline-block
@@ -67,6 +69,9 @@ $app-label-left: $app-input-padding-l
 .TextArea.has-label-lifted + .Label,
 .Input.has-label-lifted + .Label
   transform: translate(0, 3px)
+
+
+
 
 
 .ContactSection

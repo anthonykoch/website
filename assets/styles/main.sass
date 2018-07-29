@@ -1,13 +1,13 @@
 @charset 'utf-8'
 
-/**
- * The order of what's imported is very imported, and is ordered
- * in terms of least to most specific.
- *
- * We start with components, since we want to allow overriding them
- * in layouts and pages. Helpers are declared last so they override
- * all other selectors as long as descendant selectors aren't used.
- */
+//
+// The order of what's imported is very imported, and is ordered
+// in terms of least to most specific.
+//
+// We start with components, since we want to allow overriding them
+// in layouts and pages. Helpers are declared last so they override
+// all other selectors as long as descendant selectors aren't used.
+//
 
 @import 'vendor/bourbon/bourbon'
 @import '~sassdash/index'
@@ -51,7 +51,6 @@
 
 @import 'pages/shared'
 @import 'pages/home'
-@import 'pages/about'
 @import 'pages/error404'
 
 @import 'utilities/helpers'

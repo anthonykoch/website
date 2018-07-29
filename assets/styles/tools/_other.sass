@@ -1,9 +1,9 @@
 
-/**
- * Returns a color from the colors map
- * TODO: Deprecate
- * @type {Color}
- */
+//
+// Returns a color from the colors map
+// TODO: Deprecate
+// @type {Color}
+//
 @function color($key: 'primary', $variant: 'base')
   $color: null
   $color-spectrum: map-get($colors, $key)
@@ -41,33 +41,33 @@
 
 
 
-/**
- * Returns an image prefixed with a path. This does not smartly join the paths,
- * it only concatenates the two parts together.
- *
- * Note: The path in $config should end with a forward slash, e.g. '../images/'
- *
- * @param  {String} $url
- * @return {String} The image prefixed with the path
- */
+//
+// Returns an image prefixed with a path. This does not smartly join the paths,
+// it only concatenates the two parts together.
+//
+// Note: The path in $config should end with a forward slash, e.g. '../images/'
+//
+// @param  {String} $url
+// @return {String} The image prefixed with the path
+//
 @function app-image($url)
   @return map-get($config, 'images') + $url
 
-/**
- * Returns a multiple of the base gutter
- * @param  {Number} $multiplier
- * @return {Number}
- */
+//
+// Returns a multiple of the base gutter
+// @param  {Number} $multiplier
+// @return {Number}
+//
 @function spacing($multiplier)
   @return $app-gutter * $multiplier
 
 
 
-/**
- * Centers an element optionally verticall or horizontally
- * within its parent element.
- * @param string $which Maybe be 'vertical' or 'horizontal', defaults to both
- */
+//
+// Centers an element optionally verticall or horizontally
+// within its parent element.
+// @param string $which Maybe be 'vertical' or 'horizontal', defaults to both
+//
 =center($which: null)
   position: absolute
 
@@ -85,21 +85,6 @@
     transform: translate(-50%, -50%)
 
 
-
-/**
- * Gives scrollbar in webkit a style
- * TODO: Add options
- */
-=scrollbar($width: 9px, $height: 9px)
-  &::-webkit-scrollbar
-    height: $height
-    width: $width
-
-  &::-webkit-scrollbar-track
-    background-color: #dddddd
-
-  &::-webkit-scrollbar-thumb
-    background-color: #888888
 
 
 

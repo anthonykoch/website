@@ -36,6 +36,8 @@
 
 
 
+
+
 .Logo
   font-size: rem(14px)
   letter-spacing: rem(4px)
@@ -47,6 +49,8 @@
 
 
 
+
+
 .SiteNav
   flex: 1
   text-align: right
@@ -54,8 +58,6 @@
 .SiteNav__list
   align-items: center
   display: inline-flex
-
-// .SiteNav__list__item
 
 .SiteNav__list__item__link
   +site-nav-link
@@ -81,9 +83,10 @@
 
 
 
-/**
- * 1. Just enough to make the header a uniform height throughout all pages.
- */
+
+//
+// 1. Just enough to make the header a uniform height throughout all pages.
+//
 
 .SiteHeader
   min-height: rem(500px) // [1]
@@ -114,8 +117,6 @@
   &.is-fullHeight
     min-height: 100vh
 
-
-
 .SiteHeader__inner
   padding: 0 0 3rem 0
   position: relative
@@ -131,6 +132,8 @@
 
 
 
+
+
 +app-breakpoint-min(lg)
   .Logo__link
     &.is-fixed
@@ -138,11 +141,13 @@
 
 
 
-/**
- * Breaks the site navigation and "logo" onto two separate lines.
- * The breakpoint is targeted for the point at which the site nav
- * and logo layouts start breaking.
- */
+
+
+//
+// Breaks the site navigation and "logo" onto two separate lines.
+// The breakpoint is targeted for the point at which the site nav
+// and logo layouts start breaking.
+//
 @media (max-width: 730px)
   .SiteHeader
     &.has-darkBackground

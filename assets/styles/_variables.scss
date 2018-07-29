@@ -1,9 +1,9 @@
 
-/**
- * Returns the different lightness and saturations of a color
- * @param  {Color} $color
- * @return {Map}
- */
+//
+// Returns the different lightness and saturations of a color
+// @param  {Color} $color
+// @return {Map}
+//
  @function getvariants($color) {
   @return (
     'base':   $color,
@@ -334,8 +334,18 @@ $app-codepen-border-radius: 3px;
 $app-codepen-projects-image-width: 500px;
 $app-codepen-projects-image-count: 6;
 
+
+
 $app-project-preview-list-gutter: spacing(1);
 
 
 
 $app-featured-work-padding: 30px;
+
+
+
+$app-input-padding-t: 16px;
+$app-input-padding-r: 0;
+$app-input-padding-b: 16px;
+$app-input-padding-l: 16px;
+$app-label-left: $app-input-padding-l;

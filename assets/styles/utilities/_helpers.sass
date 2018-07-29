@@ -1,7 +1,3 @@
-/**
- * Contains various utility classes
- * file: _helpers.sass
- */
 
 .u-border0
   border: 0 !important
@@ -16,12 +12,14 @@
 
 
 
-/**
- * When applied to an element that has the same height and width,
- * it will make the element display into the shape of a circle.
- */
+//
+// When applied to an element that has the same height and width,
+// it will make the element display into the shape of a circle.
+//
 .u-circlify
   border-radius: 100% !important
+
+
 
 
 
@@ -36,7 +34,6 @@
 
 .u-clearfix
   +clearfix
-
 
 
 
@@ -150,13 +147,13 @@
     .u-inline#{$suffix}
       display: inline !important
 
-    /**
-     * From SUIT
-     *
-     * 1. Fix for Firefox bug: an image styled `max-width:100%` within an
-     * inline-block will display at its default size, and not limit its width to
-     * 100% of an ancestral container.
-     */
+    //
+    // From SUIT
+    //
+    // 1. Fix for Firefox bug: an image styled `max-width:100%` within an
+    // inline-block will display at its default size, and not limit its width to
+    // 100% of an ancestral container.
+    //
 
     .u-inline-block#{$suffix}
       display: inline-block !important
