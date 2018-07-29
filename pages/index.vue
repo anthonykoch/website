@@ -75,13 +75,13 @@
                           v-show="activeMFImageIndex === 0"
                         >
                           <img
-                            src="~/assets/images/work/mf-work-1@2x.png"
+                            src="~/assets/images/work/mf-work-1@2x+c.png"
                             alt="modern fertility landing page"
                             class="WorkImages-image"
                           >
                         </a>
                       </transition>
-                      <transition name="tr-fade">
+                      <!--<transition name="tr-fade">
                         <a
                           href="https://modernfertility.com/"
                           class="WorkImages-link"
@@ -95,7 +95,7 @@
                             class="WorkImages-image"
                           >
                         </a>
-                      </transition>
+                      </transition>-->
                     </div>
                     <div class="[ Tag is-absolute ]  WorkImages-tag">Web Development</div>
                   </div>
@@ -143,7 +143,7 @@
                 <div class="WorkImages">
                   <div class="WorkImages-container has-dark-shadow">
                     <div class="WorkImages-aspectFill">
-                      <img src="~/assets/images/work/plaid-work-1@2x.png" alt="" class="WorkImages-image">
+                      <img src="~/assets/images/work/plaid-work-1@2x+c.png" alt="" class="WorkImages-image">
                       <div class="[ Tag is-absolute ]  WorkImages-tag ">Web Development</div>
                     </div>
                   </div>

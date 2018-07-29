@@ -124,10 +124,10 @@ module.exports = {
     },
 
     postcss: [
-      // require('cssnano')({
-      //   preset: 'default',
-      // }),
-      // require('autoprefixer')(),
+      require('cssnano')({
+        preset: 'default',
+      }),
+      require('autoprefixer')(),
     ],
 
     extend(config, { isClient }) {
