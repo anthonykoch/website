@@ -10,13 +10,13 @@
       role="banner"
       data-page="TODO"
     >
-      <div class="SiteHeader__container">
+      <div class="SiteHeader-container">
         <div class="Logo">
           <nuxt-link
             active-class="is-active"
             exact
             to="/"
-            class="Logo__link u-px6"
+            class="Logo-link u-px6"
             :class="{
               'is-dark': hasDarkLinks,
               'is-fixed': isLogoFixed,
@@ -29,10 +29,10 @@
         </div>
 
         <nav class="SiteNav" role="navigation">
-          <ul class="SiteNav__list">
+          <ul class="SiteNav-list">
             <li
               v-for="(link, index) of $store.state.navigation.links"
-              class="SiteNav__list__item"
+              class="SiteNav-listItem"
               :key="index"
             >
               <nuxt-link
@@ -42,13 +42,13 @@
                 :class="{
                   'is-dark': hasDarkLinks,
                 }"
-                class="SiteNav__list__item__link"
+                class="SiteNav-link"
               >
                 {{ link.text }}
               </nuxt-link>
             </li>
             <li
-              class="SiteNav__list__item has-icon"
+              class="SiteNav-listItem has-icon"
             >
               <a
                 :class="{
@@ -57,7 +57,7 @@
                 href="https://github.com/anthonykoch?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
-                class="SiteNav__list__icon-link is-github"
+                class="SiteNav-iconLink is-github"
               >
                 <svg
                   fill="rgba(255,255,255,0.8)"
@@ -70,7 +70,7 @@
         </nav>
       </div>
 
-      <div class="SiteHeader__lower">
+      <div class="SiteHeader-lower">
         <slot name="lower"></slot>
       </div>
     </header>

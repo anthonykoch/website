@@ -71,10 +71,10 @@
 
     <article class="Post" id="#post">
       <div class="Post__container">
-        <header class="Post__header u-gutter" ref="postHeader">
+        <header class="Post-header u-gutter" ref="postHeader">
           <div class="u-sizeReadable u-mxauto">
-              <h1 class="Post__title">
-                <a :href="$route.path" class="Link Link--dark">
+              <h1 class="Post-title">
+                <a :href="$route.path" class="Link is-dark">
                   {{ post.title }}
                 </a>
               </h1>
@@ -90,7 +90,7 @@
         </header>
         <div>
           <div
-            class="Post__body  md"
+            class="Post-body  md"
             style="animation-delay: 0.3s"
             v-html="post.contents"
           >

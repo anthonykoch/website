@@ -1,33 +1,4 @@
 
-=title($type: ('default'))
-  @if (index($type, 'small'))
-    color: color('foreground')
-    font-family: $app-heading-font-family
-    font-size: 1.3rem
-    font-weight: 700
-    letter-spacing: rem(3px)
-    padding-bottom: double($app-gutter)
-    text-transform: uppercase
-
-  @if (index($type, 'default'))
-    font-size: 2.5rem
-    padding-bottom: double($app-gutter)
-
-  @if (index($type, 'bordered'))
-    +heading-border
-
-  @if (index($type, 'alternate'))
-    color: color('primary')
-    font-family: $app-font-family-1
-    font-size: rem(22px)
-    font-weight: 600
-    letter-spacing: rem(4px)
-    line-height: 1.3
-    text-transform: uppercase
-
-
-
-
 
 =list($type)
   @if $type == 'number'

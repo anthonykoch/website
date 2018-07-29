@@ -64,7 +64,7 @@
       <div class="u-siteWrapper u-pt4 u-pt7@lg u-gutter">
 
         <div class="FeatureWork">
-          <h2 class="Title type-1  u-pl5@lg u-textCenter u-textLeft@lg">
+          <h2 class="Heading is-type1  u-pl5@lg u-textCenter u-textLeft@lg">
             <span>Featured Work</span>
           </h2>
 
@@ -180,7 +180,7 @@
 
     <section id="contact" class="u-pb8">
       <div class="u-textCenter">
-        <h2 class="Title2 Title  u-gutter">
+        <h2 class="[ Heading is-type3 ]  u-gutter">
           Have a project in mind?
         </h2>
         <nuxt-link
@@ -194,7 +194,7 @@
 
     <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
       <div class="u-siteWrapper u-px0  u-textCenter u-textLeft@lg">
-        <h2 class="Title type-1 u-px5@lg">
+        <h2 class="[ Heading is-type1 ] u-px5@lg">
           <span>Personal Projects</span>
         </h2>
       </div>

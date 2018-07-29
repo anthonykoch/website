@@ -5,11 +5,11 @@
     :showSocial="false"
   >
     <div slot="heroLower">
-      <div class="Title Title--alternate u-textCenter">
-        <p style="font-size: 2rem" class="u-mb">
+      <div class="[ Heading is-type2 ] u-textCenter">
+        <p style="font-size: 2rem">
           Welp, this page doesn't exist.
         <a
-          class="Link Link--light Link--underline  u-mb4"
+          class="Link is-light  u-mb4"
           href="/"
           style="font-size: 2rem"
         >

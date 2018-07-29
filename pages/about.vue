@@ -11,7 +11,7 @@
       <div class="side-image about-office-background u-size12of12 u-size6of12@sm"></div>
       <section class="u-size12of12 u-size6of12@sm u-textCenter">
         <div class="u-px5 u-py8">
-          <h2 class="Title Title--small">
+          <h2 class="Heading Heading--small">
             Always learning
           </h2>
           <div class="u-sizeReadable u-textLeft@md Paragraphs Paragraphs--small Paragraphs--light">
@@ -27,7 +27,7 @@
       <div class="side-image about-jekyll-background u-size12of12 u-size6of12@lg u-order1 u-order2@lg"></div>
       <section class="u-size12of12 u-size6of12@sm u-textCenter">
         <div class="u-px5 u-py8">
-          <h2 class="[ Title Title--small ]  u-textCenter">About this website</h2>
+          <h2 class="[ Heading Heading--small ]  u-textCenter">About this website</h2>
           <div class="u-sizeReadable u-textLeft@md  [ Paragraphs Paragraphs--small Paragraphs--light ]">
             <p>
               This site is built with Jekyll and is hosted with Github Pages. The repository can be found <a href="https://github.com/anthonykoch/anthonykoch.github.io">here</a>.

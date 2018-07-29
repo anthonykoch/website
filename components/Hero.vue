@@ -10,11 +10,11 @@
         }"
       >
         <div>
-          <div class="Hero__caption" v-if="$slots.heroCaption">
+          <div class="Hero-caption [ Heading is-type2 ]" v-if="$slots.heroCaption">
             <slot name="heroCaption"></slot>
           </div>
 
-          <div class="Hero__description" v-if="$slots.heroDescription">
+          <div class="Hero-description" v-if="$slots.heroDescription">
             <slot name="heroDescription"></slot>
           </div>
           <slot name="heroLower"></slot>

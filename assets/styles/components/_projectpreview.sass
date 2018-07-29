@@ -8,15 +8,15 @@
   width: 100%
   z-index: 1
 
-.ProjectPreview--is-animated
-  transition-duration: 0.7s
-  transition-property: transform, opacity
-  transition-timing-function: ease-out
+  &.is-animated
+    transition-duration: 0.7s
+    transition-property: transform, opacity
+    transition-timing-function: ease-out
 
-.ProjectPreview--is-showing
-  opacity: 1
-  pointer-events: auto
-  transform: none
+  &.is-showing
+    opacity: 1
+    pointer-events: auto
+    transform: none
 
 .nojs .ProjectPreview
   opacity: 1
@@ -26,21 +26,21 @@
 .ProjectPreview:hover,
 .ProjectPreview:active,
 .ProjectPreview:focus
-  .ProjectPreview__background:before
+  .ProjectPreview-background:before
     opacity: 1
 
-  .ProjectPreview__title
+  .ProjectPreview-title
     opacity: 1
     transform: translate(-50.5%, -50%)
 
-.ProjectPreview__container
+.ProjectPreview-container
   border-radius: $app-project-preview-border-radius
   box-shadow: $app-box-shadow-1
   overflow: hidden
   padding-bottom: 56.25%
   position: relative
 
-.ProjectPreview__background
+.ProjectPreview-background
   +absolute-fill
   background-color: #eeeeee
   background-position: center
@@ -63,7 +63,7 @@
     content: ''
 
 
-.ProjectPreview__icon
+.ProjectPreview-icon
   border-radius: 50%
   display: inline-block
   fill: #eeeeee
@@ -74,7 +74,7 @@
   > svg
     +size(26px)
 
-.ProjectPreview__title
+.ProjectPreview-title
   +center
   backface-visibility: hidden
   border: rem(2px) solid rgba(white, 0.8)
@@ -95,7 +95,7 @@
   -webkit-font-smoothing: subpixel-antialiased
   white-space: nowrap
 
-.ProjectPreview__meta
+.ProjectPreview-meta
   align-items: center
   // color: hsla(343, 82%, 50%, 1)
   color: rgba(white, 0.9)
@@ -110,7 +110,7 @@
   text-shadow: 1px 0 1px rgba(black, 0.1)
   top: 0
 
-.ProjectPreview__likes
+.ProjectPreview-likes
   // fill: hsla(343, 82%, 50%, 1)
   fill: rgba(white, 0.9)
   // filter: drop-shadow(3px 3px 10px rgba(black, 0.1))

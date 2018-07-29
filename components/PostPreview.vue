@@ -1,17 +1,17 @@
 <template>
   <article class="PostPreview">
-    <span class="PostPreview__meta">{{ meta.humanized.created_at }}</span>
-    <h4 class="PostPreview__title">
-      <nuxt-link :to="meta.url" class="PostPreview__link">
+    <span class="PostPreview-meta">{{ meta.humanized.created_at }}</span>
+    <h4 class="PostPreview-title">
+      <nuxt-link :to="meta.url" class="PostPreview-link">
         {{ meta.title }}
       </nuxt-link>
     </h4>
     <div
-      class="PostPreview__body"
+      class="PostPreview-body"
       v-html="content"
     >
     </div>
-    <a :href="meta.url" class="PostPreview__more">read more &nbsp;&nbsp;&rarr;</a>
+    <a :href="meta.url" class="PostPreview-more">read more &nbsp;&nbsp;&rarr;</a>
   </article>
 
 </template>

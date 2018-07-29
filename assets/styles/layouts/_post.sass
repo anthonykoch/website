@@ -78,7 +78,7 @@
 /// 1. Causes the text to be title to be directly in the middle
 ///    of the site header's background image.
 ///
-.Post__header
+.Post-header
   left: 0
   padding-top: spacing(4)
   padding-bottom: spacing(2)
@@ -87,7 +87,7 @@
   width: 100%
   z-index: $app-layer-post-header
 
-.Post__title
+.Post-title
   font-family: $app-font-family-1
   font-size: rem(44px)
   font-weight: 600
@@ -95,7 +95,7 @@
   line-height: 1.2
   padding-bottom: double($app-gutter)
 
-.Post__title a
+.Post-title a
   &:link,
   &:visited
     color: #333333
@@ -104,7 +104,7 @@
   &:active
     color: #bbbbbb
 
-.Post__body
+.Post-body
   font-size: $app-post-font-size
   line-height: 1.7
   padding-bottom: spacing(2)
@@ -114,17 +114,17 @@
 
 
 
-.PostPreview__title
+.PostPreview-title
   font-family: $app-font-family-1
   letter-spacing: 2px
   font-weight: 600
   font-size: rem(32px)
   padding-bottom: 1rem
 
-.PostPreview__link
+.PostPreview-link
   +link
 
-.PostPreview__meta
+.PostPreview-meta
   color: #666666
   font-family: $app-font-family-2
   display: inline-block
@@ -134,12 +134,11 @@
   text-transform: uppercase
   padding-bottom: 1.25rem
 
-.PostPreview__body
+.PostPreview-body
   font-size: $app-post-font-size
   padding: 0 0 $app-gutter
 
-.PostPreview__more
-  +clearfix
+.PostPreview-more
   +link
   display: inline-block
   text-align: right
@@ -148,10 +147,10 @@
 
 
 +app-breakpoint-min(lg)
-  .Post__title
+  .Post-title
     font-size: rem(52px)
 
-  .Post__body
+  .Post-body
     font-size: $app-post-font-size-at-lg
     line-height: 1.7
     padding-right: spacing(4.5)

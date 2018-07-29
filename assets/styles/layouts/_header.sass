@@ -43,7 +43,7 @@
   letter-spacing: rem(4px)
   width: $app-logo-width
 
-.Logo__link
+.Logo-link
   +site-nav-link
   display: inline-block
 
@@ -55,15 +55,15 @@
   flex: 1
   text-align: right
 
-.SiteNav__list
+.SiteNav-list
   align-items: center
   display: inline-flex
 
-.SiteNav__list__item__link
+.SiteNav-link
   +site-nav-link
   letter-spacing: rem(2px)
 
-.SiteNav__list__icon-link
+.SiteNav-iconLink
   align-items: center
   display: flex
   padding: 0.5rem
@@ -117,13 +117,13 @@
   &.is-fullHeight
     min-height: 100vh
 
-.SiteHeader__inner
+.SiteHeader-inner
   padding: 0 0 3rem 0
   position: relative
   width: 100%
   z-index: $app-layer-site-header
 
-.SiteHeader__container
+.SiteHeader-container
   display: flex
   justify-content: space-between
   margin: 0 auto
@@ -135,7 +135,7 @@
 
 
 +app-breakpoint-min(lg)
-  .Logo__link
+  .Logo-link
     &.is-fixed
       position: fixed
 
@@ -156,14 +156,14 @@
         background-size: cover
         // background-position: 100% 100%
 
-  .SiteHeader__container
+  .SiteHeader-container
     display: block
 
   .Logo,
-  .Logo__link
+  .Logo-link
     width: 100%
 
-  .Logo__link
+  .Logo-link
     &:link,
     &:visited
       background: $app-site-nav-link-background--active
@@ -174,10 +174,10 @@
     padding-left: 0
     text-align: center
 
-  .SiteNav__list
+  .SiteNav-list
     display: flex
 
-  .SiteNav__list__item
+  .SiteNav-listItem
     flex: 1
     text-align: center
     margin: 0
@@ -185,11 +185,11 @@
     &.has-icon
       max-width: 4rem
 
-  .Logo__link
-  .SiteNav__list__item__link
+  .Logo-link
+  .SiteNav-link
     padding-left: 0
     padding-right: 0
 
-  .SiteNav__list__item__link
+  .SiteNav-link
     padding-bottom: 10px
     padding-top: 10px

@@ -5,8 +5,7 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
 
 ## Todo
 
-- Refactor component to be AppSiteHeader instead of just SiteHeader
-- Refactor sass styles
+- Refactor component filename to be AppSiteHeader instead of just SiteHeader
 - add these to package.json and modify webpack to handle css plugins
 
 ```
@@ -25,16 +24,15 @@ v2 of my website, built with Nuxt.js. Cool, init? Still a work in progress.
     transform-origin: 50% top;
     transition: transform 400ms;
 
-- Remove asterisk comments from Sass
-- Fix list margin left in post/md styles
 - Convert all old BEM to SUIT style
 - Use mixins for including styles into elements like headings and don't forgot to prefix these with `make-`
 - Fix the logo link text color on post pages
 - Change colors to variables
 - Edit some of the articles errors like in medium image loading and favorite features of es2015
 - Add codepen js to article pages
-- Fix post previews being offset because of max-width
 - Update about page and various pieces of text to sound more professional.
+- Add disqus back to articles
+
 
 #c5d6bb
 

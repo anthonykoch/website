@@ -5,7 +5,7 @@
       @blur="onBlur"
       @keyup="onChange"
       :class="{
-        'has-label-lifted': isInputFocused || hasText
+        'has-labelLifted': isInputFocused || hasText
       }"
       ref="input"
       class="Input"

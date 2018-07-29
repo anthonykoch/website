@@ -78,7 +78,7 @@ export default {
 //   top: 500px;
 // }
 
-// .SiteHeader__lower {
+// .SiteHeader-lower {
 //   padding-left: 300px;
 // }
 
