@@ -5,7 +5,10 @@ A static site generated with [Nuxt.js](https://nuxtjs.org/). Cool, init?
 
 ## Todo
 
-- [H] Performance improvements (images is a big one)
+- [H] Performance improvements
+  - lazy load images and video on home page
+- [M] Better fade in for landing page
+- [M] Maybe fade in/out between pages
 - [L] Find out why linting doesn't work and/or get better linting rules
 - [L] Replace all colors with variables
 - [L] Maybe add js to fullscreen an image
