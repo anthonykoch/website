@@ -1,18 +1,48 @@
 
+import fs from 'fs';
 import path from 'path';
+
+import _ from 'lodash';
+import datefns from 'date-fns';
+import hljs from 'highlight.js';
+import frontmatter from 'front-matter';
+import MarkdownIt from 'markdown-it';
 
 import {
   stripFileDate,
   getPathSlug,
   convertToAssets,
+  interpolatePath,
+  transformer,
 } from './utils';
 
-import frontmatter from 'front-matter';
-
-const _ = require('lodash');
-const datefns = require('date-fns');
-
 const ROUTE_BLOG = '/blog';
+
+const md = new MarkdownIt({
+  html: true,
+  linkify: false,
+  highlight(content, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${
+          hljs.highlight(lang, content, true).value
+        }</code></pre>`;
+      } catch (err) {
+        throw err;
+      }
+    }
+
+    return md.utils.escapeHtml(content);
+  },
+});
+
+export const getRenderedMarkdown = () => {
+  return (file) => {
+    return _.merge({}, file, {
+      contents: md.render(file.contents),
+    });
+  };
+};
 
 /**
  * Adds the parsed front matter to the file object
@@ -23,7 +53,7 @@ export const getFrontMatter =
       const data = frontmatter(file.contents);
 
       if (!frontmatter.test(file.contents)) {
-        throw new Error(`Could not find frontmatter in "${filename}"`);
+        throw new Error(`Could not find frontmatter in "${file.originalPath}"`);
       }
 
       return _.merge({}, file, {
@@ -38,7 +68,7 @@ export const getFrontMatter =
  * Is a "plugin" to be utilized by the parseMarkdown function.
  */
 export const getPostExcerpt =
-  ({ renderExcerpt=true, defaultSeparator='<!-- endexcerpt -->', md }={}) =>
+  ({ renderExcerpt=true, defaultSeparator='<!-- endexcerpt -->' }={}) =>
     (file) => {
     let excerpt = null;
     let excerptIndex = null;
@@ -174,3 +204,33 @@ export const createPostsMetaAssets =
     });
   };
 
+export const getPostsJson = async (files, { indent=2 }={}) => {
+  const postsFiles = await transformer(files, {
+    transforms: [
+      getFrontMatter(),
+      getRenderedMarkdown(),
+      getPostExcerpt(),
+      (file) => _.merge({}, file, {
+        path: stripFileDate(file.path),
+      }),
+      (file) => _.merge({}, file, {
+        humanized: {
+          created_at: datefns.format(file.frontmatter.created_at, 'MMMM, d y'),
+        },
+      }),
+    ],
+  });
+
+  const posts = createPostsJsonAssets(postsFiles, {
+    output: 'api/posts/[name].json',
+    indent,
+  });
+
+  // This is so that we can have a preview listing of posts on the /blog page
+  const postsMeta = createPostsMetaAssets(postsFiles, {
+    output: 'api/postmeta.json',
+    indent,
+  });
+
+  return { postsMeta, posts };
+};

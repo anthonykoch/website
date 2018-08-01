@@ -1,9 +1,12 @@
 
 .Overlay
   +position(fixed, 0 null null 0)
-  +size(100%)
   background: rgba(color('background'), 0.5)
+  height: 100vh
+  overflow: auto
+
   z-index: $app-layer-overlay
+  width: 100%
 
 .Overlay.is-white
   background-color: #ffffff
@@ -14,3 +17,17 @@
 .Overlay.is-dark
   background-color: #2b292b
 
+.Overlay-close
+  background-color: transparent
+  border: 2px solid transparent
+  fill: rgba(black, 0.6)
+  // border-radius: 50%
+  height: 38px
+  outline: 0
+  position: absolute
+  right: 1rem
+  top: 1rem
+  width: 38px
+
+  &:focus
+    border-color: rgba(black, 0.4)

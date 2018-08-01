@@ -5,7 +5,7 @@ import Vuex from 'vuex';
 import projects from './projects';
 import posts from './posts';
 import navigation from './navigation';
-import pages from './pages';
+import fullscreenImage from './fullscreenImage';
 
 export const storeDefinitions = {
   strict: true,
@@ -16,9 +16,7 @@ export const storeDefinitions = {
   actions: {
     async nuxtServerInit() {
       if (process.server) {
-        // const test = await axios.get('http://localhost:3000/_nuxt/api/postmeta.json');
 
-        // console.log(test)
       }
     },
   },
@@ -27,7 +25,7 @@ export const storeDefinitions = {
     projects,
     posts,
     navigation,
-    pages,
+    fullscreenImage,
   },
 };
 

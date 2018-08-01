@@ -21,7 +21,6 @@
         :src="project.video.url"
         style="height: auto"
         loop="true"
-        autoplay="true"
         aria-hidden="true"
         class="ProjectPreview-background"
       ></video>

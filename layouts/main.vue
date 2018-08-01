@@ -14,8 +14,29 @@
       Like, wtf.
      -->
 
-    <slot name="before"></slot>
+    <div :aria-hidden="isFullscreenImageShowing">
+      <transition
+        name="tr-fade"
+      >
+        <app-overlay
+          v-show="isFullscreenImageShowing"
+          @request-close="$store.dispatch('fullscreenImage/hideImage')"
+          :is-showing-close="true"
+        >
+          <div style="overflow: auto;">
+            <img
+              :src="fullscreenImageSrc"
+              :alt="fullscreenImageAlt"
+              class="Image is-fullscreen"
+              v-show="isFullscreenImageShowing"
+            >
+              <!-- style="height: 3000px" -->
+          </div>
+        </app-overlay>
+      </transition>
+    </div>
 
+    <slot name="before"></slot>
     <slot name="sidebar"></slot>
 
     <div class="Page-inner">
@@ -54,6 +75,7 @@
 
 <script>
 import Vue from 'vue';
+import { mapState } from 'vuex';
 
 // Just to make things easier so tha
 Vue.component('app-hero', require('@/components/Hero').default);
@@ -90,7 +112,18 @@ export default {
     },
   },
 
+  data() {
+    return {
+      console,
+    };
+  },
+
   computed: {
+    ...mapState({
+      isFullscreenImageShowing: state => state.fullscreenImage.isFullscreenImageShowing,
+      fullscreenImageSrc: state => state.fullscreenImage.fullscreenImageSrc,
+      fullscreenImageAlt: state => state.fullscreenImage.fullscreenImageAlt,
+    }),
     isHeroShowing() {
       return this.$slots.heroCaption || this.$slots.heroDescription || this.$slots.heroLower;
     },

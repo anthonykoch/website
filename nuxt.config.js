@@ -7,47 +7,15 @@ const glob = require('glob');
 const { inspect } = require('util');
 
 const _ = require('lodash');
-const MarkdownIt = require('markdown-it');
-const hljs = require('highlight.js');
 const datefns = require('date-fns');
 
 const { default: TransformFilePlugin } = requireModule('./.webpack/transform-file-plugin');
-
-const {
-  getFrontMatter,
-  getPostExcerpt,
-  createPostsJsonAssets,
-  createPostsMetaAssets,
-} = requireModule('./.webpack/post-helpers.js');
-
-const {
-  stripFileDate,
-  transformer,
-  when,
-} = requireModule('./.webpack/utils');
-
-const md = new MarkdownIt({
-  html: true,
-  linkify: false,
-  highlight(content, lang) {
-    if (lang && hljs.getLanguage(lang)) {
-      try {
-        return `<pre class="hljs"><code>${
-          hljs.highlight(lang, content, true).value
-        }</code></pre>`;
-      } catch (err) {
-        throw err;
-      }
-    }
-
-    return md.utils.escapeHtml(content);
-  },
-});
+const { getPostsJson } = requireModule('./.webpack/post-helpers.js');
+const { stripFileDate } = requireModule('./.webpack/utils');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const DIR_POSTS = '_posts';
 const ROUTE_BLOG = '/blog';
-const JSON_INDENT = 2;
 
 let appenv = {
   apiPath: '/_nuxt/api',
@@ -119,6 +87,7 @@ module.exports = {
    * Build configuration
    */
   build: {
+    watch: ['_posts'],
     extractCSS: {
       allChunks: true,
     },
@@ -134,9 +103,9 @@ module.exports = {
       config.module.rules = [
         ...config.module.rules,
         {
-          // This loader compiles the markdown files in `@/_post` and the TransformFilePlugin
-          // converts them into json. This allows the posts to be imported async when needed
-          // rather than sending them down with the entire app.
+          // This loader is purely so to make the posts files available to the the TransformFilePlugin,
+          // which subsequently converts them into json. This allows the posts to be imported async
+          // needed rather than sending them down with the entire app.
           //
           // In order to kick this loader off on the markdown, you need to `require('@/_posts/hello.md')`
           // or require.context('@/_posts', false, /\.$.md/) to require all the posts in a directory.
@@ -146,7 +115,7 @@ module.exports = {
             {
               // This loader will emit the the markdown file so that we can use the TransformFilePlugin
               // to transform it into JSON before the markdown is emitted.
-              loader: 'file-loader?name=[path][name].html',
+              loader: 'file-loader?name=[path][name].md',
             },
           ],
         },
@@ -154,44 +123,15 @@ module.exports = {
 
       const transformFilePlugin =
         new TransformFilePlugin({
-            include: /_posts\/.*?\.html$/,
+            include: /_posts\/.*?\.md$/,
             deleteOriginalAssets: true,
             async transform(files) {
-              const postsFiles = await transformer(files, {
-                transforms: [
-                  getFrontMatter(),
-                  getPostExcerpt({ md }),
-                  (file) => _.merge({}, file, {
-                    contents: md.render(file.contents),
-                  }),
-                  (file) => _.merge({}, file, {
-                    path: stripFileDate(file.path),
-                  }),
-                  (file) => _.merge({}, file, {
-                    humanized: {
-                      created_at: datefns.format(file.frontmatter.created_at, 'MMMM, d y'),
-                    },
-                  }),
-                ],
-              });
+              const { posts, postsMeta } = await getPostsJson(files);
 
-              const postAssets = createPostsJsonAssets(postsFiles, {
-                output: 'api/posts/[name].json',
-                indent: JSON_INDENT,
-              });
-
-              // This is so that we can have a preview listing of posts on the /blog page
-              const postsMeta = createPostsMetaAssets(postsFiles, {
-                output: 'api/postmeta.json',
-                indent: JSON_INDENT,
-              });
-
-              const all = {
-                ...postAssets,
+              return {
+                ...posts,
                 ...postsMeta,
               };
-
-              return all;
             },
           });
 

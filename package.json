@@ -29,6 +29,7 @@
     "sassdash": "^0.9.0",
     "slugify": "1.3.0",
     "vue-disqus": "^3.0.3",
+    "vue-focus-lock": "^1.2.0",
     "vue-scrollto": "^2.11.0",
     "vuex-persistedstate": "^2.5.4",
     "waypoints": "https://github.com/summerisgone/waypoints/tarball/master"

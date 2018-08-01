@@ -5,11 +5,9 @@ import axios from 'axios';
  * dev mode, and on actual production.
  */
 const baseURL =
-  typeof window === 'undefined'
-  //  && ['www.anthonykoch.com', 'localhost:3000'].includes(window.location.host)
+  process.server
     ? process.env.app.baseUrl
     : '/';
-
 
 const request = axios.create({
   baseURL,

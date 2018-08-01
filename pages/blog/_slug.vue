@@ -69,7 +69,7 @@
       </transition>
     </div>
 
-    <article class="Post" id="post">
+    <article class="Post" id="post" ref="post">
       <div class="Post__container">
         <header class="Post-header u-gutter" ref="postHeader">
           <div class="u-sizeReadable u-mxauto">
@@ -144,9 +144,6 @@ export default {
       return document.documentElement.scrollTop > offsetTop;
     },
 
-    onScroll: debounce(function () {
-    }, 300, { trailing: true }),
-
     updateBlogToolbarVisiblity: throttle(function () {
       console.log(this.getBlogToolbarVisiblity());
 
@@ -158,6 +155,13 @@ export default {
         this.isBlogToolbarVisible = false;
       }, 2000);
     }, 400, { trailing: true }),
+
+    onImageClick(e) {
+      this.$store.dispatch('fullscreenImage/setImage', {
+        src: e.currentTarget.src,
+        alt: e.currentTarget.alt,
+      });
+    },
   },
 
   head() {
@@ -198,7 +202,7 @@ export default {
 
   asyncData({ params, error }) {
     return api.getPost(params.slug)
-      .then(({ status, data: post }) => {
+      .then(({ data: post }) => {
         return {
           post,
         };
@@ -211,11 +215,22 @@ export default {
   destroyed() {
     window.removeEventListener('scroll', this.updateBlogToolbarVisiblity);
     window.removeEventListener('resize', this.updateBlogToolbarVisiblity);
+
+    this.images.forEach(image => image.removeEventListener('click', this.onImageClick));
+    this.images = null;
   },
 
   mounted() {
     window.addEventListener('scroll', this.updateBlogToolbarVisiblity);
     window.addEventListener('resize', this.updateBlogToolbarVisiblity);
+
+    const images = this.images = [...this.$refs.post.querySelectorAll('img')];
+
+    images.forEach((image) => {
+      image.classList.add('Image');
+      image.classList.add('is-allowedFullscreen');
+      image.addEventListener('click', this.onImageClick);
+    });
   },
 };
 </script>

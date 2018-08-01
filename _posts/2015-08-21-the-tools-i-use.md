@@ -1,5 +1,4 @@
 ---
-layout: post
 author: Anthony Koch
 title: The tools I use
 tags: ['development', 'tools']
@@ -7,7 +6,7 @@ id: 2
 created_at: 2015-08-21
 ---
 
-This is an overview of some of the development tools I've found useful, as well as some opinions and experiences I have had with them. 
+This is an overview of some of the development tools I've found useful, as well as some opinions and experiences I have had with them.
 
 
 <!-- endexcerpt -->
@@ -15,32 +14,33 @@ This is an overview of some of the development tools I've found useful, as well 
 
 ### Con Emu
 
-Con Emu is a <q>Windows [console emulator](http://askubuntu.com/questions/111144/are-terminal-and-shell-the-same) with tabs</q>. It has a lot of features and settings, and is very customizable. You can change the font, color scheme (the colors of the fonts), key bindings, transparency of the window, and other features. 
+Con Emu is a <q>Windows [console emulator](http://askubuntu.com/questions/111144/are-terminal-and-shell-the-same) with tabs</q>. It has a lot of features and settings, and is very customizable. You can change the font, color scheme (the colors of the fonts), key bindings, transparency of the window, and other features.
 
 
 <figure>
 	<figcaption>A picture of Con Emu running the Git Bash shell</figcaption>
-	<img src="{{site.images}}/posts/the-tools-i-use/con_emu_panels.png" alt="An image of Git Bash running through Con Emu">
+  <!-- Looking back, why the hel did I use dash case and camel case. Wtf... -->
+	<img src="/images/posts/the-tools-i-use/con_emu_panels.png" alt="An image of Git Bash running through Con Emu">
 </figure>
 
 
 #### Transparency
 
-One of the greatest features, in my opinion, is the the window transparency. Window transparency really helps when watching or reading a tutorial, and you don't want to keep switching back and forth between the command line and the browser. 
+One of the greatest features, in my opinion, is the the window transparency. Window transparency really helps when watching or reading a tutorial, and you don't want to keep switching back and forth between the command line and the browser.
 
 
-#### Tabs 
+#### Tabs
 
-One of the things really lacking with the default windows command line, among lots of other things, is the lack of tabs. Con Emu not only has tabs, but allows multiple panes per tab! The panes can be aligned side be side or top and bottom. 
+One of the things really lacking with the default windows command line, among lots of other things, is the lack of tabs. Con Emu not only has tabs, but allows multiple panes per tab! The panes can be aligned side be side or top and bottom.
 
-Each tab can be given a name for easy identification, and there is a tab restore setting that will preserve the directory the tab was closed at as well as the name the tab was given, so you don't have to keep opening up the same directory again and again. It's a great time saving feature. 
+Each tab can be given a name for easy identification, and there is a tab restore setting that will preserve the directory the tab was closed at as well as the name the tab was given, so you don't have to keep opening up the same directory again and again. It's a great time saving feature.
 
 
 > __Update:__ Con Emu can't remember the directory by default anymore, [read for more info](/blog/remember-directories-in-con-emu/)
 
 ### Git Bash
 
-Git Bash is a shell that provides things like SSH (which Windows by default doesn't have), Git (of course), and various commands that are used in Linux/Mac OS. The picture above shows Git Bash, which I much prefer to the windows command line. 
+Git Bash is a shell that provides things like SSH (which Windows by default doesn't have), Git (of course), and various commands that are used in Linux/Mac OS. The picture above shows Git Bash, which I much prefer to the windows command line.
 
 
 ### Sass
@@ -52,7 +52,7 @@ I really like what Sass has to offer. File separation, variables, mixins, and fu
 ```css
 /*
 	An example of the indented version of Sass
-	
+
 	Btw: The `+` operator is an alternative syntax to @include
 	and is exclusive to the indented syntax
 */
@@ -91,11 +91,11 @@ The above would be output as:
 
 ### Gulp and Webpack
 
-I started using Gulp because I wanted to start using Sass, and I read the gulp-sass plugin was so much faster than ruby-sass (which it is). I now use Gulp for live reloading, compiling Sass, and JavaScript minification. Getting started with Gulp was pretty easy after watching a couple [tutorials](https://www.youtube.com/playlist?list=PLLnpHn493BHE2RsdyUNpbiVn-cfuV7Fos). I was able to get up and going with it in a small amount of time. 
+I started using Gulp because I wanted to start using Sass, and I read the gulp-sass plugin was so much faster than ruby-sass (which it is). I now use Gulp for live reloading, compiling Sass, and JavaScript minification. Getting started with Gulp was pretty easy after watching a couple [tutorials](https://www.youtube.com/playlist?list=PLLnpHn493BHE2RsdyUNpbiVn-cfuV7Fos). I was able to get up and going with it in a small amount of time.
 
 Some while after learning Gulp, I came across [Webpack](http://webpack.github.io/). Webpack is a bundler tool that can be used to preprocess files, bundle JavaScript, and many other tasks. My interest in it was being able to transpile ES6 code to ES5 as well as giving the ability to require modules like in nodejs. I had originally looked into Browserify for this, but I couldn't figure out how to set it up, and Webpack seemed like the easier option.
 
-Webpack took me a much longer time to learn and get going than gulp did. I don't know why, but I just couldn't make sense of how to set it up. And that's the thing with tools like this, they are difficult to learn for a beginner, and the setup can take a long time, plus they also take up a bit of disk space. 
+Webpack took me a much longer time to learn and get going than gulp did. I don't know why, but I just couldn't make sense of how to set it up. And that's the thing with tools like this, they are difficult to learn for a beginner, and the setup can take a long time, plus they also take up a bit of disk space.
 
 
 ### Further Resources

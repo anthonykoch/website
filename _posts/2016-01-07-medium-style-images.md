@@ -1,5 +1,4 @@
 ---
-layout: post
 author: Anthony Koch
 title: Medium style image loading
 tags: ['stackblur', 'medium', 'lazy loading']

@@ -230,7 +230,7 @@ export default {
       heroItems: [
         {
           title: 'website?',
-          caption: 'I develop websites that work excellently across a wide range of devices.',
+          caption: 'I develop websites that work across a wide range of devices.',
         },
         {
           title: 'design developed?',
