@@ -224,6 +224,15 @@ export default {
     window.addEventListener('scroll', this.updateBlogToolbarVisiblity);
     window.addEventListener('resize', this.updateBlogToolbarVisiblity);
 
+    const links = [...this.$refs.post.querySelectorAll('a')];
+
+    links.forEach((link) => {
+      if (link.host !== window.location.host) {
+        link.setAttribute('rel', 'noreferrer noopener');
+        link.setAttribute('target', '_blank');
+      }
+    });
+
     const images = this.images = [...this.$refs.post.querySelectorAll('img')];
 
     images.forEach((image) => {
