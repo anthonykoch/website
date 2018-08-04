@@ -17,9 +17,12 @@ const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const DIR_POSTS = '_posts';
 const ROUTE_BLOG = '/blog';
 
+console.log({IS_PRODUCTION, node_env: process.env.NODE_ENV});
+
 let appenv = {
   apiPath: '/_nuxt/api',
   baseUrl: 'http://localhost:3000',
+  disqusShortname: 'anthonykoch',
 };
 
 if (IS_PRODUCTION) {
@@ -138,8 +141,6 @@ module.exports = {
       if (isClient) {
         config.plugins = [
           ...config.plugins,
-          //   reportFilename: path.join(__dirname, IS_PRODUCTION ? '.reports/prod.html' : '.reports/dev.html'),
-
           transformFilePlugin
         ];
       }
@@ -163,7 +164,8 @@ module.exports = {
 
   plugins: [
     '~plugins/bootstrap',
-    '~/plugins/disqus',
+    '~/plugins/ga',
+    // '~/plugins/disqus',
 
     // Might need highlighter later
     // '~plugins/vue-highlightjs'

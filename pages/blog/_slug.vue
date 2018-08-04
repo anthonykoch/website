@@ -19,7 +19,6 @@
     })();
 </script>
 
-<noscript>Please enable JavaScript to view the <a href="https://disqus.com/?ref_noscript" rel="nofollow">comments powered by Disqus.</a></noscript>
 -->
 
 <template>
@@ -48,7 +47,6 @@
     <div slot="before" class="BlogToolbar">
       <transition name="tr-fade" :duration="250">
         <div v-show="isBlogToolbarVisible">
-
             <div>
               <!-- I don't think there's a point in having this when there's a "back to top" button -->
               <!--<button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
@@ -99,21 +97,18 @@
       </div>
     </article>
 
-    <!-- TODO -->
-    <!-- {{ disqusUrl }} -->
-    <!-- <vue-disqus
+    <!--<vue-disqus
       v-if="this.post"
       :shortname="disqusShortname"
       :identifier="disqusId"
       :url="disqusUrl"
     >
-    </vue-disqus> -->
+    </vue-disqus>-->
   </page>
 </template>
 
 <script>
 import { mapState } from 'vuex';
-import Disqus from 'vue-disqus'
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/debounce';
 
@@ -145,8 +140,6 @@ export default {
     },
 
     updateBlogToolbarVisiblity: throttle(function () {
-      console.log(this.getBlogToolbarVisiblity());
-
       this.isBlogToolbarVisible = this.getBlogToolbarVisiblity();
 
       // Automatically hide it after a period of time
@@ -187,17 +180,17 @@ export default {
   },
 
   computed: {
-    disqusShortname() {
-      return process.env.app.disqusShortname;
-    },
+    // disqusShortname() {
+    //   return process.env.app.disqusShortname;
+    // },
 
-    disqusId() { // env used to avoid re-use from dev to production
-      return '${process.env.NODE_ENV}-${this.disqusShortname}-${this.post.id}'
-    },
+    // disqusId() { // env used to avoid re-use from dev to production
+    //   return '${process.env.NODE_ENV}-${this.disqusShortname}-${this.post.id}'
+    // },
 
-    disqusUrl() {
-      return this.$route.path;
-    },
+    // disqusUrl() {
+    //   return this.$route.path;
+    // },
   },
 
   asyncData({ params, error }) {
