@@ -10,11 +10,12 @@
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production nuxt start",
     "generate": "cross-env NODE_ENV=production nuxt generate",
-    "deploy": "npm run clean && npm run generate && node deploy.js",
+    "deploy": "npm run clean && cross-env NODE_ENV=production nuxt generate && node deploy.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
   "dependencies": {
+    "@nuxtjs/google-analytics": "^2.0.2",
     "@nuxtjs/markdownit": "^1.2.1",
     "axios": "^0.18.0",
     "bladejs": "https://github.com/anthonykoch/bladejs/tarball/master",

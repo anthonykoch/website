@@ -164,7 +164,6 @@ module.exports = {
 
   plugins: [
     '~plugins/bootstrap',
-    '~/plugins/ga',
     // '~/plugins/disqus',
 
     // Might need highlighter later
@@ -172,6 +171,8 @@ module.exports = {
   ],
 
   modules: [
-    // ['@nuxtjs/google-analytics', { ua: 'UA-104010-6' }],
+    ['@nuxtjs/google-analytics', {
+      id: 'UA-69481885-1',
+    }]
   ],
 };
