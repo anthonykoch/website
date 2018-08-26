@@ -1,12 +1,11 @@
 @charset 'utf-8'
 
 //
-// The order of what's imported is very imported, and is ordered
-// in terms of least to most specific.
+// The order of imports is from least to most specific.
 //
-// We start with components, since we want to allow overriding them
-// in layouts and pages. Helpers are declared last as they override
-// all other selectors by use of an !important.
+// We start with components, since we want to allow overriding them in layouts
+// and pages. Helpers are declared last as they override all other selectors by
+// use of an !important.
 //
 
 @import 'bootstrap'
@@ -45,7 +44,6 @@
 @import 'pages/home'
 @import 'pages/error404'
 
-// Contains shameful code
 @import 'shame'
 
 @import 'utilities/helpers'
