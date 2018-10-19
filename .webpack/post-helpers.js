@@ -34,7 +34,8 @@ const md = new MarkdownIt({
 
     return md.utils.escapeHtml(content);
   },
-});
+})
+  .use(require('markdown-it-named-headings'));
 
 export const getRenderedMarkdown = () => {
   return (file) => {

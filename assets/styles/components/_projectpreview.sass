@@ -9,9 +9,7 @@
   z-index: 1
 
   &.is-animated
-    transition-duration: 0.7s
-    transition-property: transform, opacity
-    transition-timing-function: ease-out
+    transition: transform 700ms ease-out, opacity 700ms ease-out
 
   &.is-showing
     opacity: 1
@@ -53,9 +51,7 @@
     border-radius: inherit
     content: ''
     opacity: 0
-    transition-duration: 0.3s
-    transition-property: background, opacity
-    transition-timing-function: $ease-in-out-cubic
+    transition: background 300ms $ease-in-out-cubic, opacity 300ms $ease-in-out-cubic
 
   &:after
     +absolute-fill

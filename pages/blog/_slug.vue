@@ -33,12 +33,24 @@
           <span class="SidebarButton-upper">Next:</span>
           <span class="SidebarButton-lower">{{ post.next.title }}</span>
         </a>
+
         <a :href="post.previous.url" class="SidebarButton u-mb3" v-if="post.previous">
           <span class="SidebarButton-upper">Previous:</span>
           <span class="SidebarButton-lower">{{ post.previous.title }}</span>
         </a>
 
-        <div class="Sidebar-social  u-textCenter">
+        <div class="Sidebar-footer  u-textCenter">
+          <div class="u-py4 u-px3" v-if="post.skip">
+            <a
+              :href="post.skip.section"
+              title="Skip the back story and get to the meat and potatoes"
+              class="Button has-lightBackground is-sizeSmall u-block u-w600"
+              v-scroll-to="post.skip.section"
+            >
+              {{ skipText }}
+            </a>
+          </div>
+
           <app-social-icons></app-social-icons>
         </div>
       </div>
@@ -180,6 +192,10 @@ export default {
   },
 
   computed: {
+    skipText() {
+      return this.post.skip && this.post.skip.text ? this.post.skip.text : "Skip the backstory"
+    },
+
     // disqusShortname() {
     //   return process.env.app.disqusShortname;
     // },

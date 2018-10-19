@@ -7,7 +7,7 @@
   cursor: pointer
   display: inline-block
   font-size: $app-button-font-size
-  font-weight: 400
+  font-weight: 500
   letter-spacing: 0.1rem
   line-height: $app-button-line-height
   outline: 0
@@ -31,12 +31,25 @@
   &:active
     filter: $app-button-drop-shadow-active
 
+  &.is-dark
+    color: #f2f2f2
+    background-color: #2b292b
+
+    &:link,
+    &:visited
+      color: #f2f2f2
+
   &.has-lightBackground
     background-color: #f2f2f2
 
     &:link,
     &:visited
       background-color: #f2f2f2
+
+  &.is-sizeSmall
+    line-height: 1.6
+    font-size: 11px
+    padding: 12px 20px
 
   &.is-sizeLarge
     line-height: $app-button-line-height-lg
