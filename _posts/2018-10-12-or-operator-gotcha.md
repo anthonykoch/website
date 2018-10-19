@@ -31,7 +31,7 @@ This ensures that there is no `Cannot read property 'headers' of undefined` erro
 
 ### How it works
 
-This pattern works because the `||` operator returns the first operand if the first operand truthy, and the second operand if the first operand is falsey. In fact, if the left operand is truthy, the right operand is never evaluated. To illustrate that point, if the second operand is a function call, e.g. `42 || getUserAge()`, then `getUserAge` would never be called and the result would be `42`.
+This pattern works because the `||` operator returns the first operand if the first operand truthy or the second operand if the first operand is falsey. In fact, if the left operand is truthy, the right operand is never evaluated. To illustrate that point, if the second operand is a function call, e.g. `42 || getUserAge()`, then `getUserAge` would never be called and the result would be `42`.
 
 ```js
 console.log(undefined || { name: 'Jim' }) // { name: 'Jim' }
