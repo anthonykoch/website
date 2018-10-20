@@ -381,8 +381,7 @@ $br-layer-files-pane: 200
   position: relative
   text-align: left
   text-shadow: rem(1px) rem(1px) rem(1px) rgba(black, 0.2)
-  transition-duration: 0.2s, 0.2s
-  transition-property: border, background-color
+  transition: border 200ms, background-color 200ms
   user-select: none
   will-change: border, background-color
   width: 100%
@@ -629,8 +628,7 @@ $br-layer-files-pane: 200
   height: auto
   display: flex
   opacity: 0
-  transition-duration: 0.2s
-  transition-property: opacity
+  transition: opacity 200ms
   user-select: none
 
 .br-FileActions-button
@@ -641,8 +639,7 @@ $br-layer-files-pane: 200
   padding-right: 30px
   position: relative
   text-align: center
-  transition-duration: 0.3s
-  transition-property: background-color, box-shadow
+  transition: background-color 300ms, box-shadow 300ms
 
   &:active,
   &:focus
@@ -689,8 +686,7 @@ $br-layer-files-pane: 200
   color: rgba(black, 0.6)
   height: 100%
   margin: 0
-  transition-duration: 0.25s, 0.5s
-  transition-property: transform, opacity
+  transition: transform 250ms, opacity 500ms
   width: rem(250px)
   z-index: $br-layer-newfileinput
 
