@@ -174,9 +174,12 @@ export default {
     },
 
     onImageClick(e) {
+      const image = e.currentTarget
+
       this.$store.dispatch('fullscreenImage/setImage', {
-        src: e.currentTarget.src,
-        alt: e.currentTarget.alt,
+        src: image.src,
+        alt: image.alt,
+        maxWidth: image.getAttribute('data-max-width'),
       });
     },
   },
