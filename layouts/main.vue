@@ -23,14 +23,16 @@
           @request-close="$store.dispatch('fullscreenImage/hideImage')"
           :is-showing-close="true"
         >
-          <div style="overflow: auto;">
+          <div class="FullscreenImageContainer">
             <img
               :src="fullscreenImageSrc"
               :alt="fullscreenImageAlt"
+              :style="{
+                'max-width': fullscreenImageMaxWidth,
+              }"
               class="Image is-fullscreen"
               v-show="isFullscreenImageShowing"
             >
-              <!-- style="height: 3000px" -->
           </div>
         </app-overlay>
       </transition>
@@ -121,9 +123,11 @@ export default {
   computed: {
     ...mapState({
       isFullscreenImageShowing: state => state.fullscreenImage.isFullscreenImageShowing,
-      fullscreenImageSrc: state => state.fullscreenImage.fullscreenImageSrc,
-      fullscreenImageAlt: state => state.fullscreenImage.fullscreenImageAlt,
+      fullscreenImageSrc: state => state.fullscreenImage.src,
+      fullscreenImageAlt: state => state.fullscreenImage.alt,
+      fullscreenImageMaxWidth: state => state.fullscreenImage.maxWidth,
     }),
+
     isHeroShowing() {
       return this.$slots.heroCaption || this.$slots.heroDescription || this.$slots.heroLower;
     },

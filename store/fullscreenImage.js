@@ -3,15 +3,18 @@ export default {
   namespaced: true,
   state: {
     isFullscreenImageShowing: false,
-    fullscreenImageSrc: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
-    fullscreenImageAlt: '',
+    src: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+    alt: '',
+    maxWidth: null,
   },
 
   mutations: {
-    SET_IMAGE(state, { src, alt }) {
+    SET_IMAGE(state, { src, alt, maxWidth }) {
       state.isFullscreenImageShowing = true;
-      state.fullscreenImageAlt = alt;
-      state.fullscreenImageSrc = src;
+      state.alt = alt;
+      state.src = src;
+
+      state.maxWidth = maxWidth;
     },
 
     HIDE_IMAGE(state) {
@@ -20,8 +23,8 @@ export default {
   },
 
   actions: {
-    setImage({ commit }, { src, alt }) {
-      commit('SET_IMAGE', { src, alt });
+    setImage({ commit }, options) {
+      commit('SET_IMAGE', options);
     },
 
     hideImage({ commit }) {

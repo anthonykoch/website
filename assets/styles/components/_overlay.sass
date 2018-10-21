@@ -20,14 +20,30 @@
 .Overlay-close
   background-color: transparent
   border: 2px solid transparent
+  border-radius: 100%
   fill: rgba(black, 0.6)
-  // border-radius: 50%
-  height: 38px
+  height: 43px
   outline: 0
   position: absolute
   right: 1rem
   top: 1rem
-  width: 38px
+  transition: transform 170ms, box-shadow 170ms
+  width: 43px
 
   &:focus
     border-color: rgba(black, 0.4)
+
+  &:active
+    transform: scale(0.92)
+    box-shadow: 0 3px 5px -1px rgba(black, 0.4)
+
+  &.is-light
+    background-color: white
+    box-shadow: 0 13px 36px -2px rgba(black, 0.18)
+
+.Overlay-closeIcon
+  width: 30px
+  position: absolute
+  top: 50%
+  left: 50%
+  transform: translate(-50%, -50%)

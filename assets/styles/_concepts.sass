@@ -1,0 +1,78 @@
+// Note: These are design concepts, this code will be bad
+
+// <div class="SidebarHeadingList">
+//   <h3 class="SidebarHeadingList-item is-active">Intro</h3>
+//   <h3 class="SidebarHeadingList-item">How does it work?</h3>
+//   <h3 class="SidebarHeadingList-item">Populating data on the server</h3>
+//   <h3 class="SidebarHeadingList-item">What I built</h3>
+//   <h3 class="SidebarHeadingList-item">Initial impressions</h3>
+// </div>
+
+
+// .SidebarHeadingList
+//   margin: 30px 20px 30px 20px
+
+// .SidebarHeadingList-item
+//   // margin-left: 25px
+//   align-items: center
+//   // font-family: proxima-nova
+//   border-radius: 3px
+//   color: rgba(white, 1)
+//   cursor: pointer
+//   display: flex
+//   letter-spacing: 1px
+//   // font-weight: 500
+//   font-size: 15px
+//   padding: 7px 10px
+//   margin-bottom: 4px
+
+//   // &:before
+//   //   content: '+'
+//   //   display: inline-block
+//   //   font-size: 20px
+//   //   margin-right: 4px
+//   //   position: relative
+//   //   top: 1px
+
+//   &:before
+//     content: ''
+//     height: 7px
+//     width: 7px
+//     border-radius: 50%
+//     display: inline-block
+//     font-size: 20px
+//     margin-right: 8px
+//     position: relative
+//     margin-left: -7px
+//     // top: 1px
+
+//   &.is-active
+//     // color: rgba(black, 0.8)
+
+//     &:before
+//       background-color: #ffe083
+
+
+
+
+// h3
+//   position: relative
+//   z-index: 1
+//   // display: inline-block
+//   left: -100px
+
+//   &:before
+//     background-color: #ffe083
+//     content: ''
+//     height: 90%
+//     display: inline-block
+//     position: absolute
+//     top: -5px
+//     left: -60px
+//     width: 200px
+//     z-index: -1
+
+//     &:after
+//       display: block
+//       content: ''
+
