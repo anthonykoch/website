@@ -73,8 +73,20 @@ module.exports = function (source, map, meta) {
   const output = `
 <template><${wrapper}>${markdown}</${wrapper}></template>
 <script>
-${$scripts.first().html() || ''}
-;const ${attributesVariable} = ${JSON.stringify(attributes)};
+${
+  $scripts.first().html() ||
+`<script>
+module.exports.default = {
+  data: function data() {
+    return {
+      ${attributesVariable}: ${attributesVariable},
+    }
+  }
+}
+</script>
+`
+}
+;var ${attributesVariable} = ${JSON.stringify(attributes)};
 </script>
 ${styles}
 `
