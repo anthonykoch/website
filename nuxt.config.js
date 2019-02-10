@@ -4,20 +4,16 @@ const requireModule = require('esm')(module);
 
 const path = require('path');
 const glob = require('glob');
-const { inspect } = require('util');
 
-const _ = require('lodash');
-const datefns = require('date-fns');
-
-const { default: TransformFilePlugin } = requireModule('./.webpack/transform-file-plugin');
-const { getPostsJson } = requireModule('./.webpack/post-helpers.js');
-const { stripFileDate } = requireModule('./.webpack/utils');
+const FrontMatterPlugin = require('./.webpack/front-matter-plugin');
 
 const IS_PRODUCTION = process.env.NODE_ENV === 'production';
 const DIR_POSTS = '_posts';
 const ROUTE_BLOG = '/blog';
 
-console.log({IS_PRODUCTION, node_env: process.env.NODE_ENV});
+console.log({node_env: process.env.NODE_ENV});
+
+const stripFileDate = (pathname) => pathname.replace(/\d{4}-\d{2}-\d{2}-/, '')
 
 let appenv = {
   apiPath: '/_nuxt/api',
@@ -94,54 +90,37 @@ module.exports = {
     extractCSS: {
       allChunks: true,
     },
-
     postcss: [
       require('cssnano')({
         preset: 'default',
       }),
       require('autoprefixer')(),
     ],
-
     extend(config, { isClient }) {
       config.module.rules = [
-        ...config.module.rules,
         {
-          // This loader is purely so to make the posts files available to the the TransformFilePlugin,
-          // which subsequently converts them into json. This allows the posts to be imported async
-          // needed rather than sending them down with the entire app.
-          //
-          // In order to kick this loader off on the markdown, you need to `require('@/_posts/hello.md')`
-          // or require.context('@/_posts', false, /\.$.md/) to require all the posts in a directory.
-          test: /\.md$/,
-          include: [path.resolve(DIR_POSTS)],
+          test: /\.md$/i,
+          include: [path.resolve('_posts')],
           use: [
+            'vue-loader',
             {
-              // This loader will emit the the markdown file so that we can use the TransformFilePlugin
-              // to transform it into JSON before the markdown is emitted.
-              loader: 'file-loader?name=[path][name].md',
+              loader: require.resolve('./.webpack/vue-markdown-loader'),
             },
           ],
         },
+        ...config.module.rules,
       ];
-
-      const transformFilePlugin =
-        new TransformFilePlugin({
-            include: /_posts\/.*?\.md$/,
-            deleteOriginalAssets: true,
-            async transform(files) {
-              const { posts, postsMeta } = await getPostsJson(files);
-
-              return {
-                ...posts,
-                ...postsMeta,
-              };
-            },
-          });
 
       if (isClient) {
         config.plugins = [
           ...config.plugins,
-          transformFilePlugin
+          new FrontMatterPlugin({
+            // Remove the date from the output filename
+            glob: '_posts/*.md',
+            replacer: stripFileDate,
+            indent: 2,
+            filename: 'postmeta.[hash:8].json',
+          })
         ];
       }
     },
