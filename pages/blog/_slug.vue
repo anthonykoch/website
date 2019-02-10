@@ -111,31 +111,6 @@ export default {
     return {
       slug: params.slug,
     }
-
-    // const meta = $store.state.posts.meta.find((meta) => meta.slug === params.slug)
-    // let post = null
-
-    // const module = await import()
-
-    // if (module) {
-    //   // post = module.default
-    // }
-
-    // console.log(module);
-
-
-    // return {
-    //   meta,
-    // }
-    // return api.getPostComponent(params.slug)
-    //   .then(({ data: post }) => {
-    //     return {
-    //       post,
-    //     };
-    //   })
-    //   .catch(err => {
-    //     error({ statusCode: 404, message: 'Post not found' });
-    //   });
   },
 
   components: {
