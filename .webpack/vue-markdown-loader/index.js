@@ -40,6 +40,7 @@ const schema = {
 };
 
 module.exports = function (source, map, meta) {
+  // console.time('mark')
   this.cacheable(true)
 
   const options = loaderUtils.getOptions(this) || {};
@@ -48,12 +49,13 @@ module.exports = function (source, map, meta) {
   const {
     render = md.render.bind(md),
     wrapper = 'div',
-    attributesVariable = 'page',
   } = options
 
-  const $ = cheerio.load(source.toString('utf8'))
-  const $scripts = $('body').find('script').filter(isTopLevel)
-  const $styles = $('body').find('style').filter(isTopLevel)
+  const { body } = frontmatter(source.replace(/^[\s]+---/, '---'))
+  const markdown = render(body)
+  const $ = cheerio.load(markdown)
+  const $scripts = $('script')
+  const $styles = $('style')
 
   if ($scripts.length > 1) {
     return this.emitError(new Error('A markdown SFC should have only one script block'))
@@ -62,36 +64,15 @@ module.exports = function (source, map, meta) {
   $scripts.remove()
   $styles.remove()
 
-  const input = $('body').html().replace(/^[\s]+---/, '---')
-
-  const { body, attributes } = frontmatter(input)
-  const markdown = render(body)
   const styles = $styles.toArray().map((el) => $.html(el)).join('')
-  console.log(styles);
-
 
   const output = `
-<template><${wrapper}>${markdown}</${wrapper}></template>
-<script>
-${
-  $scripts.first().html() ||
-`<script>
-module.exports.default = {
-  data: function data() {
-    return {
-      ${attributesVariable}: ${attributesVariable},
-    }
-  }
-}
-</script>
-`
-}
-;var ${attributesVariable} = ${JSON.stringify(attributes)};
-</script>
+${$.html($scripts) || '<script>export default {};</script>'}
 ${styles}
+<template><${wrapper}>${$('body').html()}</${wrapper}></template>
 `
 
-  // console.log(output);
+// console.timeEnd('mark')
 
   return output
 }

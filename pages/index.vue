@@ -209,18 +209,12 @@
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 
 export default {
-  props: {
-    //
-  },
-
   components: {
     page: require('@/layouts/main').default,
   },
-
   data() {
     return {
       console,

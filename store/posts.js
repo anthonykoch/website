@@ -41,13 +41,7 @@ export default {
       return api.getPostsMeta()
         .then(res => {
           $store.commit('LOAD_POSTS_META', res.data);
-          // console.log('loadMeta', res.data);
         })
-        .catch(err => {
-          // console.log('err', err)
-
-          return err;
-        });
     },
   },
 

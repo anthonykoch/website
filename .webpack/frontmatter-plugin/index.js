@@ -1,14 +1,73 @@
 'use strict'
 
-const loaderUtils = require('loader-utils')
-const frontmatter = require('front-matter')
-const validateOptions = require('schema-utils')
 const fs = require('fs')
+const path = require('path')
 const util = require('util')
-const dateFns = require('date-fns')
+
+const _ = require('lodash')
+const loaderUtils = require('loader-utils')
+const validateOptions = require('schema-utils')
+const datefns = require('date-fns')
+const slugify = require('slugify')
+const MarkdownIt = require('markdown-it');
+const frontmatter = require('front-matter')
+const hljs = require('highlight.js')
 
 const glob = util.promisify(require('glob'))
 const readFile = util.promisify(fs.readFile)
+
+const md = new MarkdownIt({
+  html: true,
+  linkify: false,
+  highlight(content, lang) {
+    if (lang && hljs.getLanguage(lang)) {
+      try {
+        return `<pre class="hljs"><code>${
+          hljs.highlight(lang, content, true).value
+        }</code></pre>`;
+      } catch (err) {
+        throw err;
+      }
+    }
+
+    return md.utils.escapeHtml(content);
+  },
+})
+  .use(require('markdown-it-named-headings'));
+
+const defaultTransformAttributes = exports.defaultTransformAttributes = (all, inputs, options) => {
+  return inputs.map((input) => {
+    const slug = slugify(path.basename(input.replacedPath, path.extname(input.replacedPath)))
+
+    let excerpt = null
+
+    if (typeof input.attributes.excerpt === 'string') {
+      // The excerpt is custom defined in the front matter
+      excerpt = String(input.attributes.excerpt);
+    } else {
+      const separator =
+        [frontmatter.excerpt_separator, frontmatter.excerptSeparator, '<!-- endexcerpt -->']
+          .find(item => item != null);
+
+      const excerptIndex = input.body.indexOf(separator)
+
+      if (excerptIndex > -1) {
+        excerpt = input.body.substring(0, excerptIndex);
+      }
+    }
+
+    return {
+      ...input.attributes,
+      importBasename: path.basename(input.path, path.extname(input.path)),
+      excerpt: excerpt == null ? null : options.markdown(excerpt),
+      humanized: {
+        created_at: datefns.format(input.attributes.created_at, 'MMMM, d y'),
+      },
+      url: path.posix.normalize(`${options.baseRoute}/${slug}`),
+      slug,
+    }
+  })
+}
 
 const schema = {
   type: 'object',
@@ -16,7 +75,6 @@ const schema = {
     'glob',
     'filename',
   ],
-  // additionalProperties: false,
   properties: {
     glob: {
       type: 'string',
@@ -36,10 +94,19 @@ const schema = {
     context: {
       type: 'string',
     },
-    transform: {
+    transformAttributes: {
+      instanceof: 'Function',
+    },
+    transformAssets: {
+      instanceof: 'Function',
+    },
+    markdown: {
       instanceof: 'Function',
     },
     replacer: {
+      instanceof: 'Function',
+    },
+    sort: {
       instanceof: 'Function',
     },
   },
@@ -63,6 +130,19 @@ const readFiles = (pattern) => {
 
 const name = 'FrontMatterPlugin';
 
+const identity = (value) => value
+
+const defaultOptions = {
+  merge: true,
+  requireFrontMatter: true,
+  markdown: (...args) => md.render(...args),
+  indent: 0,
+  context: process.cwd(),
+  replacer: identity,
+  transformAssets: identity,
+  transformAttributes: defaultTransformAttributes,
+}
+
 /**
  * Transforms the frontmatter in the set of retrieved files into a single JSON.
  */
@@ -76,37 +156,40 @@ module.exports = class FrontMatterPlugin {
    * @param {string} options.merge - merge all front matters into a single file
    * @param {string} options.context - overrides webpack context
    * @param {number} [options.indent=0] - The indent of the output JSON
-   * @param {Object} options.attributes
-   * @param {Object} options.attributes.date - The name of the attribute in the front matter that contains the date
+   * @param {string} options.dateField - A lodash path for the field in the front matter containing the date
    * @param {() => { [filename: string]: string | Buffer }} options.transform
    */
   constructor(options) {
-    this.options = options;
+    const { dateField = 'created_at' } = options
+
+    const defaultSort = ({ attributes: aAttributes }, { attributes: bAttributes }) => {
+      const aDate = _.get(aAttributes, dateField)
+      const bDate = _.get(bAttributes, dateField)
+
+      return datefns.compareDesc(aDate, bDate)
+    }
+
+    this.options = Object.assign({ dateField, sort: defaultSort }, defaultOptions, options);
 
     if (typeof options == null || typeof options !== 'object') {
       throw new Error(`options should be an object, got ${options}`);
     }
+
+    validateOptions(schema, this.options, name)
   }
 
   apply(compiler) {
-    const { attributes = { date: 'created_at' } } = this.options
-
-    const defaultSort = ({ attributes: aAttributes }, { attributes: bAttributes }) => {
-      const aDate = aAttributes[attributes.date]
-      const bDate = bAttributes[attributes.date]
-
-      return dateFns.compareDesc(aDate, bDate)
-    }
-
     const {
       glob: pattern,
-      merge = true,
-      requireFrontMatter = true,
       sort = defaultSort,
-      indent = 0,
+      merge,
+      requireFrontMatter,
+      indent,
       filename,
-      replacer = (str) => str,
-      context = process.cwd(),
+      context,
+      replacer,
+      transformAssets,
+      transformAttributes,
     } = this.options
 
     const emit = (compilation, callback) => {
@@ -122,6 +205,7 @@ module.exports = class FrontMatterPlugin {
             const fm = frontmatter(contents)
 
             return {
+              replacedPath: replacer(file.path),
               ...file,
               ...fm,
             }
@@ -137,7 +221,13 @@ module.exports = class FrontMatterPlugin {
                 ? [...inputs.sort(sort)]
                 : headers
 
-            const json = JSON.stringify(headers.map(input => input.attributes), null, indent)
+            const allAttributes = headers.map(input => input.attributes)
+
+            const json = JSON.stringify(
+                transformAttributes(allAttributes, inputs, this.options),
+                null,
+                indent
+              )
 
             const outputFilename =
               loaderUtils.interpolateName({
@@ -159,14 +249,16 @@ module.exports = class FrontMatterPlugin {
                   context: context,
                 });
 
-              all[outputPath] = JSON.stringify(input.attributes, null, indent)
+              const attributes = transformAttributes(input.attributes, input, inputs, this.options)
+
+              all[outputPath] = JSON.stringify(attributes, null, indent)
 
               return all
             }, {})
           }
 
-          if (this.options.transform) {
-            assets = this.options.transform(assets, files)
+          if (transformAssets) {
+            assets = transformAssets(assets, inputs)
           }
 
           Object.assign(

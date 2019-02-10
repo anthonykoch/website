@@ -1,51 +1,30 @@
 
-<!-- Disqus Comments -->
-<!--
-<div class="[ Row Row--large ]  disqus_thread">
-  <div id="disqus_thread"></div>
-</div>
-
-<script type="text/javascript">
-    /* * * CONFIGURATION VARIABLES * * */
-    var disqus_shortname  = '';
-    var disqus_identifier = {{ page.path | remove:'_posts/' | jsonify }};
-    var disqus_title      = {{ page.title | jsonify }};
-
-    /* * * DON'T EDIT BELOW THIS LINE * * */
-    (function() {
-        var dsq = document.createElement('script'); dsq.type = 'text/javascript'; dsq.async = true;
-        dsq.src = '//' + disqus_shortname + '.disqus.com/embed.js';
-        (document.getElementsByTagName('head')[0] || document.getElementsByTagName('body')[0]).appendChild(dsq);
-    })();
-</script>
-
--->
-
 <template>
   <page
     :showSocial="false"
     :showFooter="false"
     :theme="theme"
   >
+
     <div class="Sidebar" slot="sidebar">
       <div class="Sidebar-inner">
-        <a :href="post.next.url" class="SidebarButton u-mb3" v-if="post.next">
+        <a :href="next.url" class="SidebarButton u-mb3" v-if="next">
           <span class="SidebarButton-upper">Next:</span>
-          <span class="SidebarButton-lower">{{ post.next.title }}</span>
+          <span class="SidebarButton-lower">{{ next.title }}</span>
         </a>
 
-        <a :href="post.previous.url" class="SidebarButton u-mb3" v-if="post.previous">
+        <a :href="previous.url" class="SidebarButton u-mb3" v-if="previous">
           <span class="SidebarButton-upper">Previous:</span>
-          <span class="SidebarButton-lower">{{ post.previous.title }}</span>
+          <span class="SidebarButton-lower">{{ previous.title }}</span>
         </a>
 
         <div class="Sidebar-footer  u-textCenter">
-          <div class="u-py4 u-px3" v-if="post.skip">
+          <div class="u-py4 u-px3" v-if="meta.skip">
             <a
-              :href="post.skip.section"
+              :href="meta.skip.section"
               title="Skip the back story and get to the meat and potatoes"
               class="Button has-lightBackground is-sizeSmall u-block u-w600"
-              v-scroll-to="post.skip.section"
+              v-scroll-to="meta.skip.section"
             >
               {{ skipText }}
             </a>
@@ -88,12 +67,12 @@
           <div class="u-sizeReadable u-mxauto">
               <h1 class="Post-title">
                 <a :href="$route.path" class="Link is-dark">
-                  {{ post.title }}
+                  {{ meta.title }}
                 </a>
               </h1>
             <p class="PostMeta">
               <span class="PostMeta-date">
-                {{ post.humanized.created_at }}
+                {{ meta.humanized.created_at }}
               </span>
               <span class="PostMeta-author">
                 by Anthony Koch
@@ -102,27 +81,21 @@
           </div>
         </header>
         <div>
-          <div
-            class="Post-body  md"
+          <component
+            :is="content"
+            v-if="content"
+            ref="body"
+            class="Post-body md"
             style="animation-delay: 0.3s"
-            v-html="post.contents"
-          >
-          </div>
+          ></component>
         </div>
       </div>
     </article>
-
-    <!--<vue-disqus
-      v-if="this.post"
-      :shortname="disqusShortname"
-      :identifier="disqusId"
-      :url="disqusUrl"
-    >
-    </vue-disqus>-->
   </page>
 </template>
 
 <script>
+import Vue from 'vue'
 import { mapState } from 'vuex';
 import throttle from 'lodash/throttle';
 import debounce from 'lodash/debounce';
@@ -132,6 +105,39 @@ import * as api from "@/core/api";
 const VISIBILITY_OFFSET = 1200;
 
 export default {
+  async asyncData({ params, error, store: $store }) {
+    await $store.dispatch('posts/loadMeta');
+
+    return {
+      slug: params.slug,
+    }
+
+    // const meta = $store.state.posts.meta.find((meta) => meta.slug === params.slug)
+    // let post = null
+
+    // const module = await import()
+
+    // if (module) {
+    //   // post = module.default
+    // }
+
+    // console.log(module);
+
+
+    // return {
+    //   meta,
+    // }
+    // return api.getPostComponent(params.slug)
+    //   .then(({ data: post }) => {
+    //     return {
+    //       post,
+    //     };
+    //   })
+    //   .catch(err => {
+    //     error({ statusCode: 404, message: 'Post not found' });
+    //   });
+  },
+
   components: {
     page: require('@/layouts/main').default,
   },
@@ -186,7 +192,7 @@ export default {
 
   head() {
     return {
-      title: this.post.title,
+      // title: this.post.title,
     };
   },
 
@@ -207,36 +213,32 @@ export default {
   },
 
   computed: {
+    ...mapState({
+      allMeta: state => state.posts.meta,
+    }),
     skipText() {
       return this.post.skip && this.post.skip.text ? this.post.skip.text : "Skip the backstory"
     },
-
-    // disqusShortname() {
-    //   return process.env.app.disqusShortname;
-    // },
-
-    // disqusId() { // env used to avoid re-use from dev to production
-    //   return '${process.env.NODE_ENV}-${this.disqusShortname}-${this.post.id}'
-    // },
-
-    // disqusUrl() {
-    //   return this.$route.path;
-    // },
-  },
-
-  asyncData({ params, error }) {
-    return api.getPost(params.slug)
-      .then(({ data: post }) => {
-        return {
-          post,
-        };
-      })
-      .catch(err => {
-        error({ statusCode: 404, message: 'Post not found' });
-      });
+    metaIndex() {
+      return this.allMeta.findIndex((meta) => meta.slug === this.slug)
+    },
+    meta() {
+      return this.allMeta.find((meta) => meta.slug === this.slug)
+    },
+    content() {
+      // HACK: asyncData gives a max stack exceeded error when passing a component
+      return () => import(`@/_posts/${this.meta.importBasename}.md`)
+    },
+    next() {
+      return this.allMeta[this.metaIndex + 1]
+    },
+    previous() {
+      return this.allMeta[this.metaIndex - 1]
+    },
   },
 
   destroyed() {
+    return
     window.removeEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
     window.removeEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
 
@@ -245,11 +247,13 @@ export default {
   },
 
   created() {
+    return
     this.updateBlogToolbarVisiblityThrottled =
       throttle(this.updateBlogToolbarVisiblity, 500, { trailing: true })
   },
 
   mounted() {
+    return
     window.addEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
     window.addEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
 

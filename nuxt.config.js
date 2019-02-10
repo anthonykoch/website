@@ -5,28 +5,32 @@ const requireModule = require('esm')(module);
 const path = require('path');
 const glob = require('glob');
 
-const FrontMatterPlugin = require('./.webpack/front-matter-plugin');
+const FrontMatterPlugin = require('./.webpack/frontmatter-plugin');
 
-const IS_PRODUCTION = process.env.NODE_ENV === 'production';
+const isEnvProduction = process.env.NODE_ENV === 'production';
+const isEnvDevelopment = !isEnvProduction
 const DIR_POSTS = '_posts';
-const ROUTE_BLOG = '/blog';
+const blogRoute = '/blog';
 
 console.log({node_env: process.env.NODE_ENV});
 
 const stripFileDate = (pathname) => pathname.replace(/\d{4}-\d{2}-\d{2}-/, '')
 
+const publicPath = '/assets/'
+
 let appenv = {
-  apiPath: '/_nuxt/api',
+  publicPath,
+  apiPath:  `${publicPath}api/`,
   baseUrl: 'http://localhost:3000',
   disqusShortname: 'anthonykoch',
 };
 
-if (IS_PRODUCTION) {
-  appenv = {
-    apiPath: '/_nuxt/api',
-    baseUrl: 'http://localhost:3000',
-  };
-}
+// if (isEnvProduction) {
+//   appenv = {
+//     apiPath: '${publicPath}/api',
+//     baseUrl: 'http://localhost:3000',
+//   };
+// }
 
 module.exports = {
 
@@ -38,7 +42,7 @@ module.exports = {
   env: {
     app: {
       ...appenv,
-      IS_PRODUCTION,
+      isEnvProduction,
     },
   },
 
@@ -86,6 +90,7 @@ module.exports = {
    * Build configuration
    */
   build: {
+    publicPath,
     watch: ['_posts'],
     extractCSS: {
       allChunks: true,
@@ -111,17 +116,17 @@ module.exports = {
         ...config.module.rules,
       ];
 
-      if (isClient) {
         config.plugins = [
           ...config.plugins,
           new FrontMatterPlugin({
             // Remove the date from the output filename
             glob: '_posts/*.md',
+            baseRoute: blogRoute,
             replacer: stripFileDate,
-            indent: 2,
-            filename: 'postmeta.[hash:8].json',
+            filename: `api/postmeta.json`,
           })
         ];
+      if (isClient) {
       }
     },
   },
@@ -136,7 +141,7 @@ module.exports = {
           const basename =
             path.basename(relativeFilename, path.extname(relativeFilename));
 
-          return path.posix.normalize(`${ROUTE_BLOG}/${stripFileDate(basename)}`);
+          return path.posix.normalize(`${blogRoute}/${stripFileDate(basename)}`);
         }),
     ],
   },
