@@ -22,15 +22,17 @@ const md = new MarkdownIt({
   highlight(content, lang) {
     if (lang && hljs.getLanguage(lang)) {
       try {
-        return `<pre class="hljs"><code>${
-          hljs.highlight(lang, content, true).value
-        }</code></pre>`;
+        return (
+          `<pre class="md-codeBlock hljs" data-lang="${lang}"><code class="hljs-inner md-codeBlockInner">${
+            hljs.highlight(lang, content, true).value
+          }</code></pre>`
+        );
       } catch (err) {
         throw err;
       }
     }
 
-    return md.utils.escapeHtml(content);
+    return `<pre class="md-codeBlock" data-lang="${lang}"><code class="md-codeBlockInner">${md.utils.escapeHtml(content)}</code></pre>`;
   },
 })
   .use(require('markdown-it-named-headings'));
