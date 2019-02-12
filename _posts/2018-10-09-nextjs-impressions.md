@@ -6,7 +6,7 @@ id: 10
 created_at: 2018-10-09
 ---
 
-Server-Side Rendering (SSR) seems to be all the rage nowadays, so I'd thought I'd get in on the action by trying out [NextJS](https://nextjs.org), which is a framework for writing SSR applications in React. Next allows rendering your React application pages to HTML on the server, meaning that users be able to see your application interface before React has even loaded into the browser. 
+Server-Side Rendering (SSR) seems to be all the rage nowadays, so I'd thought I'd get in on the action by trying out [NextJS](https://nextjs.org), which is a framework for writing SSR applications in React. Next allows rendering your React application pages to HTML on the server, meaning that users be able to see your application interface before React has even loaded into the browser.
 
 <!-- endexcerpt -->
 
@@ -31,20 +31,20 @@ export default class About extends React.Component {
     // be undefined when running in the browser
     if (req) {
       const services = require('../server/services')
-      
+
       return {
         users: await services.getEmployees(),
       }
     } else {
-      return { 
+      return {
         users: await axios.get('/api/employees'),
       }
     }
   }
-  
+
   render() {
     const { users } = ths.props
-    
+
     return (
       <div>
         <h1>About us</h1>
@@ -55,7 +55,7 @@ export default class About extends React.Component {
 }
 ```
 
-The only difference here from a normal React component is the addition of `getInitialProps`. This `getInitialProps` is Next specific, and only works on components defined in `pages/`. The purpose of `getInitialProps` is to allow you to populate the page with data from a database when the page is being rendered on the server, or from an API when being rendering in the user's browser. 
+The only difference here from a normal React component is the addition of `getInitialProps`. This `getInitialProps` is Next specific, and only works on components defined in `pages/`. The purpose of `getInitialProps` is to allow you to populate the page with data from a database when the page is being rendered on the server, or from an API when being rendering in the user's browser.
 
 
 ### What I built
@@ -73,29 +73,28 @@ The [application I built](https://github.com/anthonykoch/emailapp/) to try out N
 - ES6/7 on the client and server
 
 <p>
-  <img 
-    src="https://raw.githubusercontent.com/anthonykoch/emailapp/master/emailapp.gif" 
-    data-max-width="80vw"
-    style="
-      box-shadow: 0 16px 40px -9px hsla(0,0%,51%,0.6);
-      border-radius: 4px;
-    "
+  <div data-allow-fullscreen data-max-width="80vw"></div>
+  <img
+    src="https://raw.githubusercontent.com/anthonykoch/emailapp/master/emailapp.gif"
+    style="box-shadow: 0 16px 40px -9px hsla(0,0%,51%,0.6);border-radius: 4px;"
   >
 </p>
 
 
 ### Initial impressions
 
-Next is very minimal and unopiniated in its default configuration. A base Next project only has three directories: a `static/` directory for your static assets, `components/`, and `pages/`. From there, you choose your own path on how you want to structure your project. 
+Next is very minimal and unopiniated in its default configuration. A base Next project only has three directories: a `static/` directory for your static assets, `components/`, and `pages/`. From there, you choose your own path on how you want to structure your project.
 
-It doesn't include a loader for loading images or CSS files, and becomes quite a contrast to [create-react-app (CRA)](https://github.com/facebook/create-react-app), which includes a lot by default. Just about the only thing Next does come with is [styled-jsx](https://github.com/zeit/styled-jsx). The minimalism is not a bad thing at all, though. I actually prefer Next's setup because CRA came with too many things I didn't want for this project. 
+It doesn't include a loader for loading images or CSS files, and becomes quite a contrast to [create-react-app (CRA)](https://github.com/facebook/create-react-app), which includes a lot by default. Just about the only thing Next does come with is [styled-jsx](https://github.com/zeit/styled-jsx). The minimalism is not a bad thing at all, though. I actually prefer Next's setup because CRA came with too many things I didn't want for this project.
 
 If we compare Next with [Nuxt](http://nuxtjs.org), we see Nuxt provides a lot more out of the box such as default loaders for images, css, postcss, first class support for postcss plugins and first class provisions to setup a Vuex store. As mentioned, Next doesn't come with any of these things, but provides a simple platform on which to build SSR applications where you only integrate what you need.
 
-<div class="Aside">
-  <div class="Aside-content">
-    <div class="Aside-tag  [ Tag is-absolute ]">Integration examples</div>
-      There are a <a href="https://github.com/zeit/next.js/tree/master/examples">ton of examples</a> of how to integrate various loaders and other packages in with Next. I would highly recommend reading them because this is SSR land, and things need to be set up in special ways in order to function properly.
+<div>
+  <div class="Aside">
+    <div class="Aside-content">
+      <div class="Aside-tag  [ Tag is-absolute ]">Integration examples</div>
+        There are a <a href="https://github.com/zeit/next.js/tree/master/examples">ton of examples</a> of how to integrate various loaders and other packages in with Next. I would highly recommend reading them because this is SSR land, and things need to be set up in special ways in order to function properly.
+    </div>
   </div>
 </div>
 
@@ -116,7 +115,7 @@ const Nav = () => (
         color: red
       }
     `}</style>
-  </div> 
+  </div>
 )
 ```
 
@@ -131,9 +130,9 @@ After deciding between `styled-jsx`, scoped CSS files/Sass files and `react-emot
 
 #### Active class name
 
-Coming from Vue/Nuxt, I would have liked to have seen an `active-class` equivalent (`activeClassName` in react-router land) for the `<Link>` component. If you're unfamiliar, `active-class` provides the ability to style an element based on whether or not the link's route matches the currently active route. 
+Coming from Vue/Nuxt, I would have liked to have seen an `active-class` equivalent (`activeClassName` in react-router land) for the `<Link>` component. If you're unfamiliar, `active-class` provides the ability to style an element based on whether or not the link's route matches the currently active route.
 
-I do believe the maintainers have said they will not be adding this feature in the future. This is not a super big deal, though, as I was able to piece together a higher order component to fill in for its absence. 
+I do believe the maintainers have said they will not be adding this feature in the future. This is not a super big deal, though, as I was able to piece together a higher order component to fill in for its absence.
 
 
 #### Routing
@@ -143,7 +142,7 @@ If you want dynamic urls like `/users/:userid`, then you'll have to roll your ow
 
 #### &lt;Link&gt; and styled-components
 
-There is also a bit of awkwardness with having to wrap anchor tags with `<Link>` because `<Link>` itself doesn't render a tag. It only passes a `href` prop down to its child. 
+There is also a bit of awkwardness with having to wrap anchor tags with `<Link>` because `<Link>` itself doesn't render a tag. It only passes a `href` prop down to its child.
 
 ```js
 // wrong: using a string as a child of <Link> is deprecated
@@ -153,9 +152,9 @@ const Nav = () => (<Link to="/about">About</Link>)
 const Nav = () => (<Link to="/about"><a>About</a></Link> )
 ```
 
-Having to declare an `<a>` tag without a href is weird, but by itself isn't so bad. What is annoying is that `Link` can not be extended by `styled-components` as `const StyledLink = styled(Link)`. 
+Having to declare an `<a>` tag without a href is weird, but by itself isn't so bad. What is annoying is that `Link` can not be extended by `styled-components` as `const StyledLink = styled(Link)`.
 
-The next logical step after learning of this limitation is to create a styled-component that renders an `<a>`, but that won't work because `<Link>` requires you to explicitly add a `passHref` prop when its child is a component. It doesn't matter if the component renders to an `<a>` tag, what determines if you need `passHref` is if the child is a component.
+The next logical step after learning of this limitation is to create a styled-component that renders an `<a>` tag, but that won't work unless you specifically add a `passHref` attribute.
 
 ```js
 import styled from 'react-emotion'
@@ -168,7 +167,7 @@ const SidebarLink = styled('a')`
 const Nav = () => (
   <Link to="/about">
     <SidebarLink>About</SidebarLink>
-  </Link> 
+  </Link>
 )
 
 // correct: Renders <a href="/about">About</a>
@@ -179,7 +178,7 @@ const Nav = () => (
 )
 ```
 
-Yes, this is all explained in the docs, but that doesn't make it any less awkward and annoying. These aren't breaking issues, but at the end of it all, you just get several layers of awkwardness. 
+Yes, this is all explained in the docs, but that doesn't make it any less awkward and annoying. These aren't breaking issues, but at the end of it all, you just get several layers of awkwardness.
 
 
 #### No commons folder
@@ -202,4 +201,4 @@ Currently, Next is on `v7` and I'm sure the maintainers had reasons for doing wh
 
 ### Would I use it again?
 
-Absolutely. It worked well for the app I built and SSR has some great advantages. As far as Next vs Nuxt goes, I would be inclined to go the Nuxt route, not only because I'm more of a Vue person, but because Nuxt has a more built in without being too much. It comes with `active-class` for links via `<router-link>`, dynamic routing, a Vuex store, and more default loaders (images, css, postcss), which are typically things that I'd want in any project. 
+Absolutely. It worked well for the app I built and SSR has some great advantages. As far as Next vs Nuxt goes, I would be inclined to go the Nuxt route, not only because I'm more of a Vue person, but because Nuxt has a more built in without being too much. It comes with `active-class` for links via `<router-link>`, dynamic routing, a Vuex store, and more default loaders (images, css, postcss), which are typically things that I'd want in any project.

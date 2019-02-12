@@ -6,17 +6,17 @@
     :theme="theme"
   >
 
-    <div class="Sidebar" slot="sidebar">
+    <aside class="Sidebar" slot="sidebar">
       <div class="Sidebar-inner">
-        <a :href="next.url" class="SidebarButton u-mb3" v-if="next">
+        <nuxt-link :to="next.url" class="SidebarButton u-mb3" v-if="next">
           <span class="SidebarButton-upper">Next:</span>
           <span class="SidebarButton-lower">{{ next.title }}</span>
-        </a>
+        </nuxt-link>
 
-        <a :href="previous.url" class="SidebarButton u-mb3" v-if="previous">
+        <nuxt-link :to="previous.url" class="SidebarButton u-mb3" v-if="previous">
           <span class="SidebarButton-upper">Previous:</span>
           <span class="SidebarButton-lower">{{ previous.title }}</span>
-        </a>
+        </nuxt-link>
 
         <div class="Sidebar-footer  u-textCenter">
           <div class="u-py4 u-px3" v-if="meta.skip">
@@ -33,21 +33,23 @@
           <app-social-icons></app-social-icons>
         </div>
       </div>
-    </div>
+    </aside>
 
     <div slot="before" class="BlogToolbar">
       <div
-        :style="{ opacity: isBlogToolbarVisible ? 1 : 0 }"
+        :style="{
+          opacity: isBlogToolbarVisible ? 1 : 0,
+        }"
         style="transition: opacity 300ms"
         @mouseenter="onToolbarMouseEnter"
         @mouseleave="onToolbarMouseLeave"
       >
-          <div>
-            <!-- I don't think there's a point in having this when there's a "back to top" button -->
-            <!--<button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
+          <!--<div>
+             I don't think there's a point in having this when there's a "back to top" button
+            <button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
               <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322 222"><path d="M2 95h320v32H2zM2-1h320v32H2zM2 191h320v32H2z"/></svg>
-            </button>-->
-          </div>
+            </button>
+          </div>-->
 
         <div>
           <button
@@ -80,7 +82,7 @@
             </p>
           </div>
         </header>
-        <div>
+        <capture-fullscreen :images="true" >
           <component
             :is="content"
             v-if="content"
@@ -88,7 +90,7 @@
             class="Post-body md"
             style="animation-delay: 0.3s"
           ></component>
-        </div>
+        </capture-fullscreen>
       </div>
     </article>
   </page>
@@ -115,6 +117,29 @@ export default {
 
   components: {
     page: require('@/layouts/main').default,
+    CaptureFullscreen: require('@/components/CaptureFullscreen').default,
+  },
+
+  head() {
+    return {
+      // title: this.post.title,
+    };
+  },
+
+  data() {
+    return {
+      isBlogToolbarVisible: false,
+      theme: {
+        siteHeader: {
+          isCollapsed: true,
+          isLogoFixed: true,
+          allowNavLinkActiveClass: false,
+          hasDarkbackground: false,
+          hasDarkLinks: true,
+          forceLogoActiveClass: true,
+        },
+      },
+    };
   },
 
   methods: {
@@ -153,38 +178,6 @@ export default {
         this.isBlogToolbarVisible = false;
       }, 2000);
     },
-
-    onImageClick(e) {
-      const image = e.currentTarget
-
-      this.$store.dispatch('fullscreenImage/setImage', {
-        src: image.src,
-        alt: image.alt,
-        maxWidth: image.getAttribute('data-max-width'),
-      });
-    },
-  },
-
-  head() {
-    return {
-      // title: this.post.title,
-    };
-  },
-
-  data() {
-    return {
-      isBlogToolbarVisible: false,
-      theme: {
-        siteHeader: {
-          isCollapsed: true,
-          isLogoFixed: true,
-          allowNavLinkActiveClass: false,
-          hasDarkbackground: false,
-          hasDarkLinks: true,
-          forceLogoActiveClass: true,
-        },
-      },
-    };
   },
 
   computed: {
@@ -192,7 +185,7 @@ export default {
       allMeta: state => state.posts.meta,
     }),
     skipText() {
-      return this.post.skip && this.post.skip.text ? this.post.skip.text : "Skip the backstory"
+      return this.meta.skip && this.meta.skip.text ? this.meta.skip.text : "Skip the backstory"
     },
     metaIndex() {
       return this.allMeta.findIndex((meta) => meta.slug === this.slug)
@@ -213,25 +206,22 @@ export default {
   },
 
   destroyed() {
-    return
     window.removeEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
     window.removeEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
-
-    this.images.forEach(image => image.removeEventListener('click', this.onImageClick));
-    this.images = null;
   },
 
   created() {
-    return
     this.updateBlogToolbarVisiblityThrottled =
       throttle(this.updateBlogToolbarVisiblity, 500, { trailing: true })
   },
 
-  mounted() {
-    return
+  async mounted() {
+    await this.content()
+
     window.addEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
     window.addEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
 
+    // TODO: Turn this functionality into a component
     const links = [...this.$refs.post.querySelectorAll('a')];
 
     links.forEach((link) => {
@@ -241,13 +231,13 @@ export default {
       }
     });
 
-    const images = this.images = [...this.$refs.post.querySelectorAll('img')];
+    // const images = this.images = [...this.$refs.post.querySelectorAll('img')];
 
-    images.forEach((image) => {
-      image.classList.add('Image');
-      image.classList.add('is-allowedFullscreen');
-      image.addEventListener('click', this.onImageClick);
-    });
+    // images.forEach((image) => {
+    //   image.classList.add('Image');
+    //   image.classList.add('is-allowedFullscreen');
+    //   image.addEventListener('click', this.onImageClick);
+    // });
   },
 };
 </script>

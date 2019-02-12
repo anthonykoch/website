@@ -61,9 +61,11 @@ Bytes   File
 
 tl;dr Use normalize. It's not just a browser reset, it actually fixes shit.
 
-<div class="Aside">
-  <div class="Aside-content">
-    <div class="Aside-tag  [ Tag is-absolute ]">Funny enough</div>
-    The <code>&lt;main&gt;</code> fix was <a href="https://github.com/necolas/normalize.css/issues/727" target="_blank" rel="noreferrer noopener">inadvertently removed from</a> the project somewhere around <code>v8.0.0</code>. I can assure you that the IE <code>&lt;main&gt;</code> tag is still an issue and the fix needs to be added back into normalize.
+<div>
+  <div class="Aside">
+    <div class="Aside-content">
+      <div class="Aside-tag  [ Tag is-absolute ]">Funny enough</div>
+      The <code>&lt;main&gt;</code> fix was <a href="https://github.com/necolas/normalize.css/issues/727" target="_blank" rel="noreferrer noopener">inadvertently removed from</a> the project somewhere around <code>v8.0.0</code>. I can assure you that the IE <code>&lt;main&gt;</code> tag is still an issue and the fix needs to be added back into normalize.
+    </div>
   </div>
 </div>

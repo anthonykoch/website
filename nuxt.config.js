@@ -1,60 +1,55 @@
-'use strict';
+'use strict'
 
-const requireModule = require('esm')(module);
+// TODO: Disable/enable? https://nuxtjs.org/api/configuration-router#prefetchlinks
 
-const path = require('path');
-const glob = require('glob');
+const path = require('path')
+const glob = require('glob')
 
-const FrontMatterPlugin = require('./.webpack/frontmatter-plugin');
+const webpack = require('webpack')
+const FrontMatterPlugin = require('./.webpack/frontmatter-plugin')
 
-const isEnvProduction = process.env.NODE_ENV === 'production';
+const isEnvProduction = process.env.NODE_ENV === 'production'
 const isEnvDevelopment = !isEnvProduction
-const DIR_POSTS = '_posts';
-const blogRoute = '/blog';
+const DIR_POSTS = '_posts'
+const blogRoute = '/blog'
 
-console.log({node_env: process.env.NODE_ENV});
+console.log({node_env: process.env.NODE_ENV})
 
 const stripFileDate = (pathname) => pathname.replace(/\d{4}-\d{2}-\d{2}-/, '')
 
 const publicPath = '/assets/'
 
+const HOST = process.env.NUXT_HOST || 'localhost'
+const PORT = process.env.NUXT_PORT || 3000
+
 let appenv = {
   publicPath,
   apiPath:  `${publicPath}api/`,
-  baseUrl: 'http://localhost:3000',
+  baseUrl: `http://${HOST}:${PORT}`,
   disqusShortname: 'anthonykoch',
-};
-
-// if (isEnvProduction) {
-//   appenv = {
-//     apiPath: '${publicPath}/api',
-//     baseUrl: 'http://localhost:3000',
-//   };
-// }
+}
 
 module.exports = {
-
   router: {
     linkActiveClass: '',
     linkExactActiveClass: '',
+    scrollBehavior(to, from, savedPosition) { // copied from nuxtjs.org
+      // savedPosition is only available for popstate navigations (back button)
+      if (savedPosition) {
+        return savedPosition
+      }
+      return { x: 0, y: 0 }
+    }
   },
-
   env: {
     app: {
       ...appenv,
       isEnvProduction,
     },
   },
-
-  // mode: 'spa',
-
   css: [
     '@/assets/styles/main.sass',
   ],
-
-  /*
-   * Headers of the page
-   */
   head: {
     title: 'website',
     meta: [
@@ -78,30 +73,35 @@ module.exports = {
       { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       { rel: 'stylesheet', href: 'https://use.typekit.net/nsr0hmh.css' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' },
+      // { rel: 'stylesheet', href: 'https://fonts.googleapis.com/css?family=Nunito:300,400,400i,600,700' },
     ]
   },
-  /*
-   * Customize the progress bar color
-   */
   loading: false,
-  // loading: { color: '#3B8070' },
-
-  /*
-   * Build configuration
-   */
+  render: {
+    csp: {
+      hashAlgorithm: 'sha256',
+      policies: {
+        'script-src': [
+          'https://www.google-analytics.com',
+          `https://${HOST}:${PORT}`,
+          'http://assets.codepen.io',
+          'https://assets.codepen.io',
+        ],
+        'report-uri': [
+          `https://${HOST}:${PORT}`,
+        ]
+      }
+    }  },
   build: {
     publicPath,
     watch: ['_posts'],
-    extractCSS: {
-      allChunks: true,
-    },
     postcss: [
       require('cssnano')({
         preset: 'default',
       }),
       require('autoprefixer')(),
     ],
-    extend(config, { isClient }) {
+    extend(config, { isClient, isServer }) {
       config.module.rules = [
         {
           test: /\.md$/i,
@@ -114,38 +114,38 @@ module.exports = {
           ],
         },
         ...config.module.rules,
-      ];
+      ]
 
-        config.plugins = [
-          ...config.plugins,
-          new FrontMatterPlugin({
-            // Remove the date from the output filename
-            glob: '_posts/*.md',
-            baseRoute: blogRoute,
-            replacer: stripFileDate,
-            filename: `api/postmeta.json`,
-          })
-        ];
-      if (isClient) {
-      }
+      config.plugins = [
+        new webpack.DefinePlugin({
+          isServer,
+          isClient,
+        }),
+        ...config.plugins,
+        new FrontMatterPlugin({
+          // Remove the date from the output filename
+          glob: '_posts/*.md',
+          baseRoute: blogRoute,
+          replacer: stripFileDate,
+          filename: `api/postmeta.json`,
+        })
+      ]
     },
   },
-
   generate: {
     routes: [
       ...glob.sync(path.join(__dirname, `${DIR_POSTS}/*.md`))
         .map((filename) => {
           const relativeFilename =
-            path.relative(path.join(__dirname, DIR_POSTS), filename);
+            path.relative(path.join(__dirname, DIR_POSTS), filename)
 
           const basename =
-            path.basename(relativeFilename, path.extname(relativeFilename));
+            path.basename(relativeFilename, path.extname(relativeFilename))
 
-          return path.posix.normalize(`${blogRoute}/${stripFileDate(basename)}`);
+          return path.posix.normalize(`${blogRoute}/${stripFileDate(basename)}`)
         }),
     ],
   },
-
   plugins: [
     '~plugins/bootstrap',
     // '~/plugins/disqus',
@@ -153,10 +153,9 @@ module.exports = {
     // Might need highlighter later
     // '~plugins/vue-highlightjs'
   ],
-
   modules: [
     ['@nuxtjs/google-analytics', {
       id: 'UA-69481885-1',
     }]
   ],
-};
+}

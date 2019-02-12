@@ -10,6 +10,13 @@
   &.is-allowedFullscreen
     cursor: pointer
 
+[data-allow-fullscreen] + img
+  // Required for markdown where we can't set custom classes
+  cursor: pointer
+
+
+
+
 .FullscreenImageContainer
   align-items: center
   display: flex
