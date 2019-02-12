@@ -1,5 +1,7 @@
 
 .md
+  color: $color-foreground-markdown
+
   > #{$app-headings},
   > blockquote,
   > figure,
@@ -10,14 +12,30 @@
   > p,
   > dl,
   > div,
-  > pre
-    color: $color-foreground-markdown
+  > pre,
+  > :not(.md-fullWidth)
     margin-left: auto
     margin-right: auto
     max-width: $app-md-max-width
 
     +app-breakpoint-min(lg)
       max-width: $app-md-max-width-at-lg
+
+  > #{$app-headings},
+  > blockquote,
+  > figure,
+  > ul,
+  > ol,
+  > li,
+  > p,
+  > dl,
+  > pre,
+    padding-left: rem(16px)
+    padding-right: rem(16px)
+
+  .md-gutter
+    padding-left: rem(16px)
+    padding-right: rem(16px)
 
   > blockquote,
   > figure,
@@ -28,11 +46,16 @@
   > p,
   > dl,
   > div
-    font-size: inherit
+    font-size: 16px
+    // font-size: 20px
+    // font-weight: 300
+    // line-height: 1.6
 
   > #{$app-headings}
     color: #333333
-    padding-top: 1rem
+    color: #22435f
+    color: #083c67
+    color: #02294a
 
   > ol
     +make-list-number
@@ -43,8 +66,9 @@
   > p,
   > ul,
   > ol,
-  > dl
-    padding-bottom: spacing(2)
+  > dl,
+  > .md-spacer
+    padding-bottom: spacing(1.5)
 
   > .md-fullWidth
     margin-left: 0
@@ -52,9 +76,49 @@
     max-width: 100%
     width: 100%
 
+  .md-codeBlock[data-lang="info"]
+    background-color: #fff0bf
+    background-color: #f7f5f0
+    background-color: hsla(43, 9%, 95%, 1)
+    border-radius: 5px
+    padding: 14px 14px !important
+
+
+
+.md > h3,
+.md-h3
+  // border-top: 1px dotted rgba(black, 0.07)
+  // margin-top: spacing(2)
+  // padding-top: spacing(3)
+
+  border-bottom: 1px dotted rgba(black, 0.1)
+  margin-bottom: spacing(1)
+  padding-top: spacing(3)
+  // padding-bottom: spacing(2)
+  padding-bottom: spacing(1)
+  font-weight: 700
+  font-size: 54px
+  font-size: 43px
+
+  // &:after
+  //   content: ''
+  //   padding-bottom: 1rem
+  //   display: block
+  //   height: 1px
+  //   border-bottom: 1px dotted rgba(black, 0.07)
+
 .md-h4,
 .md > h4
+  font-size: 25px
   font-weight: 700
+
+.md-h5,
+.md > h5
+  font-size: 19px
+  padding-bottom: 4px
+  font-weight: 500
+
+
 
 
 .md-listNumber

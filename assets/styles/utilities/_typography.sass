@@ -1,3 +1,20 @@
+.u-inlineQuote
+  font-family: Georgia
+  border-radius: 3px
+  // background-color: rgba(black, 0.04)
+  font-size: 0.9em
+  // font-weight: 500
+  margin-left: 6px
+  margin-right: 6px
+
+  &:before
+    content: '\201C'
+    font-size: 1.1em
+
+  &:after
+    content: '\201D'
+    font-size: 1.1em
+
 @each $size in (100, 200, 300, 400, 500, 600, 700, 800, 900)
   .u-w#{$size}
     font-weight: $size

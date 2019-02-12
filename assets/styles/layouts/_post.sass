@@ -41,7 +41,7 @@
   position: fixed
   right: spacing(1)
   text-align: center
-  top: 50px
+  top: 20px
   z-index: $app-layer-blog-toolbar
 
 .BlogToolbar-button
@@ -51,9 +51,9 @@
   display: inline-block
   margin-bottom: 1rem
   outline: 0
-  padding: 16px 0
+  padding: 14px 0
   transition: 200ms border-color
-  width: 38px
+  width: 30px
 
   svg
     fill: color('background', 'dark')
@@ -73,10 +73,27 @@
     width: 18px
 
 .BlogToolbar-backToTop
+  width: 30px
+
   svg
     margin: 0 auto
-    width: 12px
+    width: 10px
     display: block
+
+
++app-breakpoint-min(lg)
+
+  .BlogToolbar
+    right: 50px
+    top: 50px
+
+  .BlogToolbar-button
+    padding: 18px 0
+    width: 38px
+
+  .BlogToolbar-backToTop
+    svg
+      width: 11px
 
 
 
@@ -128,8 +145,6 @@
   font-size: $app-post-font-size
   line-height: 1.7
   padding-bottom: spacing(4)
-  padding-left: spacing(1)
-  padding-right: spacing(1)
   padding-top: spacing(3)
 
 
@@ -174,14 +189,10 @@
     font-size: $app-post-font-size-at-lg
     line-height: 1.7
     padding-right: spacing(4.5)
-    padding-right: spacing(2)
+    padding-right: 0
+    padding-left: 0
 
-  .BlogToolbar
-    right: 50px
-
-  .BlogToolbar-button
-    width: 42px
-
-  .BlogToolbar-backToTop
-    svg
-      width: 14px
+@media only screen and (min-width: 1600px)
+  .Post-body
+    font-size: 18px
+    line-height: 1.6

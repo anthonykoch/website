@@ -3,18 +3,23 @@ import VueScrollTo from 'vue-scrollto';
 
 import logger from '@/core/logger';
 
-global.Waypoint = require('waypoints/src/entries/noframework');
+if (process.env.isClient) {
+  require('@/assets/scripts/vendor/pep.min.js')
+}
 
-Vue.use(VueScrollTo);
+global.Waypoint = require('waypoints/src/entries/noframework')
+
+Vue.use(VueScrollTo)
 
 // This kicks off the compilation for the posts
 require.context('@/_posts', false, /\.md$/);
 
 // nuxt's default loaders will process this to output to the dist directory
-require.context('~/assets/images', true, /\.(svg|png|jpg)$/);
+require.context('~/assets/images', true, /\.(svg|png|jpg)$/)
 
-global.logger = logger;
+global.logger = logger
 
+<<<<<<< Updated upstream
 console.log('appenv:', process.env.app);
 
 
@@ -28,3 +33,6 @@ console.log('appenv:', process.env.app);
 //   });
 // }
 
+=======
+console.log('appenv:', process.env.app)
+>>>>>>> Stashed changes

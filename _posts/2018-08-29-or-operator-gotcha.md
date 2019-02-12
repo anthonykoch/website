@@ -16,7 +16,7 @@ It's become a common pattern in the JavaScript world to use the `||` (called the
 
 ### Common use cases
 
-The `||` operator is often used to give an argument of a function a default value in the case that the argument isn't passed. 
+The `||` operator is often used to give an argument of a function a default value in the case that the argument isn't passed.
 
 ```js
 function getUserMessages(opts) {
@@ -27,11 +27,11 @@ function getUserMessages(opts) {
 }
 ```
 
-This ensures that there is no `Cannot read property 'headers' of undefined` error when accessing `headers` on `options` because `options` is guaranteed to never be `undefined` or `null`. 
+This ensures that there is no `Cannot read property 'headers' of undefined` error when accessing `headers` on `options` because `options` is guaranteed to never be `undefined` or `null`.
 
 ### How it works
 
-This gist of the `||` operator is this: *Is the left operand truthy?* 
+This gist of the `||` operator is this: *Is the left operand truthy?*
 
 If **yes**, return the left operand. If **no**, return the right operand.
 
@@ -57,7 +57,7 @@ console.log(42 || getUserAge()) // 42
   </div>
 </div>
 
-This pattern works well with function parameters because parameters default to `undefined` when they are not passed. 
+This pattern works well with function parameters because parameters default to `undefined` when they are not passed.
 
 ```js
 function getUserMessages(opts) {
@@ -70,7 +70,7 @@ function getUserMessages(opts) {
 
 With the above example, if `getUserMessages` is called with no arguments, `opts` is automatically set to `undefined`. Since `opts` is `undefined`, and `undefined` is a falsey value, the `||` operator would yield the right operand.
 
-This also works with `options.headers || {}` because properties return `undefined` when they don't exist in an object. 
+This also works with `options.headers || {}` because properties return `undefined` when they don't exist in an object.
 
 
 ### The gotcha
@@ -86,11 +86,11 @@ function stringify(data, options) {
 
 const json = stringify({ lastName: 'Halpert' }, { indent: 0 })
 console.log(json) // ​​​​'{"​​​​\n  "lastName": "Halpert"​​​​​​​​​\n}'
-//                        ▲ 
+//                        ▲
 // The json is indented with 2 spaces instead of 0
 ```
 
-The goal above was to default the `indent` to `2` in the case that the `indent` option wasn't passed. However, `0` is a falsey value, and thus the `||` operator returns the right operand's value, resulting in an indent of `2` when it should be `0`. 
+The goal above was to default the `indent` to `2` in the case that the `indent` option wasn't passed. However, `0` is a falsey value, and thus the `||` operator returns the right operand's value, resulting in an indent of `2` when it should be `0`.
 
 
 ### There are a safer ways
@@ -112,7 +112,7 @@ There are two parts to the syntax used in the function parameters above, which a
 //       the property we want to assign to a variable
 //                           ▼
 function stringify(data, { indent: indent }) {
-//                                    ▲ 
+//                                    ▲
 //       the name of the variable we want create
 
 // the above is just another way of doing this
@@ -122,7 +122,7 @@ function stringify(data, options) {
 
 <!-- This syntax says,  -->
 
-<!--<div style="font-size: 20px; line-height: 1.5; font-family: Georgia; max-width: 800px;" class="u-pb6 u-pt4  u-mxauto md-fullWidth"> 
+<!--<div style="font-size: 20px; line-height: 1.5; font-family: Georgia; max-width: 800px;" class="u-pb6 u-pt4  u-mxauto md-fullWidth">
 &ldquo;	I expect the second argument to be an object, and I want to you take the indent property of that object and assign it to a variable named indent
 </div>-->
 
@@ -140,26 +140,26 @@ function stringify(data, options) {
 
 Along with destructuring, we can default our `indent` variable with a value of `2` using default value assignment. Destructuring default assignment takes on the following syntax `{ propertyName: variableName = defaultValue }`, where `defaultValue` can be a number, a string, `NaN`, `undefined`, an array, a function call — well, you get the point. I would highly recommend keeping the default values simple for readabilities sake, though.
 
-
-<div class="Aside">
-  <div class="Aside-content">
-    <div class="Aside-tag  [ Tag is-absolute ]">A note on destructuring</div>
-      Destructuring isn't limited to being used in function paramaters, but can also be used with normal variable assignments such as:
-      <br> 
-      <code>const { indent: indent } = options;</code>
+<div>
+  <div class="Aside">
+    <div class="Aside-content">
+      <div class="Aside-tag  [ Tag is-absolute ]">A note on destructuring</div>
+        Destructuring isn't limited to being used in function paramaters, but can also be used with normal variable assignments such as:
+        <br>
+        <code>const { indent: indent } = options;</code>
+    </div>
   </div>
 </div>
 
-
-In the original example, I also used what are called "parameter defaults" (another newish ES2015 feature) in order to default the second parameter to an object. This allows the complete omission of the second argument when calling `stringify(data)`, and is done to avoid the destructuring from throwing a `Cannot read property 'indent' of undefined` error. 
+In the original example, I also used what are called "parameter defaults" (another newish ES2015 feature) in order to default the second parameter to an object. This allows the complete omission of the second argument when calling `stringify(data)`, and is done to avoid the destructuring from throwing a `Cannot read property 'indent' of undefined` error.
 
 Parameter defaults take the form of:
 
 ```js
 function (parameterName = defaultValue) {
-``` 
+```
 
-but, we can use destructuring in tandem with parameter defaults to create the full desired result. 
+but, we can use destructuring in tandem with parameter defaults to create the full desired result.
 
 ```js
 //                 The second parameter will default to an object
@@ -175,7 +175,7 @@ It's also worth noting that parameter defaults don't work the same as in Python 
 
 #### Caveat
 
-The first caveat is that default value assignment and default parameters only work when the argument's ultimate value is `undefined`. It doesn't work with `null`. 
+The first caveat is that default value assignment and default parameters only work when the argument's ultimate value is `undefined`. It doesn't work with `null`.
 
 ```js
 function stringify(data, { indent=0 } = {}) {
@@ -189,7 +189,7 @@ stringify({}, { indent: false }) // false
 stringify({}, { indent: null }) // null
 ```
 
-The second is that they are newish features that aren't supported by all browsers, mainly IE, older versions of Node, and some mobile browsers. But, [this is why Babel](https://babeljs.io/) was invented. 
+The second is that they are newish features that aren't supported by all browsers, mainly IE, older versions of Node, and some mobile browsers. But, [this is why Babel](https://babeljs.io/) was invented.
 
 
 ### "That all looks complex"
