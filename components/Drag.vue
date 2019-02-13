@@ -40,7 +40,7 @@ export default {
       this.onDragStart && this.onDragStart(this.start)
       e.preventDefault()
 
-      this.$refs.container.addEventListener('pointermove', this.onWindowMouseMove)
+      window.addEventListener('pointermove', this.onWindowMouseMove)
       window.addEventListener('pointerup', this.onWindowMouseUp)
     },
     stopDrag(e) {
@@ -50,7 +50,7 @@ export default {
         }, this.start)
 
       this.isDragging = false
-      this.$refs.container.removeEventListener('pointermove', this.onWindowMouseMove)
+      window.removeEventListener('pointermove', this.onWindowMouseMove)
     },
     onWindowMouseUp(e) {
       this.stopDrag(e)

@@ -1,29 +1,30 @@
 <template>
-  <div style="position: relative">
-    <div
-      ref="tabs"
-      @scroll="onScrollDebounced"
-      class="Tabs"
-      role="tablist"
-    >
-      <div class="Tabs-scrollShadow" :class="{ 'is-showing': isScrollShadowShowing }"></div>
-      <div class="Tabs-container">
-        <slot>
-          <tabs-item
-            v-for="(tab, index) in tabs"
-            :key="tab.id || index"
-            v-bind="{
-              text: tab.text,
-              id: tab.id,
-              isActive: index === activeIndex,
-              ariaControls: tab.ariaControls,
-            }"
-          >
-          </tabs-item>
-        </slot>
+  <scroll-shadow>
+    <div class="Tabs">
+      <div
+        ref="tabs"
+        class="Tabs-container"
+        role="tablist"
+      >
+        <div class="Tabs-container">
+          <slot>
+            <tabs-item
+              v-for="(tab, index) in tabs"
+              :key="tab.id || index"
+              v-bind="{
+                text: tab.text,
+                id: tab.id,
+                isActive: index === activeIndex,
+                ariaControls: tab.ariaControls,
+              }"
+              @selected="onSelected(index, tab.id)"
+            >
+            </tabs-item>
+          </slot>
+        </div>
       </div>
     </div>
-  </div>
+  </scroll-shadow>
 </template>
 
 <script>
@@ -31,11 +32,11 @@ import _ from 'lodash'
 
 export default {
   components: {
+    ScrollShadow: require('@/components/ScrollShadow.vue').default,
     TabsItem: require('@/components/TabsItem.vue').default,
   },
   data() {
     return {
-      isScrollShadowShowing: true,
       activeIndex: this.$props.defaultIndex || 0,
     }
   },
@@ -49,26 +50,10 @@ export default {
       default: () => [],
     },
   },
-  destroyed() {
-    this.$off('click', this.onClick)
-  },
-  mounted() {
-    this.$on('click', this.onClick)
-    this.isScrollShadowShowing = this.isScrolledToEnd()
-  },
-  created() {
-    this.onScrollDebounced = _.debounce(this.onScroll, 48)
-  },
   methods: {
-    isScrolledToEnd() {
-      return this.$refs.tabs.scrollWidth - this.$refs.tabs.offsetWidth === this.$refs.tabs.scrollLeft
-    },
-    onScroll(e) {
-      this.isScrollShadowShowing = this.isScrolledToEnd()
-    },
-    onClick(id) {
-      this.activeIndex = this.tabs.findIndex((tab) => tab.id === id)
-      this.$emit('change', this.activeIndex, id)
+    onSelected(index, id) {
+      this.activeIndex = index
+      this.$emit('change', index, id)
     }
   },
 }
@@ -77,26 +62,7 @@ export default {
 <style lang="scss" scoped>
 
 .Tabs {
-  overflow: auto;
-  white-space: nowrap;
-}
-
-.Tabs-scrollShadow {
-  background-image: linear-gradient(to left, rgba(black, 0.07), transparent);
-  content: '';
-  height: 100%;
-  position: absolute;
-  pointer-events: none;
-  right: 0;
-  opacity: 1;
-  top: 0;
-  transition: opacity 300ms;
-  width: 20px;
-  z-index: 2;
-
-  &.is-showing {
-    opacity: 0;
-  }
+  position: relative;
 }
 
 .Tabs-container {

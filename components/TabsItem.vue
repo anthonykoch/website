@@ -4,7 +4,7 @@
     :aria-selected="isActive"
     :id="id"
     :href="'#' + id"
-    @click="onClick"
+    @click="onSelected"
     @keyup="onKeydown"
     class="Tabs-item"
     role="tab"
@@ -35,9 +35,9 @@ export default {
   },
   methods: {
     notify() {
-      this.$parent.$emit('click', this.id)
+      this.$emit('selected', this.id)
     },
-    onClick(e) {
+    onSelected(e) {
       e.preventDefault()
 
       if (e.which === 1) {
