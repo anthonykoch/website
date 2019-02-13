@@ -109,6 +109,8 @@ $colors: (
 );
 
 
+$app-color-link: #6196cc;
+$app-color-link-hover: hsl(225, 34%, 40%);
 
 
 
@@ -211,8 +213,6 @@ $app-active-breakpoints: ();
   }
 }
 
-
-
 $app-border-radius: 3px;
 $app-transition-duration: 0.3s;
 $app-text-size-1: rem(16px);
@@ -239,7 +239,32 @@ $app-code-font-family: 'source-code-pro', Menlo, Monaco, Consolas, 'Courier New'
 
 $app-headings: (h1, h2, h3, h4, h5, h6);
 
+$app-md-direct-headings: (' > h1', ' > h2', ' > h3', ' > h4', ' > h5', ' > h6');
+$app-md-adjacent-headings: (' + h1', ' + h2', ' + h3', ' + h4', ' + h5', ' + h6');
 
+$app-md-children: (
+  blockquote
+  figure
+  img
+  ul
+  ol
+  li
+  p
+  dl
+  pre
+);
+
+$app-md-direct-children: (
+  ' > blockquote',
+  ' > figure',
+  ' > img',
+  ' > ul',
+  ' > ol',
+  ' > li',
+  ' > p',
+  ' > dl',
+  ' > pre',
+);
 
 // Base element tag styles
 $app-code-background: #e6e6e6;

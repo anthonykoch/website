@@ -9,11 +9,27 @@
     padding-left: $app-list-item-padding-h
 
 =make-list-bullet
-  counter-reset: list-counter
-  list-style-type: disc
+  // counter-reset: list-counter
+  // list-style-type: disc
+  list-style-type: none
   padding-bottom: $app-list-padding-v
 
   > li
     margin-bottom: $app-list-item-padding-b
     margin-left: $app-list-item-margin-h
     padding-left: $app-list-item-padding-h
+    position: relative
+
+    &:before
+      content: ''
+      border-radius: 50%
+      background-color: $app-color-link
+      height: 0.4em
+      left: -24px
+      position: absolute
+      top: 0.6em
+      width: 0.4em
+
+
+
+

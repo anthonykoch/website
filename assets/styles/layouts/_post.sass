@@ -115,9 +115,10 @@
 ///    of the site header's background image.
 ///
 .Post-header
+  background-color: color('background', 'dark')
   left: 0
-  padding-top: spacing(4)
-  padding-bottom: spacing(4)
+  padding-top: spacing(8)
+  padding-bottom: spacing(7)
   position: relative
   text-align: center
   width: 100%
@@ -183,7 +184,10 @@
 
 +app-breakpoint-min(lg)
   .Post-title
-    font-size: rem(52px)
+    font-size: rem(72px)
+    font-weight: 600
+    letter-spacing: 0.25px
+    line-height: 1
 
   .Post-body
     font-size: $app-post-font-size-at-lg
