@@ -2,11 +2,9 @@
 <template>
   <page
     :showSocial="false"
-    :showFooter="false"
     :theme="theme"
   >
-
-    <aside class="Sidebar" slot="sidebar">
+    <!--<aside class="Sidebar" slot="sidebar">
       <div class="Sidebar-inner">
         <nuxt-link :to="next.url" class="SidebarButton u-mb3" v-if="next">
           <span class="SidebarButton-upper">Next:</span>
@@ -33,55 +31,31 @@
           <app-social-icons></app-social-icons>
         </div>
       </div>
-    </aside>
+    </aside>-->
 
-    <div slot="before" class="BlogToolbar">
-      <div
-        :style="{
-          opacity: isBlogToolbarVisible ? 1 : 0,
-        }"
-        style="transition: opacity 300ms"
-        @mouseenter="onToolbarMouseEnter"
-        @mouseleave="onToolbarMouseLeave"
-      >
-          <!--<div>
-             I don't think there's a point in having this when there's a "back to top" button
-            <button class="BlogToolbar-menu BlogToolbar-button" title="open menu">
-              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 322 222"><path d="M2 95h320v32H2zM2-1h320v32H2zM2 191h320v32H2z"/></svg>
-            </button>
-          </div>-->
-
-        <div>
-          <button
-            class="BlogToolbar-backToTop BlogToolbar-button"
-            title="Back to top"
-            v-scroll-to="'#post'"
-          >
-            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 205 328"><path d="M195.7 94.8c-3.1 3.1-8 3-11.3 0L110 28.4V313c0 4.4-3.6 8-8 8s-8-3.6-8-8V28.4L19.6 94.7c-3.4 2.9-8.1 3.2-11.2.1-3.1-3.1-3.3-8.5-.1-11.4 0 0 87-79.2 88-80S99.1 1 102 1s4.9 1.6 5.7 2.4 88 80 88 80c1.5 1.5 2.3 3.6 2.3 5.7s-.8 4.1-2.3 5.7z"/></svg>
-          </button>
-        </div>
-      </div>
-    </div>
+    <blog-toolbar slot="before" :top="top"></blog-toolbar>
 
     <article class="Post" id="post" ref="post">
       <div class="Post__container">
-        <header class="Post-header u-gutter" ref="postHeader">
-          <div class="u-sizeReadable u-mxauto">
-              <h1 class="Post-title">
-                <a :href="$route.path" class="Link is-dark">
-                  {{ meta.title }}
-                </a>
-              </h1>
-            <p class="PostMeta">
-              <span class="PostMeta-date">
-                {{ meta.humanized.created_at }}
-              </span>
-              <span class="PostMeta-author">
-                by Anthony Koch
-              </span>
-            </p>
-          </div>
-        </header>
+        <div class="Post-background">
+          <header class="Post-header u-gutter" ref="header">
+            <h1 class="Post-title">
+              <a :href="$route.path">
+                {{ meta.title }}
+              </a>
+            </h1>
+            <div class="u-mxauto">
+              <p class="PostMeta">
+                <span class="PostMeta-date">
+                  {{ meta.humanized.created_at }}
+                </span>
+                <span class="PostMeta-author">
+                  by Anthony Koch
+                </span>
+              </p>
+            </div>
+          </header>
+        </div>
         <capture-fullscreen :images="true" >
           <component
             :is="content"
@@ -99,8 +73,6 @@
 <script>
 import Vue from 'vue'
 import { mapState } from 'vuex';
-import throttle from 'lodash/throttle';
-import debounce from 'lodash/debounce';
 
 import * as api from "@/core/api";
 
@@ -118,72 +90,47 @@ export default {
   components: {
     page: require('@/layouts/main').default,
     CaptureFullscreen: require('@/components/CaptureFullscreen').default,
+    BlogToolbar: require('@/components/BlogToolbar').default,
   },
 
   head() {
     return {
-      // title: this.post.title,
+      title: this.meta.title,
     };
   },
 
   data() {
     return {
-      isBlogToolbarVisible: false,
       theme: {
         siteHeader: {
+          isFloating: true,
           isCollapsed: true,
-          isLogoFixed: true,
+          isLogoFixed: false,
           allowNavLinkActiveClass: false,
           hasDarkbackground: false,
-          hasDarkLinks: true,
+          hasDarkLinks: false,
           forceLogoActiveClass: true,
         },
       },
     };
   },
-
-  methods: {
-    onToolbarMouseEnter() {
-      this.isBlogToolbarVisible = true
-      clearTimeout(this.toolbarTimeout)
-    },
-
-    onToolbarMouseLeave() {
-      this.updateBlogToolbarVisiblity()
-    },
-
-    /**
-     * Returns true if the window has scrolled past the bottom of the post header
-     */
-    getBlogToolbarVisiblity() {
-      if (!process.browser) {
-        return false;
-      }
-
-      const offsetTop =
-        this.$refs.postHeader.getBoundingClientRect().top
-        + this.$refs.postHeader.offsetHeight
-        + document.body.scrollTop
-        + VISIBILITY_OFFSET;
-
-      return document.documentElement.scrollTop > offsetTop;
-    },
-
-    updateBlogToolbarVisiblity() {
-      this.isBlogToolbarVisible = this.getBlogToolbarVisiblity();
-
-      // Automatically hide it after a period of time
-      clearTimeout(this.toolbarTimeout);
-      this.toolbarTimeout = setTimeout(() => {
-        this.isBlogToolbarVisible = false;
-      }, 2000);
-    },
-  },
-
   computed: {
     ...mapState({
       allMeta: state => state.posts.meta,
     }),
+    top() {
+      if (this.$refs.header == null) {
+        return null
+      }
+
+      const offsetTop =
+        this.$refs.header.getBoundingClientRect().top
+        + this.$refs.header.offsetHeight
+        + document.body.scrollTop
+        + VISIBILITY_OFFSET;
+
+      return offsetTop
+    },
     skipText() {
       return this.meta.skip && this.meta.skip.text ? this.meta.skip.text : "Skip the backstory"
     },
@@ -205,21 +152,8 @@ export default {
     },
   },
 
-  destroyed() {
-    window.removeEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
-    window.removeEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
-  },
-
-  created() {
-    this.updateBlogToolbarVisiblityThrottled =
-      throttle(this.updateBlogToolbarVisiblity, 500, { trailing: true })
-  },
-
   async mounted() {
     await this.content()
-
-    window.addEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
-    window.addEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
 
     // TODO: Turn this functionality into a component
     const links = [...this.$refs.post.querySelectorAll('a')];

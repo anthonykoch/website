@@ -19,3 +19,13 @@
       @content
   @else
     @error 'No breakpoint exists for breakpoint #{$breakpoint-name}'
+
+
+=app-breakpoint-max($breakpoint-name)
+  @if $breakpoint-name == 'default'
+    @content
+  @else if map-has-key($app-active-breakpoints, $breakpoint-name)
+    @media only screen and (max-width: map-get($app-breakpoints, $breakpoint-name))
+      @content
+  @else
+    @error 'No breakpoint exists for breakpoint #{$breakpoint-name}'

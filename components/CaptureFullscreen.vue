@@ -39,26 +39,28 @@ export default {
         (image.previousElementSibling && image.previousElementSibling.hasAttribute('data-allow-fullscreen'))
       )
     },
-    getSettingsData(image) {
-      console.log(this.allowsFullscreen(image));
-
+    getAttributes(image) {
       const previousDataset =
         image.previousElementSibling && image.previousElementSibling.hasAttribute('data-allow-fullscreen')
           ? image.previousElementSibling.dataset
           : {}
 
       return {
-        maxWidth: image.dataset.maxWidth || previousDataset.maxWidth,
+        sizes: image.dataset.sizes || previousDataset.sizes,
+        srcset: image.dataset.srcset || previousDataset.srcset,
+        style: image.dataset.style || previousDataset.style || { 'max-height': '97vh' },
       }
     },
     showFullscreenImage(image, force = false) {
       if (force || this.allowsFullscreen(image)) {
-        const settings = this.getSettingsData(image)
+        const attributes = this.getAttributes(image)
 
         this.$store.dispatch('fullscreenImage/setImage', {
-          src: image.src,
-          alt: image.alt,
-          ...settings,
+          attributes: {
+            src: image.src,
+            alt: image.alt,
+            ...attributes,
+          },
         });
       }
     },

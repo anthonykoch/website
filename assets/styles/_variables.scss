@@ -81,6 +81,7 @@ $brand-colors: (
   )
 );
 
+// TODO: Turn this into variables and replace all color() calls with varibles
 $colors: (
   'primary': getvariants($color-primary),
   'secondary': getvariants($color-secondary),
@@ -111,7 +112,17 @@ $colors: (
 
 $app-color-link: #6196cc;
 $app-color-link-hover: hsl(225, 34%, 40%);
+$app-color-text: $color-foreground;
 
+$app-color-1: $color-primary;
+
+$app-color-text-lightest: #e6ecef;
+$app-color-text-lighter: #868a8c;
+$app-color-text-light: #737f86;
+$app-color-text-base: $color-foreground;
+$app-color-text-dark: #202020;
+$app-color-text-alternate: $color-foreground-alternate;
+$app-color-background-dark: $color-background--dark;
 
 
 $app-backup-font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif, 'Apple Color Emoji', 'Segoe UI Emoji', 'Segoe UI Symbol';
@@ -194,8 +205,8 @@ $app-breakpoints: (
   'default': 0,
   'xsm': rem(360px),
   'sm': rem(600px),
-  'readable': rem(760px),
-  'lg': rem(960px),
+  'md': rem(800px),
+  'lg': rem(1024px),
   'xlg': rem(1200px),
   'xxlg': rem(1400px),
 );
@@ -203,7 +214,7 @@ $app-breakpoints: (
 //
 // These classes will be used for the responsive @ classes.
 //
-$app-breakpoint-classes: ('default', 'xxlg', 'xlg', 'lg', 'sm', 'xsm');
+$app-breakpoint-classes: ('default', 'xxlg', 'xlg', 'lg', 'md', 'sm', 'xsm');
 
 $app-active-breakpoints: ();
 

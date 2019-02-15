@@ -2,23 +2,20 @@
 export default {
   namespaced: true,
   state: {
-    isFullscreenImageShowing: false,
-    src: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
-    alt: '',
-    maxWidth: null,
+    isShowing: false,
+    attributes: {
+      src: 'data:image/gif;base64,R0lGODlhAQABAIAAAP///wAAACH5BAEAAAAALAAAAAABAAEAAAICRAEAOw==',
+    },
   },
 
   mutations: {
-    SET_IMAGE(state, { src, alt, maxWidth }) {
-      state.isFullscreenImageShowing = true;
-      state.alt = alt;
-      state.src = src;
-
-      state.maxWidth = maxWidth;
+    SET_IMAGE(state, { attributes }) {
+      state.isShowing = true;
+      state.attributes = attributes;
     },
 
     HIDE_IMAGE(state) {
-      state.isFullscreenImageShowing = false;
+      state.isShowing = false;
     },
   },
 

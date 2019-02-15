@@ -8,22 +8,18 @@
     <div
       class="ProjectPreview-container"
     >
-      <div
-        v-if="project.image"
-        :style="imageStyles"
-        ref="background"
-        aria-hidden="true"
-        class="ProjectPreview-background"
-      ></div>
-      <video
-        v-if="project.video"
-        ref="background"
-        :src="project.video.url"
-        style="height: auto"
-        loop="true"
-        aria-hidden="true"
-        class="ProjectPreview-background"
-      ></video>
+      <lazy-load
+        :src="project.image.url"
+        :size="project.image.size"
+        background
+        :transition="{ style: { 'transition-delay': '400ms' } }"
+      >
+        <div
+          slot-scope="slotProps"
+          class="ProjectPreview-background"
+          :style="{ 'background-image': slotProps.url } "
+        ></div>
+      </lazy-load>
       <div class="ProjectPreview-title">
         {{ project.title }}
       </div>
@@ -56,26 +52,15 @@ export default {
       required: true,
     },
   },
-
+  components: {
+    LazyLoad: require('@/components/LazyLoad.vue').default,
+  },
   data() {
     return {
       ripple: null,
     };
   },
-
-  computed: {
-    imageStyles() {
-      return {
-        'background-image': `url(${this.project.image.url})`,
-      };
-    },
-  },
-
   methods: {
-    hasBackgroundVideo() {
-      return this.$refs.background.tagName === 'VIDEO';
-    },
-
     onClick(e) {
       e.preventDefault();
 
@@ -86,26 +71,6 @@ export default {
 
       this.$emit('navigate', e, this.project);
     },
-  },
-
-  mounted() {
-    // FIXME: This randomly breaks, soooooo...
-    // if (this.hasBackgroundVideo()) {
-    //   this.waypoint = new Waypoint({
-    //     element: this.$refs.background,
-    //     handler: () => {
-    //       this.$refs.background.play();
-    //       this.waypoint.destroy();
-    //     },
-    //     offset: '55%',
-    //   });
-    // }
-  },
-
-  destroyed() {
-    // if (this.waypoint) {
-    //   this.waypoint.destroy();
-    // }
   },
 };
 

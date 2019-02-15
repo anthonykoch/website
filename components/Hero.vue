@@ -6,7 +6,7 @@
         class="Hero"
         :class="{
           'Container is-smallWidth u-mxauto u-gutter': isSmallWidth,
-          'u-px5': !isSmallWidth,
+          'u-px5@sm u-gutter': !isSmallWidth,
         }"
       >
         <div>

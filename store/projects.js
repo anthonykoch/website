@@ -3,7 +3,7 @@
 export default {
   namespaced: true,
   state: {
-    codepen: require('~/_data/projects/codepen').default,
+    all: require('~/_data/projects').default,
   },
   mutations: {},
   actions: {},

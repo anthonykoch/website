@@ -101,20 +101,34 @@ module.exports = {
       }),
       require('autoprefixer')(),
     ],
+    filenames: {
+      app: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
+      chunk: ({ isDev }) => isDev ? '[name].js' : '[name].[chunkhash].js',
+      css: ({ isDev }) => isDev ? '[name].css' : '[name].[contenthash].css',
+      img: ({ isDev }) => isDev ? '[path][name].[ext]' : 'img/[name].[hash:8].[ext]',
+      font: ({ isDev }) => isDev ? '[path][name].[ext]' : 'fonts/[name]/[hash:8].[ext]',
+      video: ({ isDev }) => isDev ? '[path][name].[ext]' : 'videos/[name].[hash:8].[ext]'
+    },
     extend(config, { isClient, isServer }) {
-      config.module.rules = [
-        {
-          test: /\.md$/i,
-          include: [path.resolve('_posts')],
-          use: [
-            'vue-loader',
-            {
-              loader: require.resolve('./.webpack/vue-markdown-loader'),
-            },
-          ],
-        },
-        ...config.module.rules,
-      ]
+      config.module.rules.push({
+        test: /\.md$/i,
+        include: [path.resolve('_posts')],
+        use: [
+          'vue-loader',
+          {
+            loader: require.resolve('./.webpack/vue-markdown-loader'),
+          },
+        ],
+      })
+
+      const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
+
+      svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+
+      config.module.rules.push({
+        test: /\.svg$/,
+        loader: 'vue-svg-loader',
+      });
 
       config.plugins = [
         new webpack.DefinePlugin({

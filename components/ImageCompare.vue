@@ -113,6 +113,9 @@ export default {
               }
 
               this.isPreloaded = true
+
+              this.observer.unobserve(this.$refs.container)
+              this.observer.disconnect()
             })
         }
 
