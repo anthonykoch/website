@@ -83,7 +83,7 @@ The [application I built](https://github.com/anthonykoch/emailapp/) to try out N
 
 ### Initial impressions
 
-Next is very minimal and unopiniated in its default configuration. A base Next project only has three directories: a `static/` directory for your static assets, `components/`, and `pages/`. From there, you choose your own path on how you want to structure your project.
+Next is very minimal and unopinionated in its default configuration. A base Next project only has three directories: a `static/` directory for your static assets, `components/`, and `pages/`. From there, you choose your own path on how you want to structure your project.
 
 It doesn't include a loader for loading images or CSS files, and becomes quite a contrast to [create-react-app (CRA)](https://github.com/facebook/create-react-app), which includes a lot by default. Just about the only thing Next does come with is [styled-jsx](https://github.com/zeit/styled-jsx). The minimalism is not a bad thing at all, though. I actually prefer Next's setup because CRA came with too many things I didn't want for this project.
 
