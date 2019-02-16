@@ -8,15 +8,7 @@
       </div>
       <div></div>
     </small>
-    <div class="separation">
-      <!--<ul class="sitemap">
-        <li><a href="/blog">Blog</a></li>
-        <li><a href="/contact">Contact</a></li>
-        <li><a href="https://www.reddit.com/user/thoughtsofadoodler">Reddit</a></li>
-      </ul>-->
-      <!-- <div class="dot"></div> -->
-      <app-social-icons></app-social-icons>
-    </div>
+    <app-social-icons></app-social-icons>
   </footer>
 </template>
 
@@ -29,6 +21,7 @@
   display: flex;
   justify-content: center;
   text-align: center;
+  margin-bottom: spacing(1);
 }
 
 .Copyright-symbol {
@@ -126,7 +119,11 @@
     text-align: center;
   }
 
-  .dot {
+  .Copyright {
+    margin-bottom: 0;
+  }
+
+  /* .dot {
     display: block;
   }
 
@@ -143,5 +140,6 @@
       }
     }
   }
+  */
 }
 </style>
