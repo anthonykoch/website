@@ -57,8 +57,6 @@ export default {
 }
 
 .IconList-item {
-  /* padding-left: 20px;
-  padding-right: 20px; */
   width: 60px;
 }
 
