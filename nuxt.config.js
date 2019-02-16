@@ -97,7 +97,11 @@ module.exports = {
     watch: ['_posts'],
     postcss: [
       require('cssnano')({
-        preset: 'default',
+        preset: ['default', {
+          mergeRules: false,
+          zindex: false,
+          safe: true,
+        }],
       }),
       require('autoprefixer')(),
     ],
