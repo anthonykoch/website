@@ -220,7 +220,6 @@ export default {
       }
     },
     onActivityLost() {
-      // console.log('no');
       clearTimeout(this.interactivityId)
 
       this.interactivityId = setTimeout(() => {
@@ -228,8 +227,6 @@ export default {
       }, ACTIVITY_TIMEOUT)
     },
     onActivity() {
-      // console.log('yes');
-
       this.isUserInteracting = true
     },
   },

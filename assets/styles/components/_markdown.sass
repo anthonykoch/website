@@ -5,6 +5,10 @@ $app-md-gutter: 16px;
   // #49515d // next text color?
   color: $color-foreground-markdown
 
+  > pre > code
+    padding-left: 0
+    padding-right: 0
+
   > #{$app-headings},
   > div,
   > pre,
@@ -28,13 +32,13 @@ $app-md-gutter: 16px;
     width: calc(100% - 32px)
 
   > #{$app-headings},
-  > pre,
   > blockquote,
   > figure,
   > ul,
   > ol,
   > li,
   > p,
+  > pre,
   > dl,
   > table
     padding-left: rem(16px)
@@ -51,15 +55,12 @@ $app-md-gutter: 16px;
   > dl,
   > table
     font-size: 16px
-    // font-size: 20px
-    // font-weight: 300
-    // line-height: 1.6
 
   // > #{$app-headings}
-    // color: #333333
-    // color: #22435f
-    // color: #083c67
-    // color: #02294a
+  //   color: #333333
+  //   color: #22435f
+  //   color: #083c67
+  //   color: #02294a
 
   > ol
     +make-list-number
@@ -84,7 +85,9 @@ $app-md-gutter: 16px;
     max-width: 100%
     width: 100%
 
-
+  > :last-child
+    margin-bottom: 0
+    padding-bottom: 0
 
 .md-codeBlock[data-lang="info"]
   background-color: #fff0bf
@@ -145,12 +148,12 @@ $app-md-gutter: 16px;
 
 .md > h3,
 .md-h3
-  margin-top: spacing(4)
+  margin-top: spacing(2)
   margin-bottom: spacing(2)
   font-weight: 700
   font-weight: 600
-  font-size: 54px
-  font-size: 43px
+  font-size: 40px
+  line-height: 1.1
   position: relative
 
   &:after
@@ -182,8 +185,8 @@ $app-md-gutter: 16px;
 
 
 .md-figure
-  margin-bottom: spacing(4)
-  margin-top: spacing(4)
+  margin-bottom: spacing(2)
+  margin-top: spacing(2)
 
 
 
@@ -192,3 +195,22 @@ $app-md-gutter: 16px;
 
 .md-listBullet
   +make-list-bullet
+
+
+
++app-breakpoint-min(lg)
+  .md
+    > pre
+      padding-left: rem(32px)
+      padding-right: rem(16px)
+
+  .md > h3,
+  .md-h3
+    font-size: 44px
+    line-height: 1
+    margin-top: spacing(4)
+    margin-bottom: spacing(2)
+
+  .md-figure
+    margin-bottom: spacing(4)
+    margin-top: spacing(4)

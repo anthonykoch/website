@@ -5,13 +5,13 @@
   "author": "anthonykoch <anthonykoch@users.noreply.github.com>",
   "private": true,
   "scripts": {
-    "clean": "rm -rf dist",
     "dev": "cross-env NODE_ENV=development NUXT_HOST=0.0.0.0 nuxt",
     "build": "nuxt build",
     "start": "cross-env NODE_ENV=production nuxt start",
-    "staging": "http-server dist -p 4000 -a 0.0.0.0",
-    "gen": "npm run clean && cross-env NODE_ENV=production nuxt generate",
-    "deploy": "npm run clean && cross-env NODE_ENV=production nuxt generate && node deploy.js",
+    "gen": "rm -rf dist && cross-env NODE_ENV=production nuxt generate",
+    "dev:staging": "http-server dist-staging -p 4000 -a 0.0.0.0 -g",
+    "gen:staging": "rm -rf dist-staging && cross-env NODE_ENV=production STAGING=true nuxt generate && gzip -fk dist-staging/**/*.{js,css,png,jpg}",
+    "deploy": "rm -rf dist && cross-env NODE_ENV=production nuxt generate && node deploy.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
     "precommit": "npm run lint"
   },
@@ -22,24 +22,22 @@
     "cheerio": "^1.0.0-rc.2",
     "cuid": "2.1.1",
     "date-fns": "^2.0.0-alpha.8",
-    "esm": "^3.0.34",
     "front-matter": "^2.3.0",
     "gh-pages": "^1.2.0",
     "highlight.js": "^9.12.0",
+    "html-loader": "^0.5.5",
     "http-server": "^0.11.1",
-    "i": "^0.3.6",
     "image-size-loader": "https://github.com/boopathi/image-size-loader/tarball/master",
     "intersection-observer": "^0.5.1",
     "markdown-it": "^8.4.1",
     "markdown-it-anchor": "^5.0.2",
     "markdown-it-named-headings": "^1.1.0",
-    "npm": "^6.8.0",
     "nuxt": "^2.4.3",
     "sassdash": "^0.9.0",
     "schema-utils": "^1.0.0",
     "slugify": "^1.3.4",
     "vue-focus-lock": "^1.2.0",
-    "vue-scrollto": "^2.11.0",
+    "vue-scrollto": "^2.13.0",
     "vue-svg-loader": "^0.12.0",
     "vuex-persistedstate": "^2.5.4",
     "waypoints": "https://github.com/summerisgone/waypoints/tarball/master"
@@ -56,5 +54,8 @@
     "sass-loader": "7.0.1",
     "vue-loader": "^15.6.2",
     "webpack-bundle-analyzer": "2.12.0"
-  }
+  },
+  "browserslist": [
+    "ie >= 10"
+  ]
 }

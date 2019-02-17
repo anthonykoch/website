@@ -4,7 +4,7 @@
       <a
         href="http://codepen.io/anthonykoch"
         title="Codepen"
-        class="IconList-link"
+        class="IconList-link is-codepen"
       >
         <icon-codepen></icon-codepen>
       </a>
@@ -13,7 +13,7 @@
       <a
         href="https://github.com/anthonykoch"
         title="Github"
-        class="IconList-link"
+        class="IconList-link is-github"
       >
         <icon-octocat></icon-octocat>
       </a>
@@ -22,7 +22,7 @@
       <a
         href="https://twitter.com/anthkoch"
         title="Twitter"
-        class="IconList-link"
+        class="IconList-link is-twitter"
       >
         <icon-twitter></icon-twitter>
       </a>
@@ -47,17 +47,12 @@ export default {
 
 .IconList {
   align-items: center;
-  display: inline-flex;
-  /* display: grid; */
-  /* grid-gap: 20px; */
+  display: inline-grid;
+  grid-gap: 24px;
   text-align: center;
-  /* grid-template-columns: repeat(3, 1fr); */
+  grid-template-columns: repeat(3, 1fr);
   justify-content: center;
   user-select: none;
-}
-
-.IconList-item {
-  width: 60px;
 }
 
 .IconList-link {
@@ -85,6 +80,13 @@ export default {
     fill: currentColor;
     height: 1.5rem;
     width: 1.5rem;
+  }
+
+  &.is-twitter {
+    svg {
+      position: relative;
+      top: 1px;
+    }
   }
 }
 </style>

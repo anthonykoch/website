@@ -71,10 +71,13 @@
 
 
 
++app-breakpoint-max(sm)
+  .LandingHero-title
+    font-size: rem(40px)
 
 
 .Hero
-  padding-top: ($app-gutter * 8)
+  padding-top: spacing(3)
 
 .Hero-caption
   pass
@@ -85,6 +88,10 @@
   max-width: rem(670px)
   padding: 1.5rem 0 2rem
 
-@media (max-width: app-breakpoint('sm'))
++app-breakpoint-min(md)
   .Hero
-    padding-top: ($app-gutter * 3)
+    padding-top: spacing(6)
+
+    // +app-breakpoint-min(lg)
+    //   .Hero
+    padding-top: spacing(8)

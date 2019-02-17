@@ -5,7 +5,6 @@
     <span slot="heroCaption">Contact me</span>
     <p slot="heroDescription">
       Have a project in mind or just a general question? You can get in touch with me by emailing me at
-      <!-- Have a project in mind or just a general question? You can get in touch with me through the contact form below or email me at -->
       <a href="mailto:hello@anthonykoch.com">hello@anthonykoch.com</a>
     </p>
 

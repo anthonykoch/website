@@ -76,10 +76,9 @@ The [application I built](https://github.com/anthonykoch/emailapp/) to try out N
   <div data-allow-fullscreen data-max-width="80vw"></div>
   <img
     src="https://raw.githubusercontent.com/anthonykoch/emailapp/master/emailapp.gif"
-    style="box-shadow: 0 16px 40px -9px hsla(0,0%,51%,0.6);border-radius: 4px;"
+    class="Image has-shadow is-rounded"
   >
 </p>
-
 
 ### Initial impressions
 

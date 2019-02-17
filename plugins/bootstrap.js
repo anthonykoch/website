@@ -1,3 +1,5 @@
+// import '@babel/polyfill'
+
 import Vue from 'vue';
 import VueScrollTo from 'vue-scrollto';
 
@@ -16,4 +18,4 @@ require.context('~/assets/images', true, /\.(svg|png|jpg)$/)
 
 global.logger = logger
 
-console.log('appenv:', process.env.app)
+console.log('env:', process.env.app)

@@ -12,7 +12,7 @@
         :background="overlays.projects.background"
         v-show="overlays.projects.isShowing"
       >
-        <div name="close"></div>
+        <div slot="close"></div>
       </app-overlay>
     </transition>
 
@@ -54,16 +54,16 @@
       </div>
     </div>
 
-    <section id="work">
+    <section id="work" ref="work">
       <div class="u-siteWrapper u-pt4 u-pt7@lg u-gutter">
 
         <div class="FeatureWork">
           <h2 class="Heading is-type1  u-pb2 u-pb0@md u-pl5@md u-textCenter u-textLeft@lg">
             <span>Featured Work</span>
           </h2>
-`          <div class="FeaturedWork-grid">
+          <div class="FeaturedWork-grid">
             <div class="FeaturedWork-column is-left">
-              <div class="FeaturedWork-media u-pl2 u-pl0@lg">
+              <div class="FeaturedWork-media">
                 <div class="WorkImages">
                   <div class="WorkImages-container">
                     <div class="WorkImages-aspectFill">
@@ -198,7 +198,7 @@
       </div>
     </section>
 
-    <section id="contact" class="u-py4 u-py8@md">
+    <section id="contact" class="u-py5 u-py8@md">
       <div class="u-textCenter">
         <h2 class="[ Heading is-type3 ]  u-gutter  p-endingcta">
           Have a project in mind?
@@ -253,29 +253,37 @@ export default {
       },
     };
   },
-
   head() {
     return {
       title: `Anthony Koch`,
-      description: `Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development.`,
+      meta: [{
+        hid: 'description',
+        name: 'description',
+        content: `Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development.`,
+      }],
     };
   },
+  beforeRouteEnter(to, from, next) {
+    if (to.hash.trim() === '#work') {
+      return next(vm => {
+        vm.$scrollTo(vm.$refs.work)
+      })
+    }
 
+    next()
+  },
   computed: {
     ...mapState({
       projects: state => state.projects.all,
     }),
-
     activeHero() {
       return this.heroItems[this.activeHeroIndex];
     },
-
     images() {
       return {
       };
     },
   },
-
   methods: {
     loopImages() {
       setTimeout(() => {
@@ -288,31 +296,26 @@ export default {
         this.loopImages();
       }, 3000);
     },
-
     showNextHero() {
       this.activeHeroIndex =
         this.activeHeroIndex + 1 >= this.heroItems.length
           ? 0
           : this.activeHeroIndex + 1;
     },
-
     onHeroHidden() {
       this.showNextHero();
       setTimeout(() => {
         this.isHeroShowing = true;
       }, 100);
     },
-
     onHeroShowing() {
       this.hideHero();
     },
-
     hideHero(delay=3500) {
       setTimeout(() => {
         this.isHeroShowing = false;
       }, delay);
     },
-
     navigateToProject(e) {
       // TODO: Make this triggerable by vue attribute
       this.overlays.projects.isShowing = true;
@@ -321,14 +324,12 @@ export default {
         window.location = this.navigatedProject.href;
       }, 100)
     },
-
     setNavigatedProject(e, project) {
       this.navigatedProject = project;
       this.overlays.projects.isShowing = true;
       this.overlays.projects.background = project.fade;
     },
   },
-
   mounted() {
     this.hideHero(2000);
   },

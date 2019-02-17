@@ -2,6 +2,7 @@ package-lock.json
 /assets/scripts/**/*.map
 /assets/styles/main.css
 
+dist-staging
 .DS_Store
 /.reports/
 /.personal

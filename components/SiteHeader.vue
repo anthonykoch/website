@@ -1,8 +1,9 @@
 <template>
     <header
       :class="{
-        'has-darkBackground': hasDarkbackground,
-        'has-blogBackground': hasBlogBackground,
+        'has-darkBackground': background === 'dark',
+        'has-defaultBackground': background === 'default',
+        'has-imageBackground': background === 'image',
         'is-collapsed': isCollapsed,
         'is-fullHeight': isFullHeight,
         'is-floating': isFloating,
@@ -11,6 +12,7 @@
       role="banner"
       data-page="TODO"
     >
+      <div class="SiteHeader-background"></div>
       <div class="SiteHeader-container">
         <div class="Logo">
           <nuxt-link
@@ -37,7 +39,6 @@
               :key="index"
             >
               <nuxt-link
-                v-scroll-to="link.scrollTo"
                 :active-class="siteNavLinkActiveClass"
                 :to="link.href"
                 :class="{
@@ -74,22 +75,14 @@
 </template>
 
 <script>
-
 export default {
   props: {
     background: {
-      type: Object,
-      default() {
-        return {};
+      type: String,
+      default: 'default',
+      validator(value) {
+        return ['background', 'default', 'image', 'none'].includes(value)
       },
-    },
-    hasBlogBackground: {
-      type: Boolean,
-      default: true,
-    },
-    hasDarkbackground: {
-      type: Boolean,
-      default: true,
     },
     isFloating: {
       type: Boolean,
@@ -219,8 +212,7 @@ export default {
 
 
 .SiteHeader {
-  // 1. Just enough to make the header a uniform height throughout all pages.
-  min-height: rem(500px); // [1]
+  min-height: rem($app-site-header-height-mobile);
   position: relative;
   transition: all 300ms;
   width: 100%;
@@ -237,30 +229,34 @@ export default {
   }
 
   &.has-darkBackground {
-    &:before {
-      @include absolute-fill;
-      content: '';
-      z-index: -1;
+    .SiteHeader-background {
+      background-color: $app-site-header-background;
     }
   }
 
-  &.has-darkBackground {
+  &.has-defaultBackground {
     background-color: $app-site-header-background;
 
-    &:before {
+    .SiteHeader-background {
       background-attachment: fixed;
-      background-image: url('~assets/images/background-1+c.jpg');
-      background-position: 100% 80%;
       background-size: cover;
-      opacity: 0.12;
+      background-image: url('~assets/images/mobile-header@2x.png');
+      background-position: 70% 50px;
+      opacity: 0.4;
+      /* opacity: 0.12; */
     }
+  }
 
-    &.is-fullHeight {
-      min-height: 100vh;
-    }
+  &.is-fullHeight {
+    min-height: 100vh;
   }
 }
 
+.SiteHeader-background {
+  @include absolute-fill;
+  background-size: cover;
+  z-index: -1;
+}
 
 .SiteHeader-inner {
   padding: 0 0 3rem 0;
@@ -278,7 +274,7 @@ export default {
 }
 
 
-@include app-breakpoint-min(lg) {
+@include app-breakpoint-min(sm) {
   .Logo-link {
     &.is-fixed {
       position: fixed;
@@ -286,26 +282,44 @@ export default {
   }
 }
 
-
-
-
-
-//
-// Breaks the site navigation and "logo" onto two separate lines.
-// The breakpoint is targeted for the point at which the site nav
-// and logo layouts start breaking.
-//
-@media (max-width: 730px){
+@include app-breakpoint-min(md) {
   .SiteHeader {
-    &.has-darkBackground {
-      &:before {
-        background-position: 80% 50%;
-        background-size: cover;
-        // background-position: 100% 100%
+    min-height: rem($app-site-header-height);
+
+    &.has-defaultBackground {
+      .SiteHeader-background {
+        background-image: url('~assets/images/background-1+c.jpg');
+        background-position: 90% -260px;
       }
     }
   }
+}
 
+@include app-breakpoint-min(xlg) {
+  .SiteHeader {
+    min-height: rem($app-site-header-height);
+
+    &.has-defaultBackground {
+      .SiteHeader-background {
+        background-position: 85% -300px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .SiteHeader {
+    min-height: rem($app-site-header-height);
+
+    &.has-defaultBackground {
+      .SiteHeader-background {
+        background-position: 85% -420px;
+      }
+    }
+  }
+}
+
+@media (max-width: 730px){
   .SiteHeader-container {
     display: block;
   }
@@ -356,3 +370,14 @@ export default {
 }
 
 </style>
+
+<!--<style lang="scss">
+@import '../assets/styles/bootstrap';
+
+@include app-breakpoint-min(xsm) {
+/* @media (min-width: 300px) { */
+  body {
+    background-color: red !important;
+  }
+}
+</style>-->

@@ -96,7 +96,7 @@ code
 pre
   border-radius: 1px $app-border-radius $app-border-radius 1px
   font-family: $app-code-font-family
-  font-size: $app-pre-font-size
+  font-size: 12px
   margin-bottom: $app-text-spacing
   overflow: scroll
   padding: 0.5rem 0
@@ -109,8 +109,8 @@ pre
     color: inherit
     display: block
     font-family: inherit
-    font-size: $app-pre-font-size
-    line-height: rem(22px)
+    font-size: inherit
+    line-height: 1.4
     margin: 0
     padding-bottom: 0
     padding-left: rem(16px)
@@ -118,7 +118,10 @@ pre
     padding-top: 0
 
 
-
++app-breakpoint-min(md)
+  pre
+    > code
+      font-size: 14px
 
 
 img

@@ -69,8 +69,6 @@ export default {
         'is-dark': this.background === 'dark',
       };
 
-      // console.log(this.background, classes)
-
       return classes;
     },
   },

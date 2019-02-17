@@ -1,6 +1,5 @@
 <template>
   <div class="Page">
-
     <!--
       Hi, since you're already here, I'd like to inform you on the if/elseif statements of various programming languages.
 
@@ -108,13 +107,11 @@ export default {
       default: false,
     },
   },
-
   data() {
     return {
       console,
     };
   },
-
   computed: {
     ...mapState({
       fullscreenImage: state => state.fullscreenImage,
@@ -123,7 +120,6 @@ export default {
       return this.$slots.heroCaption || this.$slots.heroDescription || this.$slots.heroLower;
     },
   },
-
   components: {
     //
   },

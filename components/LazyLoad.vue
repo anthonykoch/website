@@ -6,7 +6,7 @@
       }"
       class="LazyLoad-aspectFill"
     >
-      <transition name="tr-lazyload" v-bind="transition">
+      <transition name="tr-lazyload">
         <img
           v-show="isLoaded"
           v-if="!background"
@@ -105,7 +105,7 @@ export default {
 
 .tr-lazyload-enter-active,
 .tr-lazyload-leave-active {
-  transition: opacity 400ms;
+  transition: opacity 500ms;
 }
 
 .tr-lazyload-leave,

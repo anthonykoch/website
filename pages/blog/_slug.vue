@@ -4,67 +4,58 @@
     :showSocial="false"
     :theme="theme"
   >
-    <!--<aside class="Sidebar" slot="sidebar">
-      <div class="Sidebar-inner">
-        <nuxt-link :to="next.url" class="SidebarButton u-mb3" v-if="next">
-          <span class="SidebarButton-upper">Next:</span>
-          <span class="SidebarButton-lower">{{ next.title }}</span>
-        </nuxt-link>
-
-        <nuxt-link :to="previous.url" class="SidebarButton u-mb3" v-if="previous">
-          <span class="SidebarButton-upper">Previous:</span>
-          <span class="SidebarButton-lower">{{ previous.title }}</span>
-        </nuxt-link>
-
-        <div class="Sidebar-footer  u-textCenter">
-          <div class="u-py4 u-px3" v-if="meta.skip">
-            <a
-              :href="meta.skip.section"
-              title="Skip the back story and get to the meat and potatoes"
-              class="Button has-lightBackground is-sizeSmall u-block u-w600"
-              v-scroll-to="meta.skip.section"
-            >
-              {{ skipText }}
-            </a>
-          </div>
-
-          <app-social-icons></app-social-icons>
-        </div>
-      </div>
-    </aside>-->
-
     <blog-toolbar slot="before" :top="top"></blog-toolbar>
 
     <article class="Post" id="post" ref="post">
-      <div class="Post__container">
-        <div class="Post-background">
-          <header class="Post-header u-gutter" ref="header">
-            <h1 class="Post-title">
-              <a :href="$route.path">
-                {{ meta.title }}
-              </a>
-            </h1>
-            <div class="u-mxauto">
-              <p class="PostMeta">
-                <span class="PostMeta-date">
-                  {{ meta.humanized.created_at }}
-                </span>
-                <span class="PostMeta-author">
-                  by Anthony Koch
-                </span>
-              </p>
-            </div>
-          </header>
+      <div class="Post-container">
+        <div class="Post-headerBackground">
+          <transition name="tr-fade">
+            <header
+              ref="header"
+              v-if="meta && meta.title"
+              class="Post-header u-gutter"
+              style="transition-delay: 1s"
+            >
+              <h1 class="Post-title">
+                <a :href="$route.path">
+                  {{ meta.title }}
+                </a>
+              </h1>
+              <div class="u-mxauto">
+                <p class="PostMeta">
+                  <span class="PostMeta-date">
+                    {{ meta.humanized.created_at }}
+                  </span>
+                  <span class="PostMeta-author">
+                    by Anthony Koch
+                  </span>
+                </p>
+              </div>
+            </header>
+          </transition>
         </div>
-        <capture-fullscreen :images="true" >
-          <component
-            :is="content"
-            v-if="content"
-            ref="body"
-            class="Post-body md"
-            style="animation-delay: 0.3s"
-          ></component>
-        </capture-fullscreen>
+        <div class="Post-content">
+          <capture-fullscreen :images="true">
+            <Component
+              :is="body"
+              ref="body"
+              class="Post-body md"
+              style="animation-delay: 0.3s"
+            ></Component>
+          </capture-fullscreen>
+          <div class="u-gutter">
+            <div class="Meme" v-if="body">
+              <nuxt-link class="Meme-item is-left" v-if="next" :to="next.url">
+                <icon-arrow-round-left class="Meme-arrow is-left"></icon-arrow-round-left>
+                <p>{{ next.title }}</p>
+              </nuxt-link>
+              <nuxt-link class="Meme-item is-right" v-if="previous" :to="previous.url">
+                <p>{{ previous.title }}</p>
+                <icon-arrow-round-right class="Meme-arrow is-right"></icon-arrow-round-right>
+              </nuxt-link>
+            </div>
+          </div>
+        </div>
       </div>
     </article>
   </page>
@@ -72,33 +63,41 @@
 
 <script>
 import Vue from 'vue'
-import { mapState } from 'vuex';
+import { mapState } from 'vuex'
 
-import * as api from "@/core/api";
+import TabbedImageCompare from '@/components/TabbedImageCompare.vue'
 
-const VISIBILITY_OFFSET = 1200;
+import * as api from "@/core/api"
+
+const VISIBILITY_OFFSET = 1200
 
 export default {
   async asyncData({ params, error, store: $store }) {
-    await $store.dispatch('posts/loadMeta');
+    await $store.dispatch('posts/loadAllMeta')
 
     return {
       slug: params.slug,
     }
   },
-
   components: {
+    IconArrowRoundRight: require('@/assets/images/icons/arrow-round-right.svg').default,
+    IconArrowRoundLeft: require('@/assets/images/icons/arrow-round-left.svg').default,
     page: require('@/layouts/main').default,
     CaptureFullscreen: require('@/components/CaptureFullscreen').default,
     BlogToolbar: require('@/components/BlogToolbar').default,
   },
-
   head() {
-    return {
-      title: this.meta.title,
-    };
-  },
+    let attrs = {}
 
+    if (this.meta) {
+      return attrs = {
+        ...attrs,
+        title: this.meta.title,
+      }
+    }
+
+    return attrs
+  },
   data() {
     return {
       theme: {
@@ -107,7 +106,7 @@ export default {
           isCollapsed: true,
           isLogoFixed: false,
           allowNavLinkActiveClass: false,
-          hasDarkbackground: false,
+          background: 'none',
           hasDarkLinks: false,
           forceLogoActiveClass: true,
         },
@@ -116,7 +115,7 @@ export default {
   },
   computed: {
     ...mapState({
-      allMeta: state => state.posts.meta,
+      allMeta: state => state.posts.allMeta,
     }),
     top() {
       if (this.$refs.header == null) {
@@ -140,10 +139,6 @@ export default {
     meta() {
       return this.allMeta.find((meta) => meta.slug === this.slug)
     },
-    content() {
-      // HACK: asyncData gives a max stack exceeded error when passing a component
-      return () => import(`@/_posts/${this.meta.importBasename}.md`)
-    },
     next() {
       return this.allMeta[this.metaIndex + 1]
     },
@@ -151,10 +146,10 @@ export default {
       return this.allMeta[this.metaIndex - 1]
     },
   },
-
-  async mounted() {
-    await this.content()
-
+  beforeCreate() {
+    this.body = () => api.getPost(this.$route.params.slug)
+  },
+  mounted() {
     // TODO: Turn this functionality into a component
     const links = [...this.$refs.post.querySelectorAll('a')];
 
@@ -164,14 +159,84 @@ export default {
         link.setAttribute('target', '_blank');
       }
     });
-
-    // const images = this.images = [...this.$refs.post.querySelectorAll('img')];
-
-    // images.forEach((image) => {
-    //   image.classList.add('Image');
-    //   image.classList.add('is-allowedFullscreen');
-    //   image.addEventListener('click', this.onImageClick);
-    // });
   },
 };
 </script>
+
+<style lang="scss" scoped>
+@import '../../assets/styles/bootstrap';
+
+.Post-content {
+  background-color: hsla(0, 0%, 98%, 1);
+  min-height: 100vh;
+}
+
+.Meme {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-gap: 20px;
+  margin: 0 auto;
+  max-width: 640px;
+  padding-bottom: 40px;
+}
+
+.Meme-item {
+  align-items: center;
+  background-size: cover;
+  background-color: $app-color-4;
+  /* border: 2px solid #f7bc0d; */
+  /* border-radius: 3px; */
+  box-shadow: 0 24px 60px -9px rgba(black, 0.2);
+  display: flex;
+  font-family: $app-font-family-1;
+  font-size: 14px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  line-height: 1.4;
+  justify-content: center;
+  padding: 16px 20px;
+  transition: color 300ms, background-color 300ms;
+  position: relative;
+  z-index: 1;
+
+  &:link,
+  &:visited {
+    fill: currentColor;
+    color: inherit;
+    color: white;
+  }
+
+  &:hover {
+    background-color: $app-color-1;
+    color: inherit;
+  }
+
+  p {
+    flex: 1;
+    position: relative;
+  }
+}
+
+.Meme-arrow {
+  fill: inherit;
+  width: 28px;
+
+  &.is-right {
+    margin-left: 8px;
+  }
+
+  &.is-left {
+    margin-right: 8px;
+  }
+}
+
+@include app-breakpoint-min(md) {
+  .Meme {
+    grid-template-columns: 1fr 1fr;
+    padding-bottom: 60px;
+    padding-top: 60px;
+  }
+}
+
+</style>
+

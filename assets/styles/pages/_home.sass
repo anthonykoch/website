@@ -160,21 +160,44 @@
   text-transform: uppercase
 
   &.is-absolute
+    font-weight: 500
+    left: -14px
     position: absolute
-    left: -25px
+    // text-align: center
+    // width: calc(14px * 2 + 100%)
 
-    &:before
-      // FIXME: Why does this not work???!!>!1 +triangle('up-right', 22px, 18px, #F2D26F)
-      border-color: transparent #F2D26F transparent transparent
-      border-width: 0 24px 10px 0
+    &:before,
+    &:after
       border-style: solid
+      border-color: transparent
       bottom: 1px
       content: ''
       height: 0
-      left: 1px
       position: absolute
       transform: translate(0%, 100%)
       width: 0
+
+    &:before
+      border-color: transparent #F2D26F transparent transparent
+      border-width: 0 12px 9px 0
+      left: 1px
+
+    // &:after
+    //   border-color: transparent transparent transparent #f2d26f
+    //   border-width: 0 0 9px 12px
+    //   right: 1px
+
+
++app-breakpoint-min(lg)
+  .Tag
+    &.is-absolute
+      left: -25px
+
+      &:before
+        border-width: 0 24px 10px 0
+
+
+
 
 
 
@@ -201,7 +224,7 @@
   display: block
 
 .WorkImages-tag
-  top: 10px
+  top: 5px
 
 +app-breakpoint-min(lg)
   .WorkImages-tag
@@ -220,11 +243,12 @@
 
 .ProjectPreviewList
   display: grid
-  grid-gap: 30px 30px
+  grid-gap: 40px 30px
   grid-template-columns: repeat(1, 1fr)
   justify-content: center
   margin-left: auto
   margin-right: auto
+  max-width: 400px
   opacity: 1
 
 .ProjectPreviewList__item
@@ -233,7 +257,10 @@
 @media (min-width: 760px)
   .ProjectPreviewList
     grid-template-columns: repeat(2, 1fr)
+    grid-gap: 30px 30px
+    max-width: 600px
 
 +app-breakpoint-min(lg)
   .ProjectPreviewList
     grid-template-columns: repeat(3, 1fr)
+    max-width: 100%
