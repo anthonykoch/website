@@ -27,6 +27,7 @@ $markdown-space-y: spacing(2);
     margin-right: auto
     max-width: 640px
 
+
     // +app-breakpoint-min(lg)
 
   > img
@@ -90,14 +91,12 @@ $markdown-space-y: spacing(2);
     margin-bottom: $markdown-space-y
     position: relative
 
-    > *
-      margin-left: 2rem
-      margin-right: 1rem
-
   > .md-fullWidth
     margin-left: 0
     margin-right: 0
     max-width: 100%
+    padding-left: 0
+    padding-right: 0
     width: 100%
 
   > :last-child
@@ -218,6 +217,11 @@ $markdown-space-y: spacing(2);
     > pre
       padding-left: rem(32px)
       padding-right: rem(16px)
+
+    > blockquote
+      > *
+        margin-left: 2rem
+        margin-right: 1rem
 
   .md > h3,
   .md-h3
