@@ -164,17 +164,17 @@ dd:last-child
 
 
 blockquote
-  border: 1px solid #eae9e4
-  background-color: #f2f2f2
-  border-radius: 3px
-  line-height: 1.6
+  // border: 1px solid #eae9e4
+  // background-color: #f2f2f2
   // border-left: rem(2px) solid $app-base-border-color
+  // border-radius: 3px
+  line-height: 1.6
   margin-bottom: double($app-text-spacing)
   // margin-top: $app-text-spacing
   padding: $app-blockquote-padding-y $app-blockquote-padding-x
 
   > *
-    font-size: $app-blockquote-font-size
+    font-size: inherit
     padding-bottom: 0
 
   > span:last-of-type
@@ -183,7 +183,21 @@ blockquote
     font-weight: bold
     padding-top: $app-gutter
 
+    // border-top: 1px solid #eae9e4
 
+  // &:before
+  //   border-bottom: 1px solid #eae9e4
+  //   content: ''
+  //   display: block
+  //   margin-bottom: 20px
+  //   height: 1px
+
+  // &:after
+  //   border-top: 1px solid #eae9e4
+  //   content: ''
+  //   display: block
+  //   height: 1px
+  //   margin-top: 20px
 
 
 
@@ -203,7 +217,53 @@ figcaption
 
 
 
-
-
 video
   width: 100%
+
+
+
+
+td
+  font-size: 14px
+  padding: 4px 16px
+
+  &:not(:last-child)
+    border-right: 1px solid rgba(black, 0.1)
+
+// thead
+//   background-color: $app-color-1
+
+th
+  border-bottom: 1px solid rgba(black, 0.1)
+  font-family: rift-soft
+  font-weight: 600
+  font-size: 15px
+  padding: 3px 16px
+  text-align: left
+  white-space: nowrap
+
+  &:not(:last-child)
+    border-right: 1px solid rgba(black, 0.1)
+
+table
+  border-collapse: collapse
+  overflow: auto
+  width: 100%
+
+  > tbody
+    > tr
+      &:first-child
+        > td
+          padding-top: 6px
+
+      &:last-child
+        > td
+          padding-bottom: 6px
+
+
+.Table
+  &.is-condensed
+    > tbody
+      > tr
+        > td
+          padding: 2px 16px 0

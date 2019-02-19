@@ -6,7 +6,7 @@
   >
     <blog-toolbar slot="before" :top="top"></blog-toolbar>
 
-    <article class="Post" id="post" ref="post">
+    <article class="Post" id="post">
       <div class="Post-container">
         <div class="Post-headerBackground">
           <transition name="tr-fade">
@@ -38,6 +38,7 @@
           <capture-fullscreen :images="true">
             <Component
               :is="body"
+              @mount="console.log('lol')"
               ref="body"
               class="Post-body md"
               style="animation-delay: 0.3s"
@@ -85,6 +86,7 @@ export default {
     page: require('@/layouts/main').default,
     CaptureFullscreen: require('@/components/CaptureFullscreen').default,
     BlogToolbar: require('@/components/BlogToolbar').default,
+    IconGithub: require('@/assets/images/icons/octocat.svg').default,
   },
   head() {
     let attrs = {}
@@ -100,6 +102,7 @@ export default {
   },
   data() {
     return {
+      top: null,
       theme: {
         siteHeader: {
           isFloating: true,
@@ -117,19 +120,6 @@ export default {
     ...mapState({
       allMeta: state => state.posts.allMeta,
     }),
-    top() {
-      if (this.$refs.header == null) {
-        return null
-      }
-
-      const offsetTop =
-        this.$refs.header.getBoundingClientRect().top
-        + this.$refs.header.offsetHeight
-        + document.body.scrollTop
-        + VISIBILITY_OFFSET;
-
-      return offsetTop
-    },
     skipText() {
       return this.meta.skip && this.meta.skip.text ? this.meta.skip.text : "Skip the backstory"
     },
@@ -146,19 +136,41 @@ export default {
       return this.allMeta[this.metaIndex - 1]
     },
   },
+  methods: {
+    getToolbarOffset() {
+      const offsetTop =
+        this.$refs.header.getBoundingClientRect().top
+        + this.$refs.header.offsetHeight
+        + document.body.scrollTop
+        + VISIBILITY_OFFSET;
+
+      return offsetTop
+    },
+  },
   beforeCreate() {
-    this.body = () => api.getPost(this.$route.params.slug)
+    this.imports = {
+      body: api.getPost(this.$route.params.slug),
+    }
+
+    this.body = () => this.imports.body
   },
   mounted() {
-    // TODO: Turn this functionality into a component
-    const links = [...this.$refs.post.querySelectorAll('a')];
+    this.top = this.getToolbarOffset()
 
-    links.forEach((link) => {
-      if (link.host !== window.location.host) {
-        link.setAttribute('rel', 'noreferrer noopener');
-        link.setAttribute('target', '_blank');
-      }
-    });
+    this.imports.body.then(() => {
+      this.$nextTick(() => {
+        // TODO: Turn this functionality into a component
+        const links = [...this.$refs.body.$el.querySelectorAll('a')];
+
+        links.forEach((link) => {
+          if (link.host !== window.location.host && link.hash.trim() === '') {
+            link.setAttribute('rel', 'noreferrer noopener');
+            link.setAttribute('target', '_blank');
+          }
+        })
+      })
+
+    })
   },
 };
 </script>

@@ -115,7 +115,7 @@ module.exports = {
   build: {
     publicPath,
     watch: ['_posts'],
-    extractCSS: true,
+    extractCSS: isEnvProduction,
     postcss: [
       require('cssnano')({
         preset: ['default', {

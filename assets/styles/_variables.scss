@@ -311,9 +311,9 @@ $app-logo-width: $app-page-sidebar-width;
 
 
 
-$app-list-item-margin-h: 30px;
-$app-list-item-padding-h: half($app-gutter);
-$app-list-item-padding-b: quarter($app-gutter);
+$app-list-item-margin-h: 32px;
+$app-list-item-padding-h: 10px;
+$app-list-item-padding-b: 8px;
 $app-list-padding-v: double($app-gutter);
 
 
@@ -325,9 +325,6 @@ $app-post-body-children: ();
 $app-post-header-background: $color-secondary;
 
 
-
-$app-md-max-width: rem(520px);
-$app-md-max-width-at-lg: rem(640px);
 
 
 $app-project-preview-border-radius: 3px;

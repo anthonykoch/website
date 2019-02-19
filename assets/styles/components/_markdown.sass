@@ -1,5 +1,7 @@
 $app-md-gutter: 16px;
 
+$markdown-space-y: spacing(2);
+
 
 .md
   // #49515d // next text color?
@@ -23,10 +25,9 @@ $app-md-gutter: 16px;
   > :not(.md-fullWidth)
     margin-left: auto
     margin-right: auto
-    max-width: $app-md-max-width
+    max-width: 640px
 
-    +app-breakpoint-min(lg)
-      max-width: $app-md-max-width-at-lg
+    // +app-breakpoint-min(lg)
 
   > img
     width: calc(100% - 32px)
@@ -39,6 +40,7 @@ $app-md-gutter: 16px;
   > li,
   > p,
   > pre,
+  > div,
   > dl,
   > table
     padding-left: rem(16px)
@@ -54,7 +56,8 @@ $app-md-gutter: 16px;
   > p,
   > dl,
   > table
-    font-size: 16px
+    font-size: 16.5px
+    line-height: 1.65
 
   // > #{$app-headings}
   //   color: #333333
@@ -68,16 +71,28 @@ $app-md-gutter: 16px;
   > ul
     +make-list-bullet
 
-  > blockquote,
   > figure,
   > ul,
   > ol,
   > li,
   > p,
   > dl,
+  > div,
   > table,
   .md-spacer
-    padding-bottom: spacing(2)
+    padding-bottom: $markdown-space-y
+
+  > blockquote
+    color: rgba(#1b292b, 0.8)
+    font-size: 15px
+    font-weight: 500
+    line-height: 1.5
+    margin-bottom: $markdown-space-y
+    position: relative
+
+    > *
+      margin-left: 2rem
+      margin-right: 1rem
 
   > .md-fullWidth
     margin-left: 0
@@ -149,29 +164,29 @@ $app-md-gutter: 16px;
 .md > h3,
 .md-h3
   margin-top: spacing(2)
-  margin-bottom: spacing(2)
+  margin-bottom: spacing(1)
   font-weight: 700
-  font-weight: 600
   font-size: 40px
   line-height: 1.1
   position: relative
+  z-index: 1
 
-  &:after
-    border-bottom: 1px dotted rgba(black, 0.14)
-    bottom: spacing(-0.75)
-    content: ''
-    display: block
-    height: 1px
-    left: auto
-    position: absolute
-    right: auto
-    transform: translate(0, 100%)
-    width: calc(100% - #{$app-md-gutter * 2})
+  // &:before
+  //   content: ''
+  //   background-image: radial-gradient(rgba($app-color-link, 0.5) -35%, transparent 60%)
+  //   border-radius: 50%
+  //   height: 800px
+  //   left: 0
+  //   position: absolute
+  //   top: 0
+  //   transform: translate(-50%, -50%)
+  //   width: 800px
+  //   z-index: -1
 
 .md-h4,
 .md > h4
-  font-size: 27px
-  font-weight: 700
+  font-size: 23px
+  font-weight: 800
 
 .md-h5,
 .md > h5
@@ -206,10 +221,10 @@ $app-md-gutter: 16px;
 
   .md > h3,
   .md-h3
-    font-size: 44px
+    font-size: 50px
     line-height: 1
     margin-top: spacing(4)
-    margin-bottom: spacing(2)
+    margin-bottom: spacing(1)
 
   .md-figure
     margin-bottom: spacing(4)

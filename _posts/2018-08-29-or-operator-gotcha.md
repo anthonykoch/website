@@ -50,10 +50,12 @@ Interestingly, if the left operand is truthy, the right operand is never evaluat
 console.log(42 || getUserAge()) // 42
 ```
 
-<div class="Aside has-tagSpacing">
-  <div class="Aside-content">
-    <div class="Aside-tag  [ Tag is-absolute ]">Falsey values</div>
-      The falsey values are <code>null</code>, <code>undefined</code>, <code>NaN</code>, <code>0</code>, <code>false</code>, and empty strings. All other values are considered truthy.
+<div>
+  <div class="Aside has-tagSpacing">
+    <div class="Aside-content">
+      <div class="Aside-tag  [ Tag is-absolute ]">Falsey values</div>
+        The falsey values are <code>null</code>, <code>undefined</code>, <code>NaN</code>, <code>0</code>, <code>false</code>, and empty strings. All other values are considered truthy.
+    </div>
   </div>
 </div>
 

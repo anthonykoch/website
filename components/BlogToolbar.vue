@@ -3,10 +3,9 @@
     <div
       :style="{
         opacity: isBlogToolbarVisible ? 1 : 0,
+        'pointer-events': isBlogToolbarVisible ? 'auto' : 'none',
       }"
       style="transition: opacity 300ms"
-      @mouseenter="onToolbarMouseEnter"
-      @mouseleave="onToolbarMouseLeave"
     >
         <!--<div>
             I don't think there's a point in having this when there's a "back to top" button
@@ -37,6 +36,10 @@ export default {
       _.throttle(this.updateBlogToolbarVisiblity, 500, { trailing: true })
   },
   mounted() {
+    setTimeout(() => {
+      this.updateBlogToolbarVisiblity()
+    }, 100)
+
     window.addEventListener('scroll', this.updateBlogToolbarVisiblityThrottled);
     window.addEventListener('resize', this.updateBlogToolbarVisiblityThrottled);
   },
@@ -55,11 +58,6 @@ export default {
     },
   },
   methods: {
-    onToolbarMouseEnter() {
-      this.isBlogToolbarVisible = true
-      clearTimeout(this.toolbarTimeout)
-    },
-
     onToolbarMouseLeave() {
       this.updateBlogToolbarVisiblity()
     },
@@ -77,12 +75,6 @@ export default {
 
     updateBlogToolbarVisiblity() {
       this.isBlogToolbarVisible = this.getBlogToolbarVisiblity();
-
-      // Automatically hide it after a period of time
-      clearTimeout(this.toolbarTimeout);
-      this.toolbarTimeout = setTimeout(() => {
-        this.isBlogToolbarVisible = false;
-      }, 2000);
     },
   },
 }

@@ -6,66 +6,126 @@ id: 11
 created_at: 2019-02-06
 ---
 
-Many people often include an image optimizer in their build chain, but just how good are they? Are they worth the build time? What even are the choices?
+
+I recently saw a question on reddit asking what was the best way to optimize images. Everyone seemed to respond with a different answer, with some recommending apps, some websites, and others CLI utilities.
 
 <!-- endexcerpt -->
 
-### A tale of bad compression
+For the last couple of years, I've relied soley on tinyjpg and compressor.io. However, the reddit question got me thinking:
 
-When I was previously at Plaid, we had used an image optimizer from npm and it was fairly useless. Large images, megabytes in size, went through with only a 50-100 KB loss. Since then, I had pretty much sworn off all image compressors from npm and just used tinyjpg. Overall, they just seemed like a gigantic waste of time. Afterall, the compressor increased the build time in minutes.
+- What are all the cross-platform image compressors?
+- How well do they compress with different settings?
+- What is the quality of the image the comes out?
+- What are the smallest file sizes that can be achieved without a loss in quality.
 
-Recently, my curiousity has gotten the best of me. I really wanted to figure out:
+### Overview
 
-1. What are all the cross-platform image compress?
-2. How well do they compress with different settings?
-3. What is the quality of the image the comes out?
-
-### The contenders
-
-#### ImageOptim
-
-I'm not quite sure what ImageOptim is. It seems to be a conglomeration of differnet tuned plugins. They have an Mac OS only app, a paid API service, as well as a free online uploader thing [https://imageoptim.com/online](https://imageoptim.com/online).
-
+<div class="u-overflowAuto md-spacer ">
+  <table class="Table u-nowrap u-mxauto" style="max-width: 800px">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>App</th>
+        <th>Online Uploader</th>
+        <th>Uploader Limit</th>
+        <th>API</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>ImageOptim</td>
+        <td><a href="https://imageoptim.com/mac">Free (macOS only)</a></td>
+        <td><a href="https://imageoptim.com/online">Yes</a></td>
+        <td>N/A</td>
+        <td><a href="https://imageoptim.com/api/pricing">Paid</a></td>
+      </tr>
+      <tr>
+        <td>imagemin</td>
+        <td><a href="https://github.com/imagemin/imagemin-app">Free (all platforms)</a></td>
+        <td>No</td>
+        <td>N/A</td>
+        <td>No</td>
+      </tr>
+      <tr>
+        <td>tinyjpg</td>
+        <td>No</td>
+        <td><a href="https://tinyjpg.com">Yes</a></td>
+        <td>5MB</td>
+        <td><a href="https://tinyjpg.com/developers">Paid</a></td>
+      </tr>
+      <tr>
+        <td>Abraia</td>
+        <td>No</td>
+        <td><a href="https://abraia.me/compressor/">Yes</a></td>
+        <td>5MB</td>
+        <td><a href="https://abraia.me/compressor/">Paid</a></td>
+      </tr>
+      <tr>
+        <td>compressor.io</td>
+        <td>No</td>
+        <td><a href="https://compressor.io">Yes</a></td>
+        <td>10MB</td>
+        <td><a href="https://tinyjpg.com/developers">Paid</a></td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 #### imagemin
 
-This is probably the most popular image optimizer, seeing as it's both free and on npm. It works by utilizing plugins such as jpegtran, jpeg-recompress, mozjpeg and pngquant. I do believe all of the plugins listed here are meant to be cross-platform, however, jpeg-recompress failed to run on a vagrant VM using a trusty64 box.
+[Imagemin](https://www.npmjs.com/package/imagemin) works by utilizing plugins such as jpegtran, jpeg-recompress, mozjpeg and pngquant.
 
-##### Resources
+<div>
+  <div class="Aside">
+    <div class="Aside-content">
+      <div class="Aside-tag  [ Tag is-absolute ]">Plugin settings</div>
+      <p>
+        Each plugin has its own settings that can be configured. This is a great article on configuring jpeg-compress:
+        <a href="https://mika-s.github.io/javascript/jpeg/compression/algorithm/2018/01/10/quality-min-and-max-with-jpeg-recompress.html">Quality, min and max with jpeg-recompress</a>
+      </p>
+    </div>
+  </div>
+</div>
 
-[Quality, min and max with jpeg-recompress](https://mika-s.github.io/javascript/jpeg/compression/algorithm/2018/01/10/quality-min-and-max-with-jpeg-recompress.html)
+#### tinyjpg
 
-#### tinyjpg/tinypng
-
-[tinyjpg.com](https://tinyjpg.com) or tinyjpg.com (same thing) is a two part service. They have a webpage where you can upload and compress up to 10 images at one time, with a maximum size limit of 5MB. They also have a paid API service. They support compressing pngs and jpegs
+I've used [tinyjpg.com](https://tinyjpg.com) for a while now. They have a webpage uploader where you can upload and compress up to 10 images at one time, with a maximum size limit of 5MB. They support compressing pngs or jpegs. tinyjpg is more on the aggressive side, so you need to watch the output quality.
 
 
 #### compressor.io
 
-[compressor.io](https://compressor.io) is free service that, but only allows you to compress one image at a time, with a maximum limit of 10MB. It supports compressing svgs, pngs, jpgs, and gifs, with the option to go for lossy or lossless compression for pngs and jpgs.
+[compressor.io](https://compressor.io) is an online uploader. It supports compressing svgs, pngs, jpgs, and gifs, with the option to go for lossy or lossless compression for pngs and jpgs. It seems to be on the less aggresive side, but has good output quality.
 
 
 #### Abraia
 
-I had never heard of this optimizer before writing this article. I decided to add it in last second just for the hell of it.
+I had never heard [abraia](https://abraia.me/) optimizer before writing this article, but I decided to add it in last second. I did have on image return corrupted, which I ended up removing from the test.
 
 
-#### Others
+#### ImageOptim
 
-Others I've found were kraken.io, which I didn't include because it only allows 1MB uploads; compressjpg.
+Something to keep in mind is that, according to their website, their app doesn't do lossy compression by default. Also, their app isn't on the App Store, so you need to download it from the website.
 
 
 ### Comparing compression
 
-We'll have three different jpeg images to compress. The output size *and* quality of the resulting image will be compared.
+We'll have three different jpeg images to compress. The output size *and* quality of the resulting image will be compared between the compressors. Each section will have a comparison tool, where the left side will show the original image, and the right will show the compressed version.
 
-```info{2-3}
-Name                 |  What it is
+#### SSIM
+
+Apparently, there's a neat way to compare how similar two images are called *Structured Similarity* (SSIM). For each comparison, I'll also be including the SSIM number for each compressed image. The package I used, [ssim.js](https://www.npmjs.com/package/ssim.js), gives a simple explanation of how it works:
+
+> <span class="u-openQuote"></span>Get a 0 to 1 score on how similar two images are. The closer SSIM is to 1 the higher the similarity.<span class="u-closeQuote"></span> <cite>- ssim.js</cite>
+
+#### Settings
+
+```info
+Name                 |  Settings
 ---------------------|-------------------------------------
-recompress-low       |  jpeg-recompress with quality=low
-recompress-medium    |  jpeg-recompress with quality=medium
+recompress-low       |  jpeg-recompress with quality=low min=40 max=85
+recompress-medium    |  jpeg-recompress with quality=medium min=60 max=85
 mozjpeg              |  mozjpeg with quality=95
-mozjpeg-low          |  mozjpeg with quality=80
+mozjpeg-medium       |  mozjpeg with quality=80
 jpegtran             |  jpegtran
 jpegtran-progressive |  jpegtran with progressive=true
 imageoptim           |  https://imageoptim.com/online with quality=medium
@@ -73,27 +133,91 @@ compressorio         |  https://compressor.io
 tinyjpg              |  https://tinyjpg.com
 ```
 
-One thing you'll note, is the `mozjpeg` actually outputs larger images than the origial. I'm not sure how that happened or if I've done it wrong. The repo for how I compressed the images lives at:
+One thing you'll note, is the `mozjpeg` actually outputs larger images than the original. I'm not sure how that happened or if I've done it wrong. The repo for how I compressed the images lives at:
 
-[github.com/anthonykoch/compressors-compared](https://github.com/anthonykoch/compressors-compared)
+<div class="u-mb4">
+  <a href="https://github.com/anthonykoch/compressors-compared" class="Resource is-github">
+    <span class="Resource-media">
+      <svg class="Resource-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9 1.4.3 2.6.4 3.8.4 8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1-8.4 1.9-15.9 2.7-22.6 2.7-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1 10.5 0 20-3.4 25.6-6 2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8 0 0 1.6-.5 5-.5 8.1 0 26.4 3.1 56.6 24.1 17.9-5.1 37-7.6 56.1-7.7 19 .1 38.2 2.6 56.1 7.7 30.2-21 48.5-24.1 56.6-24.1 3.4 0 5 .5 5 .5 12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5 1.2 0 2.6-.1 4-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"/></svg>
+    </span>
+    <span class="Resource-text">anthonykoch/compressors-compared</span>
+  </a>
+</div>
 
+#### Image: Leaves
 
-### Image: Leaves
+If you look closely, you can see that both `abraia`, `recompress-low` and `tinyjpg` changed some of the darker greens into a lighter  green. Interestingly, those three also have the lowest SSIM score. However, I don't notice any notable artifacting produced by either of the three, and they did produce the smallest file sizes.
 
-If you look closely, you can see that both `recompress-low` and `tinyjpg` changed the colors of the portions of the image. I would say `imageoptim` and `mozjpeg-low` both take the win here for most compression without changing the quality of the image.
+The rest look fairly close to the original, and have very close SSIM scores. I would say `imageoptim` and `mozjpeg-medium` both take the win here for most smallest file size without changing the quality of the image.
 
-```info
- 862 kb leaves.jpg
- 253 kb leaves-tinyjpg.jpg
- 573 kb leaves-recompress-medium.jpg
- 185 kb leaves-recompress-low.jpg
-1002 kb leaves-mozjpeg.jpg
- 391 kb leaves-mozjpeg-low.jpg
- 815 kb leaves-jpegtran.jpg
- 812 kb leaves-jpegtran-progressive.jpg
- 358 kb leaves-imageoptim.jpg
- 611 kb leaves-compressorio.jpg
-```
+<div>
+  <table class="Table is-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SSIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>original</td>
+        <td>862 KB</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>abraia</td>
+        <td>292 KB</td>
+        <td>0.9989</td>
+      </tr>
+      <tr>
+        <td>compressorio</td>
+        <td>611 KB</td>
+        <td>0.9998</td>
+      </tr>
+      <tr>
+        <td>imageoptim</td>
+        <td>358 KB</td>
+        <td>0.9997</td>
+      </tr>
+      <tr>
+        <td>jpegtran</td>
+        <td>815 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>jpegtran-progressive</td>
+        <td>812 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg</td>
+        <td>1002 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg-medium</td>
+        <td>391 KB</td>
+        <td>0.9997</td>
+      </tr>
+      <tr>
+        <td>recompress-low</td>
+        <td>185 KB</td>
+        <td>0.9984</td>
+      </tr>
+      <tr>
+        <td>recompress-medium</td>
+        <td>573 KB</td>
+        <td>0.9998</td>
+      </tr>
+      <tr>
+        <td>tinyjpg</td>
+        <td>253 KB</td>
+        <td>0.9987</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <div class="md-fullWidth md-spacer">
   <div style="max-width: 700px; margin: 0 auto">
@@ -101,26 +225,80 @@ If you look closely, you can see that both `recompress-low` and `tinyjpg` change
   </div>
 </div>
 
-### Image: Work Harder
+#### Image: Work Harder
 
-The aggressive compression from `recompress-low` created a fairly obvious pixelated banding in this image. It's obvious enough to call it unacceptable.
+The aggressive compression from `abraia`, `recompress-low`, and `tinypng` created fairly obvious artifacting and gradient banding. `imageoptim` and `compressorio` created artifacting as well, but to a much, much lesser extent.
 
-`tinyjpg` produced nearly the same output, but to a slightly lesser extent.
+At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best compression while still retaining fairly good quality, although artifacting is still noticeable if you look hard enough. `imageoptim` and `compressorio` did very well, but produced a small amount of pixelated banding, but isn't as noticeable.
 
-I would say `recompress-medium` and `mozjpeg-low` had the best compression while still retaining fairly good quality, although artifacting is still noticeable if you look hard enough. `imageoptim` and `compressorio` did very well, but produced a small amount of pixelated banding, but isn't as noticeable.
-
-```info
- 962 kb workharder.jpg
- 228 kb workharder-tinyjpg.jpg
- 545 kb workharder-recompress-medium.jpg
- 200 kb workharder-recompress-low.jpg
-1530 kb workharder-mozjpeg.jpg
- 399 kb workharder-mozjpeg-low.jpg
- 896 kb workharder-jpegtran.jpg
- 878 kb workharder-jpegtran-progressive.jpg
- 299 kb workharder-imageoptim.jpg
- 531 kb workharder-compressorio.jpg
-```
+<div>
+  <table class="Table is-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SSIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>original</td>
+        <td>962 KB</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>abraia</td>
+        <td>325 KB</td>
+        <td>0.9982</td>
+      </tr>
+      <tr>
+        <td>compressorio</td>
+        <td>531 KB</td>
+        <td>0.9996</td>
+      </tr>
+      <tr>
+        <td>imageoptim</td>
+        <td>299 KB</td>
+        <td>0.9990</td>
+      </tr>
+      <tr>
+        <td>jpegtran</td>
+        <td>896 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>jpegtran-progressive</td>
+        <td>878 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg</td>
+        <td>1530 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg-medium</td>
+        <td>399 KB</td>
+        <td>0.9992</td>
+      </tr>
+      <tr>
+        <td>recompress-low</td>
+        <td>200 KB</td>
+        <td>0.9988</td>
+      </tr>
+      <tr>
+        <td>recompress-medium</td>
+        <td>545 KB</td>
+        <td>0.9996</td>
+      </tr>
+      <tr>
+        <td>tinyjpg</td>
+        <td>228 KB</td>
+        <td>0.9992</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <!-- TODO: Just make these an iframe -->
 <div class="md-fullWidth md-spacer">
@@ -129,22 +307,235 @@ I would say `recompress-medium` and `mozjpeg-low` had the best compression while
   </div>
 </div>
 
-```info
-1174 kb flowers.jpg
- 329 kb flowers-tinyjpg.jpg
- 530 kb flowers-recompress-medium.jpg
- 217 kb flowers-recompress-low.jpg
-1584 kb flowers-mozjpeg.jpg
- 611 kb flowers-mozjpeg-low.jpg
-1137 kb flowers-jpegtran.jpg
-1095 kb flowers-jpegtran-progressive.jpg
- 513 kb flowers-imageoptim.jpg
- 900 kb flowers-compressorio.jpg
-```
+#### Image: Flowers
+
+<div>
+  <table class="Table is-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SSIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>original</td>
+        <td>1174 KB</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>abraia</td>
+        <td>527 KB</td>
+        <td>0.9995</td>
+      </tr>
+      <tr>
+        <td>compressorio</td>
+        <td>900 KB</td>
+        <td>0.9999</td>
+      </tr>
+      <tr>
+        <td>imageoptim</td>
+        <td>513 KB</td>
+        <td>0.9998</td>
+      </tr>
+      <tr>
+        <td>jpegtran</td>
+        <td>1137 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>jpegtran-progressive</td>
+        <td>1095 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg</td>
+        <td>1584 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg-medium</td>
+        <td>611 KB</td>
+        <td>0.9998</td>
+      </tr>
+      <tr>
+        <td>recompress-low</td>
+        <td>217 KB</td>
+        <td>0.9983</td>
+      </tr>
+      <tr>
+        <td>recompress-medium</td>
+        <td>530 KB</td>
+        <td>0.9998</td>
+      </tr>
+      <tr>
+        <td>tinyjpg</td>
+        <td>329 KB</td>
+        <td>0.9994</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
 
 <div class="md-fullWidth md-spacer">
   <div style="max-width: 900px; margin: 0 auto">
     <tabbed-image-compare :tabs="imageCompareFlowersTabs"></tabbed-image-compare>
+  </div>
+</div>
+
+#### Image: Coffee
+
+<div>
+  <table class="Table is-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SSIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>original</td>
+        <td>824 KB</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>abraia</td>
+        <td>329 KB</td>
+        <td>0.9987</td>
+      </tr>
+      <tr>
+        <td>compressorio</td>
+        <td>613 KB</td>
+        <td>0.9997</td>
+      </tr>
+      <tr>
+        <td>imageoptim</td>
+        <td>390 KB</td>
+        <td>0.9994</td>
+      </tr>
+      <tr>
+        <td>jpegtran</td>
+        <td>817 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>jpegtran-progressive</td>
+        <td>782 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg</td>
+        <td>1055 KB</td>
+        <td>1.0000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg-medium</td>
+        <td>428 KB</td>
+        <td>0.9994</td>
+      </tr>
+      <tr>
+        <td>recompress-low</td>
+        <td>250 KB</td>
+        <td>0.9982</td>
+      </tr>
+      <tr>
+        <td>recompress-medium</td>
+        <td>570 KB</td>
+        <td>0.9997</td>
+      </tr>
+      <tr>
+        <td>tinypng</td>
+        <td>308 KB</td>
+        <td>0.9988</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="md-fullWidth md-spacer">
+  <div style="max-width: 900px; margin: 0 auto">
+    <tabbed-image-compare :tabs="imageCompareCoffeeTabs"></tabbed-image-compare>
+  </div>
+</div>
+
+#### Image: Sun
+
+
+<div>
+  <table class="Table is-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SSIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Original</td>
+        <td>1202 KB</td>
+        <td>N/A</td>
+      </tr>
+    <tr>
+        <td>abraia</td>
+        <td>316 KB</td>
+        <td>0.9987</td>
+      </tr>
+    <tr>
+        <td>compressorio</td>
+        <td>696 KB</td>
+        <td>0.9999</td>
+      </tr>
+    <tr>
+        <td>imageoptim</td>
+        <td>412 KB</td>
+        <td>0.9997</td>
+      </tr>
+    <tr>
+        <td>jpegtran</td>
+        <td>1115 KB</td>
+        <td>1.0000</td>
+      </tr>
+    <tr>
+        <td>jpegtran-progressive</td>
+        <td>1117 KB</td>
+        <td>1.0000</td>
+      </tr>
+    <tr>
+        <td>mozjpeg</td>
+        <td>1647 KB</td>
+        <td>1.0000</td>
+      </tr>
+    <tr>
+        <td>mozjpeg-medium</td>
+        <td>548 KB</td>
+        <td>0.9998</td>
+      </tr>
+    <tr>
+        <td>recompress-low</td>
+        <td>191 KB</td>
+        <td>0.9987</td>
+      </tr>
+    <tr>
+        <td>recompress-medium</td>
+        <td>445 KB</td>
+        <td>0.9998</td>
+      </tr>
+    <tr>
+        <td>tinyjpg</td>
+        <td>250 KB</td>
+        <td>0.9988</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="md-fullWidth md-spacer">
+  <div style="max-width: 900px; margin: 0 auto">
+    <tabbed-image-compare :tabs="imageCompareSunTabs"></tabbed-image-compare>
   </div>
 </div>
 
@@ -156,7 +547,7 @@ I would say `recompress-medium` and `mozjpeg-low` had the best compression while
 
 #### jpegtran
 
-I have to assume `jpegtran` is a lossless compression, which is not really what I want.
+According to the SSIM scores, it truly is a lossless compressor. However, I'm usually looking to save precious bytes from being sent across the wire, so I'm not really interested in this compressor.
 
 #### jpeg-recompress and mozjpeg
 
@@ -170,35 +561,68 @@ Basically, for these two plugins, the quality and compression are the result of 
 
 ### Conclusion
 
-Is the artifacting worth the reduction in file size? You may notice the artifacting, but will the majority of users?
-
+Depending on what you value in compression, you may be acceptable, and let's be honest, would users really even notice?
 
 <script>
-import cuid from 'cuid'
-
-const defaultTitles = ['recompress-low', 'recompress-medium', 'mozjpeg', 'mozjpeg-low', 'jpegtran', 'compressorio', 'tinypng', 'imageoptim', 'abraia']
+const defaultTitles = [
+  {
+    text: 'abraia',
+    path: ({ image, ext = 'jpg' }) => `abraia/${image}.[abraia].${ext}`,
+  },
+  {
+    text: 'compressorio',
+    path: ({ image, ext = 'jpg' }) => `compressorio/${image}.[compressorio].${ext}`,
+  },
+  {
+    text: 'imageoptim',
+    path: ({ image, ext = 'jpg' }) => `imageoptim/${image}.[imageoptim].${ext}`,
+  },
+  {
+    text: 'jpegtran',
+    path: ({ image, ext = 'jpg' }) => `jpegtran/${image}.[jpegtran].${ext}`,
+  },
+  {
+    text: 'mozjpeg',
+    path: ({ image, ext = 'jpg' }) => `mozjpeg/${image}.[mozjpeg].${ext}`,
+  },
+  {
+    text: 'mozjpeg-medium',
+    path: ({ image, ext = 'jpg' }) => `mozjpeg-medium/${image}.[mozjpeg-medium].${ext}`,
+  },
+  {
+    text: 'recompress-low',
+    path: ({ image, ext = 'jpg' }) => `recompress-low/${image}.[recompress-low].${ext}`,
+  },
+  {
+    text: 'recompress-medium',
+    path: ({ image, ext = 'jpg' }) => `recompress-medium/${image}.[recompress-medium].${ext}`,
+  },
+  {
+    text: 'tinyjpg',
+    path: ({ image, ext = 'jpg' }) => `tinyjpg/${image}.[tinyjpg].${ext}`,
+  },
+]
 
 const createTabs = ({
     index,
     ext = 'jpg',
     width,
     height,
-    name,
+    image,
     titles = defaultTitles
   }) =>
   titles.map((title) => ({
-    text: title,
-    id: `image-compare-${name}-${title.toLowerCase()}`,
+    text: title.text,
+    id: `image-compare-${image}-${title.text.toLowerCase()}`,
     width,
     height,
     left: {
-      url: `/images/posts/image-compressors-compared/images/${name}.${ext}`,
+      url: `/images/posts/image-compressors-compared/compressed/images/${image}.[original].${ext}`,
     },
     right: {
-      url: `/images/posts/image-compressors-compared/${title}/${name}${title ? '-' + title : ''}.${ext}`,
+      url: `/images/posts/image-compressors-compared/compressed/${title.path({ image })}`,
     }
   }))
-
 
 export default {
   data() {
@@ -207,36 +631,36 @@ export default {
         index: 1,
         width: 2623,
         height: 3456,
-        name: 'leaves',
+        image: 'leaves',
       }),
       imageCompareWorkHarderTabs: createTabs({
         index: 3,
         width: 4240,
         height: 2384,
-        name: 'workharder',
+        image: 'workharder',
       }),
       imageCompareFlowersTabs: createTabs({
         index: 4,
         width: 2267,
         height: 4032,
-        name: 'flowers',
+        image: 'flowers',
       }),
-      imageCompareLampTabs: createTabs({
+      imageCompareCoffeeTabs: createTabs({
         index: 5,
-        width: 4738,
-        height: 3159,
-        name: 'lamp',
+        width: 2047,
+        height: 2559,
+        image: 'coffee',
+      }),
+      imageCompareSunTabs: createTabs({
+        index: 5,
+        width: 5760,
+        height: 3840,
+        image: 'sun',
       }),
     }
   },
   components: {
     TabbedImageCompare: require('@/components/TabbedImageCompare.vue').default,
-  },
-  props: {
-    // page: {
-    //   type: Object,
-    //   required: true,
-    // },
   },
 }
 </script>

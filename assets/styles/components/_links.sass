@@ -11,3 +11,41 @@
 
   &.is-light
     +make-link-light
+
+
+
+
+.Resource-media
+  align-items: center
+  display: flex
+  padding-left: 22px
+
+.Resource-text
+  display: block
+  padding: 14px 22px
+  font-weight: 600
+
+.Resource
+  background-color: $app-color-background-dark
+  box-shadow: 0 20px 50px -4px rgba(black, 0.2)
+  display: inline-flex
+  font-family: rift-soft
+  font-size: 13px
+  letter-spacing: 1px
+  transition: color 300ms, background-color 300ms
+
+  &:link,
+  &:visited
+    color: #eeeeee
+
+  &:hover
+    background-color: $app-color-1
+    color: $app-color-text
+
+    svg
+      fill: $app-color-text
+
+  svg
+    fill: white
+    transition: fill 300ms
+    width: 20px
