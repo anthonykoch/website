@@ -5,19 +5,25 @@
   padding-bottom: $app-list-padding-v
 
   & > li
-    margin-bottom: $app-list-item-padding-b
-    margin-left: $app-list-item-margin-h
-    padding-left: $app-list-item-padding-h
+    margin-bottom: $app-list-item-padding-b-mobile
+    margin-left: $app-list-item-margin-h-mobile
+    padding-left: $app-list-item-padding-h-mobile
+
+  +app-breakpoint-min(md)
+    & > li
+      margin-bottom: $app-list-item-padding-b
+      margin-left: $app-list-item-margin-h
+      padding-left: $app-list-item-padding-h
 
 =make-list-bullet
   line-height: 1.5
   list-style-type: none
   padding-bottom: $app-list-padding-v
 
-  > li
-    margin-bottom: $app-list-item-padding-b
-    margin-left: $app-list-item-margin-h
-    padding-left: $app-list-item-padding-h
+  & > li
+    margin-bottom: $app-list-item-padding-b-mobile
+    margin-left: $app-list-item-margin-h-mobile
+    padding-left: $app-list-item-padding-h-mobile
     position: relative
 
     &:before
@@ -30,6 +36,8 @@
       top: 0.6em
       width: 0.4em
 
-
-
-
+  +app-breakpoint-min(md)
+    & > li
+      margin-bottom: $app-list-item-padding-b
+      margin-left: $app-list-item-margin-h
+      padding-left: $app-list-item-padding-h

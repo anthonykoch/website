@@ -311,10 +311,16 @@ $app-logo-width: $app-page-sidebar-width;
 
 
 
-$app-list-item-margin-h: 32px;
-$app-list-item-padding-h: 10px;
+$app-list-item-margin-h: 38px;
+$app-list-item-padding-h: 14px;
 $app-list-item-padding-b: 8px;
 $app-list-padding-v: double($app-gutter);
+
+
+
+$app-list-item-margin-h-mobile: 28px;
+$app-list-item-padding-h-mobile: 10px;
+$app-list-item-padding-b-mobile: 6px;
 
 
 

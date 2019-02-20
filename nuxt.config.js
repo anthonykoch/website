@@ -103,10 +103,10 @@ module.exports = {
       // { name: "twitter:url", content: "{{ page.url }}"},
     ],
     script: [
-      { async: true, src: 'https://static.codepen.io/assets/embed/ei.js', body: true },
+      //
     ],
     link: [
-      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
+      { rel: 'icon', type: 'image/x-icon', href: '/images/favicon.png' },
       { rel: 'stylesheet', href: 'https://use.typekit.net/nsr0hmh.css' },
       { rel: 'stylesheet', href: 'https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' },
     ]
@@ -154,6 +154,8 @@ module.exports = {
       const svgRule = config.module.rules.find(rule => rule.test.test('.svg'));
 
       svgRule.test = /\.(png|jpe?g|gif|webp)$/;
+      console.log(config.module.rules);
+
 
       config.module.rules.push({
         test: /\.svg$/,

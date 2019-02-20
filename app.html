@@ -14,5 +14,17 @@
   </head>
   <body {{ BODY_ATTRS }}>
     {{ APP }}
+
+    <script>
+      // Make sure codepen doesn't load before nuxt does
+      setTimeout(function () {
+        const script = document.createElement('script');
+
+        script.src = 'https://static.codepen.io/assets/embed/ei.js';
+        script.async = true;
+        script.defer = true;
+
+        document.body.appendChild(script);
+      }, 1000)</script>
   </body>
 </html>

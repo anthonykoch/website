@@ -48,7 +48,7 @@ export default {
 .IconList {
   align-items: center;
   display: inline-grid;
-  grid-gap: 24px;
+  grid-gap: 28px;
   text-align: center;
   grid-template-columns: repeat(3, 1fr);
   justify-content: center;

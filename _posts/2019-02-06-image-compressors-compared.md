@@ -7,7 +7,7 @@ created_at: 2019-02-06
 ---
 
 
-I recently saw a question on reddit asking what was the best way to optimize images. Everyone seemed to respond with a different answer, with some recommending apps, some websites, and others CLI utilities.
+I recently saw a question on reddit asking what the best way to optimize images was. Everyone seemed to respond with a different answer, with some recommending apps, some websites, and others CLI utilities.
 
 <!-- endexcerpt -->
 
@@ -16,7 +16,7 @@ For the last couple of years, I've relied soley on tinyjpg and compressor.io. Ho
 - What are all the cross-platform image compressors?
 - How well do they compress with different settings?
 - What is the quality of the image the comes out?
-- What are the smallest file sizes that can be achieved without a loss in quality.
+- What are the smallest file sizes that can be achieved with only a minor loss in quality?
 
 ### Overview
 
@@ -80,7 +80,7 @@ For the last couple of years, I've relied soley on tinyjpg and compressor.io. Ho
     <div class="Aside-content">
       <div class="Aside-tag  [ Tag is-absolute ]">Plugin settings</div>
       <p>
-        Each plugin has its own settings that can be configured. This is a great article on configuring jpeg-compress:
+        Each plugin has its own settings that can be configured. This is a great article on how <code>jpeg-recompress</code> settings work:
         <a href="https://mika-s.github.io/javascript/jpeg/compression/algorithm/2018/01/10/quality-min-and-max-with-jpeg-recompress.html">Quality, min and max with jpeg-recompress</a>
       </p>
     </div>
@@ -89,7 +89,7 @@ For the last couple of years, I've relied soley on tinyjpg and compressor.io. Ho
 
 #### tinyjpg
 
-I've used [tinyjpg.com](https://tinyjpg.com) for a while now. They have a webpage uploader where you can upload and compress up to 10 images at one time, with a maximum size limit of 5MB. They support compressing pngs or jpegs. tinyjpg is more on the aggressive side, so you need to watch the output quality.
+I've used [tinyjpg.com](https://tinyjpg.com) for a while now. They support compressing pngs or jpegs. This compressor is on the more aggressive side, so you need to watch the output quality.
 
 
 #### compressor.io
@@ -99,17 +99,17 @@ I've used [tinyjpg.com](https://tinyjpg.com) for a while now. They have a webpag
 
 #### Abraia
 
-I had never heard [abraia](https://abraia.me/) optimizer before writing this article, but I decided to add it in last second. I did have on image return corrupted, which I ended up removing from the test.
+I had never heard [abraia](https://abraia.me/) optimizer before writing this article, but I decided to add it in last second. I did have an image return corrupted (at 37 bytes) [https://unsplash.com/photos/7ACuHoezUYk](https://unsplash.com/photos/7ACuHoezUYk).
 
 
 #### ImageOptim
 
-Something to keep in mind is that, according to their website, their app doesn't do lossy compression by default. Also, their app isn't on the App Store, so you need to download it from the website.
+According to their website, their app doesn't do lossy compression by default. Also, their app isn't on the App Store, so you need to download it from the website.
 
 
 ### Comparing compression
 
-We'll have three different jpeg images to compress. The output size *and* quality of the resulting image will be compared between the compressors. Each section will have a comparison tool, where the left side will show the original image, and the right will show the compressed version.
+We'll have four different jpgs images to compress. The output size *and* quality of the resulting image will be compared between the compressors. Each section will have a comparison tool, where the left side will show the original image, and the right will show the compressed version.
 
 #### SSIM
 
@@ -146,7 +146,7 @@ One thing you'll note, is the `mozjpeg` actually outputs larger images than the 
 
 #### Image: Leaves
 
-If you look closely, you can see that both `abraia`, `recompress-low` and `tinyjpg` changed some of the darker greens into a lighter  green. Interestingly, those three also have the lowest SSIM score. However, I don't notice any notable artifacting produced by either of the three, and they did produce the smallest file sizes.
+If you look closely, you can see that both `abraia`, `recompress-low` and `tinyjpg` changed some of the darker greens into a lighter  green. Interestingly, those three also have the lowest SSIM score. However, I don't see any notable artifacting produced by any of the three, and they did produce the smallest file sizes.
 
 The rest look fairly close to the original, and have very close SSIM scores. I would say `imageoptim` and `mozjpeg-medium` both take the win here for most smallest file size without changing the quality of the image.
 
@@ -161,59 +161,59 @@ The rest look fairly close to the original, and have very close SSIM scores. I w
     </thead>
     <tbody>
       <tr>
-        <td>original</td>
+        <td>Original</td>
         <td>862 KB</td>
         <td>N/A</td>
       </tr>
       <tr>
         <td>abraia</td>
         <td>292 KB</td>
-        <td>0.9989</td>
+        <td>0.99891</td>
       </tr>
       <tr>
         <td>compressorio</td>
         <td>611 KB</td>
-        <td>0.9998</td>
+        <td>0.99977</td>
       </tr>
       <tr>
         <td>imageoptim</td>
         <td>358 KB</td>
-        <td>0.9997</td>
+        <td>0.99969</td>
       </tr>
       <tr>
         <td>jpegtran</td>
         <td>815 KB</td>
-        <td>1.0000</td>
+        <td>1.00000</td>
       </tr>
       <tr>
         <td>jpegtran-progressive</td>
         <td>812 KB</td>
-        <td>1.0000</td>
+        <td>1.00000</td>
       </tr>
       <tr>
         <td>mozjpeg</td>
         <td>1002 KB</td>
-        <td>1.0000</td>
+        <td>0.99998</td>
       </tr>
       <tr>
         <td>mozjpeg-medium</td>
         <td>391 KB</td>
-        <td>0.9997</td>
+        <td>0.99969</td>
       </tr>
       <tr>
         <td>recompress-low</td>
         <td>185 KB</td>
-        <td>0.9984</td>
+        <td>0.99840</td>
       </tr>
       <tr>
         <td>recompress-medium</td>
         <td>573 KB</td>
-        <td>0.9998</td>
+        <td>0.99982</td>
       </tr>
       <tr>
         <td>tinyjpg</td>
         <td>253 KB</td>
-        <td>0.9987</td>
+        <td>0.99871</td>
       </tr>
     </tbody>
   </table>
@@ -227,7 +227,7 @@ The rest look fairly close to the original, and have very close SSIM scores. I w
 
 #### Image: Work Harder
 
-The aggressive compression from `abraia`, `recompress-low`, and `tinypng` created fairly obvious artifacting and gradient banding. `imageoptim` and `compressorio` created artifacting as well, but to a much, much lesser extent.
+The aggressive compression from `abraia`, `recompress-low`, and `tinyjpg` created fairly obvious artifacting and gradient banding. Besides `jpegtran`, the rest of them created artifacting, but isn't to a much lesser extent. It's really only noticeable if I turn my monitor brightness all the way up.
 
 At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best compression while still retaining fairly good quality, although artifacting is still noticeable if you look hard enough. `imageoptim` and `compressorio` did very well, but produced a small amount of pixelated banding, but isn't as noticeable.
 
@@ -242,59 +242,59 @@ At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best
     </thead>
     <tbody>
       <tr>
-        <td>original</td>
+        <td>Original</td>
         <td>962 KB</td>
         <td>N/A</td>
       </tr>
       <tr>
         <td>abraia</td>
         <td>325 KB</td>
-        <td>0.9982</td>
+        <td>0.99817</td>
       </tr>
       <tr>
         <td>compressorio</td>
         <td>531 KB</td>
-        <td>0.9996</td>
+        <td>0.99959</td>
       </tr>
       <tr>
         <td>imageoptim</td>
         <td>299 KB</td>
-        <td>0.9990</td>
+        <td>0.99903</td>
       </tr>
       <tr>
         <td>jpegtran</td>
         <td>896 KB</td>
-        <td>1.0000</td>
+        <td>1.00000</td>
       </tr>
       <tr>
         <td>jpegtran-progressive</td>
         <td>878 KB</td>
-        <td>1.0000</td>
+        <td>1.00000</td>
       </tr>
       <tr>
         <td>mozjpeg</td>
         <td>1530 KB</td>
-        <td>1.0000</td>
+        <td>0.99998</td>
       </tr>
       <tr>
         <td>mozjpeg-medium</td>
         <td>399 KB</td>
-        <td>0.9992</td>
+        <td>0.99923</td>
       </tr>
       <tr>
         <td>recompress-low</td>
         <td>200 KB</td>
-        <td>0.9988</td>
+        <td>0.99876</td>
       </tr>
       <tr>
         <td>recompress-medium</td>
         <td>545 KB</td>
-        <td>0.9996</td>
+        <td>0.99962</td>
       </tr>
       <tr>
         <td>tinyjpg</td>
         <td>228 KB</td>
-        <td>0.9992</td>
+        <td>0.99924</td>
       </tr>
     </tbody>
   </table>
@@ -309,160 +309,18 @@ At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best
 
 #### Image: Flowers
 
-<div>
-  <table class="Table is-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Size</th>
-        <th>SSIM</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>original</td>
-        <td>1174 KB</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td>abraia</td>
-        <td>527 KB</td>
-        <td>0.9995</td>
-      </tr>
-      <tr>
-        <td>compressorio</td>
-        <td>900 KB</td>
-        <td>0.9999</td>
-      </tr>
-      <tr>
-        <td>imageoptim</td>
-        <td>513 KB</td>
-        <td>0.9998</td>
-      </tr>
-      <tr>
-        <td>jpegtran</td>
-        <td>1137 KB</td>
-        <td>1.0000</td>
-      </tr>
-      <tr>
-        <td>jpegtran-progressive</td>
-        <td>1095 KB</td>
-        <td>1.0000</td>
-      </tr>
-      <tr>
-        <td>mozjpeg</td>
-        <td>1584 KB</td>
-        <td>1.0000</td>
-      </tr>
-      <tr>
-        <td>mozjpeg-medium</td>
-        <td>611 KB</td>
-        <td>0.9998</td>
-      </tr>
-      <tr>
-        <td>recompress-low</td>
-        <td>217 KB</td>
-        <td>0.9983</td>
-      </tr>
-      <tr>
-        <td>recompress-medium</td>
-        <td>530 KB</td>
-        <td>0.9998</td>
-      </tr>
-      <tr>
-        <td>tinyjpg</td>
-        <td>329 KB</td>
-        <td>0.9994</td>
-      </tr>
-    </tbody>
-  </table>
-</div>
-
-<div class="md-fullWidth md-spacer">
-  <div style="max-width: 900px; margin: 0 auto">
-    <tabbed-image-compare :tabs="imageCompareFlowersTabs"></tabbed-image-compare>
-  </div>
-</div>
-
-#### Image: Coffee
+While switching back and forth between the `tinyjpg` and the original in different tabs in Firefox, I noticed a difference in color that wasn't noticeable in Chrome. As it turns out, Firefox renders several of the compressed versions with more saturation, but Chrome doesn't.
 
 <div>
-  <table class="Table is-condensed">
-    <thead>
-      <tr>
-        <th>Name</th>
-        <th>Size</th>
-        <th>SSIM</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td>original</td>
-        <td>824 KB</td>
-        <td>N/A</td>
-      </tr>
-      <tr>
-        <td>abraia</td>
-        <td>329 KB</td>
-        <td>0.9987</td>
-      </tr>
-      <tr>
-        <td>compressorio</td>
-        <td>613 KB</td>
-        <td>0.9997</td>
-      </tr>
-      <tr>
-        <td>imageoptim</td>
-        <td>390 KB</td>
-        <td>0.9994</td>
-      </tr>
-      <tr>
-        <td>jpegtran</td>
-        <td>817 KB</td>
-        <td>1.0000</td>
-      </tr>
-      <tr>
-        <td>jpegtran-progressive</td>
-        <td>782 KB</td>
-        <td>1.0000</td>
-      </tr>
-      <tr>
-        <td>mozjpeg</td>
-        <td>1055 KB</td>
-        <td>1.0000</td>
-      </tr>
-      <tr>
-        <td>mozjpeg-medium</td>
-        <td>428 KB</td>
-        <td>0.9994</td>
-      </tr>
-      <tr>
-        <td>recompress-low</td>
-        <td>250 KB</td>
-        <td>0.9982</td>
-      </tr>
-      <tr>
-        <td>recompress-medium</td>
-        <td>570 KB</td>
-        <td>0.9997</td>
-      </tr>
-      <tr>
-        <td>tinypng</td>
-        <td>308 KB</td>
-        <td>0.9988</td>
-      </tr>
-    </tbody>
-  </table>
+  <img
+    src="/images/posts/image-compressors-compared/flower-firefox.png"
+    alt="flowers in firefox"
+    class="Image has-shadow is-rounded u-mxauto"
+    style="max-width: 500px; width: 100%;"
+  >
 </div>
 
-<div class="md-fullWidth md-spacer">
-  <div style="max-width: 900px; margin: 0 auto">
-    <tabbed-image-compare :tabs="imageCompareCoffeeTabs"></tabbed-image-compare>
-  </div>
-</div>
-
-#### Image: Sun
-
+As far as bytes saved, `recompress-low` took a good chunk out of the file size, and it certainly shows. It made the image look quite pixelated, while `tinyjpg` is looks acceptable. To my eyes, the others look the same as the original.
 
 <div>
   <table class="Table is-condensed">
@@ -476,58 +334,58 @@ At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best
     <tbody>
       <tr>
         <td>Original</td>
-        <td>1202 KB</td>
+        <td>1174 KB</td>
         <td>N/A</td>
       </tr>
-    <tr>
+      <tr>
         <td>abraia</td>
-        <td>316 KB</td>
-        <td>0.9987</td>
+        <td>527 KB</td>
+        <td>0.99947</td>
       </tr>
-    <tr>
+      <tr>
         <td>compressorio</td>
-        <td>696 KB</td>
-        <td>0.9999</td>
+        <td>900 KB</td>
+        <td>0.99990</td>
       </tr>
-    <tr>
+      <tr>
         <td>imageoptim</td>
-        <td>412 KB</td>
-        <td>0.9997</td>
+        <td>513 KB</td>
+        <td>0.99982</td>
       </tr>
-    <tr>
+      <tr>
         <td>jpegtran</td>
-        <td>1115 KB</td>
-        <td>1.0000</td>
+        <td>1137 KB</td>
+        <td>1.00000</td>
       </tr>
-    <tr>
+      <tr>
         <td>jpegtran-progressive</td>
-        <td>1117 KB</td>
-        <td>1.0000</td>
+        <td>1095 KB</td>
+        <td>1.00000</td>
       </tr>
-    <tr>
+      <tr>
         <td>mozjpeg</td>
-        <td>1647 KB</td>
-        <td>1.0000</td>
+        <td>1584 KB</td>
+        <td>0.99999</td>
       </tr>
-    <tr>
+      <tr>
         <td>mozjpeg-medium</td>
-        <td>548 KB</td>
-        <td>0.9998</td>
+        <td>611 KB</td>
+        <td>0.99982</td>
       </tr>
-    <tr>
+      <tr>
         <td>recompress-low</td>
-        <td>191 KB</td>
-        <td>0.9987</td>
+        <td>217 KB</td>
+        <td>0.99829</td>
       </tr>
-    <tr>
+      <tr>
         <td>recompress-medium</td>
-        <td>445 KB</td>
-        <td>0.9998</td>
+        <td>530 KB</td>
+        <td>0.99982</td>
       </tr>
-    <tr>
+      <tr>
         <td>tinyjpg</td>
-        <td>250 KB</td>
-        <td>0.9988</td>
+        <td>329 KB</td>
+        <td>0.99940</td>
       </tr>
     </tbody>
   </table>
@@ -535,33 +393,122 @@ At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best
 
 <div class="md-fullWidth md-spacer">
   <div style="max-width: 900px; margin: 0 auto">
-    <tabbed-image-compare :tabs="imageCompareSunTabs"></tabbed-image-compare>
+    <tabbed-image-compare :tabs="imageCompareFlowersTabs"></tabbed-image-compare>
   </div>
 </div>
+
+#### Image: Coffee
+
+Once again, if you view this in Firefox, you'll see a more saturated image on the right for several of the compressed versions. I imagine that's a bug with Firefox. In any case, I don't see any noticeable artifacting for any of the compressed images.
+
+<div>
+  <table class="Table is-condensed">
+    <thead>
+      <tr>
+        <th>Name</th>
+        <th>Size</th>
+        <th>SSIM</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td>Original</td>
+        <td>824 KB</td>
+        <td>N/A</td>
+      </tr>
+      <tr>
+        <td>abraia</td>
+        <td>329 KB</td>
+        <td>0.99875</td>
+      </tr>
+      <tr>
+        <td>compressorio</td>
+        <td>613 KB</td>
+        <td>0.99965</td>
+      </tr>
+      <tr>
+        <td>imageoptim</td>
+        <td>390 KB</td>
+        <td>0.99942</td>
+      </tr>
+      <tr>
+        <td>jpegtran</td>
+        <td>817 KB</td>
+        <td>1.00000</td>
+      </tr>
+      <tr>
+        <td>jpegtran-progressive</td>
+        <td>782 KB</td>
+        <td>1.00000</td>
+      </tr>
+      <tr>
+        <td>mozjpeg</td>
+        <td>1055 KB</td>
+        <td>0.99997</td>
+      </tr>
+      <tr>
+        <td>mozjpeg-medium</td>
+        <td>428 KB</td>
+        <td>0.99943</td>
+      </tr>
+      <tr>
+        <td>recompress-low</td>
+        <td>250 KB</td>
+        <td>0.99821</td>
+      </tr>
+      <tr>
+        <td>recompress-medium</td>
+        <td>570 KB</td>
+        <td>0.99971</td>
+      </tr>
+      <tr>
+        <td>tinyjpg</td>
+        <td>308 KB</td>
+        <td>0.99879</td>
+      </tr>
+    </tbody>
+  </table>
+</div>
+
+<div class="md-fullWidth md-spacer">
+  <div style="max-width: 700px; margin: 0 auto">
+    <tabbed-image-compare :tabs="imageCompareCoffeeTabs"></tabbed-image-compare>
+  </div>
+</div>
+
 
 ### Results
 
 #### tinyjpg
 
-`tinyjpg` has quite an aggressive compression that produces somewhat noticeable artifacting and color shifting depending on the image. Whether or not the artifacting is acceptable is up to you. I have a hunch `jpeg-recompress` and `mozjpeg` could be tuned to get near `tinyjpg's` compression without the terrible loss in quality.
+`tinyjpg` has fairly aggressive compression, which, depending on the image, produces noticeable artifacting and color shifting. Whether or not the artifacting is acceptable is up to you. I have a hunch `jpeg-recompress` and `mozjpeg` could be tuned to get slightly closer to `tinyjpg's` compression without as much loss in quality.
+
+#### Abraia
+
+`abraia` did about the same as `tinyjpg`. It reduced the file sizes quite well, but also produced barely noticeable artifacting and color shifting, aside from the Work Hard image, of course, which had farily obvious gradient banding.
 
 #### jpegtran
 
-According to the SSIM scores, it truly is a lossless compressor. However, I'm usually looking to save precious bytes from being sent across the wire, so I'm not really interested in this compressor.
+According to the SSIM scores, it truly is a lossless compressor. However, I'm usually looking to save a lot more bytes than what it does, so I'm not really interested in this compressor. However, if I need a lossless compressor, I know where to look.
 
 #### jpeg-recompress and mozjpeg
 
-Again, I've no idea why `mozjpeg` with default settings outputs a file greater than the input size. However, with a quality setting of `80`, it reduced the file size quite well while retaining nearly identical quality. `jpeg-recompress` also did well with the lesser aggressive compression settings.
+Again, I've no idea why `mozjpeg` with default settings outputs a file greater than the input size. However, with a quality setting of `80`, it reduced the file size quite well while retaining nearly identical quality. `jpeg-recompress` also did well with the "medium" settings.
 
-Basically, for these two plugins, the quality and compression are the result of what settings you pass to them. They can either achieve good compression while sacrificing a good deal of quality or compress decently (as compared to tinyjpg) while retaining good quality.
+Basically, for these two plugins, it's not, *"These plugins are too aggressive or not aggressive enough"*. The quality and size reductions are the result of what settings you pass to them. They can either achieve good compression while sacrificing a good deal of quality, compress decently (as compared to tinyjpg) while retaining good quality, or somewhere in between.
 
 #### imageoptim
 
-`imageoptim` with quality `medium` reduced the file size pretty well without a lot of artifacting.
+Out of all of them, I would say `imageoptim`, with the preset `medium` settings, did the best at reducing the file size while retaining as much of the quality as possible. I used their website uploader, so I'm not quite sure what settings their app has.
 
 ### Conclusion
 
-Depending on what you value in compression, you may be acceptable, and let's be honest, would users really even notice?
+Interestingly, even for different images compressed by the same compressor, the quality of the images differed. Some looked pixelated and some didn't. This just goes to show that you need to be always look at the end result to make sure it doesn't look the output quality is acceptable.
+
+**To decide which compressor is best for you**, or even what settings you choose for the compressor, **you have to decide what you value**. This is a seesaw decision. Do you value bytes saved or image quality? As we've seen, some of the compressors can be tuned to be somewhere in the middle.
+
+Personally, I value bytes saved reduction, and I highly doubt, the majority of users aren't going to notice the minor artifacting. I'll probably do more testing, but `imageoptim` and `jpeg-recompress` or `mozjpeg` all look like great choices for the most bytes saved while retaining quality, if the settings are right.
+
 
 <script>
 const defaultTitles = [
@@ -650,12 +597,6 @@ export default {
         width: 2047,
         height: 2559,
         image: 'coffee',
-      }),
-      imageCompareSunTabs: createTabs({
-        index: 5,
-        width: 5760,
-        height: 3840,
-        image: 'sun',
       }),
     }
   },

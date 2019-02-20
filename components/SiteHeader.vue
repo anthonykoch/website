@@ -33,20 +33,34 @@
 
         <nav class="SiteNav" role="navigation">
           <ul class="SiteNav-list">
-            <li
-              v-for="(link, index) of $store.state.navigation.links"
-              class="SiteNav-listItem"
-              :key="index"
-            >
+            <li class="SiteNav-listItem">
               <nuxt-link
-                :active-class="siteNavLinkActiveClass"
-                :to="link.href"
-                :class="{
-                  'is-light': hasLightLinks,
-                }"
+                to="/#work"
+                :class="{ 'is-light': hasLightLinks }"
+                class="SiteNav-link"
+                @click.native="onWorkClick"
+              >
+                Work
+              </nuxt-link>
+            </li>
+            <li class="SiteNav-listItem">
+              <nuxt-link
+                active-class="/blog"
+                to="/blog"
+                :class="{ 'is-light': hasLightLinks }"
                 class="SiteNav-link"
               >
-                {{ link.text }}
+                Blog
+              </nuxt-link>
+            </li>
+            <li class="SiteNav-listItem">
+              <nuxt-link
+                active-class="/contact"
+                to="/contact"
+                :class="{ 'is-light': hasLightLinks }"
+                class="SiteNav-link"
+              >
+                Contact
               </nuxt-link>
             </li>
             <li
@@ -61,7 +75,7 @@
                 rel="noopener noreferrer"
                 class="SiteNav-iconLink is-github"
               >
-                <icon-octocat style="margin-top: -1px; fill: rgba(255, 255, 255, 0.8)"></icon-octocat>
+                <icon-octocat style="margin-top: -1px;"></icon-octocat>
               </a>
             </li>
           </ul>
@@ -76,6 +90,9 @@
 
 <script>
 export default {
+  components: {
+    IconOctocat: require('@/assets/images/icons/octocat.svg').default,
+  },
   props: {
     background: {
       type: String,
@@ -113,15 +130,20 @@ export default {
       default: false,
     },
   },
-  components: {
-    IconOctocat: require('@/assets/images/icons/octocat.svg').default,
+  methods: {
+    onWorkClick(e) {
+      if (window.location.pathname === '/') {
+        e.preventDefault()
+        this.$scrollTo('#work')
+      }
+    },
   },
   computed: {
     siteNavLinkActiveClass() {
-      return this.allowNavLinkActiveClass ? 'is-active' : null;
+      return this.allowNavLinkActiveClass ? 'is-active' : null
     },
   },
-};
+}
 </script>
 
 <style lang="scss" scoped>
@@ -151,11 +173,8 @@ export default {
     color: #333333;
     background: $app-site-nav-link-background--active;
     border-color: white;
-    // color: $app-site-nav-link-foreground--active
   }
 }
-
-
 
 
 
@@ -194,17 +213,27 @@ export default {
   padding: 0.5rem;
 
   &.is-github {
-    max-width: 4.5rem;
+    max-width: 100%;
+    width: 54px;
 
     svg {
-      width: rem(22px);
+      fill: rgba(255, 255, 255, 0.8);
       margin: 0 auto;
+      width: rem(22px);
+    }
+
+    &:hover {
+      svg {
+        fill: $app-color-1;
+      }
     }
   }
 
   &.is-dark {
-    svg {
-      fill: $app-site-nav-link-foreground;
+    &.is-github {
+      svg {
+        fill: $app-site-nav-link-foreground;
+      }
     }
   }
 }
