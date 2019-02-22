@@ -34,8 +34,8 @@ body
   font-family: $app-heading-font-family
   font-weight: 600
   letter-spacing: 1px
-  margin:  0
-  padding: 0 0 1rem 0
+  padding: 0
+  margin: 0 0 6px 0
 
 h1
   font-size: rem(54px)
@@ -43,11 +43,12 @@ h1
 
 h2
   font-size: rem(44px)
-  line-height: 1.2
+  line-height: 1.1
 
 h3
-  font-size: rem(34px)
-  line-height: 1.4
+  font-size: rem(36px)
+  font-size: rem(43px)
+  line-height: 1.2
 
 h4
   font-size: rem(22px)
@@ -95,7 +96,7 @@ code
 pre
   border-radius: 1px $app-border-radius $app-border-radius 1px
   font-family: $app-code-font-family
-  font-size: $app-pre-font-size
+  font-size: 12px
   margin-bottom: $app-text-spacing
   overflow: scroll
   padding: 0.5rem 0
@@ -108,8 +109,8 @@ pre
     color: inherit
     display: block
     font-family: inherit
-    font-size: $app-pre-font-size
-    line-height: rem(22px)
+    font-size: inherit
+    line-height: 1.4
     margin: 0
     padding-bottom: 0
     padding-left: rem(16px)
@@ -117,7 +118,10 @@ pre
     padding-top: 0
 
 
-
++app-breakpoint-min(md)
+  pre
+    > code
+      font-size: 14px
 
 
 img
@@ -160,17 +164,17 @@ dd:last-child
 
 
 blockquote
-  border: 1px solid #eae9e4
-  background-color: #f2f2f2
-  border-radius: 3px
-  line-height: 1.6
+  // border: 1px solid #eae9e4
+  // background-color: #f2f2f2
   // border-left: rem(2px) solid $app-base-border-color
+  // border-radius: 3px
+  line-height: 1.6
   margin-bottom: double($app-text-spacing)
   // margin-top: $app-text-spacing
   padding: $app-blockquote-padding-y $app-blockquote-padding-x
 
   > *
-    font-size: $app-blockquote-font-size
+    font-size: inherit
     padding-bottom: 0
 
   > span:last-of-type
@@ -179,7 +183,21 @@ blockquote
     font-weight: bold
     padding-top: $app-gutter
 
+    // border-top: 1px solid #eae9e4
 
+  // &:before
+  //   border-bottom: 1px solid #eae9e4
+  //   content: ''
+  //   display: block
+  //   margin-bottom: 20px
+  //   height: 1px
+
+  // &:after
+  //   border-top: 1px solid #eae9e4
+  //   content: ''
+  //   display: block
+  //   height: 1px
+  //   margin-top: 20px
 
 
 
@@ -199,7 +217,53 @@ figcaption
 
 
 
-
-
 video
   width: 100%
+
+
+
+
+td
+  font-size: 14px
+  padding: 4px 16px
+
+  &:not(:last-child)
+    border-right: 1px solid rgba(black, 0.1)
+
+// thead
+//   background-color: $app-color-1
+
+th
+  border-bottom: 1px solid rgba(black, 0.1)
+  font-family: rift-soft
+  font-weight: 600
+  font-size: 15px
+  padding: 3px 16px
+  text-align: left
+  white-space: nowrap
+
+  &:not(:last-child)
+    border-right: 1px solid rgba(black, 0.1)
+
+table
+  border-collapse: collapse
+  overflow: auto
+  width: 100%
+
+  > tbody
+    > tr
+      &:first-child
+        > td
+          padding-top: 6px
+
+      &:last-child
+        > td
+          padding-bottom: 6px
+
+
+.Table
+  &.is-condensed
+    > tbody
+      > tr
+        > td
+          padding: 2px 16px 0

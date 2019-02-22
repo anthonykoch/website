@@ -1,15 +1,18 @@
 <template>
     <header
       :class="{
-        'has-darkBackground': hasDarkbackground,
-        'has-blogBackground': hasBlogBackground,
+        'has-darkBackground': background === 'dark',
+        'has-defaultBackground': background === 'default',
+        'has-imageBackground': background === 'image',
         'is-collapsed': isCollapsed,
         'is-fullHeight': isFullHeight,
+        'is-floating': isFloating,
       }"
       class="SiteHeader"
       role="banner"
       data-page="TODO"
     >
+      <div class="SiteHeader-background"></div>
       <div class="SiteHeader-container">
         <div class="Logo">
           <nuxt-link
@@ -18,7 +21,7 @@
             to="/"
             class="Logo-link u-px6"
             :class="{
-              'is-dark': hasDarkLinks,
+              'is-light': hasLightLinks,
               'is-fixed': isLogoFixed,
               'is-active': forceLogoActiveClass,
             }"
@@ -30,21 +33,34 @@
 
         <nav class="SiteNav" role="navigation">
           <ul class="SiteNav-list">
-            <li
-              v-for="(link, index) of $store.state.navigation.links"
-              class="SiteNav-listItem"
-              :key="index"
-            >
+            <li class="SiteNav-listItem">
               <nuxt-link
-                v-scroll-to="link.scrollTo"
-                :active-class="siteNavLinkActiveClass"
-                :to="link.href"
-                :class="{
-                  'is-dark': hasDarkLinks,
-                }"
+                to="/#work"
+                :class="{ 'is-light': hasLightLinks }"
+                class="SiteNav-link"
+                @click.native="onWorkClick"
+              >
+                Work
+              </nuxt-link>
+            </li>
+            <li class="SiteNav-listItem">
+              <nuxt-link
+                active-class="/blog"
+                to="/blog"
+                :class="{ 'is-light': hasLightLinks }"
                 class="SiteNav-link"
               >
-                {{ link.text }}
+                Blog
+              </nuxt-link>
+            </li>
+            <li class="SiteNav-listItem">
+              <nuxt-link
+                active-class="/contact"
+                to="/contact"
+                :class="{ 'is-light': hasLightLinks }"
+                class="SiteNav-link"
+              >
+                Contact
               </nuxt-link>
             </li>
             <li
@@ -52,18 +68,14 @@
             >
               <a
                 :class="{
-                  'is-dark': hasDarkLinks,
+                  'is-dark': hasLightLinks,
                 }"
                 href="https://github.com/anthonykoch?tab=repositories"
                 target="_blank"
                 rel="noopener noreferrer"
                 class="SiteNav-iconLink is-github"
               >
-                <svg
-                  fill="rgba(255,255,255,0.8)"
-                  xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
-                  <path d="M178.354,287.478c-9.123,0-16.928,4.207-23.201,12.833c-6.291,8.478-9.398,18.973-9.398,31.431 c0,12.474,3.166,23.008,9.398,31.509c6.273,8.54,14.039,12.771,23.201,12.771c8.494,0,15.889-4.27,22.121-12.771 c6.271-8.501,9.398-19.035,9.398-31.509c0-12.419-3.166-22.93-9.398-31.431C194.242,291.724,186.908,287.478,178.354,287.478z"/> <path d="M334.668,287.478c-9.045,0-16.891,4.207-23.182,12.833c-6.271,8.478-9.359,18.973-9.359,31.431 c0,12.474,3.186,23.008,9.359,31.509c6.291,8.54,14.098,12.771,23.182,12.771c8.533,0,15.906-4.27,22.178-12.771 c6.293-8.501,9.418-19.035,9.418-31.509c0-12.419-3.164-22.93-9.418-31.431C350.574,291.724,343.299,287.478,334.668,287.478z"/> <path d="M445.777,172h-0.059c0,0,2.793-14.264,0.314-39.18c-2.182-24.916-7.471-47.838-16.123-68.82 c0,0-4.422,0.76-12.76,2.896s-22.08,6.299-40.938,14.768c-18.541,8.54-37.986,19.788-58.297,33.505 c-13.803-3.934-34.408-5.939-61.994-5.939c-26.289,0-46.914,2.012-61.977,5.945c-44.592-30.859-81.832-47.945-112.092-51.175 c-8.594,20.982-13.883,43.991-16.045,68.97c-2.398,24.939,0.432,39.329,0.432,39.329C41.979,198.551,32,236.541,32,267.793 c0,24.244,0.658,46.078,6.125,65.48c5.564,19.31,12.662,35.13,21.098,47.221c8.611,12.121,19.012,22.788,31.576,31.938 c12.467,9.314,23.988,15.962,34.389,20.216c10.461,4.372,22.375,7.602,35.982,9.861c13.33,2.386,23.438,3.645,30.477,3.996 c0,0,28,1.494,64.354,1.494c36.354,0,64.295-1.494,64.295-1.494c7.02-0.352,17.145-1.634,30.535-3.996 c13.547-2.299,25.521-5.607,35.941-9.861c10.402-4.293,21.943-10.901,34.469-20.216c12.523-9.032,22.906-19.739,31.518-31.938 c8.436-12.091,15.494-27.911,21.098-47.221c5.486-19.402,6.145-41.385,6.145-65.629C480,237.389,469.982,199,445.777,172z M380.383,405.645C352.521,418.736,311.486,424,257.061,424l-2.143-0.039c-54.443,0-95.361-5.248-122.848-18.41 c-27.508-13.092-41.271-40.057-41.271-80.738c0-24.33,8.572-43.99,25.482-59.107c7.354-6.515,16.438-11.019,27.645-13.717 c11.129-2.558,21.354-2.762,30.969-2.465c9.398,0.415,22.551,2.196,39.344,3.464C231.029,254.285,243.535,256,256,256 c11.698,0,27.213-1.957,52.104-3.959c24.99-1.971,43.494-2.971,55.467-1c12.289,2.002,22.986,6.202,32.129,14.742 c17.734,15.751,26.602,35.505,26.602,59.084C422.301,365.533,408.164,392.537,380.383,405.645z"/>
-                </svg>
+                <icon-octocat style="margin-top: -1px;"></icon-octocat>
               </a>
             </li>
           </ul>
@@ -77,22 +89,21 @@
 </template>
 
 <script>
-
 export default {
+  components: {
+    IconOctocat: require('@/assets/images/icons/octocat.svg').default,
+  },
   props: {
     background: {
-      type: Object,
-      default() {
-        return {};
+      type: String,
+      default: 'default',
+      validator(value) {
+        return ['background', 'default', 'image', 'none'].includes(value)
       },
     },
-    hasBlogBackground: {
+    isFloating: {
       type: Boolean,
-      default: true,
-    },
-    hasDarkbackground: {
-      type: Boolean,
-      default: true,
+      default: false,
     },
     isCollapsed: {
       type: Boolean,
@@ -110,7 +121,7 @@ export default {
       type: Boolean,
       default: false,
     },
-    hasDarkLinks: {
+    hasLightLinks: {
       type: Boolean,
       default: false,
     },
@@ -119,11 +130,283 @@ export default {
       default: false,
     },
   },
-
-  computed: {
-    siteNavLinkActiveClass() {
-      return this.allowNavLinkActiveClass ? 'is-active' : null;
+  methods: {
+    onWorkClick(e) {
+      if (window.location.pathname === '/') {
+        e.preventDefault()
+        this.$scrollTo('#work')
+      }
     },
   },
-};
+  computed: {
+    siteNavLinkActiveClass() {
+      return this.allowNavLinkActiveClass ? 'is-active' : null
+    },
+  },
+}
 </script>
+
+<style lang="scss" scoped>
+@import '../assets/styles/bootstrap';
+
+@mixin site-nav-link {
+  $padding-v: $app-site-nav-link-padding-v;
+  border-top: $app-site-nav-link-border-width solid transparent;
+  display: block;
+  filter: drop-shadow(3px 4px 7px rgba(black, 0.2));
+  font-family: $app-site-nav-link-font-family;
+  font-size: rem(15px);
+  font-weight: 600;
+  padding: calc(#{$padding-v} - #{$app-site-nav-link-border-width}) $app-site-nav-link-padding-h $padding-v;
+  text-transform: uppercase;
+  transition: background-color, color;
+  transition-duration: $app-transition-duration;
+
+  &:link,
+  &:visited {
+    color: #dddddd;
+  }
+
+  &:hover,
+  &:active,
+  &.is-active {
+    color: #333333;
+    background: $app-site-nav-link-background--active;
+    border-color: white;
+  }
+}
+
+
+
+.Logo {
+  font-size: rem(14px);
+  letter-spacing: rem(4px);
+  width: $app-logo-width;
+}
+
+.Logo-link {
+  @include site-nav-link;
+  display: inline-block;
+}
+
+
+
+
+.SiteNav {
+  flex: 1;
+  text-align: right;
+}
+
+.SiteNav-list {
+  align-items: center;
+  display: inline-flex;
+}
+
+.SiteNav-link {
+  @include site-nav-link;
+  letter-spacing: rem(2px);
+}
+
+.SiteNav-iconLink {
+  align-items: center;
+  display: flex;
+  padding: 0.5rem;
+
+  &.is-github {
+    max-width: 100%;
+    width: 54px;
+
+    svg {
+      fill: rgba(255, 255, 255, 0.8);
+      margin: 0 auto;
+      width: rem(22px);
+    }
+
+    &:hover {
+      svg {
+        fill: $app-color-1;
+      }
+    }
+  }
+
+  &.is-dark {
+    &.is-github {
+      svg {
+        fill: $app-site-nav-link-foreground;
+      }
+    }
+  }
+}
+
+
+
+.SiteHeader {
+  min-height: rem($app-site-header-height-mobile);
+  position: relative;
+  transition: all 300ms;
+  width: 100%;
+  z-index: $app-layer-site-header;
+
+  &.is-collapsed {
+    min-height: 0;
+  }
+
+  &.is-floating {
+    left: 0;
+    position: absolute;
+    top: 0;
+  }
+
+  &.has-darkBackground {
+    .SiteHeader-background {
+      background-color: $app-site-header-background;
+    }
+  }
+
+  &.has-defaultBackground {
+    background-color: $app-site-header-background;
+
+    .SiteHeader-background {
+      background-attachment: fixed;
+      background-size: cover;
+      background-image: url('~assets/images/mobile-header@2x.png');
+      background-position: 70% 50px;
+      opacity: 0.4;
+      /* opacity: 0.12; */
+    }
+  }
+
+  &.is-fullHeight {
+    min-height: 100vh;
+  }
+}
+
+.SiteHeader-background {
+  @include absolute-fill;
+  background-size: cover;
+  z-index: -1;
+}
+
+.SiteHeader-inner {
+  padding: 0 0 3rem 0;
+  position: relative;
+  width: 100%;
+  z-index: $app-layer-site-header;
+}
+
+.SiteHeader-container {
+  display: flex;
+  justify-content: space-between;
+  margin: 0 auto;
+  position: relative;
+  width: 100%;
+}
+
+
+@include app-breakpoint-min(sm) {
+  .Logo-link {
+    &.is-fixed {
+      position: fixed;
+    }
+  }
+}
+
+@include app-breakpoint-min(md) {
+  .SiteHeader {
+    min-height: rem($app-site-header-height);
+
+    &.has-defaultBackground {
+      .SiteHeader-background {
+        background-image: url('~assets/images/background-1+c.jpg');
+        background-position: 90% -260px;
+      }
+    }
+  }
+}
+
+@include app-breakpoint-min(xlg) {
+  .SiteHeader {
+    min-height: rem($app-site-header-height);
+
+    &.has-defaultBackground {
+      .SiteHeader-background {
+        background-position: 85% -300px;
+      }
+    }
+  }
+}
+
+@media (min-width: 1600px) {
+  .SiteHeader {
+    min-height: rem($app-site-header-height);
+
+    &.has-defaultBackground {
+      .SiteHeader-background {
+        background-position: 85% -420px;
+      }
+    }
+  }
+}
+
+@media (max-width: 730px){
+  .SiteHeader-container {
+    display: block;
+  }
+
+  .Logo,
+  .Logo-link {
+    width: 100%;
+  }
+
+  .Logo-link {
+    &:link,
+    &:visited {
+      background: $app-site-nav-link-background--active;
+      color: $app-site-nav-link-foreground--active;
+    }
+  }
+
+  .Logo,
+  .SiteNav {
+    padding-left: 0;
+    text-align: center;
+  }
+
+  .SiteNav-list {
+    display: flex;
+  }
+
+  .SiteNav-listItem {
+    flex: 1;
+    text-align: center;
+    margin: 0;
+
+    &.has-icon {
+      max-width: 4rem;
+    }
+  }
+
+  .Logo-link,
+  .SiteNav-link {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .SiteNav-link {
+    padding-bottom: 10px;
+    padding-top: 10px;
+  }
+}
+
+</style>
+
+<!--<style lang="scss">
+@import '../assets/styles/bootstrap';
+
+@include app-breakpoint-min(xsm) {
+/* @media (min-width: 300px) { */
+  body {
+    background-color: red !important;
+  }
+}
+</style>-->

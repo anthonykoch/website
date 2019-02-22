@@ -11,7 +11,9 @@
         ref="projectsOverlay"
         :background="overlays.projects.background"
         v-show="overlays.projects.isShowing"
-      ></app-overlay>
+      >
+        <div slot="close"></div>
+      </app-overlay>
     </transition>
 
     <div slot="heroLower">
@@ -52,17 +54,16 @@
       </div>
     </div>
 
-    <section id="work">
+    <section id="work" ref="work">
       <div class="u-siteWrapper u-pt4 u-pt7@lg u-gutter">
 
         <div class="FeatureWork">
-          <h2 class="Heading is-type1  u-pl5@lg u-textCenter u-textLeft@lg">
+          <h2 class="Heading is-type1  u-pb2 u-pb0@md u-pl5@md u-textCenter u-textLeft@lg">
             <span>Featured Work</span>
           </h2>
-
           <div class="FeaturedWork-grid">
             <div class="FeaturedWork-column is-left">
-              <div class="FeaturedWork-media u-pl2 u-pl0@lg">
+              <div class="FeaturedWork-media">
                 <div class="WorkImages">
                   <div class="WorkImages-container">
                     <div class="WorkImages-aspectFill">
@@ -124,7 +125,7 @@
                     href="https://modernfertility.com/"
                     target="_blank"
                     rel="noreferrer noopener"
-                    class="FeaturedWork-cta"
+                    class="Button is-ghost has-hoverEffect1"
                   >
                     View Website
                   </a>
@@ -137,7 +138,7 @@
             <p>Should probably say more</p>
           </div>-->
 
-          <div class="FeaturedWork-grid u-mb8 u-itemsCenter">
+          <div class="FeaturedWork-grid u-mb4 u-mb8@md u-itemsCenter">
             <div class="FeaturedWork-column is-left  u-order1@lg">
               <div class="FeaturedWork-media u-pl2 u-pl0@lg">
                 <div class="WorkImages">
@@ -165,62 +166,64 @@
       </div>
     </section>
 
-    <section id="contact" class="u-pb8">
-      <div class="u-textCenter">
-        <h2 class="[ Heading is-type3 ]  u-gutter">
-          Have a project in mind?
-        </h2>
-        <nuxt-link
-          to="contact"
-          class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
-        >
-          Get in touch
-        </nuxt-link>
-      </div>
-    </section>
-
-    <section id="codepen" v-show="true" style="max-width: 1140px;" class="u-mxauto">
+    <section id="codepen">
       <div class="u-siteWrapper u-px0  u-textCenter u-textLeft@lg">
-        <h2 class="[ Heading is-type1 ] u-px5@lg">
-          <span>Personal Projects</span>
-        </h2>
+          <div class="[ Container is-large ]  u-mxauto u-gutter u-mb2">
+          <h2 class="[ Heading is-type1 ]">
+            <span>Personal Projects</span>
+          </h2>
+        </div>
       </div>
-
-      <div class="CodepenProjects" style="background-color: transparent">
-        <div class="u-siteWrapper u-px5">
-          <app-project-preview-list
-            :projects="projects"
-            @navigate="setNavigatedProject"
-            ref="projects"
-          >
-          </app-project-preview-list>
-          <div class="u-textCenter">
-            <a
-              href="https://codepen.io/anthonykoch/"
-              class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
-            >
-              View more on Codepen &rarr;
-            </a>
+      <div class="CodepenProjects">
+        <div class="u-siteWrapper">
+          <div class="u-py4 u-py7@md">
+            <div class="Container is-large u-mxauto u-gutter">
+              <app-project-preview-list
+                :projects="projects"
+                @navigate="setNavigatedProject"
+                class="u-mb4"
+              >
+              </app-project-preview-list>
+            </div>
+            <div class="u-textCenter">
+              <a
+                href="https://codepen.io/anthonykoch/"
+                class="Button has-lightBackground has-hoverEffect1 is-sizeLarge u-mt3"
+              >
+                View more on Codepen &rarr;
+              </a>
+            </div>
           </div>
         </div>
       </div>
     </section>
+
+    <section id="contact" class="u-py5 u-py8@md">
+      <div class="u-textCenter">
+        <h2 class="[ Heading is-type3 ]  u-gutter  p-endingcta">
+          Have a project in mind?
+        </h2>
+        <div class="u-gutter">
+          <nuxt-link
+            to="contact"
+            class="Button has-lightBackground has-hoverEffect1 is-sizeLarge"
+          >
+            Get in touch
+          </nuxt-link>
+        </div>
+      </div>
+    </section>
+
   </page>
 </template>
 
 <script>
-
 import { mapState } from 'vuex';
 
 export default {
-  props: {
-    //
-  },
-
   components: {
     page: require('@/layouts/main').default,
   },
-
   data() {
     return {
       console,
@@ -250,30 +253,37 @@ export default {
       },
     };
   },
-
   head() {
     return {
       title: `Anthony Koch`,
-      description: `Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development.`,
+      meta: [{
+        hid: 'description',
+        name: 'description',
+        content: `Hello, my name is Anthony Koch. I'm a front-end developer specializing in responsive design, web performance, and custom web development.`,
+      }],
     };
   },
+  beforeRouteEnter(to, from, next) {
+    if (to.hash.trim() === '#work') {
+      return next(vm => {
+        vm.$scrollTo(vm.$refs.work)
+      })
+    }
 
+    next()
+  },
   computed: {
     ...mapState({
-      projects: state => state.projects.codepen,
-      featuredProject: state => state.projects.github.editorconnect,
+      projects: state => state.projects.all,
     }),
-
     activeHero() {
       return this.heroItems[this.activeHeroIndex];
     },
-
     images() {
       return {
       };
     },
   },
-
   methods: {
     loopImages() {
       setTimeout(() => {
@@ -286,31 +296,26 @@ export default {
         this.loopImages();
       }, 3000);
     },
-
     showNextHero() {
       this.activeHeroIndex =
         this.activeHeroIndex + 1 >= this.heroItems.length
           ? 0
           : this.activeHeroIndex + 1;
     },
-
     onHeroHidden() {
       this.showNextHero();
       setTimeout(() => {
         this.isHeroShowing = true;
       }, 100);
     },
-
     onHeroShowing() {
       this.hideHero();
     },
-
     hideHero(delay=3500) {
       setTimeout(() => {
         this.isHeroShowing = false;
       }, delay);
     },
-
     navigateToProject(e) {
       // TODO: Make this triggerable by vue attribute
       this.overlays.projects.isShowing = true;
@@ -319,20 +324,27 @@ export default {
         window.location = this.navigatedProject.href;
       }, 100)
     },
-
     setNavigatedProject(e, project) {
       this.navigatedProject = project;
       this.overlays.projects.isShowing = true;
       this.overlays.projects.background = project.fade;
     },
   },
-
   mounted() {
     this.hideHero(2000);
   },
 };
 </script>
 
-<style>
+<style lang="scss" scoped>
+@import '../assets/styles/bootstrap';
 
+@include app-breakpoint-max(md) {
+  .p-endingcta {
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 290px;
+    text-align: center;
+  }
+}
 </style>

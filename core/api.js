@@ -1,8 +1,11 @@
+import path from 'path'
+
 import axios from '@/core/fetch';
 
-/**
- * For debugging purposes.
- */
+const req = require.context('@/_posts', true, /\.md$/)
+const filenames = req.keys()
+
+// For debugging purposes.
 if (typeof window !== 'undefined') {
   window.axios = axios;
 }
@@ -10,11 +13,18 @@ if (typeof window !== 'undefined') {
 const apiPath = process.env.app.apiPath;
 
 export const getPost = async (slug) => {
-  console.log(`${apiPath}/posts/${slug}.json`)
-  return axios.get(`${apiPath}/posts/${slug}.json`);
+  for (const filename of filenames) {
+    const basename = path.basename(filename)
+
+    if (basename.includes(slug)) {
+      return import(`@/_posts/${basename}`)
+        .then((module) => module.default)
+    }
+  }
+
+  return Promise.reject(new Error('Post not found'))
 };
 
 export const getPostsMeta = async () => {
-  console.log(`${apiPath}/postmeta.json`)
-  return axios.get(`${apiPath}/postmeta.json`);
+  return axios.get(`${apiPath}postmeta.json`);
 };

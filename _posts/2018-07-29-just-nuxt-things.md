@@ -140,6 +140,7 @@ When there's an error, it will show an overlay that goes away when you fix the e
   <img src="/images/posts/just-nuxt-things/error-page+c.png" alt="nuxt error page">
 </figure>
 
+
 #### Scroll position
 
 This isn't really a Nuxt thing, but something against `vue-router`. The scroll position doesn't get remembered on page refresh. They allow customizing this, but it's not done by default. I have to wonder if they don't include this by default because the logic for it is too buggy and/or too difficult to achieve.

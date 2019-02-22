@@ -1,6 +1,5 @@
 <template>
   <div class="Page">
-
     <!--
       Hi, since you're already here, I'd like to inform you on the if/elseif statements of various programming languages.
 
@@ -13,25 +12,20 @@
 
       Like, wtf.
      -->
-
-    <div :aria-hidden="isFullscreenImageShowing">
+    <div :aria-hidden="fullscreenImage.isShowing">
       <transition
         name="tr-fade"
       >
         <app-overlay
-          v-show="isFullscreenImageShowing"
+          v-show="fullscreenImage.isShowing"
           @request-close="$store.dispatch('fullscreenImage/hideImage')"
           :is-showing-close="true"
         >
           <div class="FullscreenImageContainer">
             <img
-              :src="fullscreenImageSrc"
-              :alt="fullscreenImageAlt"
-              :style="{
-                'max-width': fullscreenImageMaxWidth,
-              }"
+              v-bind="fullscreenImage.attributes"
               class="Image is-fullscreen"
-              v-show="isFullscreenImageShowing"
+              v-show="fullscreenImage.isShowing"
             >
           </div>
         </app-overlay>
@@ -113,26 +107,19 @@ export default {
       default: false,
     },
   },
-
   data() {
     return {
       console,
     };
   },
-
   computed: {
     ...mapState({
-      isFullscreenImageShowing: state => state.fullscreenImage.isFullscreenImageShowing,
-      fullscreenImageSrc: state => state.fullscreenImage.src,
-      fullscreenImageAlt: state => state.fullscreenImage.alt,
-      fullscreenImageMaxWidth: state => state.fullscreenImage.maxWidth,
+      fullscreenImage: state => state.fullscreenImage,
     }),
-
     isHeroShowing() {
       return this.$slots.heroCaption || this.$slots.heroDescription || this.$slots.heroLower;
     },
   },
-
   components: {
     //
   },

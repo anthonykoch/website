@@ -10,8 +10,31 @@
   &.is-allowedFullscreen
     cursor: pointer
 
+  &.has-shadow
+    box-shadow: 0 16px 40px -9px hsla(0,0%,51%,0.6)
+
+  &.is-rounded
+    border-radius: 4px
+
+[data-allow-fullscreen] + img
+  // Required for markdown where we can't set custom classes
+  cursor: pointer
+
+
+
 .FullscreenImageContainer
   align-items: center
   display: flex
   overflow: auto
   height: 100vh
+
+
+
+.AspectRetain
+  position: relative
+
+.AspectRetain-background
+  background-color: #eeeeee
+
+.AspectRetain-fill
+  +absolute-fill

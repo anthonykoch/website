@@ -54,28 +54,27 @@ export function getElementOffset(element) {
   return rect;
 }
 
+
 /**
  * Returns a promise which resolves when the image has loaded and
  * rejects when the image fails to load.
  *
  * @param {String}  url
- * @param {Promise}
  */
+export function preloadImage(url) {
+	return new Promise((resolve, reject) => {
+		const image = document.createElement('img');
 
-export function loadImage(url) {
-  return new Promise((resolve, reject) => {
-    const image = document.createElement('img');
+		image.src = url;
 
-    image.src = url;
+		image.addEventListener('load', function onImageLoaded(event) {
+			this.removeEventListener('load', onImageLoaded);
+			resolve({ url, img: image });
+		});
 
-    image.addEventListener('load', function onImageLoaded(event) {
-      this.removeEventListener('load', onImageLoaded);
-      resolve({ image, url });
-    });
-
-    image.addEventListener('error', function onImageLoadError(event) {
-      this.removeEventListener('error', onImageLoadError)
-      reject({ image, url });
-    });
-  });
+		image.addEventListener('error', function onImageLoadError(event) {
+			this.removeEventListener('error', onImageLoadError)
+			reject(new Error('Could not load image'));
+		});
+	});
 }

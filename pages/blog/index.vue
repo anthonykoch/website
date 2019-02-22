@@ -9,8 +9,8 @@
     </div>
     <section>
       <div class="[ Container is-smallWidth ] u-gutter u-mxauto">
-        <ul class="PostList u-pt8">
-          <li class="PostList__item u-pb8"
+        <ul class="PostList">
+          <li class="PostList__item"
             v-for="(meta, index) in postsMeta"
             :key="index"
           >
@@ -29,7 +29,8 @@ import * as api from '@/core/api';
 
 export default {
   async fetch({ store: $store }) {
-    await $store.dispatch('posts/loadMeta');
+    await $store.dispatch('posts/loadAllMeta');
+
   },
 
   components: {
@@ -57,7 +58,7 @@ export default {
 
   computed: {
     ...mapState({
-      postsMeta: state => state.posts.meta,
+      postsMeta: state => state.posts.allMeta,
     }),
   },
 };

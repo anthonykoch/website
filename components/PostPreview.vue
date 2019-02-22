@@ -29,7 +29,7 @@ export default {
 
   computed: {
     content() {
-      return _.truncate(this.meta.excerpt.content, {
+      return _.truncate(this.meta.excerpt, {
         length: 250,
       });
     },

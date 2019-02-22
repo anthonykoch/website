@@ -209,8 +209,12 @@ Once the image has loaded and the class has been added, the image will fade in o
 
 The example in the codepen demo uses a little bit different code because of it had to be setup for display in codepen.
 
-<div class="md-fullWidth" style="min-height: 480px">
-  <p data-height="480" data-theme-id="20490" data-slug-hash="WrOQQz" data-default-tab="result" data-user="anthonykoch" class='codepen'>See the Pen <a href='http://codepen.io/anthonykoch/pen/WrOQQz/'>Medium style image loading</a> by Anthony Koch (<a href='http://codepen.io/anthonykoch'>@anthonykoch</a>) on <a href='http://codepen.io'>CodePen</a>.</p>
+<div class="md-fullWidth" style="min-height: 480px" v-pre>
+  <p class="codepen" data-height="480" data-theme-id="20490" data-default-tab="js,result" data-user="anthonykoch" data-slug-hash="WrOQQz" style="box-sizing: border-box; display: flex; align-items: center; justify-content: center; margin: 1em 0; padding: 1em;" data-pen-title="Medium style blur image loading">
+  <span>See the Pen <a href="https://codepen.io/anthonykoch/pen/WrOQQz/">
+  Medium style blur image loading</a> by Anthony Koch (<a href="https://codepen.io/anthonykoch">@anthonykoch</a>)
+  on <a href="https://codepen.io">CodePen</a>.</span>
+  </p>
 </div>
 
 

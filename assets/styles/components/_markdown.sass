@@ -1,38 +1,80 @@
+$app-md-gutter: 16px;
+
+$markdown-space-y: spacing(2);
+
 
 .md
-  > #{$app-headings},
+  // #49515d // next text color?
+  color: $color-foreground-markdown
+
+  > pre > code
+    padding-left: 0
+    padding-right: 0
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6,
+  > div,
+  > pre,
+  > img,
   > blockquote,
   > figure,
-  > img,
   > ul,
   > ol,
   > li,
   > p,
   > dl,
-  > div,
-  > pre
-    color: $color-foreground-markdown
+  > :not(.md-fullWidth)
     margin-left: auto
     margin-right: auto
-    max-width: $app-md-max-width
+    max-width: 640px
 
-    +app-breakpoint-min(lg)
-      max-width: $app-md-max-width-at-lg
 
+    // +app-breakpoint-min(lg)
+
+  > img
+    width: calc(100% - 32px)
+
+  > h1,
+  > h2,
+  > h3,
+  > h4,
+  > h5,
+  > h6,
   > blockquote,
   > figure,
+  > ul,
+  > ol,
+  > li,
+  > p,
+  > pre,
+  > div,
+  > dl,
+  > table
+    padding-left: rem(16px)
+    padding-right: rem(16px)
+
+  > div,
   > img,
+  > blockquote,
+  > figure,
   > ul,
   > ol,
   > li,
   > p,
   > dl,
-  > div
-    font-size: inherit
+  > table
+    font-size: 16.5px
+    line-height: 1.65
 
-  > #{$app-headings}
-    color: #333333
-    padding-top: 1rem
+  // > #{$app-headings}
+  //   color: #333333
+  //   color: #22435f
+  //   color: #083c67
+  //   color: #02294a
 
   > ol
     +make-list-number
@@ -40,21 +82,136 @@
   > ul
     +make-list-bullet
 
-  > p,
+  > figure,
   > ul,
   > ol,
-  > dl
-    padding-bottom: spacing(2)
+  > li,
+  > p,
+  > dl,
+  > div,
+  > table,
+  .md-spacer
+    padding-bottom: $markdown-space-y
+
+  > blockquote
+    color: rgba(#1b292b, 0.8)
+    font-size: 15px
+    font-weight: 500
+    line-height: 1.5
+    margin-bottom: $markdown-space-y
+    position: relative
 
   > .md-fullWidth
     margin-left: 0
     margin-right: 0
     max-width: 100%
+    padding-left: 0
+    padding-right: 0
     width: 100%
+
+  > :last-child
+    margin-bottom: 0
+    padding-bottom: 0
+
+.md-codeBlock[data-lang="info"]
+  background-color: #fff0bf
+  background-color: #f7f5f0
+  background-color: hsla(43, 9%, 95%, 1)
+  border-radius: 5px
+  padding: 14px 14px !important
+
+
+.md-gutter
+  padding-left: rem($app-md-gutter)
+  padding-right: rem($app-md-gutter)
+
+
+
+.md > table,
+.md-table
+  width: 100%
+  text-align: left
+
+
+
+.md > h2,
+.md-h2,
+.md > h3,
+.md-h3,
+.md-h4,
+.md > h4,
+.md-h5,
+.md > h5,
+.md-h6,
+.md > h6
+  position: relative
+
+  &:hover
+    .md-headingAnchor
+      opacity: 1
+
+.md-headingAnchor
+  display: block
+  left: -15px
+  opacity: 0
+  position: absolute
+  top: 50%
+  transform: translate(-50%, -50%)
+  transition: opacity 300ms
+
+  svg
+    fill: $app-color-link
+    position: absolute
+    left: 50%
+    top: 50%
+    transform: translate(-50%, -50%)
+    vertical-align: middle
+    width: 20px
+
+
+
+.md > h3,
+.md-h3
+  margin-top: spacing(2)
+  margin-bottom: spacing(1)
+  font-weight: 700
+  font-size: 40px
+  line-height: 1.1
+  position: relative
+  z-index: 1
+
+  // &:before
+  //   content: ''
+  //   background-image: radial-gradient(rgba($app-color-link, 0.5) -35%, transparent 60%)
+  //   border-radius: 50%
+  //   height: 800px
+  //   left: 0
+  //   position: absolute
+  //   top: 0
+  //   transform: translate(-50%, -50%)
+  //   width: 800px
+  //   z-index: -1
 
 .md-h4,
 .md > h4
-  font-weight: 700
+  font-size: 23px
+  font-weight: 800
+
+.md-h5,
+.md > h5
+  font-size: 16px
+  font-weight: 500
+  font-weight: 600
+  font-family: $app-font-family-2
+  letter-spacing: 0
+  margin-bottom: 8px
+
+
+
+.md-figure
+  margin-bottom: spacing(2)
+  margin-top: spacing(2)
+
 
 
 .md-listNumber
@@ -62,3 +219,27 @@
 
 .md-listBullet
   +make-list-bullet
+
+
+
++app-breakpoint-min(lg)
+  .md
+    > pre
+      padding-left: rem(32px)
+      padding-right: rem(16px)
+
+    > blockquote
+      > *
+        margin-left: 2rem
+        margin-right: 1rem
+
+  .md > h3,
+  .md-h3
+    font-size: 50px
+    line-height: 1
+    margin-top: spacing(4)
+    margin-bottom: spacing(1)
+
+  .md-figure
+    margin-bottom: spacing(4)
+    margin-top: spacing(4)

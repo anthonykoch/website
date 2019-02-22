@@ -1,145 +1,119 @@
 .Aside
   background-color: #f2f2f2
   border: 1px solid darken(#f2f2f2, 3)
-  margin-bottom: spacing(2)
+  // margin-bottom: spacing(2)
   margin-top: spacing(1)
+  margin-left: $app-gutter
+  margin-right: $app-gutter
 
   &.has-tagSpacing
     margin-top: spacing(3)
 
 .Aside-content
   position: relative
-  padding: 36px 48px
+  padding: 36px 20px
 
 .Aside-tag
   top: 0
   transform: translate(0, -50%)
 
++app-breakpoint-min(lg)
+  .Aside-content
+    padding: 36px 32px
+
+
+
+
 
 
 .PostMeta
-  font-size: 15px
-  font-weight: 600
+  font-family: $app-font-family-1
+  font-size: 14px
+  font-weight: 500
   line-height: 1.4
-  text-align: center
+  letter-spacing: 1px
 
 .PostMeta-date
-  color: #999
-  font-weight: 500
-  font-style: italic
+  color: $app-color-1
   display: inline-block
   text-transform: capitalize
 
 .PostMeta-author
-  display: inline-block
-  margin-left: 6px
   color: #aaaaaa
+  font-style: italic
+  margin-left: 8px
 
 
 
-.BlogToolbar
-  position: fixed
-  right: spacing(1)
-  text-align: center
-  top: 50px
-  z-index: $app-layer-blog-toolbar
 
-.BlogToolbar-button
-  background-color: transparent
-  border: 1px solid color('background', 'dark')
-  border-radius: 3px
-  display: inline-block
-  margin-bottom: 1rem
-  outline: 0
-  padding: 16px 0
-  transition: 200ms border-color
-  width: 38px
-
-  svg
-    fill: color('background', 'dark')
-    transition: fill 200ms
-
-  &:hover
-    border-color: color('primary')
-
-    svg
-      fill: #dddddd
-      fill: color('primary')
-
-.BlogToolbar-menu
-  svg
-    display: block
-    margin: 0 auto
-    width: 18px
-
-.BlogToolbar-backToTop
-  svg
-    margin: 0 auto
-    width: 12px
-    display: block
-
-
-
-///
-/// 1. z-indexed over the header wrapper
-///
 .PostList
+  // 1. z-indexed over the header wrapper
   margin: 0 auto
+  padding-top: spacing(2)
   position: relative
   z-index: 1 // [1]
+
+.PostList__item
+  padding-bottom: spacing(3)
+
++app-breakpoint-min(md)
+  .PostList
+    padding-top: spacing(4)
+
+  .PostList__item
+    padding-bottom: spacing(5)
+
+
 
 .Post
   font-size: $app-post-font-size
   line-height: 1.8
   position: relative
 
-///
-/// 1. Causes the text to be title to be directly in the middle
-///    of the site header's background image.
-///
-.Post-header
-  left: 0
-  padding-top: spacing(4)
-  padding-bottom: spacing(4)
+.Post-headerBackground
+  align-items: center
+  background-color: color('background', 'dark')
+  display: flex
+  min-height: $app-site-header-height-mobile
   position: relative
-  text-align: center
+
+.Post-header
+  margin-top: spacing(5)
+  position: relative
   width: 100%
   z-index: $app-layer-post-header
 
 .Post-title
   font-family: $app-font-family-1
-  font-size: rem(44px)
+  font-size: rem(42px)
   font-weight: 600
   letter-spacing: rem(3px)
-  line-height: 1.2
-  padding-bottom: double($app-gutter)
+  line-height: 1.15
+  margin-bottom: spacing(1)
 
 .Post-title a
   &:link,
   &:visited
-    color: #333333
+    color: #eeeeee
 
   &:hover,
   &:active
-    color: #bbbbbb
+    color: $app-color-1
 
 .Post-body
   background-color: hsla(0, 0%, 98%, 1)
   font-size: $app-post-font-size
   line-height: 1.7
   padding-bottom: spacing(4)
-  padding-left: spacing(1)
-  padding-right: spacing(1)
   padding-top: spacing(3)
-
-
 
 .PostPreview-title
   font-family: $app-font-family-1
   letter-spacing: 2px
   font-weight: 600
-  font-size: rem(32px)
-  padding-bottom: 1rem
+  font-size: rem(36px)
+  line-height: 1.2
+  margin-bottom: 1rem
 
 .PostPreview-link
   +make-link
@@ -166,22 +140,30 @@
 
 
 
-+app-breakpoint-min(lg)
++app-breakpoint-min(md)
+  .Post-header
+    margin-top: spacing(9)
+    margin-bottom: spacing(7)
+    text-align: center
+
+  .Post-backgroun
+    min-height: $app-site-header-height
+
   .Post-title
-    font-size: rem(52px)
+    font-size: rem(76px)
+    font-weight: 600
+    letter-spacing: 0.25px
+    line-height: 1
+    margin-bottom: spacing(2)
 
   .Post-body
     font-size: $app-post-font-size-at-lg
     line-height: 1.7
     padding-right: spacing(4.5)
-    padding-right: spacing(2)
+    padding-right: 0
+    padding-left: 0
 
-  .BlogToolbar
-    right: 50px
-
-  .BlogToolbar-button
-    width: 42px
-
-  .BlogToolbar-backToTop
-    svg
-      width: 14px
+@media only screen and (min-width: 1600px)
+  .Post-body
+    font-size: 18px
+    line-height: 1.6
