@@ -1,18 +1,6 @@
 <!DOCTYPE html>
 <html {{ HTML_ATTRS }}>
   <head>
-    {{ HEAD }}
-    <script src="https://browser.sentry-cdn.com/4.6.1/bundle.min.js" crossorigin="anonymous"></script>
-    <script>
-      var isStaging = {{ JSON.stringify(ENV.app.isStaging) }}
-      var isEnvProduction = {{ JSON.stringify(ENV.app.isEnvProduction) }}
-
-      if (isEnvProduction && !isStaging) {
-        Sentry.init({ dsn: 'https://1049260bcb57442ebafa6890e89d1e5c@sentry.io/1395424' });
-      }
-    </script>
-  </head>
-  <body {{ BODY_ATTRS }}>
     <style>
       /*!
  * Agate by Taufik Nurrohman <https://github.com/taufik-nurrohman>
@@ -123,6 +111,19 @@
   text-decoration: underline;
 }
     </style>
+
+    {{ HEAD }}
+    <script src="https://browser.sentry-cdn.com/4.6.1/bundle.min.js" crossorigin="anonymous"></script>
+    <script>
+      var isStaging = {{ JSON.stringify(ENV.app.isStaging) }}
+      var isEnvProduction = {{ JSON.stringify(ENV.app.isEnvProduction) }}
+
+      if (isEnvProduction && !isStaging) {
+        Sentry.init({ dsn: 'https://1049260bcb57442ebafa6890e89d1e5c@sentry.io/1395424' });
+      }
+    </script>
+  </head>
+  <body {{ BODY_ATTRS }}>
     {{ APP }}
 
     <script>
