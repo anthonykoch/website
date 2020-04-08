@@ -1,15 +1,23 @@
 $app-md-gutter: 16px;
 
 $markdown-space-y: spacing(2);
-
+$color-20: #e8debe;
 
 .md
-  // #49515d // next text color?
-  color: $color-foreground-markdown
+  color: #524e52
+
+  > *
+    word-wrap: break-word;
 
   > pre > code
     padding-left: 0
     padding-right: 0
+
+  > *:not(pre) code
+    background-color: $color-20
+    border-radius: 3px
+    padding: 2px 4px
+    color: #48432d
 
   > h1,
   > h2,
@@ -30,10 +38,8 @@ $markdown-space-y: spacing(2);
   > :not(.md-fullWidth)
     margin-left: auto
     margin-right: auto
-    max-width: 640px
-
-
-    // +app-breakpoint-min(lg)
+    max-width: 750px
+    max-width: 800px
 
   > img
     width: calc(100% - 32px)
@@ -67,14 +73,8 @@ $markdown-space-y: spacing(2);
   > p,
   > dl,
   > table
-    font-size: 16.5px
-    line-height: 1.65
-
-  // > #{$app-headings}
-  //   color: #333333
-  //   color: #22435f
-  //   color: #083c67
-  //   color: #02294a
+    font-size: 15px
+    line-height: 1.5
 
   > ol
     +make-list-number
@@ -92,6 +92,9 @@ $markdown-space-y: spacing(2);
   > table,
   .md-spacer
     padding-bottom: $markdown-space-y
+
+  .md-spacer
+    padding-bottom: 80px
 
   > blockquote
     color: rgba(#1b292b, 0.8)
@@ -113,17 +116,50 @@ $markdown-space-y: spacing(2);
     margin-bottom: 0
     padding-bottom: 0
 
-.md-codeBlock[data-lang="info"]
+
+.hljs
+  padding: 0
+
+.md-codeBlock
+  line-height: 1.6
+
+  &[data-lang="info"]
+  > code
+    overfloW: auto
+    line-height: inherit
+    padding: 20px
+
+  +app-breakpoint-min(lg)
+    border-left: 2px solid #222
+
+
+
+
+
+.hljs,
+.md-codeBlock:not([data-lang]),
+.md-codeBlock[data-lang=""]
   background-color: #fff0bf
   background-color: #f7f5f0
   background-color: hsla(43, 9%, 95%, 1)
-  border-radius: 5px
-  padding: 14px 14px !important
+  background-color: $color-background--dark
+  color: white
+  padding: 14px 14px 14px 32px
+
+
+
++app-breakpoint-min(lg)
+  .hljs,
+  .md-codeBlock:not([data-lang]),
+  .md-codeBlock[data-lang=""]
+    border-radius: 5px
 
 
 .md-gutter
   padding-left: rem($app-md-gutter)
   padding-right: rem($app-md-gutter)
+
+
 
 
 
@@ -133,6 +169,18 @@ $markdown-space-y: spacing(2);
   text-align: left
 
 
+
+
+
+
+
+
+.md
+  > h3 + h2,
+  > h3 + h4,
+  > h3 + h5,
+  > h3 + h6
+    margin-top: 40px
 
 .md > h2,
 .md-h2,
@@ -144,7 +192,9 @@ $markdown-space-y: spacing(2);
 .md > h5,
 .md-h6,
 .md > h6
+  color: #333333
   position: relative
+  font-family: proxima-nova
 
   &:hover
     .md-headingAnchor
@@ -152,33 +202,53 @@ $markdown-space-y: spacing(2);
 
 .md-headingAnchor
   display: block
-  left: -15px
+  left: -25px
   opacity: 0
   position: absolute
   top: 50%
   transform: translate(-50%, -50%)
   transition: opacity 300ms
+  height: 35px
+  width: 35px
+  border-radius: 50%
+  background-color: $color-20
 
   svg
-    fill: $app-color-link
+    fill: #333
     position: absolute
     left: 50%
     top: 50%
     transform: translate(-50%, -50%)
     vertical-align: middle
-    width: 20px
+    width: 16px
 
 
 
 .md > h3,
 .md-h3
-  margin-top: spacing(2)
-  margin-bottom: spacing(1)
-  font-weight: 700
   font-size: 40px
-  line-height: 1.1
+  font-weight: 900
+  letter-spacing: 0px
+  line-height: 1
+  margin-bottom: spacing(1)
+  margin-top: spacing(2)
   position: relative
   z-index: 1
+  font-weight: 900
+
+
+  // &:before
+  //   background-color: color('primary')
+  //   background-image: url("data:image/svg+xml,%3Csvg width='100' height='20' viewBox='0 0 100 20' xmlns='http://www.w3.org/2000/svg'%3E%3Cpath d='M21.184 20c.357-.13.72-.264 1.088-.402l1.768-.661C33.64 15.347 39.647 14 50 14c10.271 0 15.362 1.222 24.629 4.928.955.383 1.869.74 2.75 1.072h6.225c-2.51-.73-5.139-1.691-8.233-2.928C65.888 13.278 60.562 12 50 12c-10.626 0-16.855 1.397-26.66 5.063l-1.767.662c-2.475.923-4.66 1.674-6.724 2.275h6.335zm0-20C13.258 2.892 8.077 4 0 4V2c5.744 0 9.951-.574 14.85-2h6.334zM77.38 0C85.239 2.966 90.502 4 100 4V2c-6.842 0-11.386-.542-16.396-2h-6.225zM0 14c8.44 0 13.718-1.21 22.272-4.402l1.768-.661C33.64 5.347 39.647 4 50 4c10.271 0 15.362 1.222 24.629 4.928C84.112 12.722 89.438 14 100 14v-2c-10.271 0-15.362-1.222-24.629-4.928C65.888 3.278 60.562 2 50 2 39.374 2 33.145 3.397 23.34 7.063l-1.767.662C13.223 10.84 8.163 12 0 12v2z' fill='%239C92AC' fill-opacity='0.4' fill-rule='evenodd'/%3E%3C/svg%3E");
+  //   content: ''
+  //   height: 140px
+  //   left: 0
+  //   position: absolute
+  //   top: 0
+  //   transform:t translate(-50%, -50%)
+  //   width: 140px
+  //   z-index: -1
+
 
   // &:before
   //   content: ''
@@ -194,8 +264,11 @@ $markdown-space-y: spacing(2);
 
 .md-h4,
 .md > h4
-  font-size: 23px
+  font-size: 15px
   font-weight: 800
+  letter-spacing: 1px
+  margin-bottom: 10px
+  text-transform: uppercase
 
 .md-h5,
 .md > h5
@@ -205,6 +278,23 @@ $markdown-space-y: spacing(2);
   font-family: $app-font-family-2
   letter-spacing: 0
   margin-bottom: 8px
+
++app-breakpoint-min(lg)
+  .md > h3,
+  .md-h3
+    font-size: 60px
+    line-height: 1
+    margin-top: spacing(4)
+    margin-bottom: spacing(1)
+    font-size: 36px
+
+  .md-h4,
+  .md > h4
+    font-size: 17px
+    letter-spacing: 2px
+    margin-bottom: 15px
+
+
 
 
 
@@ -222,8 +312,23 @@ $markdown-space-y: spacing(2);
 
 
 
+
+
 +app-breakpoint-min(lg)
   .md
+    > div,
+    > img,
+    > blockquote,
+    > figure,
+    > ul,
+    > ol,
+    > li,
+    > p,
+    > dl,
+    > table
+      font-size: 16.7px;
+      line-height: 1.7
+
     > pre
       padding-left: rem(32px)
       padding-right: rem(16px)
@@ -233,12 +338,6 @@ $markdown-space-y: spacing(2);
         margin-left: 2rem
         margin-right: 1rem
 
-  .md > h3,
-  .md-h3
-    font-size: 50px
-    line-height: 1
-    margin-top: spacing(4)
-    margin-bottom: spacing(1)
 
   .md-figure
     margin-bottom: spacing(4)
