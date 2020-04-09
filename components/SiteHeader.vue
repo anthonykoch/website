@@ -313,8 +313,6 @@ export default {
 
 @include app-breakpoint-min(md) {
   .SiteHeader {
-    min-height: rem($app-site-header-height);
-
     &.has-defaultBackground {
       .SiteHeader-background {
         background-image: url('~assets/images/background-1+c.jpg');
@@ -326,7 +324,7 @@ export default {
 
 @include app-breakpoint-min(xlg) {
   .SiteHeader {
-    min-height: rem($app-site-header-height);
+    min-height: rem($app-site-header-height-lg);
 
     &.has-defaultBackground {
       .SiteHeader-background {
@@ -336,10 +334,8 @@ export default {
   }
 }
 
-@media (min-width: 1600px) {
+@include app-breakpoint-min(xxxlg) {
   .SiteHeader {
-    min-height: rem($app-site-header-height);
-
     &.has-defaultBackground {
       .SiteHeader-background {
         background-position: 85% -420px;
