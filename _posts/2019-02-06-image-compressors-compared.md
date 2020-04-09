@@ -119,7 +119,7 @@ Apparently, there's a neat way to compare how similar two images are called *Str
 
 #### Settings
 
-```info
+```
 Name                 |  Settings
 ---------------------|-------------------------------------
 recompress-low       |  jpeg-recompress with quality=low min=40 max=85
@@ -135,7 +135,7 @@ tinyjpg              |  https://tinyjpg.com
 
 One thing you'll note, is the `mozjpeg` actually outputs larger images than the original. I'm not sure how that happened or if I've done it wrong. The repo for how I compressed the images lives at:
 
-<div class="u-mb4 u-textCenter">
+<div class="u-mb6 u-mt3 u-textCenter">
   <a href="https://github.com/anthonykoch/compressors-compared" class="Resource is-github">
     <span class="Resource-media">
       <svg class="Resource-image" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512"><path d="M256 32C132.3 32 32 134.9 32 261.7c0 101.5 64.2 187.5 153.2 217.9 1.4.3 2.6.4 3.8.4 8.3 0 11.5-6.1 11.5-11.4 0-5.5-.2-19.9-.3-39.1-8.4 1.9-15.9 2.7-22.6 2.7-43.1 0-52.9-33.5-52.9-33.5-10.2-26.5-24.9-33.6-24.9-33.6-19.5-13.7-.1-14.1 1.4-14.1h.1c22.5 2 34.3 23.8 34.3 23.8 11.2 19.6 26.2 25.1 39.6 25.1 10.5 0 20-3.4 25.6-6 2-14.8 7.8-24.9 14.2-30.7-49.7-5.8-102-25.5-102-113.5 0-25.1 8.7-45.6 23-61.6-2.3-5.8-10-29.2 2.2-60.8 0 0 1.6-.5 5-.5 8.1 0 26.4 3.1 56.6 24.1 17.9-5.1 37-7.6 56.1-7.7 19 .1 38.2 2.6 56.1 7.7 30.2-21 48.5-24.1 56.6-24.1 3.4 0 5 .5 5 .5 12.2 31.6 4.5 55 2.2 60.8 14.3 16.1 23 36.6 23 61.6 0 88.2-52.4 107.6-102.3 113.3 8 7.1 15.2 21.1 15.2 42.5 0 30.7-.3 55.5-.3 63 0 5.4 3.1 11.5 11.4 11.5 1.2 0 2.6-.1 4-.4C415.9 449.2 480 363.1 480 261.7 480 134.9 379.7 32 256 32z"/></svg>
@@ -150,7 +150,7 @@ If you look closely, you can see that both `abraia`, `recompress-low` and `tinyj
 
 The rest look fairly close to the original, and have very close SSIM scores. I would say `imageoptim` and `mozjpeg-medium` both take the win here for most smallest file size without changing the quality of the image.
 
-<div>
+<div class="md-spacer">
   <table class="Table is-condensed">
     <thead>
       <tr>
@@ -231,7 +231,7 @@ The aggressive compression from `abraia`, `recompress-low`, and `tinyjpg` create
 
 At this point, I would say `recompress-medium` and `mozjpeg-medium` had the best compression while still retaining fairly good quality, although artifacting is still noticeable if you look hard enough. `imageoptim` and `compressorio` did very well, but produced a small amount of pixelated banding, but isn't as noticeable.
 
-<div>
+<div class="md-spacer">
   <table class="Table is-condensed">
     <thead>
       <tr>
@@ -322,7 +322,7 @@ While switching back and forth between the `tinyjpg` and the original in differe
 
 As far as bytes saved, `recompress-low` took a good chunk out of the file size, and it certainly shows. It made the image look quite pixelated, while `tinyjpg` is looks acceptable. To my eyes, the others look the same as the original.
 
-<div>
+<div class="md-spacer">
   <table class="Table is-condensed">
     <thead>
       <tr>
@@ -401,7 +401,7 @@ As far as bytes saved, `recompress-low` took a good chunk out of the file size, 
 
 Once again, if you view this in Firefox, you'll see a more saturated image on the right for several of the compressed versions. I imagine that's a bug with Firefox. In any case, I don't see any noticeable artifacting for any of the compressed images.
 
-<div>
+<div class="md-spacer">
   <table class="Table is-condensed">
     <thead>
       <tr>
@@ -503,11 +503,13 @@ Out of all of them, I would say `imageoptim`, with the preset `medium` settings,
 
 ### Conclusion
 
-Interestingly, even for different images compressed by the same compressor, the quality of the images differed. Some looked pixelated and some didn't. This just goes to show that you need to be always look at the end result to make sure it doesn't look the output quality is acceptable.
+Interestingly, different pictures produced a different quality of output for the same compressor with the same settings. Some pictures were pixelated and some weren't. This just goes to show you should always look at the end result to make sure the output quality is acceptable.
 
-**To decide which compressor is best for you**, or even what settings you choose for the compressor, **you have to decide what you value**. This is a seesaw decision. Do you value bytes saved or image quality? As we've seen, some of the compressors can be tuned to be somewhere in the middle.
+**To decide which compressor is best for you**, or even what settings you choose for the compressor, **you have to decide what you value**. This is a "seesaw" decision. Do you value bytes saved or image quality?
 
-Personally, I value bytes saved reduction, and I highly doubt, the majority of users aren't going to notice the minor artifacting. I'll probably do more testing, but `imageoptim` and `jpeg-recompress` or `mozjpeg` all look like great choices for the most bytes saved while retaining quality, if the settings are right.
+Personally, I value bytes saved, and I highly doubt the majority of users are going to notice the minor artifacting. In fact, I found the artifcating to only be noticeable on a high ppi screen with the brightness turned all the way up. `imageoptim` and `jpeg-recompress` or `mozjpeg` all look like great choices for the most bytes saved while retaining quality, if the settings are right.
+
+
 
 
 <script>
