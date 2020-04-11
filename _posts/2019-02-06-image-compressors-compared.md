@@ -65,7 +65,7 @@ For the last couple of years, I've relied soley on tinyjpg and compressor.io. Ho
         <td>No</td>
         <td><a href="https://compressor.io">Yes</a></td>
         <td>10MB</td>
-        <td><a href="https://tinyjpg.com/developers">Paid</a></td>
+        <td>No</td>
       </tr>
     </tbody>
   </table>

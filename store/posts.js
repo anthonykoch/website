@@ -16,5 +16,6 @@ export const actions = {
       .then(res => {
         commit('LOAD_POSTS_META', res.data);
       })
+      .catch(err => console.log(err))
   },
 }

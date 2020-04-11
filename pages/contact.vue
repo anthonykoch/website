@@ -10,6 +10,7 @@
 
     <!--
       TODO: Figure out where the form data should be sent
+      -->
       <section id="contact" class="u-pb7 u-pt7">
       <form
         action=""
@@ -71,7 +72,7 @@
           Send message
         </button>
       </form>
-    </section>-->
+    </section>
   </page>
 </template>
 

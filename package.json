@@ -7,12 +7,13 @@
   "scripts": {
     "dev": "cross-env NODE_ENV=development NUXT_HOST=0.0.0.0 nuxt",
     "build": "nuxt build",
-    "start": "cross-env NODE_ENV=production nuxt start",
     "gen": "rm -rf dist && cross-env NODE_ENV=production nuxt generate",
-    "dev:staging": "http-server dist-staging -p 4000 -a 0.0.0.0 -g",
-    "gen:staging": "rm -rf dist-staging && cross-env NODE_ENV=production STAGING=true nuxt generate && gzip -fk dist-staging/**/*.{js,css,png,jpg}",
+    "staging": "yarn gen:staging && http-server dist -p 4000 -a 0.0.0.0 -g",
+    "gen:staging": "rm -rf dist && cross-env NODE_ENV=production nuxt generate",
+    "stats": "gzip -fk dist/**/*.{js,css,png,jpg}",
     "deploy": "rm -rf dist && cross-env NODE_ENV=production nuxt generate && node deploy.js",
     "lint": "eslint --ext .js,.vue --ignore-path .gitignore .",
+    "start": "cross-env NODE_ENV=production nuxt start",
     "precommit": "npm run lint"
   },
   "dependencies": {

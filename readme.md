@@ -21,7 +21,6 @@ A static site generated with [Nuxt.js](https://nuxtjs.org/). Cool, init?
 ```
 
 - [L] Edit some of the articles errors like in medium image loading and favorite features of es2015
-- [L] Add disqus back to articles
 
 
-#c5d6bb
+https://github.com/nuxt-community/feed-module

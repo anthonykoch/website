@@ -2,8 +2,9 @@ import path from 'path'
 
 import axios from '@/core/fetch';
 
-const req = require.context('@/_posts', true, /\.md$/)
+const req = require.context('@/_posts', true, /\.md$/, 'lazy')
 const filenames = req.keys()
+console.log(req)
 
 // For debugging purposes.
 if (typeof window !== 'undefined') {
